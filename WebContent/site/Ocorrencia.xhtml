@@ -1,0 +1,49 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui">
+<f:metadata>
+	<f:viewParam name="codigo" value="#{cadastroOcorrrenciaBean.ocorrencia}" />
+</f:metadata>
+
+
+<ui:composition template="/templates/template.xhtml">
+
+	<ui:define name="tituloJanela">Sistema com JSF 2.0 e Facelets</ui:define>
+	<ui:define name="conteudo">
+		<h:form enctype="multipart/form-data">
+			<div class="ui-fluid">
+				<h1>Cadastro de Ocorrencia</h1>
+				<p:panelGrid columns="2" style="width: 100%; margin-top: 20px"
+					columnClasses="rotulo, campo">
+
+				<h:outputText value="Nome: " />
+				<h:inputText value="#{cadastroOcorrrenciaBean.ocorrencia.nome}" />
+
+				<h:outputText value="Data: " />
+				<p:calendar id="mask" value="#{cadastroOcorrrenciaBean.ocorrencia.data}"
+						pattern="dd-MM-yyyy" mask="true" />
+
+				<h:outputLabel value="Veiculo" />
+					<h:selectOneMenu value="#{cadastroOcorrrenciaBean.ocorrencia.veiculo}"
+						required="true" label="Veiculo">
+						<f:selectItem itemLabel="Selecione o Veiculo correspondente a ocorrencia"
+							noSelectionOption="true" />
+						<f:selectItems value="#{cadastroOcorrrenciaBean.veiculos}" var="veiculo"
+							itemValue="#{veiculo}" itemLabel="#{veiculo.placa}" />
+					</h:selectOneMenu>
+
+
+			</p:panelGrid>
+
+
+
+			<h:commandButton action="#{cadastroOcorrrenciaBean.cadastrar()}"
+				value="Salvar" />
+				</div>
+		</h:form>
+	</ui:define>	
+	</ui:composition>
+</html>

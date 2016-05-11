@@ -1,0 +1,71 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui">
+<ui:composition template="/templates/template.xhtml">
+	<ui:define name="tituloJanela">Sistema com JSF 2.0 e Facelets</ui:define>
+	<ui:define name="conteudo">
+	
+	<h1>Lista de Veiculos Cadastrados</h1>
+	
+			<h:form>
+			
+			<h:messages />
+			
+			
+			
+			
+			
+			<p:dataTable id="tbl" var="veiculo" value="#{cadastroVeiculoBean.veiculos}" rowKey="#{veiculo.placa}" widgetVar="tbl" filteredValue="#{cadastroVeiculoBean.veiculos}" paginator="true" paginatorPosition="bottom" rows="20" resizableColumns="true">
+						<p:column id="nameHeader" sortBy="#{veiculo.placa}" filterBy="#{veiculo.placa}">
+						<f:facet name="header">Tipo do Veiculo</f:facet>
+						  <h:outputText value="#{veiculo.tipo.nome}" />
+                    </p:column>
+				
+							
+			<p:column>
+				<f:facet name="header">Numero da Placa</f:facet>
+				#{veiculo.placa}
+			</p:column>	
+				
+			<p:column>
+				<f:facet name="header">Tipo do Veiculo</f:facet>
+				#{veiculo.tipo.nome}
+			</p:column>
+			
+			<p:column>
+				<f:facet name="header">Situacao do Veiculo</f:facet>
+				#{veiculo.situacao}
+			</p:column>
+			
+			<p:column>
+				<f:facet name="header">Condição do Veiculo</f:facet>
+				#{veiculo.condicao}
+			</p:column>
+			
+			
+			
+			<p:column>
+					<h:link outcome="Veiculo" value="Editar">
+					<f:param name="codigo"  value="#{veiculo.codigo}"/>
+					</h:link>
+			</p:column>
+				
+								
+			<p:column>
+				<f:facet name="header">Excluir</f:facet>
+				<h:commandLink value="Excluir"
+				 action="#{cadastroVeiculoBean.excluir(veiculo)}"
+				 onclick="if (!confirm('Confirmar a exclusão deste Veiculo? ')) return false"/>
+			</p:column>
+			
+			</p:dataTable>
+		</h:form>
+	</ui:define>	
+	</ui:composition>
+</html>
+
+
+
