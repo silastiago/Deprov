@@ -25,7 +25,7 @@ public class OcorrenciaConversor implements Converter{
 		if (value != null && !value.equals("")) {
 			retorno = ocorrencias.porCodigo(new Integer(value));
 		if (retorno == null) {
-			String descricaoErro = "Estado n√£o existe";
+			String descricaoErro = "Ocorrencia n„o existe";
 			FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_ERROR, descricaoErro, descricaoErro);
 			throw new ConverterException(message);
 		}

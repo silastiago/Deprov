@@ -24,7 +24,7 @@ public class VeiculoConversor implements Converter{
 		if (value != null && !value.equals("")) {
 			retorno = veiculos.porCodigo(new Integer(value));
 		if (retorno == null) {
-			String descricaoErro = "Cidade n√£o existe";
+			String descricaoErro = "Veiculo n„o existe";
 			FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_ERROR, descricaoErro, descricaoErro);
 			throw new ConverterException(message);
 		}

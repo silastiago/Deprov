@@ -5,7 +5,7 @@
 	xmlns:ui="http://java.sun.com/jsf/facelets"
 	xmlns:p="http://primefaces.org/ui">
 <f:metadata>
-	<f:viewParam name="codigo" value="#{cadastroOcorrrenciaBean.ocorrencia}" />
+	<f:viewParam name="codigo"/>
 </f:metadata>
 
 
@@ -13,7 +13,7 @@
 
 	<ui:define name="tituloJanela">Sistema com JSF 2.0 e Facelets</ui:define>
 	<ui:define name="conteudo">
-		<h:form enctype="multipart/form-data">
+		<h:form enctype="multipart/form-data" >
 			<div class="ui-fluid">
 				<h1>Cadastro de Ocorrencia</h1>
 				<p:panelGrid columns="2" style="width: 100%; margin-top: 20px"
@@ -25,24 +25,53 @@
 				<h:outputText value="Data: " />
 				<p:calendar id="mask" value="#{cadastroOcorrrenciaBean.ocorrencia.data}"
 						pattern="dd-MM-yyyy" mask="true" />
-
-				<h:outputLabel value="Veiculo" />
-					<h:selectOneMenu value="#{cadastroOcorrrenciaBean.ocorrencia.veiculo}"
-						required="true" label="Veiculo">
-						<f:selectItem itemLabel="Selecione o Veiculo correspondente a ocorrencia"
-							noSelectionOption="true" />
-						<f:selectItems value="#{cadastroOcorrrenciaBean.veiculos}" var="veiculo"
-							itemValue="#{veiculo}" itemLabel="#{veiculo.placa}" />
-					</h:selectOneMenu>
-
+				
+				<p:commandButton action="#{cadastroOcorrrenciaBean.cadastrar(codigo)}" value="Salvar" />
 
 			</p:panelGrid>
-
-
-
-			<h:commandButton action="#{cadastroOcorrrenciaBean.cadastrar()}"
-				value="Salvar" />
 				</div>
+			</h:form>
+			
+				<h:form>
+				<p:dataTable value="#{cadastroOcorrrenciaBean.listarVeiculo(codigo)}" var="ocorrencia"   rows="10" rowsPerPageTemplate="5,10,15,20"
+				id="mostraEquipamento"  paginator="true" >
+				
+				
+				<p:column filterBy="#{ocorrencia.nome}"  style="text-align: center; width:10%" filterMatchMode="startsWith">
+					<f:facet name="header">
+						<h:outputText value="Nome da Ocorrencia" />
+					</f:facet>
+					<h:outputText value="#{ocorrencia.nome}" />
+				</p:column>
+								
+				<p:column filterBy="#{ocorrencia.data}"  style="text-align: center; width:10%" filterMatchMode="startsWith">
+					<f:facet name="header">
+						<h:outputText value="Data da Ocorrencia" />
+					</f:facet>
+					<h:outputText value="#{ocorrencia.data}" />
+				</p:column>
+				
+				<p:column filterBy="#{ocorrencia.veiculo.placa}"  style="text-align: center; width:10%" filterMatchMode="startsWith">
+					<f:facet name="header">
+						<h:outputText value="Veiculo da Ocorrencia" />
+					</f:facet>
+					<h:outputText value="#{ocorrencia.veiculo.placa}" />
+				</p:column>
+				
+			<p:column style="text-align: center; width:5%">
+					<h:link outcome="Ocorrencia" value="Editar Ocorrencia">
+					<i class="icon-edit"></i>
+					<f:param name="codigo_ocorrencia"  value="#{ocorrencia.codigo}"/>
+					</h:link>
+				</p:column>
+			
+			<p:column style="text-align: center; width:5%">
+				<h:commandLink value="Excluir"
+				 action="#{cadastroOcorrenciaBean.excluir(ocorrencia)}"
+				 onclick="if (!confirm('Confirmar a exclusão desta Ocorrencia? ')) return false"/>
+				 <i class="icon-remove-sign"></i>
+			</p:column>
+			</p:dataTable>
 		</h:form>
 	</ui:define>	
 	</ui:composition>

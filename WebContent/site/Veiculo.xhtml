@@ -19,7 +19,7 @@
 				<p:panelGrid columns="4" style="width: 100%; margin-top: 20px"
 					columnClasses="rotulo, campo, rotulo, campo">
 
-
+					
 
 					<h:outputText value="Numero da Placa" />
 					<p:inputText value="#{cadastroVeiculoBean.veiculo.placa}" />
@@ -125,8 +125,7 @@
 					<p:outputLabel for="mask" value="Data:" />
 					<p:calendar id="mask" value="#{cadastroVeiculoBean.veiculo.date4}"
 						pattern="dd-MM-yyyy" mask="true" />
-						
- 				
+ 					
 					<p:commandButton actionListener="#{cadastroVeiculoBean.cadastrar()}" value="Salvar" >
 						</p:commandButton>
 				</p:panelGrid>
