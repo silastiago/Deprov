@@ -33,7 +33,7 @@ public class CadastroGrupoBean implements Serializable{
 	public void cadastrar(){
 		Grupos grupos = this.repositorios.getGrupos();
 		grupos.salvar(grupo);
-		this.grupo = new Grupo();
+		
 		
 
 		String msg = "Cadastro efetuado com sucesso!";

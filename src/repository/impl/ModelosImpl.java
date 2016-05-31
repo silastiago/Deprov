@@ -19,7 +19,7 @@ public class ModelosImpl implements Modelos{
 	@SuppressWarnings("unchecked")
 	@Override
 	public List<Modelo> listar(){
-		return sessao.createCriteria(Modelo.class).addOrder(Order.asc("nome")).list();
+		return sessao.createCriteria(Modelo.class).addOrder(Order.asc("modelo")).list();
 	}
 
 	@Override

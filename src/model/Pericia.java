@@ -13,7 +13,7 @@ import javax.persistence.Table;
 public class Pericia implements Serializable, Cloneable{
 
 	private Integer codigo;
-	private String nome;
+	private String pericia;
 
 	@Id
 	@GeneratedValue
@@ -23,12 +23,13 @@ public class Pericia implements Serializable, Cloneable{
 	public void setCodigo(Integer codigo) {
 		this.codigo = codigo;
 	}
-	@Column
-	public String getNome() {
-		return nome;
+	
+	@Column	
+	public String getPericia() {
+		return pericia;
 	}
-	public void setNome(String nome) {
-		this.nome = nome;
+	public void setPericia(String pericia) {
+		this.pericia = pericia;
 	}
 	
 	@Override
@@ -36,7 +37,7 @@ public class Pericia implements Serializable, Cloneable{
 		final int prime = 31;
 		int result = 1;
 		result = prime * result + ((codigo == null) ? 0 : codigo.hashCode());
-		result = prime * result + ((nome == null) ? 0 : nome.hashCode());
+		result = prime * result + ((pericia == null) ? 0 : pericia.hashCode());
 		return result;
 	}
 	@Override
@@ -53,10 +54,10 @@ public class Pericia implements Serializable, Cloneable{
 				return false;
 		} else if (!codigo.equals(other.codigo))
 			return false;
-		if (nome == null) {
-			if (other.nome != null)
+		if (pericia == null) {
+			if (other.pericia != null)
 				return false;
-		} else if (!nome.equals(other.nome))
+		} else if (!pericia.equals(other.pericia))
 			return false;
 		return true;
 	}

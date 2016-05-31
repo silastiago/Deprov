@@ -10,9 +10,9 @@ import javax.faces.bean.ManagedBean;
 import javax.faces.bean.RequestScoped;
 import javax.faces.context.FacesContext;
 
-import model.Fabricante;
+import model.Marca;
 import model.Tipo;
-import repository.Fabricantes;
+import repository.Marcas;
 import repository.Tipos;
 import util.Repositorios;
 
@@ -33,14 +33,14 @@ public class CadastroTipoBean implements Serializable{
 	}
 
 
-	public void cadastrar(){
+	public String cadastrar(){
 		Tipos tipos = this.repositorios.getTipos();
 		tipos.salvar(tipo);
-		this.tipo = new Tipo();
 
 		String msg = "Cadastro efetuado com sucesso!";
 		FacesContext.getCurrentInstance().addMessage(null,
 				new FacesMessage(FacesMessage.SEVERITY_INFO, msg, msg));
+		return "index?faces-redirect=true";
 	}
 
 	public void update(Tipo tipo){

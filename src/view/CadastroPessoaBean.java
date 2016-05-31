@@ -37,7 +37,7 @@ public class CadastroPessoaBean implements Serializable{
 		Pessoas pessoas = this.repositorios.getPessoas();
 		pessoas.salvar(this.pessoa);
 
-		this.pessoa = new Pessoa();
+		
 
 		String msg = "Cadastro efetuado com sucesso!";
 		FacesContext.getCurrentInstance().addMessage(null,
@@ -57,6 +57,19 @@ public class CadastroPessoaBean implements Serializable{
 		this.init();
 	}
 
+	public String logar(){
+		Pessoas pessoas = this.repositorios.getPessoas();
+		if (pessoas.login(pessoa) == null) {
+			return "Login.xhtml";
+		}
+		return "index.xhtml";
+	}
+
+	public String logout() {
+		Pessoas pessoas = this.repositorios.getPessoas();
+		pessoas.logout();
+		return "Login.xhtml";
+	}
 	
 	
 	public Pessoa getPessoa() {

@@ -5,18 +5,18 @@ import java.io.Serializable;
 import org.hibernate.Session;
 
 import repository.Cores;
-import repository.Fabricantes;
 import repository.Grupos;
-import repository.Ocorrencias;
+import repository.Marcas;
 import repository.Modelos;
+import repository.Ocorrencias;
 import repository.Pericias;
 import repository.Pessoas;
 import repository.Seguros;
 import repository.Tipos;
 import repository.Veiculos;
 import repository.impl.CoresImpl;
-import repository.impl.FabricantesImpl;
 import repository.impl.GruposImpl;
+import repository.impl.MarcaImpl;
 import repository.impl.ModelosImpl;
 import repository.impl.OcorrenciaImpl;
 import repository.impl.PericiasImpl;
@@ -32,8 +32,8 @@ public class Repositorios implements Serializable {
 		return new PessoasImpl(this.getSession());
 	}
 	
-	public Fabricantes getFabricantes(){
-		return new FabricantesImpl(this.getSession());
+	public Marcas getMarcas(){
+		return new MarcaImpl(this.getSession());
 	}
 	
 	public Modelos getModelos(){

@@ -36,7 +36,6 @@ public class CadastroPericiaBean implements Serializable{
 	public void cadastrar(){
 		Pericias pericias = this.repositorios.getPericias();
 		pericias.salvar(pericia);
-		this.pericia = new Pericia();
 
 		String msg = "Cadastro efetuado com sucesso!";
 		FacesContext.getCurrentInstance().addMessage(null,

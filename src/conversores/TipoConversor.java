@@ -7,7 +7,7 @@ import javax.faces.convert.Converter;
 import javax.faces.convert.ConverterException;
 import javax.faces.convert.FacesConverter;
 
-import model.Fabricante;
+import model.Marca;
 import model.Tipo;
 import repository.Tipos;
 import util.Repositorios;

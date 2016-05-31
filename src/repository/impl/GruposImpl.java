@@ -19,7 +19,7 @@ public class GruposImpl implements Grupos{
 	@SuppressWarnings("unchecked")
 	@Override
 	public List<Grupo> listar() {
-		return sessao.createCriteria(Grupo.class).addOrder(Order.asc("nome")).list();
+		return sessao.createCriteria(Grupo.class).addOrder(Order.asc("grupo")).list();
 	}
 
 	@Override

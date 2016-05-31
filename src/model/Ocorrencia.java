@@ -15,7 +15,7 @@ import javax.persistence.Table;
 public class Ocorrencia implements Serializable, Cloneable{
 
 	private Integer codigo;
-	private String nome;
+	private String ocorrencia;
 	private String data;
 	private Veiculo veiculo;
 	
@@ -28,12 +28,14 @@ public class Ocorrencia implements Serializable, Cloneable{
 		this.codigo = codigo;
 	}
 	
-	public String getNome() {
-		return nome;
+	@Column
+	public String getOcorrencia() {
+		return ocorrencia;
 	}
-	public void setNome(String nome) {
-		this.nome = nome;
+	public void setOcorrencia(String ocorrencia) {
+		this.ocorrencia = ocorrencia;
 	}
+	@Column
 	public String getData() {
 		return data;
 	}

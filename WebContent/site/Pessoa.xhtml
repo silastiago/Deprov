@@ -25,7 +25,7 @@
 			<h:outputLabel value="Grupo"/>
 				<h:selectOneMenu value="#{cadastroPessoaBean.pessoa.grupo}" required="true" label="Grupo">
 				<f:selectItem itemLabel="Selecione o grupo da pessoa" noSelectionOption="true"/>
-				<f:selectItems value="#{cadastroPessoaBean.grupos}" var="grupo" itemValue="#{grupo}" itemLabel="#{grupo.nome}"/>
+				<f:selectItems value="#{cadastroPessoaBean.grupos}" var="grupo" itemValue="#{grupo}" itemLabel="#{grupo.grupo}"/>
 				</h:selectOneMenu>
 			
 			</p:panelGrid>

@@ -19,7 +19,7 @@ public class PericiasImpl implements Pericias{
 	@SuppressWarnings("unchecked")
 	@Override
 	public List<Pericia> listar() {
-		return sessao.createCriteria(Pericia.class).addOrder(Order.asc("nome")).list();
+		return sessao.createCriteria(Pericia.class).addOrder(Order.asc("pericia")).list();
 	}
 
 	@Override

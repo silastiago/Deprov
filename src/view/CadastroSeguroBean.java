@@ -35,14 +35,14 @@ public class CadastroSeguroBean implements Serializable{
 	}
 
 
-	public void cadastrar(){
+	public String cadastrar(){
 		Seguros seguros = this.repositorios.getSeguros();
 		seguros.salvar(seguro);
-		this.seguro = new Seguro();
 
 		String msg = "Cadastro efetuado com sucesso!";
 		FacesContext.getCurrentInstance().addMessage(null,
 				new FacesMessage(FacesMessage.SEVERITY_INFO, msg, msg));
+		return "index?faces-redirect=true";
 	}
 
 	public void update(Seguro seguro){

@@ -1,13 +1,17 @@
 package view;
 
+import java.io.ByteArrayInputStream;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
 import java.io.Serializable;
+import java.sql.Connection;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.annotation.PostConstruct;
 import javax.faces.application.FacesMessage;
@@ -15,24 +19,39 @@ import javax.faces.bean.ManagedBean;
 import javax.faces.bean.RequestScoped;
 import javax.faces.context.ExternalContext;
 import javax.faces.context.FacesContext;
+import javax.faces.event.PhaseId;
 import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.Part;
 
+import org.apache.commons.io.IOUtils;
 import org.primefaces.event.FileUploadEvent;
 import org.primefaces.model.DefaultStreamedContent;
 import org.primefaces.model.StreamedContent;
 import org.primefaces.model.UploadedFile;
 
+import conexao.ConnectionFactory;
 import model.Cor;
-import model.Fabricante;
+import model.Marca;
 import model.Modelo;
 import model.Pericia;
 import model.Seguro;
 import model.Tipo;
 import model.Veiculo;
+import net.sf.jasperreports.engine.JRException;
+import net.sf.jasperreports.engine.JasperCompileManager;
+import net.sf.jasperreports.engine.JasperExportManager;
+import net.sf.jasperreports.engine.JasperFillManager;
+import net.sf.jasperreports.engine.JasperPrint;
+import net.sf.jasperreports.engine.JasperReport;
+import net.sf.jasperreports.engine.export.JRPdfExporter;
+import net.sf.jasperreports.export.ExporterInput;
+import net.sf.jasperreports.export.OutputStreamExporterOutput;
+import net.sf.jasperreports.export.SimpleExporterInput;
+import net.sf.jasperreports.export.SimpleOutputStreamExporterOutput;
+import net.sf.jasperreports.export.SimplePdfExporterConfiguration;
 import repository.Cores;
-import repository.Fabricantes;
+import repository.Marcas;
 import repository.Modelos;
 import repository.Pericias;
 import repository.Seguros;
@@ -50,10 +69,13 @@ public class CadastroVeiculoBean implements Serializable{
 	private List<Veiculo> veiculosFiltrados = new ArrayList<Veiculo>();
 	private List<Cor> cores = new ArrayList<Cor>();
 	private List<Tipo> tipos = new ArrayList<Tipo>();
-	private List<Fabricante> fabricantes = new ArrayList<Fabricante>();
+	private List<Marca> marcas  = new ArrayList<Marca>();
 	private List<Modelo> modelos = new ArrayList<Modelo>();
 	private List<Seguro> seguros = new ArrayList<Seguro>();
 	private List<Pericia> pericias = new ArrayList<Pericia>();
+	private StreamedContent file;
+	
+	
 
 
 
@@ -63,29 +85,82 @@ public class CadastroVeiculoBean implements Serializable{
 		Veiculos veiculos = this.repositorios.getveiculos();
 		Cores cores = this.repositorios.getCores();
 		Tipos tipos = this.repositorios.getTipos();
-		Fabricantes fabricantes = this.repositorios.getFabricantes();
+		Marcas marcas = this.repositorios.getMarcas();
 		Modelos modelos = this.repositorios.getModelos();
 		Seguros seguros = this.repositorios.getSeguros();
 		Pericias pericias = this.repositorios.getPericias();
+		
 
 		//this.veiculos = veiculos.listarPorPlaca(this.veiculo);
 		this.veiculos = veiculos.listar();
 		this.cores = cores.listar();
 		this.tipos = tipos.listar();
-		this.fabricantes = fabricantes.listar();
+		this.marcas = marcas.listar();
 		this.modelos = modelos.listar();
 		this.seguros = seguros.listar();
 		this.pericias = pericias.listar();
 	}
 
 
-	public String cadastrar() throws IOException{
+	public String cadastrar() throws IOException {
+		
+			//InputStream is = (InputStream) fileUploadEvent.getFile().getInputstream(); 
+			//byte[] bytes = IOUtils.toByteArray(is);
+			//System.out.println("tamanho dos bytes : " + bytes.length);
+			//veiculo.setFoto(bytes);
 			Veiculos veiculos = this.repositorios.getveiculos();
 			veiculos.salvar(veiculo);
-			this.veiculo = new Veiculo();
 		return "index?faces-redirect=true";
 	}
 
+	public String gerarRelatorio(String codigo) throws JRException {
+		System.out.println("iunciiando metodo de geracao de relatorio");
+		
+		int idVeiculo = Integer.parseInt(codigo);
+		ConnectionFactory conexao = new ConnectionFactory();
+		
+		String reportSrcFile = "/resources/relatorios/Relatorio.jrxml";
+        
+        // First, compile jrxml file.
+        JasperReport jasperReport =    JasperCompileManager.compileReport(reportSrcFile);
+ 
+        Connection conn = conexao.getConnection();
+ 
+        // Parameters for report
+        Map<String, Object> parameters = new HashMap<String, Object>();
+        parameters.put("codigo_veiculo", idVeiculo);
+        
+        JasperPrint print = JasperFillManager.fillReport(jasperReport,
+                parameters, conn);
+ 
+        // Make sure the output directory exists.
+        //File outDir = new File("C:/Users/Sinf02/Pictures");
+        //outDir.mkdirs();
+ 
+        // PDF Exportor.
+        JRPdfExporter exporter = new JRPdfExporter();
+ 
+        ExporterInput exporterInput = new SimpleExporterInput(print);
+        // ExporterInput
+        exporter.setExporterInput(exporterInput);
+ 
+        // ExporterOutput
+        OutputStreamExporterOutput exporterOutput = new SimpleOutputStreamExporterOutput("/resources/relatorios/FirstJasperReport.pdf");
+        // Output
+        exporter.setExporterOutput(exporterOutput);
+ 
+
+        SimplePdfExporterConfiguration configuration = new SimplePdfExporterConfiguration();
+        exporter.setConfiguration(configuration);
+        exporter.exportReport();
+        
+        System.out.print("Relatorio criado com sucesso!");
+        return "index?faces-redirect=true";
+		
+	}
+	
+	
+	
 	public void update(Veiculo veiculo){
 		Veiculos veiculos = this.repositorios.getveiculos();
 		veiculos.editar(veiculo);
@@ -146,13 +221,14 @@ public class CadastroVeiculoBean implements Serializable{
 		this.tipos = tipos;
 	}
 
-	public List<Fabricante> getFabricantes() {
-		return fabricantes;
+	public List<Marca> getMarcas() {
+		return marcas;
 	}
 
-	public void setFabricantes(List<Fabricante> fabricantes) {
-		this.fabricantes = fabricantes;
+	public void setMarcas(List<Marca> marcas) {
+		this.marcas = marcas;
 	}
+
 
 	public List<Modelo> getModelos() {
 		return modelos;
@@ -177,4 +253,15 @@ public class CadastroVeiculoBean implements Serializable{
 	public void setPericias(List<Pericia> pericias) {
 		this.pericias = pericias;
 	}
+
+
+	public StreamedContent getFile() {
+		return file;
+	}
+
+
+	public void setFile(StreamedContent file) {
+		this.file = file;
+	}	
+	
 }

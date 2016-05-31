@@ -19,7 +19,7 @@ public class SegurosImpl implements Seguros{
 	@SuppressWarnings("unchecked")
 	@Override
 	public List<Seguro> listar() {
-		return sessao.createCriteria(Seguro.class).addOrder(Order.asc("nome")).list();
+		return sessao.createCriteria(Seguro.class).addOrder(Order.asc("seguro")).list();
 	}
 
 	@Override

@@ -13,7 +13,7 @@ import javax.persistence.Table;
 public class Cor implements Serializable, Cloneable{
 
 	private Integer codigo;
-	private String nome;
+	private String cor;
 
 	@Id
 	@GeneratedValue
@@ -23,20 +23,21 @@ public class Cor implements Serializable, Cloneable{
 	public void setCodigo(Integer codigo) {
 		this.codigo = codigo;
 	}
-	@Column
-	public String getNome() {
-		return nome;
-	}
-	public void setNome(String nome) {
-		this.nome = nome;
-	}
 	
+	@Column
+	public String getCor() {
+		return cor;
+	}
+	public void setCor(String cor) {
+		this.cor = cor;
+	}
+
 	@Override
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
 		result = prime * result + ((codigo == null) ? 0 : codigo.hashCode());
-		result = prime * result + ((nome == null) ? 0 : nome.hashCode());
+		result = prime * result + ((cor == null) ? 0 : cor.hashCode());
 		return result;
 	}
 	@Override
@@ -53,10 +54,10 @@ public class Cor implements Serializable, Cloneable{
 				return false;
 		} else if (!codigo.equals(other.codigo))
 			return false;
-		if (nome == null) {
-			if (other.nome != null)
+		if (cor == null) {
+			if (other.cor != null)
 				return false;
-		} else if (!nome.equals(other.nome))
+		} else if (!cor.equals(other.cor))
 			return false;
 		return true;
 	}

@@ -18,7 +18,7 @@ public class CoresImpl implements Cores{
 	@SuppressWarnings("unchecked")
 	@Override
 	public List<Cor> listar() {
-		return sessao.createCriteria(Cor.class).addOrder(Order.asc("nome")).list();
+		return sessao.createCriteria(Cor.class).addOrder(Order.asc("cor")).list();
 	}
 
 	@Override

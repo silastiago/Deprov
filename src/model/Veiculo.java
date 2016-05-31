@@ -26,13 +26,11 @@ import org.hibernate.annotations.ManyToAny;
 @Table
 public class Veiculo implements Serializable, Cloneable{
 	private Integer codigo;
-	//private Date dataEntrada;
-	//private Date dataSaida;
-	
 	private String placa;
+	private String placaOriginal;
 	private Tipo tipo;
 	private Cor cor;
-	private Fabricante fabricante;
+	private Marca marca;
 	private Modelo modelo;
 	private String Anofabricacao;
 	private String chassi;
@@ -80,12 +78,12 @@ public class Veiculo implements Serializable, Cloneable{
 		this.dataSaida = dataSaida;
 	}
 	*/
-
-
+	
 	@Column
 	public Date getDate4() {
 		return date4;
 	}
+
 
 	public void setDate4(Date date4) {
 		this.date4 = date4;
@@ -100,6 +98,16 @@ public class Veiculo implements Serializable, Cloneable{
 	public void setPlaca(String placa) {
 		this.placa = placa;
 	}
+	
+	@Column
+	public String getPlacaOriginal() {
+		return placaOriginal;
+	}
+
+	public void setPlacaOriginal(String placaOriginal) {
+		this.placaOriginal = placaOriginal;
+	}
+
 	@ManyToOne
 	@JoinColumn(name="codigo_tipo", referencedColumnName="codigo")
 	public Tipo getTipo() {
@@ -119,13 +127,13 @@ public class Veiculo implements Serializable, Cloneable{
 		this.cor = cor;
 	}
 	@ManyToOne
-	@JoinColumn(name="codigo_fabricante", referencedColumnName="codigo")
-	public Fabricante getFabricante() {
-		return fabricante;
+	@JoinColumn(name="codigo_marca", referencedColumnName="codigo")
+	public Marca getMarca() {
+		return marca;
 	}
 
-	public void setFabricante(Fabricante fabricante) {
-		this.fabricante = fabricante;
+	public void setMarca(Marca marca) {
+		this.marca = marca;
 	}
 	@ManyToOne
 	@JoinColumn(name="codigo_modelo", referencedColumnName="codigo")
@@ -266,7 +274,7 @@ public class Veiculo implements Serializable, Cloneable{
 		result = prime * result + ((condicao == null) ? 0 : condicao.hashCode());
 		result = prime * result + ((cor == null) ? 0 : cor.hashCode());
 		result = prime * result + ((date4 == null) ? 0 : date4.hashCode());
-		result = prime * result + ((fabricante == null) ? 0 : fabricante.hashCode());
+		result = prime * result + ((marca == null) ? 0 : marca.hashCode());
 		result = prime * result + ((ip_processo == null) ? 0 : ip_processo.hashCode());
 		result = prime * result + ((modelo == null) ? 0 : modelo.hashCode());
 		result = prime * result + ((motor == null) ? 0 : motor.hashCode());
@@ -339,10 +347,10 @@ public class Veiculo implements Serializable, Cloneable{
 				return false;
 		} else if (!date4.equals(other.date4))
 			return false;
-		if (fabricante == null) {
-			if (other.fabricante != null)
+		if (marca == null) {
+			if (other.marca != null)
 				return false;
-		} else if (!fabricante.equals(other.fabricante))
+		} else if (!marca.equals(other.marca))
 			return false;
 		if (ip_processo == null) {
 			if (other.ip_processo != null)

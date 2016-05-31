@@ -13,7 +13,7 @@ import javax.persistence.Table;
 public class Seguro implements Serializable, Cloneable{
 
 	private Integer codigo;
-	private String nome;
+	private String seguro;
 
 	@Id
 	@GeneratedValue
@@ -23,12 +23,13 @@ public class Seguro implements Serializable, Cloneable{
 	public void setCodigo(Integer codigo) {
 		this.codigo = codigo;
 	}
+	
 	@Column
-	public String getNome() {
-		return nome;
+	public String getSeguro() {
+		return seguro;
 	}
-	public void setNome(String nome) {
-		this.nome = nome;
+	public void setSeguro(String seguro) {
+		this.seguro = seguro;
 	}
 	
 	@Override
@@ -36,7 +37,7 @@ public class Seguro implements Serializable, Cloneable{
 		final int prime = 31;
 		int result = 1;
 		result = prime * result + ((codigo == null) ? 0 : codigo.hashCode());
-		result = prime * result + ((nome == null) ? 0 : nome.hashCode());
+		result = prime * result + ((seguro == null) ? 0 : seguro.hashCode());
 		return result;
 	}
 	@Override
@@ -53,10 +54,10 @@ public class Seguro implements Serializable, Cloneable{
 				return false;
 		} else if (!codigo.equals(other.codigo))
 			return false;
-		if (nome == null) {
-			if (other.nome != null)
+		if (seguro == null) {
+			if (other.seguro != null)
 				return false;
-		} else if (!nome.equals(other.nome))
+		} else if (!seguro.equals(other.seguro))
 			return false;
 		return true;
 	}

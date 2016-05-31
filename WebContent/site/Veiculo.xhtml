@@ -21,16 +21,19 @@
 
 					
 
-					<h:outputText value="Numero da Placa" />
+					<h:outputText value="Placa no Veiculo" />
 					<p:inputText value="#{cadastroVeiculoBean.veiculo.placa}" />
-
+					
+					<h:outputText value="Placa Original" />
+					<p:inputText value="#{cadastroVeiculoBean.veiculo.placaOriginal}" />
+					
 					<h:outputLabel value="Tipo" />
 					<h:selectOneMenu value="#{cadastroVeiculoBean.veiculo.tipo}"
 						required="true" label="Tipo">
 						<f:selectItem itemLabel="Selecione o Tipo do Veiculo"
 							noSelectionOption="true" />
 						<f:selectItems value="#{cadastroVeiculoBean.tipos}" var="tipo"
-							itemValue="#{tipo}" itemLabel="#{tipo.nome}" />
+							itemValue="#{tipo}" itemLabel="#{tipo.tipo}" />
 					</h:selectOneMenu>
 
 					<h:outputLabel value="Cor" />
@@ -39,17 +42,17 @@
 						<f:selectItem itemLabel="Selecione a cor do Veiculo"
 							noSelectionOption="true" />
 						<f:selectItems value="#{cadastroVeiculoBean.cores}" var="cor"
-							itemValue="#{cor}" itemLabel="#{cor.nome}" />
+							itemValue="#{cor}" itemLabel="#{cor.cor}" />
 					</h:selectOneMenu>
 
-					<h:outputLabel value="Fabricante" />
-					<h:selectOneMenu value="#{cadastroVeiculoBean.veiculo.fabricante}"
+					<h:outputLabel value="marca" />
+					<h:selectOneMenu value="#{cadastroVeiculoBean.veiculo.marca}"
 						required="true" label="Fabricante">
-						<f:selectItem itemLabel="Selecione o Fabricante do Veiculo"
+						<f:selectItem itemLabel="Selecione a Marca do Veiculo"
 							noSelectionOption="true" />
-						<f:selectItems value="#{cadastroVeiculoBean.fabricantes}"
-							var="fabricante" itemValue="#{fabricante}"
-							itemLabel="#{fabricante.nome}" />
+						<f:selectItems value="#{cadastroVeiculoBean.marcas}"
+							var="marca" itemValue="#{marca}"
+							itemLabel="#{marca.marca}" />
 					</h:selectOneMenu>
 
 					<h:outputLabel value="Modelo" />
@@ -58,7 +61,7 @@
 						<f:selectItem itemLabel="Selecione o Modelo do Veiculo"
 							noSelectionOption="true" />
 						<f:selectItems value="#{cadastroVeiculoBean.modelos}" var="modelo"
-							itemValue="#{modelo}" itemLabel="#{modelo.nome}" />
+							itemValue="#{modelo}" itemLabel="#{modelo.modelo}" />
 					</h:selectOneMenu>
 
 					<h:outputText value="Ano de Fabricação" />
@@ -91,7 +94,7 @@
 						<f:selectItem itemLabel="Selecione o Seguro do Veiculo"
 							noSelectionOption="true" />
 						<f:selectItems value="#{cadastroVeiculoBean.seguros}" var="seguro"
-							itemValue="#{seguro}" itemLabel="#{seguro.nome}" />
+							itemValue="#{seguro}" itemLabel="#{seguro.seguro}" />
 					</h:selectOneMenu>
 
 					<h:outputText value="Situação" />
@@ -119,18 +122,17 @@
 						<f:selectItem itemLabel="Selecione a Pericia do Veiculo"
 							noSelectionOption="true" />
 						<f:selectItems value="#{cadastroVeiculoBean.pericias}"
-							var="pericia" itemValue="#{pericia}" itemLabel="#{pericia.nome}" />
+							var="pericia" itemValue="#{pericia}" itemLabel="#{pericia.pericia}" />
 					</h:selectOneMenu>
 
 					<p:outputLabel for="mask" value="Data:" />
 					<p:calendar id="mask" value="#{cadastroVeiculoBean.veiculo.date4}"
 						pattern="dd-MM-yyyy" mask="true" />
  					
-					<p:commandButton actionListener="#{cadastroVeiculoBean.cadastrar()}" value="Salvar" >
-						</p:commandButton>
+					
 				</p:panelGrid>
 
-
+			<h:commandButton action="#{cadastroVeiculoBean.cadastrar()}" value="Salvar" />
 
 
 

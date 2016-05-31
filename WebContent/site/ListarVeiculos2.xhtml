@@ -10,7 +10,7 @@
 	
 	<h1>Lista de Veiculos Cadastrados</h1>
 	
-			<h:form>
+			<h:form enctype="multipart/form-data">
 			
 			<h:messages />
 			
@@ -41,9 +41,8 @@
 			</p:column>
 			
 			<p:column>
-				<f:facet name="header">Condição do Veiculo</f:facet>
-				#{veiculo.condicao}
-			</p:column>
+                            <p:graphicImage value="#{veiculo.mostrarImagemDeByte}" width="70" height="70" />
+            </p:column>
 			
 			
 			

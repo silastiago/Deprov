@@ -16,8 +16,8 @@ import javax.persistence.Table;
 @Table
 public class Modelo implements Serializable, Cloneable{
 	private Integer codigo;
-	private String nome;
-	private Fabricante fabricante;
+	private String modelo;
+	private Marca marca;
 	
 	@Id
 	@GeneratedValue
@@ -27,29 +27,30 @@ public class Modelo implements Serializable, Cloneable{
 	public void setCodigo(Integer codigo) {
 		this.codigo = codigo;
 	}
-	@Column(name="nome")
-	public String getNome() {
-		return nome;
+	@Column
+	public String getModelo() {
+		return modelo;
 	}
-	public void setNome(String nome) {
-		this.nome = nome;
+	public void setModelo(String modelo) {
+		this.modelo = modelo;
 	}
 	@ManyToOne
-	@JoinColumn(name="codigo_fabricante", referencedColumnName="codigo")
-	public Fabricante getfabricante() {
-		return fabricante;
+	@JoinColumn(name="codigo_marca", referencedColumnName="codigo")
+	public Marca getMarca() {
+		return marca;
 	}
-	public void setFabricante(Fabricante fabricante) {
-		this.fabricante = fabricante;
+	public void setMarca(Marca marca) {
+		this.marca = marca;
 	}
+	
 	
 	@Override
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
 		result = prime * result + ((codigo == null) ? 0 : codigo.hashCode());
-		result = prime * result + ((fabricante == null) ? 0 : fabricante.hashCode());
-		result = prime * result + ((nome == null) ? 0 : nome.hashCode());
+		result = prime * result + ((marca == null) ? 0 : marca.hashCode());
+		result = prime * result + ((modelo == null) ? 0 : modelo.hashCode());
 		return result;
 	}
 	@Override
@@ -66,15 +67,15 @@ public class Modelo implements Serializable, Cloneable{
 				return false;
 		} else if (!codigo.equals(other.codigo))
 			return false;
-		if (fabricante == null) {
-			if (other.fabricante != null)
+		if (marca == null) {
+			if (other.marca != null)
 				return false;
-		} else if (!fabricante.equals(other.fabricante))
+		} else if (!marca.equals(other.marca))
 			return false;
-		if (nome == null) {
-			if (other.nome != null)
+		if (modelo == null) {
+			if (other.modelo != null)
 				return false;
-		} else if (!nome.equals(other.nome))
+		} else if (!modelo.equals(other.modelo))
 			return false;
 		return true;
 	}

@@ -62,7 +62,7 @@ public class CadastroOcorrenciaBean implements Serializable {
 		ocorrencia.setVeiculo(veiculo);
 
 		ocorrencias.salvar(ocorrencia);
-		this.ocorrencia = new Ocorrencia();
+		
 
 		String msg = "Cadastro efetuado com sucesso!";
 		FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, msg, msg));

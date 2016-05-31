@@ -20,12 +20,12 @@
 					columnClasses="rotulo, campo">
 
 				<h:outputText value="Nome: " />
-				<h:inputText value="#{cadastroModeloBean.modelo.nome}" />
+				<h:inputText value="#{cadastroModeloBean.modelo.modelo}" />
 			
 			<h:outputLabel value="Fabricante"/>
-				<h:selectOneMenu value="#{cadastroModeloBean.modelo.fabricante}" required="true" label="Fabricante">
+				<h:selectOneMenu value="#{cadastroModeloBean.modelo.marca}" required="true" label="Fabricante">
 				<f:selectItem itemLabel="Selecione o fabricante do Modelo" noSelectionOption="true"/>
-				<f:selectItems value="#{cadastroModeloBean.fabricantes}" var="fabricante" itemValue="#{fabricante}" itemLabel="#{fabricante.nome}"/>
+				<f:selectItems value="#{cadastroModeloBean.marcas}" var="marca" itemValue="#{marca}" itemLabel="#{marca.marca}"/>
 				</h:selectOneMenu>
 			
 			</p:panelGrid>

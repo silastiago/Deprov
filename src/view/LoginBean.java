@@ -12,7 +12,7 @@ import javax.servlet.http.HttpServletRequest;
 import model.Pessoa;
 import repository.impl.PessoasImpl;
 
-@ManagedBean
+@ManagedBean(name="loginBean")
 @SessionScoped
 public class LoginBean {
 

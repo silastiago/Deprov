@@ -5,7 +5,7 @@ import java.util.List;
 import org.hibernate.Session;
 import org.hibernate.criterion.Order;
 
-import model.Fabricante;
+import model.Marca;
 import model.Tipo;
 import repository.Tipos;
 
@@ -19,7 +19,7 @@ public class TiposImpl implements Tipos{
 	@SuppressWarnings("unchecked")
 	@Override
 	public List<Tipo> listar() {
-		return sessao.createCriteria(Tipo.class).addOrder(Order.asc("nome")).list();
+		return sessao.createCriteria(Tipo.class).addOrder(Order.asc("tipo")).list();
 	}
 
 	@Override

@@ -20,7 +20,7 @@
 					columnClasses="rotulo, campo">
 
 				<h:outputText value="Nome: " />
-				<h:inputText value="#{cadastroOcorrrenciaBean.ocorrencia.nome}" />
+				<h:inputText value="#{cadastroOcorrrenciaBean.ocorrencia.ocorrencia}" />
 
 				<h:outputText value="Data: " />
 				<p:calendar id="mask" value="#{cadastroOcorrrenciaBean.ocorrencia.data}"
@@ -32,16 +32,16 @@
 				</div>
 			</h:form>
 			
-				<h:form>
+				<h:form enctype="multipart/form-data">
 				<p:dataTable value="#{cadastroOcorrrenciaBean.listarVeiculo(codigo)}" var="ocorrencia"   rows="10" rowsPerPageTemplate="5,10,15,20"
 				id="mostraEquipamento"  paginator="true" >
 				
 				
-				<p:column filterBy="#{ocorrencia.nome}"  style="text-align: center; width:10%" filterMatchMode="startsWith">
+				<p:column filterBy="#{ocorrencia.ocorrencia}"  style="text-align: center; width:10%" filterMatchMode="startsWith">
 					<f:facet name="header">
 						<h:outputText value="Nome da Ocorrencia" />
 					</f:facet>
-					<h:outputText value="#{ocorrencia.nome}" />
+					<h:outputText value="#{ocorrencia.ocorrencia}" />
 				</p:column>
 								
 				<p:column filterBy="#{ocorrencia.data}"  style="text-align: center; width:10%" filterMatchMode="startsWith">

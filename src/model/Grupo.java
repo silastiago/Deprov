@@ -21,7 +21,7 @@ public class Grupo implements Serializable{
 	
 	
 	private Integer codigo;
-	private String nome;
+	private String grupo;
 	
 	public Grupo(){
 		
@@ -37,19 +37,19 @@ public class Grupo implements Serializable{
 	}
 
 	@Column
-	public String getNome() {
-		return nome;
+	public String getGrupo() {
+		return grupo;
 	}
-	public void setNome(String nome) {
-		this.nome = nome;
+	public void setGrupo(String grupo) {
+		this.grupo = grupo;
 	}
-
+	
 	@Override
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
 		result = prime * result + ((codigo == null) ? 0 : codigo.hashCode());
-		result = prime * result + ((nome == null) ? 0 : nome.hashCode());
+		result = prime * result + ((grupo == null) ? 0 : grupo.hashCode());
 		return result;
 	}
 	@Override
@@ -66,18 +66,13 @@ public class Grupo implements Serializable{
 				return false;
 		} else if (!codigo.equals(other.codigo))
 			return false;
-		if (nome == null) {
-			if (other.nome != null)
+		if (grupo == null) {
+			if (other.grupo != null)
 				return false;
-		} else if (!nome.equals(other.nome))
+		} else if (!grupo.equals(other.grupo))
 			return false;
 		return true;
 	}
-	@Override
-	public String toString() {
-		return nome;
-	}
-	
 	@Override
 	public Object clone() throws CloneNotSupportedException {
 		// TODO Auto-generated method stub
