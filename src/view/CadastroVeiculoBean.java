@@ -117,6 +117,12 @@ public class CadastroVeiculoBean implements Serializable{
 		System.out.println("iunciiando metodo de geracao de relatorio");
 		
 		int idVeiculo = Integer.parseInt(codigo);
+		Veiculos veiculos = this.repositorios.getveiculos();
+		Veiculo carro = veiculos.porCodigo(idVeiculo);
+		
+		
+		
+		
 		ConnectionFactory conexao = new ConnectionFactory();
 		
 		String reportSrcFile = "/resources/relatorios/Relatorio.jrxml";
@@ -134,8 +140,8 @@ public class CadastroVeiculoBean implements Serializable{
                 parameters, conn);
  
         // Make sure the output directory exists.
-        //File outDir = new File("C:/Users/Sinf02/Pictures");
-        //outDir.mkdirs();
+        File outDir = new File("C:/Users/Sinf02/Pictures");
+        outDir.mkdirs();
  
         // PDF Exportor.
         JRPdfExporter exporter = new JRPdfExporter();
@@ -145,7 +151,7 @@ public class CadastroVeiculoBean implements Serializable{
         exporter.setExporterInput(exporterInput);
  
         // ExporterOutput
-        OutputStreamExporterOutput exporterOutput = new SimpleOutputStreamExporterOutput("/resources/relatorios/FirstJasperReport.pdf");
+        OutputStreamExporterOutput exporterOutput = new SimpleOutputStreamExporterOutput("/resources/relatorios/"+carro.getPlaca()+".pdf");
         // Output
         exporter.setExporterOutput(exporterOutput);
  
@@ -154,6 +160,7 @@ public class CadastroVeiculoBean implements Serializable{
         exporter.setConfiguration(configuration);
         exporter.exportReport();
         
+        System.out.println("placa do carro é: " + carro.getPlaca());
         System.out.print("Relatorio criado com sucesso!");
         return "index?faces-redirect=true";
 		
