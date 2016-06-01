@@ -45,6 +45,7 @@ public class Veiculo implements Serializable, Cloneable{
 	private String proprietario;
 	private String chave;
 	private String comentarios;
+	private String motivoApreensao;
 	private Pericia pericia;
 	private Date date4;
 
@@ -248,6 +249,15 @@ public class Veiculo implements Serializable, Cloneable{
 
 	public void setComentarios(String comentarios) {
 		this.comentarios = comentarios;
+	}
+
+	@Column
+	public String getMotivoApreensao() {
+		return motivoApreensao;
+	}
+
+	public void setMotivoApreensao(String motivoApreensao) {
+		this.motivoApreensao = motivoApreensao;
 	}
 
 	@ManyToOne

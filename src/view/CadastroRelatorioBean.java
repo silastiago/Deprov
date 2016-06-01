@@ -54,9 +54,6 @@ public class CadastroRelatorioBean implements Serializable {
 		System.out.println("iniciando metodo de geracao de relatorio");
 		
 		int idVeiculo = Integer.parseInt(codigo);
-		Veiculos veiculos = this.repositorios.getveiculos();
-		Veiculo carro = veiculos.porCodigo(idVeiculo);
-		
 		ConnectionFactory conexao = new ConnectionFactory();
 		
 		String reportSrcFile = "C:/Users/Sinf02/workspace/Deprov/WebContent/resources/relatorios/Relatorio.jrxml";
@@ -86,7 +83,7 @@ public class CadastroRelatorioBean implements Serializable {
  
         // ExporterOutput
         OutputStreamExporterOutput exporterOutput = new SimpleOutputStreamExporterOutput(
-                "C:/Users/Sinf02/Downloads/"+carro.getPlaca()+".pdf");
+                "C:/Users/Sinf02/Downloads/FirstJasperReport.pdf");
         // Output
         exporter.setExporterOutput(exporterOutput);
  

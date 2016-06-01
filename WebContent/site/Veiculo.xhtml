@@ -124,6 +124,9 @@
 						<f:selectItems value="#{cadastroVeiculoBean.pericias}"
 							var="pericia" itemValue="#{pericia}" itemLabel="#{pericia.pericia}" />
 					</h:selectOneMenu>
+						
+					<h:outputText value="Motivo da Apreensão:" />
+					<p:inputText value="#{cadastroVeiculoBean.veiculo.motivoApreensao}" />
 
 					<p:outputLabel for="mask" value="Data:" />
 					<p:calendar id="mask" value="#{cadastroVeiculoBean.veiculo.date4}"
