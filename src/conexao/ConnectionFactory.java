@@ -31,9 +31,14 @@ public class ConnectionFactory {
 	public Connection getConnection(){
 		System.out.println("Iniciando conexao ");
 		try{
-			Class.forName(driver);
+			try {
+				Class.forName(driver);
+			} catch (ClassNotFoundException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 			conexao = DriverManager.getConnection(url, usuario, senha);
-			} catch (SQLException | ClassNotFoundException e) {
+			} catch (SQLException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}

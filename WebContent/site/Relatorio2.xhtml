@@ -19,17 +19,13 @@
 				<p:panelGrid columns="2" style="width: 100%; margin-top: 20px"
 					columnClasses="rotulo, campo">
 				
-				
-        <object type="application/pdf" data="C:/Users/Sinf02/Downloads/FirstJasperReport.pdf" height="300px" width="100%">
-            <a href="C:/Users/Sinf02/Downloads/FirstJasperReport.pdf">click</a>
-        </object>
-				
-
-				
-
+		<h:commandButton value="Download"  >
+			<p:fileDownload value="#{cadastroRelatorioBean.puxa()}"/>
+		 </h:commandButton>
 			</p:panelGrid>
 				</div>
 			</h:form>
+			
 	</ui:define>	
 	</ui:composition>
 </html>

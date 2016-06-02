@@ -1,7 +1,11 @@
 package view;
 
 import java.io.File;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.OutputStream;
 import java.io.Serializable;
+import java.net.URL;
 import java.sql.Connection;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -15,11 +19,14 @@ import javax.faces.bean.RequestScoped;
 import javax.faces.bean.ViewScoped;
 import javax.faces.context.FacesContext;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
 import org.primefaces.event.CellEditEvent;
+import org.primefaces.model.DefaultStreamedContent;
+import org.primefaces.model.StreamedContent;
 
 import conexao.ConnectionFactory;
-import model.Ocorrencia;
+
 import model.Veiculo;
 import net.sf.jasperreports.engine.JRException;
 import net.sf.jasperreports.engine.JasperCompileManager;
@@ -37,12 +44,13 @@ import repository.Veiculos;
 import util.Repositorios;
 
 @ManagedBean(name = "cadastroRelatorioBean")
-@ViewScoped
+@RequestScoped
 public class CadastroRelatorioBean implements Serializable {
 
 	private Repositorios repositorios = new Repositorios();
 	private List<Veiculo> veiculos = new ArrayList<Veiculo>();
 	private Veiculo veiculo = new Veiculo();
+	private StreamedContent file;
 
 	@PostConstruct
 	public void init() {
@@ -56,8 +64,7 @@ public class CadastroRelatorioBean implements Serializable {
 		int idVeiculo = Integer.parseInt(codigo);
 		ConnectionFactory conexao = new ConnectionFactory();
 		
-		String reportSrcFile = "C:/Users/Sinf02/workspace/Deprov/WebContent/resources/relatorios/Relatorio.jrxml";
-        
+		String reportSrcFile = "/opt/tomcat/webapps/Deprov/resources/relatorios/Relatorio.jrxml";
         // First, compile jrxml file.
         JasperReport jasperReport =    JasperCompileManager.compileReport(reportSrcFile);
  
@@ -83,7 +90,7 @@ public class CadastroRelatorioBean implements Serializable {
  
         // ExporterOutput
         OutputStreamExporterOutput exporterOutput = new SimpleOutputStreamExporterOutput(
-                "C:/Users/Sinf02/Downloads/FirstJasperReport.pdf");
+                "/opt/tomcat/webapps/Deprov/resources/relatorios/FirstJasperReport.pdf");
         // Output
         exporter.setExporterOutput(exporterOutput);
  
@@ -96,7 +103,43 @@ public class CadastroRelatorioBean implements Serializable {
 		
 	}
 	
+	public void puxa() throws IOException{
+		
+		FacesContext facesContext = FacesContext.getCurrentInstance();
+	    HttpServletResponse response = (HttpServletResponse) facesContext.getExternalContext().getResponse();
+
+	    response.reset();   // Algum filtro pode ter configurado alguns cabeçalhos no buffer de antemão. Queremos livrar-se deles, senão ele pode colidir.
+	    response.setHeader("Content-Type", "application/pdf");  // Define apenas o tipo de conteúdo, Utilize se necessário ServletContext#getMimeType() para detecção automática com base em nome de arquivo. 
+	    OutputStream responseOutputStream = response.getOutputStream();
+
+	    String PDF_URL = "http://snmp.info.ufrn.br:8080/Deprov/resources/relatorios/FirstJasperReport.pdf";
+		// Lê o conteúdo do PDF
+	    URL url = new URL(PDF_URL);
+	    InputStream pdfInputStream = url.openStream();
+
+	    // Lê o conteúdo do PDF e grava para saída
+	    byte[] bytesBuffer = new byte[2048];
+	    int bytesRead;
+	    while ((bytesRead = pdfInputStream.read(bytesBuffer)) > 0) {
+	        responseOutputStream.write(bytesBuffer, 0, bytesRead);
+	    }    
+	    responseOutputStream.flush();
+
+	    // Fecha os streams
+	    pdfInputStream.close();
+	    responseOutputStream.close();         
+	    facesContext.responseComplete();         
 	
+	}
+	
+	public StreamedContent getFile() {
+		return file;
+	}
+
+	public void setFile(StreamedContent file) {
+		this.file = file;
+	}
+
 	public List<Veiculo> getVeiculos() {
 		return veiculos;
 	}

@@ -39,7 +39,7 @@ public class CadastroOcorrenciaBean implements Serializable {
 		this.veiculos = veiculos.listar();
 	}
 
-	public void cadastrar(String codigo) {
+	public String cadastrar(String codigo) {
 		Ocorrencias ocorrencias = this.repositorios.getocorrencia();
 		
 		int idVeiculo = Integer.parseInt(codigo);
@@ -66,6 +66,8 @@ public class CadastroOcorrenciaBean implements Serializable {
 
 		String msg = "Cadastro efetuado com sucesso!";
 		FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, msg, msg));
+	
+		return "index?faces-redirect=true";
 	}
 	
 	public void update(Ocorrencia ocorrencia) {
