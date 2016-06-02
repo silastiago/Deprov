@@ -64,7 +64,7 @@ public class CadastroRelatorioBean implements Serializable {
 		int idVeiculo = Integer.parseInt(codigo);
 		ConnectionFactory conexao = new ConnectionFactory();
 		
-		String reportSrcFile = "/opt/tomcat/webapps/Deprov/resources/relatorios/Relatorio.jrxml";
+		String reportSrcFile = "/opt/tomcat/webapps/Deprov/resources/relatorios/RelatorioVeiculo.jrxml";
         // First, compile jrxml file.
         JasperReport jasperReport =    JasperCompileManager.compileReport(reportSrcFile);
  
