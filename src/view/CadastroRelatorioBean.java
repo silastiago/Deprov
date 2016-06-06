@@ -58,7 +58,7 @@ public class CadastroRelatorioBean implements Serializable {
 		this.veiculos = veiculos.listar();
 	}
 
-	public String gerarRelatorio(String codigo) throws JRException {
+	public String gerarRelatorio(String codigo) throws JRException, IOException {
 		System.out.println("iniciando metodo de geracao de relatorio");
 		
 		int idVeiculo = Integer.parseInt(codigo);
@@ -99,6 +99,39 @@ public class CadastroRelatorioBean implements Serializable {
         exporter.setConfiguration(configuration);
         exporter.exportReport();	
         System.out.print("Relatorio criado com sucesso!");
+        
+        
+        
+        FacesContext facesContext = FacesContext.getCurrentInstance();
+	    HttpServletResponse response = (HttpServletResponse) facesContext.getExternalContext().getResponse();
+
+	    response.reset();   // Algum filtro pode ter configurado alguns cabeçalhos no buffer de antemão. Queremos livrar-se deles, senão ele pode colidir.
+	    response.setHeader("Content-Type", "application/pdf");  // Define apenas o tipo de conteúdo, Utilize se necessário ServletContext#getMimeType() para detecção automática com base em nome de arquivo. 
+	    OutputStream responseOutputStream = response.getOutputStream();
+
+	    String PDF_URL = "http://snmp.info.ufrn.br:8080/Deprov/resources/relatorios/FirstJasperReport.pdf";
+		// Lê o conteúdo do PDF
+	    URL url = new URL(PDF_URL);
+	    InputStream pdfInputStream = url.openStream();
+
+	    // Lê o conteúdo do PDF e grava para saída
+	    byte[] bytesBuffer = new byte[2048];
+	    int bytesRead;
+	    while ((bytesRead = pdfInputStream.read(bytesBuffer)) > 0) {
+	        responseOutputStream.write(bytesBuffer, 0, bytesRead);
+	    }    
+	    responseOutputStream.flush();
+
+	    // Fecha os streams
+	    pdfInputStream.close();
+	    responseOutputStream.close();         
+	    facesContext.responseComplete();
+        
+        
+        
+        
+        
+        
         return "index?faces-redirect=true";
 		
 	}

@@ -130,6 +130,4 @@ public class CadastroOcorrenciaBean implements Serializable {
 	public void setVeiculo(Veiculo veiculo) {
 		this.veiculo = veiculo;
 	}
-	
-
 }

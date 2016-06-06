@@ -15,14 +15,11 @@
 	<ui:define name="conteudo">
 		<h:form enctype="multipart/form-data" >
 			<div class="ui-fluid">
-				<h1>Cadastro de Ocorrencia</h1>
+				<h1>Gerar Relatorio</h1>
 				<p:panelGrid columns="2" style="width: 100%; margin-top: 20px"
 					columnClasses="rotulo, campo">
 				
 				<h:commandButton action="#{cadastroRelatorioBean.gerarRelatorio(codigo)}" value="Gerar" />
-				<h:commandButton value="Download"  >
-					<p:fileDownload value="#{cadastroRelatorioBean.puxa()}"/>
-		 		</h:commandButton>
 			</p:panelGrid>
 				</div>
 			</h:form>
