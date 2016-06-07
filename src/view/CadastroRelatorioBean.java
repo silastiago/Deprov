@@ -78,9 +78,9 @@ public class CadastroRelatorioBean implements Serializable {
                 parameters, conn);
  
         // Make sure the output directory exists.
-        //File outDir = new File("C:/Users/Sinf02/Pictures");
-        //outDir.mkdirs();
- 
+        File outDir = new File("/opt/tomcat/webapps/Deprov/resources/images/"+codigo);
+        outDir.mkdirs();
+        
         // PDF Exportor.
         JRPdfExporter exporter = new JRPdfExporter();
  
@@ -126,11 +126,6 @@ public class CadastroRelatorioBean implements Serializable {
 	    pdfInputStream.close();
 	    responseOutputStream.close();         
 	    facesContext.responseComplete();
-        
-        
-        
-        
-        
         
         return "index?faces-redirect=true";
 		
