@@ -44,8 +44,7 @@ public class CadastroFotoBean implements Serializable {
 	private List<Foto> listaFotos = new ArrayList<Foto>();
 	private List<Veiculo> veiculos = new ArrayList<Veiculo>();
 	private Veiculo veiculo = new Veiculo();
-	private StreamedContent imagem;
-	
+    private UploadedFile file;
 
 	@PostConstruct
 	public void init() {
@@ -53,41 +52,46 @@ public class CadastroFotoBean implements Serializable {
 		this.listaFotos = fotos.listar();
 		Veiculos veiculos = this.repositorios.getveiculos();
 		this.veiculos = veiculos.listar();
+	
 	}
 	
-	public void criaArquivo(byte[] bytes, String arquivo) {
-		FileOutputStream fos;
-		String path = "/opt/tomcat/webapps/Deprov/resources/images/1/";
+	public String upload(String codigo){
+		System.out.println("Codigo do veiculo: " + codigo);
+		File outDir = new File("/opt/tomcat/webapps/Deprov/resources/images/"+ codigo);
+        if (outDir.exists()) {
+			System.out.println("Diretorio já criado ");
+		}else {
+			outDir. mkdirs();
+		}
+        
+        FileOutputStream fos;
+        String nomeArquivo = file.getFileName();
+        byte[] fotos = file.getContents();
+        
+        String path = "/opt/tomcat/webapps/Deprov/resources/images/"+codigo+"/";
 		try {
-		fos = new FileOutputStream(path+arquivo);
-		fos.write(bytes);
+		fos = new FileOutputStream(path+nomeArquivo);
+		fos.write(fotos);
 		fos.close();
 		} catch (FileNotFoundException ex) {
 		} catch (IOException ex) {
 		}
-		}
+		this.foto.setPath(path+nomeArquivo);
+        
+		IFoto Ifoto = repositorios.getFoto();
+		int idVeiculo = Integer.parseInt(codigo);
+		veiculo.setCodigo(idVeiculo);
+		this.foto.setVeiculo(veiculo);
+		Ifoto.salvar(foto);
+		
+		
+        return "index?faces-redirect=true";
+	}
 	
-	
+	/*
 	public void handleFileUpload(FileUploadEvent event) {
 		
-		UploadedFile uploadedFile = event.getFile();  	 
-		
-			 
-		 //imagem = new DefaultStreamedContent(event.getFile().getInputstream());
-		
-		 String nomeArquivo = uploadedFile.getFileName();
-		 System.out.println("Nome do arquivo: " + nomeArquivo);
-		 byte[] foto = event.getFile().getContents();
-		 this.criaArquivo(foto, nomeArquivo);
-		
-		 
-		
-		 }
-	
-	public String cadastrar(String codigo) {
-		//IFoto fotos = repositorios.getFoto();
-		
-		File outDir = new File("/opt/tomcat/webapps/Deprov/resources/images/"+codigo);
+		File outDir = new File("/opt/tomcat/webapps/Deprov/resources/images/"+ codigo);
         if (outDir.exists()) {
 			System.out.println("Diretorio já criado ");
 		}else {
@@ -95,37 +99,43 @@ public class CadastroFotoBean implements Serializable {
 		}
 		
 		
+		FileOutputStream fos;
 		
+		 UploadedFile uploadedFile = event.getFile();		
+		 String nomeArquivo = uploadedFile.getFileName();
+		 System.out.println("Nome do arquivo: " + nomeArquivo);
+		 byte[] foto = event.getFile().getContents();
+		
+		 
+		 String path = "/opt/tomcat/webapps/Deprov/resources/images/1/";
+			try {
+			fos = new FileOutputStream(path+nomeArquivo);
+			fos.write(foto);
+			fos.close();
+			} catch (FileNotFoundException ex) {
+			} catch (IOException ex) {
+			}
+			this.foto.setPath(path+nomeArquivo);
+		
+		 }
+	
+	public String cadastrar(String codigo) {
+		IFoto fotos = repositorios.getFoto();
 		
 		
 		
 		int idVeiculo = Integer.parseInt(codigo);
-		
-		
-		//String codigo = FacesContext.getCurrentInstance().getExternalContext().getRequestParameterMap().get("codigo");
-
-		
-		//System.out.println("Codigo do veiculo: " + codigo);
-		
-		// FacesContext fc = FacesContext.getCurrentInstance();
-		// String id_veiculo =
-		// fc.getExternalContext().getRequestParameterMap().get("codigo_veiculo")
-		// ;
 		System.out.println("ID do veiculo para a foto : " + codigo);
-		// 
-		//System.out.println("ID do veiculo: " + idVeiculo);
 		
-		//veiculo.setCodigo(idVeiculo);
-		//ocorrencia.setVeiculo(veiculo);
-
-		//ocorrencias.salvar(ocorrencia);
-		
+		veiculo.setCodigo(idVeiculo);
+		this.foto.setVeiculo(veiculo);
+		fotos.salvar(foto);		
 
 		
 	
 		return "index?faces-redirect=true";
 	}
-	
+	*/
 	public void update(Ocorrencia ocorrencia) {
 		Ocorrencias ocorrencias = this.repositorios.getocorrencia();
 		ocorrencias.editar(ocorrencia);
@@ -174,13 +184,12 @@ public class CadastroFotoBean implements Serializable {
 		this.veiculo = veiculo;
 	}
 
-	public StreamedContent getImagem() {
-		return imagem;
+	public UploadedFile getFile() {
+		return file;
 	}
 
-	public void setImagem(StreamedContent imagem) {
-		this.imagem = imagem;
-	}
-
+	public void setFile(UploadedFile file) {
+		this.file = file;
+	}	
 	
 }

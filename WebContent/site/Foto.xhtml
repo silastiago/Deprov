@@ -19,16 +19,16 @@
 				<p:panelGrid columns="2" style="width: 100%; margin-top: 20px"
 					columnClasses="rotulo, campo">
 				
-				 <p:fileUpload   label="Procurar..."  fileUploadListener="#{cadastroFotoBean.handleFileUpload}"
- 				allowTypes="/(\.|\/)(gif|jpe?g|png)$/"  mode="advanced"/>
- 				
 				
 				
-				<h:commandButton action="#{cadastroFotoBean.cadastrar(codigo)}" value="Salvar" />
+				<p:fileUpload value="#{cadastroFotoBean.file}" mode="simple" skinSimple="true"/>
 				
 				
 				
-
+				<p:commandButton value="Submit" ajax="false" actionListener="#{cadastroFotoBean.upload(codigo)}"  />
+				
+				
+				
 			</p:panelGrid>
 				</div>
 			</h:form>

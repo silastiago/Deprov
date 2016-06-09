@@ -25,6 +25,7 @@
 		<mapping class="model.Seguro"/>
 		<mapping class="model.Veiculo"/>
 		<mapping class="model.Ocorrencia"/>
+		<mapping class="model.Foto"/>
 
 
 	</session-factory>
