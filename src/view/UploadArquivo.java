@@ -40,9 +40,8 @@ public class UploadArquivo {
 	return context.getRealPath("/");
 		}
 		
-	public void fileUpload(FileUploadEvent event, String type, String diretorio) {
+	public void fileUpload(FileUploadEvent event, String diretorio) {
 	try {
-	this.nome = new java.util.Date().getTime() + type;
 	this.caminho = getRealPath() + diretorio + getNome();
 	this.arquivo = event.getFile().getContents();
 	
