@@ -88,54 +88,6 @@ public class CadastroFotoBean implements Serializable {
         return "index?faces-redirect=true";
 	}
 	
-	/*
-	public void handleFileUpload(FileUploadEvent event) {
-		
-		File outDir = new File("/opt/tomcat/webapps/Deprov/resources/images/"+ codigo);
-        if (outDir.exists()) {
-			System.out.println("Diretorio já criado ");
-		}else {
-			outDir. mkdirs();
-		}
-		
-		
-		FileOutputStream fos;
-		
-		 UploadedFile uploadedFile = event.getFile();		
-		 String nomeArquivo = uploadedFile.getFileName();
-		 System.out.println("Nome do arquivo: " + nomeArquivo);
-		 byte[] foto = event.getFile().getContents();
-		
-		 
-		 String path = "/opt/tomcat/webapps/Deprov/resources/images/1/";
-			try {
-			fos = new FileOutputStream(path+nomeArquivo);
-			fos.write(foto);
-			fos.close();
-			} catch (FileNotFoundException ex) {
-			} catch (IOException ex) {
-			}
-			this.foto.setPath(path+nomeArquivo);
-		
-		 }
-	
-	public String cadastrar(String codigo) {
-		IFoto fotos = repositorios.getFoto();
-		
-		
-		
-		int idVeiculo = Integer.parseInt(codigo);
-		System.out.println("ID do veiculo para a foto : " + codigo);
-		
-		veiculo.setCodigo(idVeiculo);
-		this.foto.setVeiculo(veiculo);
-		fotos.salvar(foto);		
-
-		
-	
-		return "index?faces-redirect=true";
-	}
-	*/
 	public void update(Ocorrencia ocorrencia) {
 		Ocorrencias ocorrencias = this.repositorios.getocorrencia();
 		ocorrencias.editar(ocorrencia);
@@ -191,5 +143,4 @@ public class CadastroFotoBean implements Serializable {
 	public void setFile(UploadedFile file) {
 		this.file = file;
 	}	
-	
 }
