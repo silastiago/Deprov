@@ -88,6 +88,14 @@ public class CadastroFotoBean implements Serializable {
         return "index?faces-redirect=true";
 	}
 	
+	public List<Foto> listarFotos(String codigo){
+		IFoto Ifoto = repositorios.getFoto();
+		int idVeiculo = Integer.parseInt(codigo);
+		listaFotos = Ifoto.porCodigoVeiculo(idVeiculo);
+		
+		return listaFotos;
+	}
+	
 	public void update(Ocorrencia ocorrencia) {
 		Ocorrencias ocorrencias = this.repositorios.getocorrencia();
 		ocorrencias.editar(ocorrencia);

@@ -2,9 +2,12 @@ package repository.impl;
 
 import java.util.List;
 
+import org.hibernate.Query;
 import org.hibernate.Session;
+import org.hibernate.criterion.Restrictions;
 
 import model.Foto;
+import model.Ocorrencia;
 import repository.IFoto;
 
 
@@ -40,5 +43,11 @@ public class FotoImpl implements IFoto{
 	@Override
 	public void editar(Foto foto) {
 		this.sessao.update(foto);
+	}
+
+	@SuppressWarnings("unchecked")
+	@Override
+	public List<Foto> porCodigoVeiculo(Integer codigo_veiculo) {
+		return sessao.createCriteria(Foto.class).add(Restrictions.eq("veiculo.codigo", codigo_veiculo)).list();
 	}
 }

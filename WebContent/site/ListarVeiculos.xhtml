@@ -107,7 +107,14 @@
 					<i class="icon-edit"></i>
 					<f:param name="codigo"  value="#{veiculo.codigo}"/>
 					</h:link>
-				</p:column>
+			</p:column>
+			
+			<p:column style="text-align: center; width:5%">
+					<h:link outcome="ListarFotos" value="Listar Foto">
+					<i class="icon-edit"></i>
+					<f:param name="codigo"  value="#{veiculo.codigo}"/>
+					</h:link>
+			</p:column>
 			
 			<p:column style="text-align: center; width:5%">
 					<h:link outcome="Relatorio" value="Gerar Relatorio">
