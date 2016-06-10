@@ -69,6 +69,7 @@ public class CadastroFotoBean implements Serializable {
         byte[] fotos = file.getContents();
         
         String path = "/opt/tomcat/webapps/Deprov/resources/images/"+codigo+"/";
+        String pathBanco = "../resources/images/"+codigo+"/";
 		try {
 		fos = new FileOutputStream(path+nomeArquivo);
 		fos.write(fotos);
@@ -76,7 +77,7 @@ public class CadastroFotoBean implements Serializable {
 		} catch (FileNotFoundException ex) {
 		} catch (IOException ex) {
 		}
-		this.foto.setPath(path+nomeArquivo);
+		this.foto.setPath(pathBanco+nomeArquivo);
         
 		IFoto Ifoto = repositorios.getFoto();
 		int idVeiculo = Integer.parseInt(codigo);
