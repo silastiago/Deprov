@@ -18,8 +18,8 @@
 
 		<h:form enctype="multipart/form-data">
 
-			<p:galleria var="image" value="#{cadastroFotoBean.listarFotos(codigo)}" panelWidth="600" panelHeight="600" showCaption="true">
-					<p:graphicImage value="#{image.path}" alt="#{image.path}"/>
+			<p:galleria var="image" value="#{cadastroFotoBean.listarFotos(codigo)}" panelWidth="600" panelHeight="600" autoPlay="false" >
+					<p:graphicImage value="#{image.path}" width="500" height="500"/>
 			</p:galleria>
 
 

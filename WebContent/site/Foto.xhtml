@@ -15,7 +15,7 @@
 	<ui:define name="conteudo">
 		<h:form enctype="multipart/form-data" >
 			<div class="ui-fluid">
-				<h1>Cadastro de Ocorrencia</h1>
+				<h1>Cadastro de Fotos do Veiculo</h1>
 				<p:panelGrid columns="2" style="width: 100%; margin-top: 20px"
 					columnClasses="rotulo, campo">
 				
@@ -32,6 +32,25 @@
 			</p:panelGrid>
 				</div>
 			</h:form>
+			
+			
+			<h:form enctype="multipart/form-data" >
+			<div class="ui-fluid">
+				<h1>Fotos do Veiculo</h1>
+				<p:panelGrid columns="1" style="width: 100%; margin-top: 20px"
+					>
+				
+			<p:galleria var="image" value="#{cadastroFotoBean.listarFotos(codigo)}" panelWidth="600" panelHeight="600" autoPlay="false" >
+					<p:graphicImage value="#{image.path}" width="500" height="500"/>
+			</p:galleria>	
+				
+			</p:panelGrid>
+				</div>
+			</h:form>
+			
+			
+			
+			
 	</ui:define>	
 	</ui:composition>
 </html>
