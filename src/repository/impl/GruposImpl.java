@@ -4,8 +4,6 @@ import java.util.List;
 
 import org.hibernate.Session;
 import org.hibernate.criterion.Order;
-
-import model.Cor;
 import model.Grupo;
 import repository.Grupos;
 
@@ -35,7 +33,6 @@ public class GruposImpl implements Grupos{
 	@Override
 	public void remover(Grupo grupo) {
 		this.sessao.delete(grupo);
-
 	}
 
 	@Override

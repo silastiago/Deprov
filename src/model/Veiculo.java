@@ -30,7 +30,7 @@ public class Veiculo implements Serializable, Cloneable{
 	private String placaOriginal;
 	private Tipo tipo;
 	private Cor cor;
-	private Marca marca;
+	private Fabricante marca;
 	private Modelo modelo;
 	private String Anofabricacao;
 	private String chassi;
@@ -59,32 +59,11 @@ public class Veiculo implements Serializable, Cloneable{
 	public void setCodigo(Integer codigo) {
 		this.codigo = codigo;
 	}
-	/*
-	@Column(name="dataEntrada")
-	@Temporal(TemporalType.DATE)
-	public Date getDataEntrada() {
-		return dataEntrada;
-	}
-
-	public void setDataEntrada(Date dataEntrada) {
-		this.dataEntrada = dataEntrada;
-	}
-	@Column(name="sataSaida")
-	@Temporal(TemporalType.DATE)
-	public Date getDataSaida() {
-		return dataSaida;
-	}
-
-	public void setDataSaida(Date dataSaida) {
-		this.dataSaida = dataSaida;
-	}
-	*/
-	
+		
 	@Column
 	public Date getDate4() {
 		return date4;
 	}
-
 
 	public void setDate4(Date date4) {
 		this.date4 = date4;
@@ -97,7 +76,7 @@ public class Veiculo implements Serializable, Cloneable{
 	}
 
 	public void setPlaca(String placa) {
-		this.placa = placa;
+		this.placa = placa.toUpperCase();
 	}
 	
 	@Column
@@ -106,7 +85,7 @@ public class Veiculo implements Serializable, Cloneable{
 	}
 
 	public void setPlacaOriginal(String placaOriginal) {
-		this.placaOriginal = placaOriginal;
+		this.placaOriginal = placaOriginal.toUpperCase();
 	}
 
 	@ManyToOne
@@ -129,11 +108,11 @@ public class Veiculo implements Serializable, Cloneable{
 	}
 	@ManyToOne
 	@JoinColumn(name="codigo_marca", referencedColumnName="codigo")
-	public Marca getMarca() {
+	public Fabricante getMarca() {
 		return marca;
 	}
 
-	public void setMarca(Marca marca) {
+	public void setMarca(Fabricante marca) {
 		this.marca = marca;
 	}
 	@ManyToOne
@@ -159,7 +138,7 @@ public class Veiculo implements Serializable, Cloneable{
 	}
 
 	public void setChassi(String chassi) {
-		this.chassi = chassi;
+		this.chassi = chassi.toUpperCase();
 	}
 	@Column
 	public String getMotor() {
@@ -167,7 +146,7 @@ public class Veiculo implements Serializable, Cloneable{
 	}
 
 	public void setMotor(String motor) {
-		this.motor = motor;
+		this.motor = motor.toUpperCase();
 	}
 	@Column
 	public String getLocalAtual() {
@@ -175,7 +154,7 @@ public class Veiculo implements Serializable, Cloneable{
 	}
 
 	public void setLocalAtual(String localAtual) {
-		LocalAtual = localAtual;
+		LocalAtual = localAtual.toUpperCase();
 	}
 	@Column
 	public String getObs() {
@@ -183,7 +162,7 @@ public class Veiculo implements Serializable, Cloneable{
 	}
 
 	public void setObs(String obs) {
-		Obs = obs;
+		Obs = obs.toUpperCase();
 	}
 	@Column
 	public String getNumero_ocorrencia() {
@@ -191,7 +170,7 @@ public class Veiculo implements Serializable, Cloneable{
 	}
 
 	public void setNumero_ocorrencia(String numero_ocorrencia) {
-		this.numero_ocorrencia = numero_ocorrencia;
+		this.numero_ocorrencia = numero_ocorrencia.toUpperCase();
 	}
 	@Column
 	public String getIp_processo() {
@@ -199,7 +178,7 @@ public class Veiculo implements Serializable, Cloneable{
 	}
 
 	public void setIp_processo(String ip_processo) {
-		this.ip_processo = ip_processo;
+		this.ip_processo = ip_processo.toUpperCase();
 	}
 	@ManyToOne
 	@JoinColumn(name="codigo_seguro", referencedColumnName="codigo")
@@ -216,7 +195,7 @@ public class Veiculo implements Serializable, Cloneable{
 	}
 
 	public void setSituacao(String situacao) {
-		this.situacao = situacao;
+		this.situacao = situacao.toUpperCase();
 	}
 	@Column
 	public String getCondicao() {
@@ -224,7 +203,7 @@ public class Veiculo implements Serializable, Cloneable{
 	}
 
 	public void setCondicao(String condicao) {
-		this.condicao = condicao;
+		this.condicao = condicao.toUpperCase();
 	}
 	@Column
 	public String getProprietario() {
@@ -232,7 +211,7 @@ public class Veiculo implements Serializable, Cloneable{
 	}
 
 	public void setProprietario(String proprietario) {
-		this.proprietario = proprietario;
+		this.proprietario = proprietario.toUpperCase();
 	}
 	@Column
 	public String getChave() {
@@ -240,7 +219,7 @@ public class Veiculo implements Serializable, Cloneable{
 	}
 
 	public void setChave(String chave) {
-		this.chave = chave;
+		this.chave = chave.toUpperCase();
 	}
 	@Column
 	public String getComentarios() {
@@ -248,7 +227,7 @@ public class Veiculo implements Serializable, Cloneable{
 	}
 
 	public void setComentarios(String comentarios) {
-		this.comentarios = comentarios;
+		this.comentarios = comentarios.toUpperCase();
 	}
 
 	@Column
@@ -257,7 +236,7 @@ public class Veiculo implements Serializable, Cloneable{
 	}
 
 	public void setMotivoApreensao(String motivoApreensao) {
-		this.motivoApreensao = motivoApreensao;
+		this.motivoApreensao = motivoApreensao.toUpperCase();
 	}
 
 	@ManyToOne

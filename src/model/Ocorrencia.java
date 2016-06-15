@@ -33,7 +33,7 @@ public class Ocorrencia implements Serializable, Cloneable{
 		return ocorrencia;
 	}
 	public void setOcorrencia(String ocorrencia) {
-		this.ocorrencia = ocorrencia;
+		this.ocorrencia = ocorrencia.toUpperCase();
 	}
 	@Column
 	public String getData() {

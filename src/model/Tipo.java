@@ -29,7 +29,7 @@ public class Tipo implements Serializable, Cloneable{
 		return tipo;
 	}
 	public void setTipo(String tipo) {
-		this.tipo = tipo;
+		this.tipo = tipo.toUpperCase();
 	}
 	
 	@Override

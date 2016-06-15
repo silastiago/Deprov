@@ -7,25 +7,26 @@ import javax.faces.convert.Converter;
 import javax.faces.convert.ConverterException;
 import javax.faces.convert.FacesConverter;
 
-import model.Fabricante;
-import model.Tipo;
-import repository.Tipos;
+import model.Cor;
+import model.Grupo;
+import repository.Cores;
+import repository.Grupos;
 import util.Repositorios;
 
 
-@FacesConverter(forClass=Tipo.class)
-public class TipoConversor implements Converter{
+@FacesConverter(forClass=Grupo.class)
+public class GrupoConversor implements Converter{
 
 	private Repositorios repositorios = new Repositorios();
 
 	@Override
 	public Object getAsObject(FacesContext context, UIComponent component, String value) {
-		Tipo retorno = null;
-		Tipos tipos = repositorios.getTipos();
+		Grupo retorno = null;
+		Grupos grupos = repositorios.getGrupos();
 		if (value != null && !value.equals("")) {
-			retorno = tipos.porCodigo(new Integer(value));
+			retorno = grupos.porCodigo(new Integer(value));
 		if (retorno == null) {
-			String descricaoErro = "Marca não existe";
+			String descricaoErro = "Estado não existe";
 			FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_ERROR, descricaoErro, descricaoErro);
 			throw new ConverterException(message);
 		}
@@ -38,7 +39,7 @@ public class TipoConversor implements Converter{
 	@Override
 	public String getAsString(FacesContext context, UIComponent component, Object value) {
 		if (value != null) {
-			Integer codigo = ((Tipo) value).getCodigo();
+			Integer codigo = ((Grupo) value).getCodigo();
 			return codigo == null ? "" : codigo.toString();
 		}
 		return null;

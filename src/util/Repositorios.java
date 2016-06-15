@@ -7,7 +7,7 @@ import org.hibernate.Session;
 import repository.Cores;
 import repository.Grupos;
 import repository.IFoto;
-import repository.Marcas;
+import repository.Fabricantes;
 import repository.Modelos;
 import repository.Ocorrencias;
 import repository.Pericias;
@@ -18,7 +18,7 @@ import repository.Veiculos;
 import repository.impl.CoresImpl;
 import repository.impl.FotoImpl;
 import repository.impl.GruposImpl;
-import repository.impl.MarcaImpl;
+import repository.impl.FabricanteImpl;
 import repository.impl.ModelosImpl;
 import repository.impl.OcorrenciaImpl;
 import repository.impl.PericiasImpl;
@@ -34,8 +34,8 @@ public class Repositorios implements Serializable {
 		return new PessoasImpl(this.getSession());
 	}
 	
-	public Marcas getMarcas(){
-		return new MarcaImpl(this.getSession());
+	public Fabricantes getFabricantes(){
+		return new FabricanteImpl(this.getSession());
 	}
 	
 	public Modelos getModelos(){

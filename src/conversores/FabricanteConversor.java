@@ -7,20 +7,20 @@ import javax.faces.convert.Converter;
 import javax.faces.convert.ConverterException;
 import javax.faces.convert.FacesConverter;
 
-import model.Marca;
-import repository.Marcas;
+import model.Fabricante;
+import repository.Fabricantes;
 import util.Repositorios;
 
 
-@FacesConverter(forClass=Marca.class)
-public class MarcaConversor implements Converter{
+@FacesConverter(forClass=Fabricante.class)
+public class FabricanteConversor implements Converter{
 
 	private Repositorios repositorios = new Repositorios();
 
 	@Override
 	public Object getAsObject(FacesContext context, UIComponent component, String value) {
-		Marca retorno = null;
-		Marcas fabricantes = repositorios.getMarcas();
+		Fabricante retorno = null;
+		Fabricantes fabricantes = repositorios.getFabricantes();
 		if (value != null && !value.equals("")) {
 			retorno = fabricantes.porCodigo(new Integer(value));
 		if (retorno == null) {
@@ -37,7 +37,7 @@ public class MarcaConversor implements Converter{
 	@Override
 	public String getAsString(FacesContext context, UIComponent component, Object value) {
 		if (value != null) {
-			Integer codigo = ((Marca) value).getCodigo();
+			Integer codigo = ((Fabricante) value).getCodigo();
 			return codigo == null ? "" : codigo.toString();
 		}
 		return null;

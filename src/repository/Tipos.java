@@ -2,7 +2,7 @@ package repository;
 
 import java.util.List;
 
-import model.Marca;
+import model.Fabricante;
 import model.Tipo;
 
 public interface Tipos {

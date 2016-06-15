@@ -10,9 +10,9 @@ import javax.faces.bean.ManagedBean;
 import javax.faces.bean.RequestScoped;
 import javax.faces.context.FacesContext;
 
-import model.Marca;
+import model.Fabricante;
 import model.Modelo;
-import repository.Marcas;
+import repository.Fabricantes;
 import repository.Modelos;
 import util.Repositorios;
 
@@ -23,26 +23,21 @@ public class CadastroModeloBean implements Serializable{
 	private Repositorios repositorios = new Repositorios();
 	private Modelo modelo  = new Modelo();
 	private List<Modelo> modelos = new ArrayList<Modelo>();
-	private List<Marca> marcas = new ArrayList<Marca>();
+	private List<Fabricante> fabricantes = new ArrayList<Fabricante>();
 	
 
 	@PostConstruct
 	public void init(){
 		Modelos modelos = this.repositorios.getModelos();
-		Marcas marcas = this.repositorios.getMarcas();
+		Fabricantes fabricantes = this.repositorios.getFabricantes();
 		this.modelos = modelos.listar();
-		this.marcas = marcas.listar();
+		this.fabricantes = fabricantes.listar();
 	}
 
 
 	public String cadastrar(){
 		Modelos modelos = this.repositorios.getModelos();
 		modelos.salvar(modelo);
-		
-
-		String msg = "Cadastro efetuado com sucesso!";
-		FacesContext.getCurrentInstance().addMessage(null,
-				new FacesMessage(FacesMessage.SEVERITY_INFO, msg, msg));
 		
 		return "index?faces-redirect=true";
 	}
@@ -79,11 +74,11 @@ public class CadastroModeloBean implements Serializable{
 		this.modelos = modelos;
 	}
 
-	public List<Marca> getMarcas() {
-		return marcas;
+	public List<Fabricante> getFabricantes() {
+		return fabricantes;
 	}
 
-	public void setMarcas(List<Marca> marcas) {
-		this.marcas = marcas;
+	public void setFabricantes(List<Fabricante> fabricantes) {
+		this.fabricantes = fabricantes;
 	}
 }

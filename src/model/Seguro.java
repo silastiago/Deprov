@@ -29,7 +29,7 @@ public class Seguro implements Serializable, Cloneable{
 		return seguro;
 	}
 	public void setSeguro(String seguro) {
-		this.seguro = seguro;
+		this.seguro = seguro.toUpperCase();
 	}
 	
 	@Override

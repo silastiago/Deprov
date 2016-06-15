@@ -32,7 +32,7 @@ import org.primefaces.model.UploadedFile;
 
 import conexao.ConnectionFactory;
 import model.Cor;
-import model.Marca;
+import model.Fabricante;
 import model.Modelo;
 import model.Pericia;
 import model.Seguro;
@@ -50,7 +50,7 @@ import net.sf.jasperreports.export.SimpleExporterInput;
 import net.sf.jasperreports.export.SimpleOutputStreamExporterOutput;
 import net.sf.jasperreports.export.SimplePdfExporterConfiguration;
 import repository.Cores;
-import repository.Marcas;
+import repository.Fabricantes;
 import repository.Modelos;
 import repository.Pericias;
 import repository.Seguros;
@@ -68,7 +68,7 @@ public class CadastroVeiculoBean implements Serializable{
 	private List<Veiculo> veiculosFiltrados = new ArrayList<Veiculo>();
 	private List<Cor> cores = new ArrayList<Cor>();
 	private List<Tipo> tipos = new ArrayList<Tipo>();
-	private List<Marca> marcas  = new ArrayList<Marca>();
+	private List<Fabricante> fabricantes  = new ArrayList<Fabricante>();
 	private List<Modelo> modelos = new ArrayList<Modelo>();
 	private List<Seguro> seguros = new ArrayList<Seguro>();
 	private List<Pericia> pericias = new ArrayList<Pericia>();
@@ -83,28 +83,23 @@ public class CadastroVeiculoBean implements Serializable{
 		Veiculos veiculos = this.repositorios.getveiculos();
 		Cores cores = this.repositorios.getCores();
 		Tipos tipos = this.repositorios.getTipos();
-		Marcas marcas = this.repositorios.getMarcas();
+		Fabricantes fabricantes = this.repositorios.getFabricantes();
 		Modelos modelos = this.repositorios.getModelos();
 		Seguros seguros = this.repositorios.getSeguros();
 		Pericias pericias = this.repositorios.getPericias();
 
-		//this.veiculos = veiculos.listarPorPlaca(this.veiculo);
+		
 		this.veiculos = veiculos.listar();
 		this.cores = cores.listar();
 		this.tipos = tipos.listar();
-		this.marcas = marcas.listar();
+		this.fabricantes = fabricantes.listar();
 		this.modelos = modelos.listar();
 		this.seguros = seguros.listar();
 		this.pericias = pericias.listar();
 	}
 
 
-	public String cadastrar() throws IOException {
-		
-			//InputStream is = (InputStream) fileUploadEvent.getFile().getInputstream(); 
-			//byte[] bytes = IOUtils.toByteArray(is);
-			//System.out.println("tamanho dos bytes : " + bytes.length);
-			//veiculo.setFoto(bytes);
+	public String cadastrar(){
 			Veiculos veiculos = this.repositorios.getveiculos();
 			veiculos.salvar(veiculo);
 		return "index?faces-redirect=true";
@@ -153,10 +148,7 @@ public class CadastroVeiculoBean implements Serializable{
         exporter.exportReport();	
         System.out.print("Relatorio criado com sucesso!");
         return "index?faces-redirect=true";
-		
 	}
-	
-	
 	
 	public void update(Veiculo veiculo){
 		Veiculos veiculos = this.repositorios.getveiculos();
@@ -169,11 +161,9 @@ public class CadastroVeiculoBean implements Serializable{
 		this.init();
 	}
 
-
 	public Veiculo getVeiculo() {
 		return veiculo;
 	}
-
 
 	public void setVeiculo(Veiculo veiculo) throws CloneNotSupportedException {
 		this.veiculo = veiculo;
@@ -218,12 +208,12 @@ public class CadastroVeiculoBean implements Serializable{
 		this.tipos = tipos;
 	}
 
-	public List<Marca> getMarcas() {
-		return marcas;
+	public List<Fabricante> getFabricantes() {
+		return fabricantes;
 	}
 
-	public void setMarcas(List<Marca> marcas) {
-		this.marcas = marcas;
+	public void setFabricantes(List<Fabricante> fabricantes) {
+		this.fabricantes = fabricantes;
 	}
 
 

@@ -10,9 +10,9 @@ import javax.faces.bean.ManagedBean;
 import javax.faces.bean.RequestScoped;
 import javax.faces.context.FacesContext;
 
-import model.Marca;
+import model.Fabricante;
 import model.Tipo;
-import repository.Marcas;
+import repository.Fabricantes;
 import repository.Tipos;
 import util.Repositorios;
 

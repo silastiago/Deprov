@@ -29,7 +29,7 @@ public class Pericia implements Serializable, Cloneable{
 		return pericia;
 	}
 	public void setPericia(String pericia) {
-		this.pericia = pericia;
+		this.pericia = pericia.toUpperCase();
 	}
 	
 	@Override

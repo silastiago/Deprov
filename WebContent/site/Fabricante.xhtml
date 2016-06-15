@@ -5,7 +5,7 @@
 	xmlns:ui="http://java.sun.com/jsf/facelets"
 	xmlns:p="http://primefaces.org/ui">
 <f:metadata>
-	<f:viewParam name="codigo" value="#{cadastroCorBean.cor}" />
+	<f:viewParam name="codigo" value="#{cadastroFabricanteBean.fabricante}" />
 </f:metadata>
 
 
@@ -15,57 +15,56 @@
 	<ui:define name="conteudo">
 		<h:form enctype="multipart/form-data">
 			<div class="ui-fluid">
-				<h1>Cadastro de Cores</h1>
+				<h1>Cadastro de Marca</h1>
 				<p:panelGrid columns="2" style="width: 100%; margin-top: 20px"
-					columnClasses="rotulo, campo">
+					columnClasses="rotulo, campo, rotulo">
 
 				<h:outputText value="Nome: " />
-				<h:inputText value="#{cadastroCorBean.cor.cor}" />
+				<h:inputText value="#{cadastroFabricanteBean.fabricante.fabricante}" />
 			</p:panelGrid>
 
-			<h:commandButton action="#{cadastroCorBean.cadastrar()}"
+			<h:commandButton action="#{cadastroFabricanteBean.cadastrar()}"
 				value="Salvar" />
 				</div>
 		</h:form>
-		
-		
-		<h1>Cores Cadastradas</h1>
+	
+	<h1>Fabricantes Cadastrados</h1>
 	
 			<h:form enctype="multipart/form-data">
 			
-			<p:dataTable var="cor" value="#{cadastroCorBean.cores}"
+			<p:dataTable var="fabricante" value="#{cadastroFabricanteBean.fabricantes}"
 			frame="box" rules="all" cellpadding="3"
 				width="100%" headerClass="cabecalho" rowClasses="cor-sim, cor-nao"
 				columnClasses="nome">
 				
 				
 				
-			<p:column filterBy="#{cor.cor}"  style="text-align: center; width:5%" 
+			<p:column filterBy="#{fabricante.fabricante}"  style="text-align: center; width:5%" 
 					filterMatchMode="startsWith">
 					<f:facet name="header">
-						<h:outputText value="Cor" />
+						<h:outputText value="Fabricante" />
 					</f:facet>
-					<h:outputText value="#{cor.cor}" />
+					<h:outputText value="#{fabricante.fabricante}" />
 			</p:column>	
 				
 			<p:column style="text-align: center; width:3%">
-					<h:link outcome="Cor" value="Editar">
+					<h:link outcome="Fabricante" value="Editar">
 					<i class="icon-edit"></i>
-					<f:param name="codigo"  value="#{cor.codigo}"/>
+					<f:param name="codigo"  value="#{fabricante.codigo}"/>
 					</h:link>
 			</p:column>
 				
 			
 			<p:column style="text-align: center; width:3%">
 				<h:commandLink value="Excluir"
-				 action="#{cadastroCorBean.excluir(cor)}"
-				 onclick="if (!confirm('Confirmar a exclusão desta Cor ? ')) return false"/>
+				 action="#{cadastroFabricanteBean.excluir(fabricante)}"
+				 onclick="if (!confirm('Confirmar a exclusão desta Fabricante ? ')) return false"/>
 				 <i class="icon-remove-sign"></i>
 			</p:column>
 			
 			</p:dataTable>
 		</h:form>
-		
+
 	</ui:define>	
 	</ui:composition>
 </html>

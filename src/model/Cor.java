@@ -29,7 +29,7 @@ public class Cor implements Serializable, Cloneable{
 		return cor;
 	}
 	public void setCor(String cor) {
-		this.cor = cor;
+		this.cor = cor.toUpperCase();
 	}
 
 	@Override

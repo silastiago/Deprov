@@ -11,9 +11,9 @@ import javax.faces.bean.RequestScoped;
 import javax.faces.context.FacesContext;
 
 import model.Cor;
-import model.Marca;
+import model.Fabricante;
 import repository.Cores;
-import repository.Marcas;
+import repository.Fabricantes;
 import util.Repositorios;
 
 @ManagedBean(name="cadastroCorBean")
@@ -31,7 +31,7 @@ public class CadastroCorBean implements Serializable{
 	}
 
 
-	public String cadastrar(){
+	public void cadastrar(){
 		Cores cores = this.repositorios.getCores();
 		cores.salvar(cor);
 
@@ -39,7 +39,7 @@ public class CadastroCorBean implements Serializable{
 		FacesContext.getCurrentInstance().addMessage(null,
 				new FacesMessage(FacesMessage.SEVERITY_INFO, msg, msg));
 		
-		return "index?faces-redirect=true";
+		//return "index?faces-redirect=true";
 	}
 
 	public void update(Cor cor){

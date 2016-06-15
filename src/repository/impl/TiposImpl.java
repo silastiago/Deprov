@@ -5,7 +5,7 @@ import java.util.List;
 import org.hibernate.Session;
 import org.hibernate.criterion.Order;
 
-import model.Marca;
+import model.Fabricante;
 import model.Tipo;
 import repository.Tipos;
 

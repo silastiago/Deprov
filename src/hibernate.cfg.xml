@@ -17,7 +17,7 @@
 
 		<mapping class="model.Grupo"/>
 		<mapping class="model.Pessoa"/>
-		<mapping class="model.Marca"/>
+		<mapping class="model.Fabricante"/>
 		<mapping class="model.Modelo"/>
 		<mapping class="model.Cor"/>
 		<mapping class="model.Tipo"/>

@@ -41,7 +41,7 @@ public class Grupo implements Serializable{
 		return grupo;
 	}
 	public void setGrupo(String grupo) {
-		this.grupo = grupo;
+		this.grupo = grupo.toUpperCase();
 	}
 	
 	@Override

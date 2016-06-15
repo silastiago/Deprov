@@ -17,7 +17,7 @@ import javax.persistence.Table;
 public class Modelo implements Serializable, Cloneable{
 	private Integer codigo;
 	private String modelo;
-	private Marca marca;
+	private Fabricante marca;
 	
 	@Id
 	@GeneratedValue
@@ -32,14 +32,14 @@ public class Modelo implements Serializable, Cloneable{
 		return modelo;
 	}
 	public void setModelo(String modelo) {
-		this.modelo = modelo;
+		this.modelo = modelo.toUpperCase();
 	}
 	@ManyToOne
 	@JoinColumn(name="codigo_marca", referencedColumnName="codigo")
-	public Marca getMarca() {
+	public Fabricante getMarca() {
 		return marca;
 	}
-	public void setMarca(Marca marca) {
+	public void setMarca(Fabricante marca) {
 		this.marca = marca;
 	}
 	
