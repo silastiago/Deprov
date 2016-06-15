@@ -45,11 +45,11 @@
 					<h:outputText value="#{veiculo.cor.cor}" />
 				</p:column>
 				
-				<p:column filterBy="#{veiculo.marca.marca}"  style="text-align: center; width:5%" filterMatchMode="startsWith">
+				<p:column filterBy="#{veiculo.fabricante.fabricante}"  style="text-align: center; width:5%" filterMatchMode="startsWith">
 					<f:facet name="header">
 						<h:outputText value="Fabricante do Veiculo" />
 					</f:facet>
-					<h:outputText value="#{veiculo.marca.marca}" />
+					<h:outputText value="#{veiculo.fabricante.fabricante}" />
 				</p:column>
 		
 				<p:column filterBy="#{veiculo.modelo.modelo}"  style="text-align: center; width:5%" filterMatchMode="startsWith">

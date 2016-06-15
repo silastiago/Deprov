@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Created with Jaspersoft Studio version 6.2.2.final using JasperReports Library version 6.2.2  -->
-<!-- 2016-06-07T16:05:41 -->
+<!-- 2016-06-15T16:38:32 -->
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="RelatorioVeiculo" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="31633f3b-cf08-4c8e-9dcd-4688c49a5839">
-	<property name="com.jaspersoft.studio.data.sql.tables" value="bWFyY2EgLDYzMSwzMTIsYmZkYTM1YTMtMzk5YS00MWQxLWI5NDYtNjY2ZTc5MjBhNDc1O2NvciAs&#xA;MzQ5LDIyMywzYzE0MGI0Ni1iYjIyLTQ2MjMtOGYyYy1mN2Y2NzZiNjNlODU7b2NvcnJlbmNpYSAs&#xA;MTUsMjY1LGYyYjExNGRhLTA0MmEtNDljMC1hYjA1LWQ0N2QzZTNlNjdmYjttb2RlbG8gLDQ3MSwy&#xA;MTcsNjdlZGEyODYtODcyZi00MzIxLWI5YjktZGY3OTE4NTc4MDMxO3ZlaWN1bG8gLDE4MCwxNSw0&#xA;N2UxNGE3YS03ODhiLTQzODMtODZjNS01OGI2MTIyNjczOWY7"/>
+	<property name="com.jaspersoft.studio.data.sql.tables" value=""/>
 	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="Deprov"/>
 	<parameter name="codigo_veiculo" class="java.lang.Integer"/>
 	<queryString>
@@ -13,7 +13,7 @@
 	veiculo.placa,
 	veiculo.placaoriginal,
 	veiculo.motivoapreensao,
-	marca.marca,
+	fabricante.fabricante,
 	modelo.modelo,
 	cor.cor,
 	ocorrencia.ocorrencia,
@@ -26,9 +26,9 @@ FROM ocorrencia
 	 veiculo.codigo_cor = cor.codigo 
 	INNER JOIN modelo ON 
 	 veiculo.codigo_modelo = modelo.codigo 
-	INNER JOIN marca ON 
-	 veiculo.codigo_marca = marca.codigo 
-	 AND modelo.codigo_marca = marca.codigo 
+	INNER JOIN fabricante ON 
+	 veiculo.codigo_fabricante = fabricante.codigo 
+	 AND modelo.codigo_fabricante = fabricante.codigo 
 WHERE 
 	 veiculo.codigo = $P!{codigo_veiculo}]]>
 	</queryString>
@@ -40,8 +40,8 @@ WHERE
 	<field name="placaoriginal" class="java.lang.String"/>
 	<field name="anofabricacao" class="java.lang.String"/>
 	<field name="motivoapreensao" class="java.lang.String"/>
-	<field name="marca" class="java.lang.String"/>
 	<field name="modelo" class="java.lang.String"/>
+	<field name="fabricante" class="java.lang.String"/>
 	<field name="cor" class="java.lang.String"/>
 	<field name="ocorrencia" class="java.lang.String"/>
 	<field name="data" class="java.lang.String"/>
@@ -115,8 +115,8 @@ WHERE
 		<band height="100" splitType="Stretch">
 			<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
 			<staticText>
-				<reportElement x="4" y="0" width="100" height="20" uuid="e0237024-114c-4e93-bd0b-e95b5191ca30"/>
-				<text><![CDATA[MARCA/MODELO:]]></text>
+				<reportElement x="4" y="0" width="113" height="20" uuid="e0237024-114c-4e93-bd0b-e95b5191ca30"/>
+				<text><![CDATA[FABRICANTE/MODELO:]]></text>
 			</staticText>
 			<staticText>
 				<reportElement x="437" y="0" width="27" height="18" uuid="b68c44f6-ab1c-4974-b029-fe73bfd340b8"/>
@@ -137,7 +137,7 @@ WHERE
 				<text><![CDATA[MOTIVO DA APREENSÃO:]]></text>
 			</staticText>
 			<textField>
-				<reportElement x="143" y="-1" width="60" height="17" uuid="13969c05-33d9-410d-934f-7a97143a0213"/>
+				<reportElement x="157" y="-1" width="60" height="17" uuid="13969c05-33d9-410d-934f-7a97143a0213"/>
 				<textFieldExpression><![CDATA[$F{modelo}]]></textFieldExpression>
 			</textField>
 			<staticText>
@@ -155,7 +155,7 @@ WHERE
 				<textFieldExpression><![CDATA[$F{cor}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="34" y="40" width="100" height="20" uuid="e791d855-7eef-4e81-a8c6-97aa6138cc7d">
+				<reportElement x="34" y="40" width="518" height="20" uuid="e791d855-7eef-4e81-a8c6-97aa6138cc7d">
 					<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
 					<property name="com.jaspersoft.studio.unit.y" value="pixel"/>
 				</reportElement>
@@ -217,12 +217,6 @@ WHERE
 				<textElement textAlignment="Center" verticalAlignment="Middle"/>
 				<text><![CDATA[DATA]]></text>
 			</staticText>
-			<textField>
-				<reportElement x="97" y="0" width="51" height="16" uuid="90e4e89c-b661-4cc1-94f1-599933ae37e2">
-					<property name="com.jaspersoft.studio.unit.y" value="pixel"/>
-				</reportElement>
-				<textFieldExpression><![CDATA[$F{marca}]]></textFieldExpression>
-			</textField>
 			<staticText>
 				<reportElement x="209" y="0" width="70" height="20" uuid="914e9a0e-6f04-49d9-a1fe-33500e8e21cb"/>
 				<text><![CDATA[CHASSI:]]></text>
@@ -231,10 +225,19 @@ WHERE
 				<reportElement x="134" y="59" width="422" height="16" uuid="f11f2e6e-ba4f-4e20-9048-2f6ac12415d8"/>
 				<textFieldExpression><![CDATA[$F{motivoapreensao}]]></textFieldExpression>
 			</textField>
+			<textField>
+				<reportElement x="117" y="-1" width="76" height="17" uuid="0ca806eb-95b4-43d8-8a04-ba917830bdec">
+					<property name="com.jaspersoft.studio.unit.y" value="pixel"/>
+					<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
+					<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+					<property name="com.jaspersoft.studio.unit.x" value="pixel"/>
+				</reportElement>
+				<textFieldExpression><![CDATA[$F{fabricante}]]></textFieldExpression>
+			</textField>
 		</band>
 	</columnHeader>
 	<detail>
-		<band height="21" splitType="Stretch">
+		<band height="33" splitType="Stretch">
 			<textField>
 				<reportElement x="100" y="0" width="452" height="21" uuid="7e9f16f5-05ba-409f-8bb7-b1a63024f214">
 					<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
