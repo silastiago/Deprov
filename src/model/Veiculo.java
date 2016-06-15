@@ -30,7 +30,7 @@ public class Veiculo implements Serializable, Cloneable{
 	private String placaOriginal;
 	private Tipo tipo;
 	private Cor cor;
-	private Fabricante marca;
+	private Fabricante fabricante;
 	private Modelo modelo;
 	private String Anofabricacao;
 	private String chassi;
@@ -107,13 +107,13 @@ public class Veiculo implements Serializable, Cloneable{
 		this.cor = cor;
 	}
 	@ManyToOne
-	@JoinColumn(name="codigo_marca", referencedColumnName="codigo")
-	public Fabricante getMarca() {
-		return marca;
+	@JoinColumn(name="codigo_fabricante", referencedColumnName="codigo")
+	public Fabricante getFabricante() {
+		return fabricante;
 	}
 
-	public void setMarca(Fabricante marca) {
-		this.marca = marca;
+	public void setFabricante(Fabricante fabricante) {
+		this.fabricante = fabricante;
 	}
 	@ManyToOne
 	@JoinColumn(name="codigo_modelo", referencedColumnName="codigo")
@@ -263,7 +263,7 @@ public class Veiculo implements Serializable, Cloneable{
 		result = prime * result + ((condicao == null) ? 0 : condicao.hashCode());
 		result = prime * result + ((cor == null) ? 0 : cor.hashCode());
 		result = prime * result + ((date4 == null) ? 0 : date4.hashCode());
-		result = prime * result + ((marca == null) ? 0 : marca.hashCode());
+		result = prime * result + ((fabricante == null) ? 0 : fabricante.hashCode());
 		result = prime * result + ((ip_processo == null) ? 0 : ip_processo.hashCode());
 		result = prime * result + ((modelo == null) ? 0 : modelo.hashCode());
 		result = prime * result + ((motor == null) ? 0 : motor.hashCode());
@@ -336,10 +336,10 @@ public class Veiculo implements Serializable, Cloneable{
 				return false;
 		} else if (!date4.equals(other.date4))
 			return false;
-		if (marca == null) {
-			if (other.marca != null)
+		if (fabricante == null) {
+			if (other.fabricante != null)
 				return false;
-		} else if (!marca.equals(other.marca))
+		} else if (!fabricante.equals(other.fabricante))
 			return false;
 		if (ip_processo == null) {
 			if (other.ip_processo != null)

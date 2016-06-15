@@ -27,7 +27,6 @@
 				<f:selectItem itemLabel="Selecione o grupo da pessoa" noSelectionOption="true"/>
 				<f:selectItems value="#{cadastroPessoaBean.grupos}" var="grupo" itemValue="#{grupo}" itemLabel="#{grupo.grupo}"/>
 				</h:selectOneMenu>
-			
 			</p:panelGrid>
 
 			<h:commandButton action="#{cadastroPessoaBean.cadastrar()}"
@@ -35,6 +34,52 @@
 				</div>
 		</h:form>
 
-	</ui:define>>	
+	<h1>Pessoas Cadastrados</h1>
+	
+			<h:form enctype="multipart/form-data">
+			
+			<p:dataTable var="pessoa" value="#{cadastroPessoaBean.pessoas}"
+			frame="box" rules="all" cellpadding="3"
+				width="100%" headerClass="cabecalho" rowClasses="cor-sim, cor-nao"
+				columnClasses="nome">
+				
+				
+				
+			<p:column filterBy="#{pessoa.login}"  style="text-align: center; width:5%" 
+					filterMatchMode="startsWith">
+					<f:facet name="header">
+						<h:outputText value="Login" />
+					</f:facet>
+					<h:outputText value="#{pessoa.login}" />
+			</p:column>	
+			
+			<p:column filterBy="#{pessoa.grupo.grupo}"  style="text-align: center; width:5%" 
+					filterMatchMode="startsWith">
+					<f:facet name="header">
+						<h:outputText value="Grupo" />
+					</f:facet>
+					<h:outputText value="#{pessoa.grupo.grupo}" />
+			</p:column>
+			
+				
+			<p:column style="text-align: center; width:3%">
+					<h:link outcome="Pessoa" value="Editar">
+					<i class="icon-edit"></i>
+					<f:param name="codigo"  value="#{pessoa.codigo}"/>
+					</h:link>
+			</p:column>
+				
+			
+			<p:column style="text-align: center; width:3%">
+				<h:commandLink value="Excluir"
+				 action="#{cadastroPessoaBean.excluir(pessoa)}"
+				 onclick="if (!confirm('Confirmar a exclusão desta Pessoa ? ')) return false"/>
+				 <i class="icon-remove-sign"></i>
+			</p:column>
+			
+			</p:dataTable>
+		</h:form>
+
+	</ui:define>	
 	</ui:composition>
 </html>

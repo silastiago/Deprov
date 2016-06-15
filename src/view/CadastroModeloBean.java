@@ -74,6 +74,7 @@ public class CadastroModeloBean implements Serializable{
 		this.modelos = modelos;
 	}
 
+
 	public List<Fabricante> getFabricantes() {
 		return fabricantes;
 	}

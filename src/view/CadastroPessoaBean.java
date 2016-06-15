@@ -36,14 +36,7 @@ public class CadastroPessoaBean implements Serializable{
 	public void cadastrar(){
 		Pessoas pessoas = this.repositorios.getPessoas();
 		pessoas.salvar(this.pessoa);
-
-		
-
-		String msg = "Cadastro efetuado com sucesso!";
-		FacesContext.getCurrentInstance().addMessage(null,
-				new FacesMessage(FacesMessage.SEVERITY_INFO, msg, msg));
 	}
-
 
 	
 	public void update(Pessoa pessoa){

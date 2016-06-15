@@ -17,7 +17,7 @@ import javax.persistence.Table;
 public class Modelo implements Serializable, Cloneable{
 	private Integer codigo;
 	private String modelo;
-	private Fabricante marca;
+	private Fabricante fabricante;
 	
 	@Id
 	@GeneratedValue
@@ -35,12 +35,12 @@ public class Modelo implements Serializable, Cloneable{
 		this.modelo = modelo.toUpperCase();
 	}
 	@ManyToOne
-	@JoinColumn(name="codigo_marca", referencedColumnName="codigo")
-	public Fabricante getMarca() {
-		return marca;
+	@JoinColumn(name="codigo_fabricante", referencedColumnName="codigo")
+	public Fabricante getFabricante() {
+		return fabricante;
 	}
-	public void setMarca(Fabricante marca) {
-		this.marca = marca;
+	public void setFabricante(Fabricante fabricante) {
+		this.fabricante = fabricante;
 	}
 	
 	
@@ -49,7 +49,7 @@ public class Modelo implements Serializable, Cloneable{
 		final int prime = 31;
 		int result = 1;
 		result = prime * result + ((codigo == null) ? 0 : codigo.hashCode());
-		result = prime * result + ((marca == null) ? 0 : marca.hashCode());
+		result = prime * result + ((fabricante == null) ? 0 : fabricante.hashCode());
 		result = prime * result + ((modelo == null) ? 0 : modelo.hashCode());
 		return result;
 	}
@@ -67,10 +67,10 @@ public class Modelo implements Serializable, Cloneable{
 				return false;
 		} else if (!codigo.equals(other.codigo))
 			return false;
-		if (marca == null) {
-			if (other.marca != null)
+		if (fabricante == null) {
+			if (other.fabricante != null)
 				return false;
-		} else if (!marca.equals(other.marca))
+		} else if (!fabricante.equals(other.fabricante))
 			return false;
 		if (modelo == null) {
 			if (other.modelo != null)

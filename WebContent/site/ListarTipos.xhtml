@@ -2,54 +2,44 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
 	xmlns:h="http://java.sun.com/jsf/html"
 	xmlns:f="http://java.sun.com/jsf/core"
-	xmlns:ui="http://java.sun.com/jsf/facelets">
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui">
 <ui:composition template="/templates/template.xhtml">
 	<ui:define name="tituloJanela">Sistema com JSF 2.0 e Facelets</ui:define>
 	<ui:define name="conteudo">
 	
-	<h1>Lista de Fabricantes Cadastrados</h1>
+	<h1>Tipos Cadastrados</h1>
 	
 			<h:form enctype="multipart/form-data">
 			
-			<h:messages />
-			
-			
-			<h:dataTable var="tipo" value="#{cadastroTipoBean.tipos}"
+			<p:dataTable var="tipo" value="#{cadastroTipoBean.tipos}"
 			frame="box" rules="all" cellpadding="3"
 				width="100%" headerClass="cabecalho" rowClasses="cor-sim, cor-nao"
 				columnClasses="nome">
 				
+			<p:column filterBy="#{tipo.tipo}"  style="text-align: center; width:5%" 
+					filterMatchMode="startsWith">
+					<f:facet name="header">
+						<h:outputText value="Tipo" />
+					</f:facet>
+					<h:outputText value="#{tipo.tipo}" />
+			</p:column>
 				
-				
-							
-			<h:column>
-				<f:facet name="header">Nome</f:facet>
-				#{tipo.tipo}
-			</h:column>	
-				
-				
-			
-			
-			<h:column>
-					<f:facet name="header">Editar</f:facet>
+			<p:column style="text-align: center; width:3%">
 					<h:link outcome="Tipo" value="Editar">
+					<i class="icon-edit"></i>
 					<f:param name="codigo"  value="#{tipo.codigo}"/>
 					</h:link>
-			</h:column>
-				
-								
-				<h:column>
-				<f:facet name="header">Excluir</f:facet>
+			</p:column>
+			
+			<p:column style="text-align: center; width:3%">
 				<h:commandLink value="Excluir"
 				 action="#{cadastroTipoBean.excluir(tipo)}"
-				 onclick="if (!confirm('Confirmar a exclusão deste Tipo? ')) return false"/>
-			</h:column>
-			
-			</h:dataTable>
+				 onclick="if (!confirm('Confirmar a exclusão deste Tipo ? ')) return false"/>
+				 <i class="icon-remove-sign"></i>
+			</p:column>
+			</p:dataTable>
 		</h:form>
 	</ui:define>	
 	</ui:composition>
 </html>
-
-
-

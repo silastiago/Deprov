@@ -23,20 +23,64 @@
 				<h:inputText value="#{cadastroModeloBean.modelo.modelo}" />
 			
 			<h:outputLabel value="Fabricante"/>
-				<h:selectOneMenu value="#{cadastroModeloBean.modelo.marca}" required="true" label="Fabricante">
-				<f:selectItem itemLabel="Selecione o fabricante do Modelo" noSelectionOption="true"/>
-				<f:selectItems value="#{cadastroModeloBean.marcas}" var="marca" itemValue="#{marca}" itemLabel="#{marca.marca}"/>
+				<h:selectOneMenu value="#{cadastroModeloBean.modelo.fabricante}" required="true" label="Fabricante">
+				<f:selectItem itemLabel="Selecione o Fabricante do Modelo" noSelectionOption="true"/>
+				<f:selectItems value="#{cadastroModeloBean.fabricantes}" var="fabricante" itemValue="#{fabricante}" itemLabel="#{fabricante.fabricante}"/>
 				</h:selectOneMenu>
 			
 			</p:panelGrid>
-			
-			
 
 			<h:commandButton action="#{cadastroModeloBean.cadastrar()}"
 				value="Salvar" />
 				</div>
 		</h:form>
 
-	</ui:define>>	
+	<h1>Modelos Cadastrados</h1>
+	
+			<h:form enctype="multipart/form-data">
+			
+			<p:dataTable var="modelo" value="#{cadastroModeloBean.modelos}"
+			frame="box" rules="all" cellpadding="3"
+				width="100%" headerClass="cabecalho" rowClasses="cor-sim, cor-nao"
+				columnClasses="nome">
+				
+				
+				
+			<p:column filterBy="#{modelo.modelo}"  style="text-align: center; width:5%" 
+					filterMatchMode="startsWith">
+					<f:facet name="header">
+						<h:outputText value="Modelo" />
+					</f:facet>
+					<h:outputText value="#{modelo.modelo}" />
+			</p:column>	
+			
+			<p:column filterBy="#{modelo.fabricante.fabricante}"  style="text-align: center; width:5%" 
+					filterMatchMode="startsWith">
+					<f:facet name="header">
+						<h:outputText value="Fabricante" />
+					</f:facet>
+					<h:outputText value="#{modelo.fabricante.fabricante}" />
+			</p:column>
+			
+				
+			<p:column style="text-align: center; width:3%">
+					<h:link outcome="Modelo" value="Editar">
+					<i class="icon-edit"></i>
+					<f:param name="codigo"  value="#{modelo.codigo}"/>
+					</h:link>
+			</p:column>
+				
+			
+			<p:column style="text-align: center; width:3%">
+				<h:commandLink value="Excluir"
+				 action="#{cadastroModeloBean.excluir(modelo)}"
+				 onclick="if (!confirm('Confirmar a exclusão deste Modelo ? ')) return false"/>
+				 <i class="icon-remove-sign"></i>
+			</p:column>
+			
+			</p:dataTable>
+		</h:form>
+
+	</ui:define>
 	</ui:composition>
 </html>

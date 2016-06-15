@@ -45,14 +45,14 @@
 							itemValue="#{cor}" itemLabel="#{cor.cor}" />
 					</h:selectOneMenu>
 
-					<h:outputLabel value="marca" />
-					<h:selectOneMenu value="#{cadastroVeiculoBean.veiculo.marca}"
+					<h:outputLabel value="Fabricante" />
+					<h:selectOneMenu value="#{cadastroVeiculoBean.veiculo.fabricante}"
 						required="true" label="Fabricante">
-						<f:selectItem itemLabel="Selecione a Marca do Veiculo"
+						<f:selectItem itemLabel="Selecione o Fabricante do Veiculo"
 							noSelectionOption="true" />
-						<f:selectItems value="#{cadastroVeiculoBean.marcas}"
-							var="marca" itemValue="#{marca}"
-							itemLabel="#{marca.marca}" />
+						<f:selectItems value="#{cadastroVeiculoBean.fabricantes}"
+							var="fabricante" itemValue="#{fabricante}"
+							itemLabel="#{fabricante.fabricante}" />
 					</h:selectOneMenu>
 
 					<h:outputLabel value="Modelo" />
