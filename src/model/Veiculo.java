@@ -26,6 +26,7 @@ import org.hibernate.annotations.ManyToAny;
 @Table
 public class Veiculo implements Serializable, Cloneable{
 	private Integer codigo;
+	private String dossie;
 	private String placa;
 	private String placaOriginal;
 	private Tipo tipo;
@@ -59,7 +60,16 @@ public class Veiculo implements Serializable, Cloneable{
 	public void setCodigo(Integer codigo) {
 		this.codigo = codigo;
 	}
-		
+	
+	@Column
+	public String getDossie() {
+		return dossie;
+	}
+
+	public void setDossie(String dossie) {
+		this.dossie = dossie;
+	}
+
 	@Column
 	public Date getDate4() {
 		return date4;
