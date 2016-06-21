@@ -11,6 +11,7 @@ import org.hibernate.Session;
 import org.hibernate.criterion.Order;
 import org.hibernate.criterion.Restrictions;
 
+import model.Ocorrencia;
 import model.Pessoa;
 import repository.Pessoas;
 
@@ -47,15 +48,17 @@ public class PessoasImpl implements Pessoas{
 		this.sessao.update(pessoa);
 	}
 	@Override
+	//public Pessoa login(Pessoa pessoa) {
 	public Pessoa login(Pessoa pessoa) {
-		Criteria c = this.sessao.createCriteria(Pessoa.class);
-		c.add(Restrictions.ilike("login", pessoa.getLogin()));
-		c.add(Restrictions.ilike("senha", pessoa.getSenha()));
+		/*Criteria c = this.sessao.createCriteria(Pessoa.class);
+		c.add(Restrictions.eq("login", pessoa.getLogin()));
+		c.add(Restrictions.eq("senha", pessoa.getSenha()));
 		FacesContext fc = FacesContext.getCurrentInstance();
 		HttpSession session = (HttpSession) fc.getExternalContext().getSession(false);
 		session.setAttribute("usuario", pessoa.getLogin());
-		session.setAttribute("senha", pessoa.getSenha());
-		return (Pessoa) c.uniqueResult();
+		session.setAttribute("senha", pessoa.getSenha());*/
+		return (Pessoa) sessao.createCriteria(Pessoa.class).add(Restrictions.eq("login", pessoa.getLogin())).add(Restrictions.eq("senha", pessoa.getSenha())).uniqueResult();
+		//return (Pessoa) c.uniqueResult();
 	}
 
 	@Override

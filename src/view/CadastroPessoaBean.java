@@ -52,7 +52,9 @@ public class CadastroPessoaBean implements Serializable{
 
 	public String logar(){
 		Pessoas pessoas = this.repositorios.getPessoas();
-		if (pessoas.login(pessoa) == null) {
+		System.out.println("Nome da pessoa: " + pessoas.login(pessoa).getLogin());
+		System.out.println("Senha da pessoa: " + pessoas.login(pessoa).getSenha());
+		if (pessoas.login(pessoa) == null ) {
 			return "Login.xhtml";
 		}
 		return "index.xhtml";
