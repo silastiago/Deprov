@@ -111,11 +111,8 @@
 					<h:outputText value="Proprietario" />
 					<p:inputText value="#{cadastroVeiculoBean.veiculo.proprietario}" />
 
-					<h:outputText value="Chave" />
-					<h:selectOneRadio value="#{cadastroVeiculoBean.veiculo.chave}">
-						<f:selectItem itemValue="Sim" itemLabel="Sim" />
-						<f:selectItem itemValue="Não" itemLabel="Não" />
-					</h:selectOneRadio>
+					<h:outputText value="Chave: " />
+					<p:inputText value="#{cadastroVeiculoBean.veiculo.chave}" />
 
 					<h:outputText value="Comentarios" />
 					<p:inputText value="#{cadastroVeiculoBean.veiculo.comentarios}" />
