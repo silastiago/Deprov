@@ -5,13 +5,14 @@
 
 <hibernate-configuration>
 	<session-factory>
-		<property name="hibernate.connection.driver_class">org.postgresql.Driver</property>
-		<property name="hibernate.connection.url">jdbc:postgresql://localhost:5432/deprov</property>
-		<property name="hibernate.connection.username">postgres</property>
-		<property name="hibernate.connection.password">postgres</property>
+		<property name="hibernate.connection.driver_class">com.mysql.jdbc.Driver</property>
+		<property name="hibernate.connection.url">jdbc:mysql://40.40.0.10:1701/deprov</property>
+		<property name="hibernate.connection.username">deprov</property>
+		<property name="hibernate.connection.password">deprov</property>
 
-		<property name="dialect">org.hibernate.dialect.PostgreSQLDialect</property>
+		<property name="hibernate.dialect">org.hibernate.dialect.MySQLDialect</property>
 		<property name="hibernate.hbm2ddl.auto">update</property>
+		<property name="show_sql">true</property>
 		<property name="format_sql">true</property>
 
 		<mapping class="model.Grupo"/>
@@ -24,6 +25,7 @@
 		<mapping class="model.Seguro"/>
 		<mapping class="model.Veiculo"/>
 		<mapping class="model.Ocorrencia"/>
+		<mapping class="model.Foto"/>
 
 
 	</session-factory>
