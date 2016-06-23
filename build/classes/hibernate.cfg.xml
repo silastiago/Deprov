@@ -6,7 +6,7 @@
 <hibernate-configuration>
 	<session-factory>
 		<property name="hibernate.connection.driver_class">org.postgresql.Driver</property>
-		<property name="hibernate.connection.url">jdbc:postgresql://localhost:5432/deprov</property>
+		<property name="hibernate.connection.url">jdbc:postgresql://40.40.0.10:5432/deprov</property>
 		<property name="hibernate.connection.username">postgres</property>
 		<property name="hibernate.connection.password">postgres</property>
 
@@ -17,6 +17,7 @@
 		<mapping class="model.Grupo"/>
 		<mapping class="model.Pessoa"/>
 		<mapping class="model.Fabricante"/>
+		<mapping class="model.Foto"/>
 		<mapping class="model.Modelo"/>
 		<mapping class="model.Cor"/>
 		<mapping class="model.Tipo"/>
