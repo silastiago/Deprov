@@ -20,6 +20,7 @@ import javax.faces.bean.RequestScoped;
 import javax.faces.context.ExternalContext;
 import javax.faces.context.FacesContext;
 import javax.faces.event.PhaseId;
+import javax.faces.event.ValueChangeEvent;
 import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.Part;
@@ -93,7 +94,7 @@ public class CadastroVeiculoBean implements Serializable{
 		this.cores = cores.listar();
 		this.tipos = tipos.listar();
 		this.fabricantes = fabricantes.listar();
-		this.modelos = modelos.listar();
+		//this.modelos = modelos.listar();
 		this.seguros = seguros.listar();
 		this.pericias = pericias.listar();
 	}
@@ -161,6 +162,18 @@ public class CadastroVeiculoBean implements Serializable{
 		this.init();
 	}
 
+	public List<Modelo> carregaModelos(ValueChangeEvent evento){
+		
+		
+		Fabricante fab  = (Fabricante) evento.getNewValue();;
+		
+		
+		Modelos Imodelos = this.repositorios.getModelos();
+		this.modelos =  Imodelos.porCodigoFabricante(fab.getCodigo());
+		return modelos;
+		
+	}
+	
 	public Veiculo getVeiculo() {
 		return veiculo;
 	}
@@ -173,7 +186,7 @@ public class CadastroVeiculoBean implements Serializable{
 			this.veiculo = (Veiculo) veiculo.clone();
 		}
 	}
-
+	
 	public List<Veiculo> getVeiculos() {
 		return veiculos;
 	}

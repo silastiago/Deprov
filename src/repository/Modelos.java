@@ -11,4 +11,5 @@ public interface Modelos {
 	public Modelo salvar(Modelo modelo);
 	public void remover(Modelo modelo);
 	public void editar(Modelo modelo);
+	public List<Modelo> porCodigoFabricante(Integer codigo_fabricante);
 }

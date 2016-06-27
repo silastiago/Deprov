@@ -66,5 +66,9 @@ public class Fabricante implements Serializable, Cloneable{
 		// TODO Auto-generated method stub
 		return super.clone();
 	}
-
+	
+	@Override
+	public String toString() {
+		return "Fabricante [codigo=" + codigo + ", fabricante=" + fabricante + "]";
+	}
 }

@@ -4,8 +4,11 @@ import java.util.List;
 
 import org.hibernate.Session;
 import org.hibernate.criterion.Order;
+import org.hibernate.criterion.Restrictions;
 
+import model.Fabricante;
 import model.Modelo;
+import model.Ocorrencia;
 import repository.Modelos;
 
 
@@ -41,5 +44,10 @@ public class ModelosImpl implements Modelos{
 	@Override
 	public void editar(Modelo modelo) {
 		this.sessao.update(modelo);
+	}
+	
+	@Override
+	public List<Modelo> porCodigoFabricante(Integer codigo_fabricante) {
+		return sessao.createCriteria(Modelo.class).add(Restrictions.eq("fabricante.codigo", codigo_fabricante)).list();
 	}
 }

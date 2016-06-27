@@ -55,13 +55,14 @@ public class CadastroPessoaBean implements Serializable{
 		if (pessoas.login(pessoa) == null) {
 			return "Login.xhtml";
 		}
-		return "index.xhtml";
+		return "site/index.xhtml?faces-redirect=true";
 	}
 
-	public String logout() {
+	public String sair() {
+		System.out.println("TESTANDO FUNCAO DE SAIR");
 		Pessoas pessoas = this.repositorios.getPessoas();
-		pessoas.logout();
-		return "Login.xhtml";
+		pessoas.logout(); 
+		return "../Login.xhtml?faces-redirect=true";
 	}
 	
 	
