@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Context>
 	<Realm className="org.apache.catalina.realm.JDBCRealm"
-		driverName="org.postgresql.Driver" connectionURL="jdbc:postgresql://localhost:5432/deprov"
+		driverName="org.postgresql.Driver" connectionURL="jdbc:postgresql://40.40.0.10:5432/deprov"
 		connectionName="postgres" connectionPassword="postgres"
 		userTable="Pessoa" userNameCol="login" userCredCol="senha" userRoleTable="Pessoa" roleNameCol="codigo_grupo" />
 </Context>

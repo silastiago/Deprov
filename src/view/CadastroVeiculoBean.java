@@ -94,7 +94,7 @@ public class CadastroVeiculoBean implements Serializable{
 		this.cores = cores.listar();
 		this.tipos = tipos.listar();
 		this.fabricantes = fabricantes.listar();
-		//this.modelos = modelos.listar();
+		this.modelos = modelos.listar();
 		this.seguros = seguros.listar();
 		this.pericias = pericias.listar();
 	}
@@ -163,15 +163,10 @@ public class CadastroVeiculoBean implements Serializable{
 	}
 
 	public List<Modelo> carregaModelos(ValueChangeEvent evento){
-		
-		
-		Fabricante fab  = (Fabricante) evento.getNewValue();;
-		
-		
+		Fabricante fab  = (Fabricante) evento.getNewValue();
 		Modelos Imodelos = this.repositorios.getModelos();
-		this.modelos =  Imodelos.porCodigoFabricante(fab.getCodigo());
-		return modelos;
-		
+		modelos =  Imodelos.porCodigoFabricante(fab.getCodigo());
+		return modelos;	
 	}
 	
 	public Veiculo getVeiculo() {
