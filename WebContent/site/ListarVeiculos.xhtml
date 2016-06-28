@@ -13,15 +13,11 @@
 		<h:form enctype="multipart/form-data" acceptcharset="ISO-8859-1">
 			
 			
-			<p:dataTable value="#{cadastroVeiculoBean.veiculos}" var="veiculo"   widgetVar="veiculoTable" 
-			filteredValue="#{cadastroVeiculoBean.veiculosFiltrados}"  rowsPerPageTemplate="5,10,15,20"
+			<p:dataTable value="#{cadastroVeiculoBean.veiculos}" var="veiculo"  rowsPerPageTemplate="10,15,20"
 				id="mostraEquipamento"  paginator="true" >
 				
 				
-				<f:facet name="header">
-                		<h:outputText value="Busca Avançada :"  />
-                		<p:inputText id="globalFilter" onkeyup="PF('veiculoTable').filter()" />
-        		</f:facet>
+				
 				
 				
 				<p:column filterBy="#{veiculo.placa}"  style="text-align: center; width:5%" 
