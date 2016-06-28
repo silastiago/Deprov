@@ -10,10 +10,11 @@
 
 		<h1>Lista de Veiculos Cadastrados</h1>
 
-		<h:form enctype="multipart/form-data">
-
-			<h:messages />
-			<p:dataTable value="#{cadastroVeiculoBean.veiculos}" var="veiculo"   widgetVar="veiculoTable" filteredValue="#{cadastroVeiculoBean.veiculosFiltrados}" rows="10" rowsPerPageTemplate="5,10,15,20"
+		<h:form enctype="multipart/form-data" acceptcharset="ISO-8859-1">
+			
+			
+			<p:dataTable value="#{cadastroVeiculoBean.veiculos}" var="veiculo"   widgetVar="veiculoTable" 
+			filteredValue="#{cadastroVeiculoBean.veiculosFiltrados}"  rowsPerPageTemplate="5,10,15,20"
 				id="mostraEquipamento"  paginator="true" >
 				
 				
