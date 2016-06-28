@@ -31,8 +31,11 @@
 							<p:menuitem value="ListarTipos" outcome="ListarTipos"/>
 							<p:menuitem value="ListarVeiculos" outcome="ListarVeiculos"/>
 							
+							
 						</p:submenu>
-						<p:menuitem value="Sair" action="#{loginBean.sair()}"/>
+						<p:submenu label="Opções">
+						<p:menuitem value="Sair" action="#{loginBean.sair()}"  />
+						</p:submenu>
 					</p:menubar>
 				</h:form>				
 		</div>

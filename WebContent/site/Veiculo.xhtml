@@ -130,7 +130,12 @@
 
 					<p:outputLabel for="mask" value="Data:" />
 					<p:calendar id="mask" value="#{cadastroVeiculoBean.veiculo.date4}"
-						pattern="dd-MM-yyyy" mask="true" />
+						pattern="dd/MM/yyyy" mask="true" navigator="true" showOn="button">
+						<f:convertDateTime pattern="dd/MM/yyyy" type="both" dateStyle="short"/>						
+						</p:calendar>
+						
+					
+	
  					
 					
 				</p:panelGrid>

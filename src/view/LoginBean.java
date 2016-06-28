@@ -10,6 +10,7 @@ import javax.servlet.DispatcherType;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import model.Pessoa;
 import repository.impl.PessoasImpl;
@@ -32,13 +33,11 @@ public class LoginBean {
 		}
 	}
 
-	public String sair() throws ServletException, IOException {
-		System.out.println("TESTANDO METODO DE SAIR ");
-		this.getRequest().logout();
-		this.getRequest().getSession().invalidate();
-		
-		//this.getResponse().sendRedirect("http://snmp.info.ufrn.br:8080/Deprov/Login?faces-redirect=true");
-		return "../Login?faces-redirect=true";
+	public void sair() throws ServletException, IOException {
+		FacesContext fc = FacesContext.getCurrentInstance();
+	    HttpSession session = (HttpSession)fc.getExternalContext().getSession(false);
+	    session.invalidate();
+	    FacesContext.getCurrentInstance().getExternalContext().redirect("../Login.xhtml");
 	}
 
 	private HttpServletRequest getRequest() {

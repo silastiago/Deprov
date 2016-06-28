@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Created with Jaspersoft Studio version 6.2.2.final using JasperReports Library version 6.2.2  -->
-<!-- 2016-06-27T16:55:21 -->
+<!-- 2016-06-28T15:20:02 -->
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="RelatorioVeiculo" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="31633f3b-cf08-4c8e-9dcd-4688c49a5839">
 	<property name="com.jaspersoft.studio.data.sql.tables" value=""/>
 	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="Deprov"/>
@@ -19,7 +19,8 @@
 	ocorrencia.ocorrencia,
 	ocorrencia.data,
 	veiculo.anofabricacao,
-	veiculo.dossie
+	veiculo.dossie,
+	veiculo.date4
 FROM ocorrencia
 	INNER JOIN veiculo ON 
 	 ocorrencia.codigo_veiculo = veiculo.codigo 
@@ -47,6 +48,7 @@ WHERE
 	<field name="ocorrencia" class="java.lang.String"/>
 	<field name="data" class="java.lang.String"/>
 	<field name="dossie" class="java.lang.String"/>
+	<field name="date4" class="java.sql.Date"/>
 	<background>
 		<band splitType="Stretch"/>
 	</background>
@@ -84,7 +86,7 @@ WHERE
 				<reportElement x="0" y="2" width="550" height="58" uuid="3c88995e-4cec-4baa-b88c-4c0891772e36"/>
 			</rectangle>
 			<staticText>
-				<reportElement x="366" y="8" width="100" height="30" uuid="89f41178-64dd-4b09-9993-3b589c993359"/>
+				<reportElement x="361" y="8" width="100" height="30" uuid="89f41178-64dd-4b09-9993-3b589c993359"/>
 				<textElement verticalAlignment="Top">
 					<font size="16"/>
 				</textElement>
@@ -97,28 +99,52 @@ WHERE
 				</textElement>
 				<text><![CDATA[EM,]]></text>
 			</staticText>
-			<textField pattern="dd/MM/yyyy">
-				<reportElement x="399" y="32" width="95" height="24" uuid="854ab23e-e206-4dcc-ba6e-e88236812528"/>
-				<textElement>
-					<font size="16"/>
-				</textElement>
-				<textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
-			</textField>
 			<staticText>
-				<reportElement x="20" y="16" width="210" height="30" uuid="0148616f-502c-42ab-a0ea-8b0235995c67"/>
+				<reportElement x="-17" y="5" width="197" height="25" uuid="0148616f-502c-42ab-a0ea-8b0235995c67">
+					<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+				</reportElement>
 				<textElement textAlignment="Center" markup="styled">
-					<font fontName="SansSerif" size="18" isBold="true"/>
+					<font fontName="SansSerif" size="14" isBold="true"/>
 				</textElement>
 				<text><![CDATA[DEPROV - DEPOSITO]]></text>
 			</staticText>
 			<textField>
-				<reportElement x="450" y="11" width="100" height="18" uuid="544e2bd7-4004-41fc-a043-349d8e47b193"/>
+				<reportElement x="450" y="8" width="100" height="42" uuid="544e2bd7-4004-41fc-a043-349d8e47b193">
+					<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+				</reportElement>
+				<textElement>
+					<font size="16"/>
+				</textElement>
 				<textFieldExpression><![CDATA[$F{dossie}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="400" y="33" width="95" height="24" uuid="adc60289-7944-49b6-92b7-80042c08413f">
+					<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
+					<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+				</reportElement>
+				<textElement>
+					<font size="16"/>
+				</textElement>
+				<textFieldExpression><![CDATA[ new SimpleDateFormat("dd/MM/yyyy").format($F{date4})]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="11" y="35" width="60" height="25" uuid="12723cc7-fdb7-43e9-8002-4868a3b7e1ed"/>
+				<textElement>
+					<font size="14" isBold="true"/>
+				</textElement>
+				<text><![CDATA[CHAVE]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="75" y="35" width="111" height="20" uuid="1a54f45a-c722-48ba-b7f6-fb47f84bd4eb"/>
+				<textElement>
+					<font size="14" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{chave}]]></textFieldExpression>
 			</textField>
 		</band>
 	</pageHeader>
 	<columnHeader>
-		<band height="100" splitType="Stretch">
+		<band height="105" splitType="Stretch">
 			<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
 			<staticText>
 				<reportElement x="4" y="0" width="113" height="20" uuid="e0237024-114c-4e93-bd0b-e95b5191ca30"/>
@@ -161,7 +187,7 @@ WHERE
 				<textFieldExpression><![CDATA[$F{cor}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="34" y="40" width="100" height="20" uuid="e791d855-7eef-4e81-a8c6-97aa6138cc7d">
+				<reportElement x="34" y="40" width="518" height="20" uuid="e791d855-7eef-4e81-a8c6-97aa6138cc7d">
 					<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
 					<property name="com.jaspersoft.studio.unit.y" value="pixel"/>
 				</reportElement>
@@ -185,20 +211,12 @@ WHERE
 				</reportElement>
 				<textFieldExpression><![CDATA[$F{placaoriginal}]]></textFieldExpression>
 			</textField>
-			<staticText>
-				<reportElement x="4" y="19" width="49" height="15" uuid="12723cc7-fdb7-43e9-8002-4868a3b7e1ed"/>
-				<text><![CDATA[CHAVE]]></text>
-			</staticText>
-			<textField>
-				<reportElement x="48" y="19" width="50" height="13" uuid="1a54f45a-c722-48ba-b7f6-fb47f84bd4eb"/>
-				<textFieldExpression><![CDATA[$F{chave}]]></textFieldExpression>
-			</textField>
 			<textField>
 				<reportElement x="255" y="0" width="49" height="17" uuid="bf254635-4437-4ea8-bf9e-0eda9139a773"/>
 				<textFieldExpression><![CDATA[$F{chassi}]]></textFieldExpression>
 			</textField>
 			<staticText>
-				<reportElement x="100" y="82" width="452" height="18" uuid="0af1bd47-428e-4268-9764-0f897d0ed3cc">
+				<reportElement x="100" y="86" width="452" height="18" uuid="0af1bd47-428e-4268-9764-0f897d0ed3cc">
 					<property name="com.jaspersoft.studio.unit.y" value="pixel"/>
 				</reportElement>
 				<box>
@@ -211,7 +229,7 @@ WHERE
 				<text><![CDATA[PROVIDÊNCIAS]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="0" y="82" width="100" height="18" uuid="cc66b4fd-97f9-4856-9b86-f39025e8d75e">
+				<reportElement x="0" y="86" width="100" height="18" uuid="cc66b4fd-97f9-4856-9b86-f39025e8d75e">
 					<property name="com.jaspersoft.studio.unit.y" value="pixel"/>
 				</reportElement>
 				<box>
@@ -244,6 +262,7 @@ WHERE
 	</columnHeader>
 	<detail>
 		<band height="21" splitType="Stretch">
+			<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
 			<textField>
 				<reportElement x="100" y="0" width="452" height="21" uuid="7e9f16f5-05ba-409f-8bb7-b1a63024f214">
 					<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
@@ -260,6 +279,7 @@ WHERE
 			<textField>
 				<reportElement x="0" y="0" width="100" height="21" uuid="e82612e7-76ae-4807-95cb-cf3e7f951759">
 					<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+					<property name="com.jaspersoft.studio.unit.y" value="pixel"/>
 				</reportElement>
 				<box leftPadding="3">
 					<topPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
@@ -273,7 +293,9 @@ WHERE
 		</band>
 	</detail>
 	<columnFooter>
-		<band height="45" splitType="Stretch"/>
+		<band height="25" splitType="Stretch">
+			<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+		</band>
 	</columnFooter>
 	<pageFooter>
 		<band height="54" splitType="Stretch"/>
