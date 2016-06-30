@@ -8,6 +8,10 @@
 	<f:viewParam name="codigo"/>
 </f:metadata>
 
+<f:metadata>
+	<f:viewParam name="codigo_ocorrencia" value="#{cadastroOcorrrenciaBean.ocorrencia}"/>
+</f:metadata>
+
 
 <ui:composition template="/templates/template.xhtml">
 
@@ -22,9 +26,11 @@
 				<h:outputText value="Nome: " />
 				<h:inputText value="#{cadastroOcorrrenciaBean.ocorrencia.ocorrencia}" />
 
-				<h:outputText value="Data: " />
-				<p:calendar id="mask" value="#{cadastroOcorrrenciaBean.ocorrencia.data}"
-						pattern="dd-MM-yyyy" mask="true" />
+				<p:outputLabel for="mask" value="Data:" />
+					<p:calendar id="mask" value="#{cadastroOcorrrenciaBean.ocorrencia.data}"
+						pattern="dd/MM/yyyy" mask="true" navigator="true" showOn="button">
+						<f:convertDateTime pattern="dd/MM/yyyy" type="both" dateStyle="short"/>						
+					</p:calendar>
 				
 				<p:commandButton action="#{cadastroOcorrrenciaBean.cadastrar(codigo)}" value="Salvar" />
 				

@@ -1,6 +1,8 @@
 package model;
 
 import java.io.Serializable;
+import java.util.Date;
+
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -16,7 +18,7 @@ public class Ocorrencia implements Serializable, Cloneable{
 
 	private Integer codigo;
 	private String ocorrencia;
-	private String data;
+	private Date data;
 	private Veiculo veiculo;
 	
 	@Id
@@ -36,10 +38,10 @@ public class Ocorrencia implements Serializable, Cloneable{
 		this.ocorrencia = ocorrencia.toUpperCase();
 	}
 	@Column
-	public String getData() {
+	public Date getData() {
 		return data;
 	}
-	public void setData(String data) {
+	public void setData(Date data) {
 		this.data = data;
 	}
 	@ManyToOne

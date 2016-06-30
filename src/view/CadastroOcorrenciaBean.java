@@ -28,6 +28,7 @@ public class CadastroOcorrenciaBean implements Serializable {
 	private Repositorios repositorios = new Repositorios();
 	private Ocorrencia ocorrencia = new Ocorrencia();
 	private List<Ocorrencia> ocorrencias = new ArrayList<Ocorrencia>();
+	private List<Ocorrencia> ocorrenciasFiltradas = new ArrayList<Ocorrencia>();
 	private List<Veiculo> veiculos = new ArrayList<Veiculo>();
 	private Veiculo veiculo = new Veiculo();
 
@@ -42,30 +43,11 @@ public class CadastroOcorrenciaBean implements Serializable {
 	public String cadastrar(String codigo) {
 		Ocorrencias ocorrencias = this.repositorios.getocorrencia();
 		
-		int idVeiculo = Integer.parseInt(codigo);
-		
-		
-		//String codigo = FacesContext.getCurrentInstance().getExternalContext().getRequestParameterMap().get("codigo");
-
-		
-		//System.out.println("Codigo do veiculo: " + codigo);
-		
-		// FacesContext fc = FacesContext.getCurrentInstance();
-		// String id_veiculo =
-		// fc.getExternalContext().getRequestParameterMap().get("codigo_veiculo")
-		// ;
-		System.out.println("ID do veiculo: " + codigo);
-		// 
-		//System.out.println("ID do veiculo: " + idVeiculo);
-		
+		int idVeiculo = Integer.parseInt(codigo);		
 		veiculo.setCodigo(idVeiculo);
 		ocorrencia.setVeiculo(veiculo);
 
 		ocorrencias.salvar(ocorrencia);
-		
-
-		String msg = "Cadastro efetuado com sucesso!";
-		FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, msg, msg));
 	
 		return "index?faces-redirect=true";
 	}
@@ -91,8 +73,14 @@ public class CadastroOcorrenciaBean implements Serializable {
 		int idVeiculo = Integer.parseInt(codigo);
 		Ocorrencias Iocorrencia = this.repositorios.getocorrencia();
 		ocorrencias = Iocorrencia.porCodigoVeiculo(idVeiculo);
-		return ocorrencias; 
+		return ocorrencias;
 	}
+	
+	public void listarocorrencia(CellEditEvent event){
+		Ocorrencia ocorrencia = (Ocorrencia) event.getNewValue();
+		System.out.println("Ocorrencia numero "+ ocorrencia.getCodigo());
+	}
+	
 	
 	public Ocorrencia getOcorrencia() {
 		return ocorrencia;
@@ -121,6 +109,14 @@ public class CadastroOcorrenciaBean implements Serializable {
 
 	public void setVeiculos(List<Veiculo> veiculos) {
 		this.veiculos = veiculos;
+	}
+
+	public List<Ocorrencia> getOcorrenciasFiltradas() {
+		return ocorrenciasFiltradas;
+	}
+
+	public void setOcorrenciasFiltradas(List<Ocorrencia> ocorrenciasFiltradas) {
+		this.ocorrenciasFiltradas = ocorrenciasFiltradas;
 	}
 
 	public Veiculo getVeiculo() {

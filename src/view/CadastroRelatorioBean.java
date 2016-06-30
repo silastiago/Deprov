@@ -93,8 +93,8 @@ public class CadastroRelatorioBean implements Serializable {
         OutputStreamExporterOutput exporterOutput = new SimpleOutputStreamExporterOutput(
                 "/var/lib/tomcat8/webapps/Deprov/resources/relatorios/FirstJasperReport.pdf");
         
-        //OutputStreamExporterOutput exporterOutput = new SimpleOutputStreamExporterOutput(
-           //           "/opt/tomcat/webapps/Deprov/resources/relatorios/FirstJasperReport.pdf");
+        /*OutputStreamExporterOutput exporterOutput = new SimpleOutputStreamExporterOutput(
+                      "/opt/tomcat/webapps/Deprov/resources/relatorios/FirstJasperReport.pdf");*/
         
         // Output
         exporter.setExporterOutput(exporterOutput);
