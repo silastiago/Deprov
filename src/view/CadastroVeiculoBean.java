@@ -105,51 +105,6 @@ public class CadastroVeiculoBean implements Serializable{
 			veiculos.salvar(veiculo);
 		return "index?faces-redirect=true";
 	}
-
-	public String gerarRelatorio(String codigo) throws JRException {
-		System.out.println("iunciiando metodo de geracao de relatorio");
-		
-		int idVeiculo = Integer.parseInt(codigo);
-		ConnectionFactory conexao = new ConnectionFactory();
-		
-		String reportSrcFile = "C:/Users/Sinf02/workspace/Deprov/WebContent/resources/relatorios/Relatorio.jrxml";
-        
-        // First, compile jrxml file.
-        JasperReport jasperReport =    JasperCompileManager.compileReport(reportSrcFile);
- 
-        Connection conn = conexao.getConnection();
- 
-        // Parameters for report
-        Map<String, Object> parameters = new HashMap<String, Object>();
-        parameters.put("codigo_veiculo", idVeiculo);
-        
-        JasperPrint print = JasperFillManager.fillReport(jasperReport,
-                parameters, conn);
- 
-        // Make sure the output directory exists.
-        //File outDir = new File("C:/Users/Sinf02/Pictures");
-        //outDir.mkdirs();
- 
-        // PDF Exportor.
-        JRPdfExporter exporter = new JRPdfExporter();
- 
-        ExporterInput exporterInput = new SimpleExporterInput(print);
-        // ExporterInput
-        exporter.setExporterInput(exporterInput);
- 
-        // ExporterOutput
-        OutputStreamExporterOutput exporterOutput = new SimpleOutputStreamExporterOutput(
-                "C:/Users/Sinf02/Downloads/FirstJasperReport.pdf");
-        // Output
-        exporter.setExporterOutput(exporterOutput);
- 
-        //
-        SimplePdfExporterConfiguration configuration = new SimplePdfExporterConfiguration();
-        exporter.setConfiguration(configuration);
-        exporter.exportReport();	
-        System.out.print("Relatorio criado com sucesso!");
-        return "index?faces-redirect=true";
-	}
 	
 	public void update(Veiculo veiculo){
 		Veiculos veiculos = this.repositorios.getveiculos();

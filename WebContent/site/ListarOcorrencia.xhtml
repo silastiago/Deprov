@@ -11,29 +11,7 @@
 <ui:composition template="/templates/template.xhtml">
 
 	<ui:define name="tituloJanela">Sistema com JSF 2.0 e Facelets</ui:define>
-	<ui:define name="conteudo">
-		<h:form enctype="multipart/form-data" acceptcharset="ISO-8859-1">
-			<div class="ui-fluid">
-				<h1>Cadastro de Ocorrencia</h1>
-				<p:panelGrid columns="2" style="width: 100%; margin-top: 20px"
-					columnClasses="rotulo, campo">
-
-				<h:outputText value="Nome: " />
-				<h:inputText value="#{cadastroOcorrrenciaBean.ocorrencia.ocorrencia}" />
-
-				<p:outputLabel for="mask" value="Data:" />
-					<p:calendar id="mask" value="#{cadastroOcorrrenciaBean.ocorrencia.data}"
-						pattern="dd/MM/yyyy" mask="true" navigator="true" showOn="button">
-						<f:convertDateTime pattern="dd/MM/yyyy" type="both" dateStyle="short"/>						
-					</p:calendar>
-				
-				<p:commandButton action="#{cadastroOcorrrenciaBean.cadastrar(codigo)}" value="Salvar" />
-				
-
-			</p:panelGrid>
-				</div>
-			</h:form>
-			
+	<ui:define name="conteudo">			
 				<h:form enctype="multipart/form-data">
 				<p:dataTable value="#{cadastroOcorrrenciaBean.listarVeiculo(codigo)}" var="ocorrencia"   rows="10" rowsPerPageTemplate="5,10,15,20"
 				id="mostraEquipamento"  paginator="true" >
