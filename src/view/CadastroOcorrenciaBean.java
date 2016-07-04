@@ -29,13 +29,15 @@ public class CadastroOcorrenciaBean implements Serializable {
 		ocorrencia.setVeiculo(veiculo);
 
 		ocorrencias.salvar(ocorrencia);
-	
-		return "index?faces-redirect=true";
+		
+		return null;
+		//return "index?faces-redirect=true";
 	}
 	
 	public String editar() {
 		Ocorrencias ocorrencias = this.repositorios.getocorrencia();
 		ocorrencias.salvar(ocorrencia);
+		this.ocorrencias.add(ocorrencia);
 		return "index?faces-redirect=true";
 	}
 	
