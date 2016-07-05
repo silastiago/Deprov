@@ -6,6 +6,7 @@
 	xmlns:p="http://primefaces.org/ui">
 <f:metadata>
 	<f:viewParam name="codigo" value="#{cadastroVeiculoBean.veiculo}" />
+	<f:viewParam name="codigo_veiculo"  />
 </f:metadata>
 
 
@@ -18,7 +19,6 @@
 				<h1>Cadastro de Veiculo</h1>
 				<p:panelGrid columns="4" style="width: 100%; margin-top: 20px"
 					columnClasses="rotulo, campo, rotulo, campo">
-
 					
 
 					<h:outputText value="Placa no Veiculo" />
@@ -135,6 +135,13 @@
 						</p:calendar>
 				</p:panelGrid>
 			<h:commandButton action="#{cadastroVeiculoBean.cadastrar()}" value="Salvar" />
+			
+			<h:commandButton actionListener="#{cadastroVeiculoBean.ocorrencia}" value="Gerar Relatorio" >
+			<f:attribute name="codigo" value="#{cadastroVeiculoBean.veiculo}" />	
+			</h:commandButton>
+					
+					
+			
 			</div>
 		</h:form>
 

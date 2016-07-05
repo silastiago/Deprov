@@ -19,6 +19,7 @@ import javax.faces.bean.ManagedBean;
 import javax.faces.bean.RequestScoped;
 import javax.faces.context.ExternalContext;
 import javax.faces.context.FacesContext;
+import javax.faces.event.ActionEvent;
 import javax.faces.event.PhaseId;
 import javax.faces.event.ValueChangeEvent;
 import javax.servlet.ServletContext;
@@ -53,6 +54,7 @@ import net.sf.jasperreports.export.SimplePdfExporterConfiguration;
 import repository.Cores;
 import repository.Fabricantes;
 import repository.Modelos;
+import repository.Ocorrencias;
 import repository.Pericias;
 import repository.Seguros;
 import repository.Tipos;
@@ -106,6 +108,19 @@ public class CadastroVeiculoBean implements Serializable{
 		return "index?faces-redirect=true";
 	}
 	
+	public String visualizar(String codigo){
+	return "Veiculo?codigo="+codigo+"faces-redirect=true";
+	}
+	
+	public String ocorrencia(ActionEvent event){
+		Veiculo veiculo = (Veiculo) event.getComponent().getAttributes().get("codigo");
+		System.out.println("codigo do veiculo: " + veiculo.getCodigo());
+		
+		String codigo = veiculo.getCodigo().toString();
+		
+		return "Ocorrencia?codigo="+codigo+"faces-redirect=true";
+		}
+	
 	public void update(Veiculo veiculo){
 		Veiculos veiculos = this.repositorios.getveiculos();
 		veiculos.editar(veiculo);
@@ -116,7 +131,13 @@ public class CadastroVeiculoBean implements Serializable{
 		veiculos.remover(veiculo);
 		this.init();
 	}
-
+	
+	public void listarVeiculo(String codigo){
+	int idVeiculo = Integer.parseInt(codigo);
+	Veiculos IVeiculo= this.repositorios.getveiculos();
+	veiculos = IVeiculo.listarPorPlaca(idVeiculo);
+	}
+	
 	public List<Modelo> carregaModelos(ValueChangeEvent evento){
 		Fabricante fab  = (Fabricante) evento.getNewValue();
 		Modelos Imodelos = this.repositorios.getModelos();

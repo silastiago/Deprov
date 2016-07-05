@@ -16,9 +16,6 @@
 			<p:dataTable value="#{cadastroVeiculoBean.veiculos}" var="veiculo"  id="mostraEquipamento">
 				
 				
-				
-				
-				
 				<p:column filterBy="#{veiculo.placa}"  style="text-align: center; width:5%" 
 					filterMatchMode="startsWith">
 					<f:facet name="header">
@@ -86,14 +83,13 @@
 				</p:column>
 			
 				<p:column style="text-align: center; width:3%">
-					<h:link outcome="Veiculo" value="Visualizar">
-					<i class="icon-edit"></i>
-					<f:param name="codigo"  value="#{veiculo.codigo}"/>
-					</h:link>
+					<h:commandLink value="Visualizar" action="#{cadastroVeiculoBean.visualizar(veiculo.codigo)}">
+					<f:param name="codigo_veiculo"  value="#{veiculo.codigo}"/> 
+					</h:commandLink>
 				</p:column>
 				
 				<p:column style="text-align: center; width:5%">
-					<h:link outcome="Ocorrencia" value="Gerar Ocorrencia">
+					<h:link outcome="Ocorrencia" value="Gerar Ocorrencia" >
 					<i class="icon-edit"></i>
 					<f:param name="codigo"  value="#{veiculo.codigo}"/>
 					</h:link>

@@ -11,5 +11,5 @@ public interface Veiculos {
 	public Veiculo salvar(Veiculo veiculo);
 	public void remover(Veiculo veiculo);
 	public void editar(Veiculo veiculo);
-	public List<Veiculo> listarPorPlaca(Veiculo veiculo);
+	public List<Veiculo> listarPorPlaca(int codigo);
 }

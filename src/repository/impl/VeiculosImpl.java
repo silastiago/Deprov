@@ -49,8 +49,8 @@ public class VeiculosImpl implements Veiculos{
 	}
 
 	@Override
-	public List<Veiculo> listarPorPlaca(Veiculo veiculo) {
+	public List<Veiculo> listarPorPlaca(int codigo) {
 		//Criteria criteria = sessao.createCriteria(Veiculo.class).addQueryHint("FROM Veiculo E WHERE E.Placa = jfoerhgoh");
-		return sessao. createCriteria(Veiculo.class).add(Restrictions.eq("Placa", veiculo.getPlaca())).list();
+		return sessao. createCriteria(Veiculo.class).add(Restrictions.eq("veiculo.placa", codigo)).list();
 	}
 }

@@ -3,8 +3,12 @@ package view;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
+
+
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
+
+
 import model.Ocorrencia;
 import model.Veiculo;
 import repository.Ocorrencias;
@@ -22,22 +26,22 @@ public class CadastroOcorrenciaBean implements Serializable {
 	private Veiculo veiculo = new Veiculo();
 
 	public String cadastrar(String codigo) {
+		
+		//String codigo = FacesContext.getCurrentInstance().getExternalContext().getRequestParameterMap().get("codigo";)
+		
+		
 		Ocorrencias ocorrencias = this.repositorios.getocorrencia();
 		
 		int idVeiculo = Integer.parseInt(codigo);		
 		veiculo.setCodigo(idVeiculo);
 		ocorrencia.setVeiculo(veiculo);
-
 		ocorrencias.salvar(ocorrencia);
-		
 		return null;
-		//return "index?faces-redirect=true";
 	}
 	
 	public String editar() {
 		Ocorrencias ocorrencias = this.repositorios.getocorrencia();
 		ocorrencias.salvar(ocorrencia);
-		this.ocorrencias.add(ocorrencia);
 		return "index?faces-redirect=true";
 	}
 	
