@@ -136,11 +136,11 @@
 				</p:panelGrid>
 			<h:commandButton action="#{cadastroVeiculoBean.cadastrar()}" value="Salvar" />
 			
-			<h:commandButton actionListener="#{cadastroVeiculoBean.ocorrencia}" value="Gerar Relatorio" >
-			<f:attribute name="codigo" value="#{cadastroVeiculoBean.veiculo}" />	
-			</h:commandButton>
-					
-					
+			
+			<h:commandButton actionListener="#{cadastroVeiculoBean.gerarRelatorio}" value="Gerar Relatorio" 
+				onclick="this.form.target='_blank'">
+				<f:attribute name="codigo" value="#{cadastroVeiculoBean.veiculo}" />
+			</h:commandButton>		
 			
 			</div>
 		</h:form>
