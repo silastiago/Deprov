@@ -15,8 +15,14 @@
 	<ui:define name="conteudo">
 		<h:form enctype="multipart/form-data" acceptcharset="ISO-8859-1">
 			<div class="ui-fluid">
-				<h1>Cadastro de Veiculo</h1>
-				<p:panelGrid columns="4" style="width: 100%; margin-top: 20px"
+				
+
+			
+			
+		<p:tabView>
+        <p:tab title="Veiculo">
+            
+            				<p:panelGrid columns="4" style="width: 100%; margin-top: 20px"
 					columnClasses="rotulo, campo, rotulo, campo">
 					
 
@@ -135,21 +141,19 @@
 				</p:panelGrid>
 			<h:commandButton action="#{cadastroVeiculoBean.cadastrar()}" value="Salvar" />
 			
-			
 			<h:commandButton actionListener="#{cadastroRelatorioBean.gerarRelatorio}" value="Gerar Relatorio" 
 				onclick="this.form.target='_blank'">
 				<f:attribute name="codigo" value="#{cadastroVeiculoBean.veiculo}" />
-			</h:commandButton>		
+			</h:commandButton>
 			
 			<h:link outcome="Ocorrencia" value="Gerar Ocorrencia">
 				<f:param name="codigo"  value="#{cadastroVeiculoBean.veiculo.codigo}"/>
 			</h:link>
 			
-			</div>
-		
-		
-		
-		<h:form enctype="multipart/form-data" >
+        </p:tab>
+        <p:tab title="Fotos do Veiculo">
+            
+            <h:form enctype="multipart/form-data" >
 			<div class="ui-fluid">
 				<h1>Cadastro de Fotos do Veiculo</h1>
 				<p:panelGrid columns="2" style="width: 100%; margin-top: 20px"
@@ -184,6 +188,15 @@
 			
 				</div>
 			</h:form>
+            
+        </p:tab>
+    </p:tabView>
+			
+			</div>
+		
+		
+		
+		
 		
 		
 		</h:form>
