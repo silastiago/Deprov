@@ -136,7 +136,7 @@
 			<h:commandButton action="#{cadastroVeiculoBean.cadastrar()}" value="Salvar" />
 			
 			
-			<h:commandButton actionListener="#{cadastroVeiculoBean.gerarRelatorio}" value="Gerar Relatorio" 
+			<h:commandButton actionListener="#{cadastroRelatorioBean.gerarRelatorio}" value="Gerar Relatorio" 
 				onclick="this.form.target='_blank'">
 				<f:attribute name="codigo" value="#{cadastroVeiculoBean.veiculo}" />
 			</h:commandButton>		
@@ -172,7 +172,7 @@
 			</h:form>
 			
 			
-			<h:form enctype="multipart/form-data" id="foto" >
+			<h:form enctype="multipart/form-data" >
 			<div class="ui-fluid" align="center">
 				
 				<p:panelGrid columns="1" style="width: 100%; margin-top: 20px"

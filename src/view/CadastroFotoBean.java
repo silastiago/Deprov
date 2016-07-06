@@ -94,7 +94,8 @@ public class CadastroFotoBean implements Serializable {
 		Ifoto.salvar(foto);
 		
 		
-        return "index?faces-redirect=true";
+        //return "index?faces-redirect=true";
+		return null;
 	}
 	
 	public List<Foto> listarFotos(){
