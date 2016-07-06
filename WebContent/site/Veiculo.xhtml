@@ -155,11 +155,8 @@
             
             <h:form enctype="multipart/form-data" >
 			<div class="ui-fluid">
-				<h1>Cadastro de Fotos do Veiculo</h1>
 				<p:panelGrid columns="2" style="width: 100%; margin-top: 20px"
 					columnClasses="rotulo, campo">
-				
-				
 				
 				<p:fileUpload value="#{cadastroFotoBean.file}" mode="simple" skinSimple="true"/>
 				
@@ -169,8 +166,6 @@
 					<f:attribute name="codigo" value="#{cadastroVeiculoBean.veiculo}" />
 				</p:commandButton>
 				
-				
-				
 			</p:panelGrid>
 				</div>
 			</h:form>
@@ -179,9 +174,7 @@
 			<h:form enctype="multipart/form-data" >
 			<div class="ui-fluid" align="center">
 				
-			
-				
-			<p:galleria var="image" value="#{cadastroFotoBean.listarFotos()}" panelWidth="1280" panelHeight="720" autoPlay="false" filmstripPosition="bottom"  style="horizontal-align:center" >
+			<p:galleria var="image" value="#{cadastroFotoBean.listarFotos(cadastroVeiculoBean.veiculo.codigo)}" panelWidth="1280" panelHeight="720" autoPlay="true" filmstripPosition="bottom"  style="horizontal-align:center" >
 					<p:graphicImage value="#{image.path}" />
 			</p:galleria>	
 				

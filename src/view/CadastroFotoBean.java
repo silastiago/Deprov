@@ -84,10 +84,10 @@ public class CadastroFotoBean implements Serializable {
 		return null;
 	}
 	
-	public List<Foto> listarFotos(){
+	public List<Foto> listarFotos(int codigo){
 		IFoto Ifoto = repositorios.getFoto();
 		//int idVeiculo = Integer.parseInt(veiculo.getCodigo());
-		listaFotos = Ifoto.porCodigoVeiculo(veiculo.getCodigo());
+		listaFotos = Ifoto.porCodigoVeiculo(codigo);
 		
 		return listaFotos;
 	}
