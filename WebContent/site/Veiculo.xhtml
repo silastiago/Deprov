@@ -6,7 +6,6 @@
 	xmlns:p="http://primefaces.org/ui">
 <f:metadata>
 	<f:viewParam name="codigo" value="#{cadastroVeiculoBean.veiculo}" />
-	<f:viewParam name="codigo_veiculo"  />
 </f:metadata>
 
 
@@ -142,11 +141,53 @@
 				<f:attribute name="codigo" value="#{cadastroVeiculoBean.veiculo}" />
 			</h:commandButton>		
 			
+			<h:commandButton actionListener="#{cadastroVeiculoBean.ocorrencia}" value="Gerar Ocorrencia">
+				<f:attribute name="codigo" value="#{cadastroVeiculoBean.veiculo}" />
+			</h:commandButton>
+			
 			</div>
+		
+		
+		
+		<h:form enctype="multipart/form-data" >
+			<div class="ui-fluid">
+				<h1>Cadastro de Fotos do Veiculo</h1>
+				<p:panelGrid columns="2" style="width: 100%; margin-top: 20px"
+					columnClasses="rotulo, campo">
+				
+				
+				
+				<p:fileUpload value="#{cadastroFotoBean.file}" mode="simple" skinSimple="true"/>
+				
+				
+				
+				<p:commandButton value="Submit" ajax="false" actionListener="#{cadastroFotoBean.upload}"  >
+					<f:attribute name="codigo" value="#{cadastroVeiculoBean.veiculo}" />
+				</p:commandButton>
+				
+				
+				
+			</p:panelGrid>
+				</div>
+			</h:form>
+			
+			
+			<h:form enctype="multipart/form-data" id="foto" >
+			<div class="ui-fluid" align="center">
+				
+				<p:panelGrid columns="1" style="width: 100%; margin-top: 20px"
+					>
+				
+			<p:galleria var="image" value="#{cadastroFotoBean.listarFotos()}" panelWidth="800" panelHeight="600" autoPlay="false" filmstripPosition="bottom"  style="horizontal-align:center" >
+					<p:graphicImage value="#{image.path}" width="100%" height="100%"  />
+			</p:galleria>	
+				
+			</p:panelGrid>
+				</div>
+			</h:form>
+		
+		
 		</h:form>
-
-	
-
 
 	</ui:define>	
 	</ui:composition>

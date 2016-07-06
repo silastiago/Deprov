@@ -13,6 +13,7 @@ import javax.annotation.PostConstruct;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
 import javax.faces.context.FacesContext;
+import javax.faces.event.ActionEvent;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
@@ -55,9 +56,15 @@ public class CadastroFotoBean implements Serializable {
 	
 	}
 	
-	public String upload(String codigo){
+	public String upload(ActionEvent event){
+		veiculo = (Veiculo) event.getComponent().getAttributes().get("codigo");
+		System.out.println("codigo do veiculo: " + veiculo.getCodigo());
+		
+		String codigo = veiculo.getCodigo().toString();
+		
 		System.out.println("Codigo do veiculo: " + codigo);
-		File outDir = new File("/var/lib/tomcat8/webapps/Deprov/resources/images/"+ codigo);
+		//File outDir = new File("/var/lib/tomcat8/webapps/Deprov/resources/images/"+ codigo);
+		File outDir = new File("/opt/tomcat/webapps/Deprov/resources/images/"+ codigo);
         if (outDir.exists()) {
 			System.out.println("Diretorio já criado ");
 		}else {
@@ -68,7 +75,8 @@ public class CadastroFotoBean implements Serializable {
         String nomeArquivo = file.getFileName();
         byte[] fotos = file.getContents();
         
-        String path = "/var/lib/tomcat8/webapps/Deprov/resources/images/"+ codigo+"/";
+        //String path = "/var/lib/tomcat8/webapps/Deprov/resources/images/"+ codigo+"/";
+        String path = "/opt/tomcat/webapps/Deprov/resources/images/"+ codigo+"/";
         String pathBanco = "../resources/images/"+codigo+"/";
 		try {
 		fos = new FileOutputStream(path+nomeArquivo);
@@ -89,10 +97,10 @@ public class CadastroFotoBean implements Serializable {
         return "index?faces-redirect=true";
 	}
 	
-	public List<Foto> listarFotos(String codigo){
+	public List<Foto> listarFotos(){
 		IFoto Ifoto = repositorios.getFoto();
-		int idVeiculo = Integer.parseInt(codigo);
-		listaFotos = Ifoto.porCodigoVeiculo(idVeiculo);
+		//int idVeiculo = Integer.parseInt(veiculo.getCodigo());
+		listaFotos = Ifoto.porCodigoVeiculo(veiculo.getCodigo());
 		
 		return listaFotos;
 	}

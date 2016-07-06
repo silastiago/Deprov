@@ -120,8 +120,8 @@ public class CadastroVeiculoBean implements Serializable{
 		System.out.println("codigo do veiculo: " + veiculo.getCodigo());
 		
 		String codigo = veiculo.getCodigo().toString();
-		
-		return "Ocorrencia?codigo="+codigo+"faces-redirect=true";
+		System.out.println("Ocorrencia.xhtml?codigo="+codigo);
+		return "snmp.info.ufrn.br:8080/Deprov/site/Ocorrencia.xhtml?codigo="+codigo;
 		}
 	
 	public void update(Veiculo veiculo){
