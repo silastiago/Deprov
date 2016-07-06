@@ -1,6 +1,5 @@
 package view;
 
-import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
@@ -13,21 +12,13 @@ import java.util.List;
 import java.util.Map;
 
 import javax.annotation.PostConstruct;
-import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.RequestScoped;
-import javax.faces.bean.ViewScoped;
 import javax.faces.context.FacesContext;
 import javax.faces.event.ActionEvent;
-import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-
-import org.primefaces.event.CellEditEvent;
-import org.primefaces.model.DefaultStreamedContent;
 import org.primefaces.model.StreamedContent;
-
 import conexao.ConnectionFactory;
-
 import model.Veiculo;
 import net.sf.jasperreports.engine.JRException;
 import net.sf.jasperreports.engine.JasperCompileManager;
@@ -40,7 +31,6 @@ import net.sf.jasperreports.export.OutputStreamExporterOutput;
 import net.sf.jasperreports.export.SimpleExporterInput;
 import net.sf.jasperreports.export.SimpleOutputStreamExporterOutput;
 import net.sf.jasperreports.export.SimplePdfExporterConfiguration;
-import repository.Ocorrencias;
 import repository.Veiculos;
 import util.Repositorios;
 
@@ -82,11 +72,7 @@ public class CadastroRelatorioBean implements Serializable {
         
         JasperPrint print = JasperFillManager.fillReport(jasperReport,
                 parameters, conn);
- 
-        // Make sure the output directory exists.
-        //File outDir = new File("/opt/tomcat/webapps/Deprov/resources/images/"+codigo);
-        //outDir.mkdirs();
-        
+         
         // PDF Exportor.
         JRPdfExporter exporter = new JRPdfExporter();
  

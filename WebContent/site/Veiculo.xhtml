@@ -141,9 +141,9 @@
 				<f:attribute name="codigo" value="#{cadastroVeiculoBean.veiculo}" />
 			</h:commandButton>		
 			
-			<h:commandButton actionListener="#{cadastroVeiculoBean.ocorrencia}" value="Gerar Ocorrencia">
-				<f:attribute name="codigo" value="#{cadastroVeiculoBean.veiculo}" />
-			</h:commandButton>
+			<h:link outcome="Ocorrencia" value="Gerar Ocorrencia">
+				<f:param name="codigo"  value="#{cadastroVeiculoBean.veiculo.codigo}"/>
+			</h:link>
 			
 			</div>
 		
@@ -175,14 +175,13 @@
 			<h:form enctype="multipart/form-data" >
 			<div class="ui-fluid" align="center">
 				
-				<p:panelGrid columns="1" style="width: 100%; margin-top: 20px"
-					>
+			
 				
-			<p:galleria var="image" value="#{cadastroFotoBean.listarFotos()}" panelWidth="800" panelHeight="600" autoPlay="false" filmstripPosition="bottom"  style="horizontal-align:center" >
-					<p:graphicImage value="#{image.path}" width="100%" height="100%"  />
+			<p:galleria var="image" value="#{cadastroFotoBean.listarFotos()}" panelWidth="1280" panelHeight="720" autoPlay="false" filmstripPosition="bottom"  style="horizontal-align:center" >
+					<p:graphicImage value="#{image.path}" />
 			</p:galleria>	
 				
-			</p:panelGrid>
+			
 				</div>
 			</h:form>
 		
