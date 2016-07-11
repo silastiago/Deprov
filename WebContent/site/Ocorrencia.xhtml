@@ -67,9 +67,16 @@
 					</h:link>
 				</p:column>
 			
+			
+			<p:column style="text-align: center; width:5%">
+					<h:commandButton action="#{cadastroOcorrrenciaBean.excluir(ocorrencia.codigo)}"  value="Excluir" />
+				</p:column>
+			
+			
+			
 			<p:column style="text-align: center; width:5%">
 				<h:commandLink value="Excluir"
-				 action="#{cadastroOcorrenciaBean.excluir(ocorrencia)}"
+				 action="#{cadastroOcorrenciaBean.excluir(ocorrencia.codigo)}"
 				 onclick="if (!confirm('Confirmar a exclusão desta Ocorrencia? ')) return false"/>
 				 <i class="icon-remove-sign"></i>
 			</p:column>

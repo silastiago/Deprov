@@ -7,7 +7,7 @@ import java.util.List;
 
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
-
+import javax.faces.event.ActionEvent;
 
 import model.Ocorrencia;
 import model.Veiculo;
@@ -51,12 +51,15 @@ public class CadastroOcorrenciaBean implements Serializable {
 		ocorrencias.editar(ocorrencia);
 	}
 
-	public String excluir(Ocorrencia ocorrencia) {
-		System.out.println("codigo da ocorrencia: " + ocorrencia.getCodigo());
+	public void excluir(int codigo) {
+		
+		System.out.println("codigo da ocorrencia : " + codigo);
+		
+		System.out.println("codigo da ocorrencia: " + codigo);
 		
 		//Ocorrencias ocorrencias = this.repositorios.getocorrencia();
 		//ocorrencias.remover(ocorrencia);
-		return "index?faces-redirect=true";
+		//return "index?faces-redirect=true";
 	}
 
 	public List<Ocorrencia> listar(){
