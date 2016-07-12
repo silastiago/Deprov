@@ -49,10 +49,10 @@ public class CadastroFotoBean implements Serializable {
 		String codigo = veiculo.getCodigo().toString();
 		
 		System.out.println("Codigo do veiculo: " + codigo);
-		File outDir = new File("/var/lib/tomcat8/webapps/Deprov/resources/images/"+ codigo);
-		//File outDir = new File("/opt/tomcat/webapps/Deprov/resources/images/"+ codigo);
+		//File outDir = new File("/var/lib/tomcat8/webapps/Deprov/resources/images/"+ codigo);
+		File outDir = new File("/opt/tomcat/webapps/Deprov/resources/images/"+ codigo);
         if (outDir.exists()) {
-			System.out.println("Diretorio já criado ");
+			System.out.println("Diretorio jï¿½ criado ");
 		}else {
 			outDir. mkdirs();
 		}
@@ -61,8 +61,8 @@ public class CadastroFotoBean implements Serializable {
         String nomeArquivo = file.getFileName();
         byte[] fotos = file.getContents();
         
-        String path = "/var/lib/tomcat8/webapps/Deprov/resources/images/"+ codigo+"/";
-        //String path = "/opt/tomcat/webapps/Deprov/resources/images/"+ codigo+"/";
+        //String path = "/var/lib/tomcat8/webapps/Deprov/resources/images/"+ codigo+"/";
+        String path = "/opt/tomcat/webapps/Deprov/resources/images/"+ codigo+"/";
         String pathBanco = "../resources/images/"+codigo+"/";
 		try {
 		fos = new FileOutputStream(path+nomeArquivo);

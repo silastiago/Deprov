@@ -59,8 +59,8 @@ public class CadastroRelatorioBean implements Serializable {
 		int idVeiculo = Integer.parseInt(codigo);
 		ConnectionFactory conexao = new ConnectionFactory();
 		
-		//String reportSrcFile = "/opt/tomcat/webapps/Deprov/resources/relatorios/RelatorioVeiculo.jrxml";
-		String reportSrcFile = "/var/lib/tomcat8/webapps/Deprov/resources/relatorios/RelatorioVeiculo.jrxml";
+		String reportSrcFile = "/opt/tomcat/webapps/Deprov/resources/relatorios/RelatorioVeiculo.jrxml";
+		//String reportSrcFile = "/var/lib/tomcat8/webapps/Deprov/resources/relatorios/RelatorioVeiculo.jrxml";
         // First, compile jrxml file.
         JasperReport jasperReport =    JasperCompileManager.compileReport(reportSrcFile);
  
@@ -81,11 +81,11 @@ public class CadastroRelatorioBean implements Serializable {
         exporter.setExporterInput(exporterInput);
  
         // ExporterOutput
-        OutputStreamExporterOutput exporterOutput = new SimpleOutputStreamExporterOutput(
-                "/var/lib/tomcat8/webapps/Deprov/resources/relatorios/FirstJasperReport.pdf");
-        
         /*OutputStreamExporterOutput exporterOutput = new SimpleOutputStreamExporterOutput(
-                      "/opt/tomcat/webapps/Deprov/resources/relatorios/FirstJasperReport.pdf");*/
+                "/var/lib/tomcat8/webapps/Deprov/resources/relatorios/FirstJasperReport.pdf");*/
+        
+        OutputStreamExporterOutput exporterOutput = new SimpleOutputStreamExporterOutput(
+                      "/opt/tomcat/webapps/Deprov/resources/relatorios/FirstJasperReport.pdf");
         
         // Output
         exporter.setExporterOutput(exporterOutput);
@@ -101,17 +101,17 @@ public class CadastroRelatorioBean implements Serializable {
         FacesContext facesContext = FacesContext.getCurrentInstance();
 	    HttpServletResponse response = (HttpServletResponse) facesContext.getExternalContext().getResponse();
 
-	    response.reset();   // Algum filtro pode ter configurado alguns cabeçalhos no buffer de antemão. Queremos livrar-se deles, senão ele pode colidir.
-	    response.setHeader("Content-Type", "application/pdf");  // Define apenas o tipo de conteúdo, Utilize se necessário ServletContext#getMimeType() para detecção automática com base em nome de arquivo. 
+	    response.reset();   // Algum filtro pode ter configurado alguns cabeï¿½alhos no buffer de antemï¿½o. Queremos livrar-se deles, senï¿½o ele pode colidir.
+	    response.setHeader("Content-Type", "application/pdf");  // Define apenas o tipo de conteï¿½do, Utilize se necessï¿½rio ServletContext#getMimeType() para detecï¿½ï¿½o automï¿½tica com base em nome de arquivo. 
 	    OutputStream responseOutputStream = response.getOutputStream();
 
-	    String PDF_URL = "http://sinf.policiacivil.rn.gov.br:8080/Deprov/resources/relatorios/FirstJasperReport.pdf";
-	    //String PDF_URL = "http://snmp.info.ufrn.br:8080/Deprov/resources/relatorios/FirstJasperReport.pdf";
-		// Lê o conteúdo do PDF
+	    //String PDF_URL = "http://sinf.policiacivil.rn.gov.br:8080/Deprov/resources/relatorios/FirstJasperReport.pdf";
+	    String PDF_URL = "http://snmp.info.ufrn.br:8080/Deprov/resources/relatorios/FirstJasperReport.pdf";
+		// Lï¿½ o conteï¿½do do PDF
 	    URL url = new URL(PDF_URL);
 	    InputStream pdfInputStream = url.openStream();
 
-	    // Lê o conteúdo do PDF e grava para saída
+	    // Lï¿½ o conteï¿½do do PDF e grava para saï¿½da
 	    byte[] bytesBuffer = new byte[2048];
 	    int bytesRead;
 	    while ((bytesRead = pdfInputStream.read(bytesBuffer)) > 0) {

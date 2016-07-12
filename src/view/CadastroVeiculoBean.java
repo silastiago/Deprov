@@ -80,10 +80,6 @@ public class CadastroVeiculoBean implements Serializable{
 	private StreamedContent file;
 	
 	
-
-
-
-
 	@PostConstruct
 	public void init(){
 		Veiculos veiculos = this.repositorios.getveiculos();
