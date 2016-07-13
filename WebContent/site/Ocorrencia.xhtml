@@ -39,18 +39,20 @@
 				id="mostraEquipamento"  paginator="true" >
 				
 				
-				<p:column filterBy="#{ocorrencia.ocorrencia}"  style="text-align: center; width:10%" filterMatchMode="startsWith">
+				<p:column filterBy="#{ocorrencia.ocorrencia}"  style="text-align: center; width:15%" filterMatchMode="startsWith">
 					<f:facet name="header">
 						<h:outputText value="Nome da Ocorrencia" />
 					</f:facet>
 					<h:outputText value="#{ocorrencia.ocorrencia}" />
 				</p:column>
 								
-				<p:column filterBy="#{ocorrencia.data}"  style="text-align: center; width:10%" filterMatchMode="startsWith">
+				<p:column filterBy="#{ocorrencia.data}"  style="text-align: center; width:5%" filterMatchMode="startsWith">
 					<f:facet name="header">
 						<h:outputText value="Data da Ocorrencia" />
 					</f:facet>
-					<h:outputText value="#{ocorrencia.data}" />
+					<h:outputText value="#{ocorrencia.data}" >
+					<f:convertDateTime pattern="dd-MM-yyyy"/>
+					</h:outputText>
 				</p:column>
 				
 				<p:column filterBy="#{ocorrencia.veiculo.placa}"  style="text-align: center; width:10%" filterMatchMode="startsWith">
