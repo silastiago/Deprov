@@ -16,7 +16,7 @@
 			<p:dataTable value="#{cadastroVeiculoBean.veiculos}" var="veiculo"  id="mostraEquipamento">
 				
 				
-				<p:column filterBy="#{veiculo.placa}"  style="text-align: center; width:5%" 
+				<p:column filterBy="#{veiculo.placa}"  style="text-align: center; width:4%" 
 					filterMatchMode="startsWith">
 					<f:facet name="header">
 						<h:outputText value="Placa" />
@@ -39,14 +39,14 @@
 				</p:column>
 
 
-				<p:column filterBy="#{veiculo.cor.cor}"  style="text-align: center; width:5%" filterMatchMode="startsWith">
+				<p:column filterBy="#{veiculo.cor.cor}"  style="text-align: center; width:4%" filterMatchMode="startsWith">
 					<f:facet name="header">
 						<h:outputText value="Cor" />
 					</f:facet>
 					<h:outputText value="#{veiculo.cor.cor}" />
 				</p:column>
 				
-				<p:column filterBy="#{veiculo.anofabricacao}"  style="text-align: center; width:5%" filterMatchMode="startsWith">
+				<p:column filterBy="#{veiculo.anofabricacao}"  style="text-align: center; width:4%" filterMatchMode="startsWith">
 					<f:facet name="header">
 						<h:outputText value="Ano Fab/Mod" />
 					</f:facet>
@@ -54,28 +54,28 @@
 				</p:column>
 
 
-				<p:column filterBy="#{veiculo.chassi}"  style="text-align: center; width:5%" filterMatchMode="startsWith">
+				<p:column filterBy="#{veiculo.chassi}"  style="text-align: center; width:7%" filterMatchMode="startsWith">
 					<f:facet name="header">
 						<h:outputText value="Chassi" />
 					</f:facet>
 					<h:outputText value="#{veiculo.chassi}" />
 				</p:column>
 	
-				<p:column filterBy="#{veiculo.motor}"  style="text-align: center; width:5%" filterMatchMode="startsWith">
+				<p:column filterBy="#{veiculo.motor}"  style="text-align: center; width:7%" filterMatchMode="startsWith">
 					<f:facet name="header">
 						<h:outputText value="Motor" />
 					</f:facet>
 					<h:outputText value="#{veiculo.motor}" />
 				</p:column>
 				
-				<p:column filterBy="#{veiculo.obs}"  style="text-align: center; width:5%" filterMatchMode="startsWith">
+				<p:column filterBy="#{veiculo.pericia.pericia}"  style="text-align: center; width:5%" filterMatchMode="startsWith">
 					<f:facet name="header">
-						<h:outputText value="Observações" />
+						<h:outputText value="Exame Veicular" />
 					</f:facet>
-					<h:inputTextarea value="#{veiculo.obs}" cols="12" />
+					<h:outputText value="#{veiculo.pericia.pericia}" />
 				</p:column>
 				
-				<p:column filterBy="#{veiculo.situacao}"  style="text-align: center; width:5%" filterMatchMode="startsWith">
+				<p:column filterBy="#{veiculo.situacao}"  style="text-align: center; width:4%" filterMatchMode="startsWith">
 					<f:facet name="header">
 						<h:outputText value="Situação" />
 					</f:facet>
