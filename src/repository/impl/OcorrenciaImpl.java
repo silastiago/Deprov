@@ -25,7 +25,7 @@ public class OcorrenciaImpl implements Ocorrencias{
 	@SuppressWarnings("unchecked")
 	@Override
 	public List<Ocorrencia> listar() {
-		return sessao.createCriteria(Ocorrencia.class).addOrder(Order.asc("ocorrencia")).list();
+		return sessao.createCriteria(Ocorrencia.class).addOrder(Order.asc("data")).list();
 	}
 
 	@Override
