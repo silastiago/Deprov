@@ -1,40 +1,16 @@
 package view;
 
-import java.io.ByteArrayInputStream;
-import java.io.File;
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.OutputStream;
 import java.io.Serializable;
-import java.net.MalformedURLException;
-import java.net.URL;
-import java.sql.Connection;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
-
 import javax.annotation.PostConstruct;
-import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.RequestScoped;
-import javax.faces.context.ExternalContext;
-import javax.faces.context.FacesContext;
 import javax.faces.event.ActionEvent;
-import javax.faces.event.PhaseId;
 import javax.faces.event.ValueChangeEvent;
-import javax.servlet.ServletContext;
-import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.Part;
 
-import org.apache.commons.io.IOUtils;
-import org.primefaces.event.FileUploadEvent;
-import org.primefaces.model.DefaultStreamedContent;
 import org.primefaces.model.StreamedContent;
-import org.primefaces.model.UploadedFile;
 
-import conexao.ConnectionFactory;
 import model.Cor;
 import model.Fabricante;
 import model.Modelo;
@@ -42,21 +18,9 @@ import model.Pericia;
 import model.Seguro;
 import model.Tipo;
 import model.Veiculo;
-import net.sf.jasperreports.engine.JRException;
-import net.sf.jasperreports.engine.JasperCompileManager;
-import net.sf.jasperreports.engine.JasperFillManager;
-import net.sf.jasperreports.engine.JasperPrint;
-import net.sf.jasperreports.engine.JasperReport;
-import net.sf.jasperreports.engine.export.JRPdfExporter;
-import net.sf.jasperreports.export.ExporterInput;
-import net.sf.jasperreports.export.OutputStreamExporterOutput;
-import net.sf.jasperreports.export.SimpleExporterInput;
-import net.sf.jasperreports.export.SimpleOutputStreamExporterOutput;
-import net.sf.jasperreports.export.SimplePdfExporterConfiguration;
 import repository.Cores;
 import repository.Fabricantes;
 import repository.Modelos;
-import repository.Ocorrencias;
 import repository.Pericias;
 import repository.Seguros;
 import repository.Tipos;
@@ -117,7 +81,7 @@ public class CadastroVeiculoBean implements Serializable{
 		
 		String codigo = veiculo.getCodigo().toString();
 		System.out.println("Ocorrencia.xhtml?codigo="+codigo);
-		return "Ocorrencia.xhtml?codigo="+codigo+"faces-redirect=true";
+		return "Ocorrencia?codigo="+codigo+"faces-redirect=true";
 		}
 	
 	public void update(Veiculo veiculo){

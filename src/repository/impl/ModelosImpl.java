@@ -6,9 +6,7 @@ import org.hibernate.Session;
 import org.hibernate.criterion.Order;
 import org.hibernate.criterion.Restrictions;
 
-import model.Fabricante;
 import model.Modelo;
-import model.Ocorrencia;
 import repository.Modelos;
 
 

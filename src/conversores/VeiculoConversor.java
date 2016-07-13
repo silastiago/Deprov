@@ -37,6 +37,7 @@ public class VeiculoConversor implements Converter{
 	@Override
 	public String getAsString(FacesContext context, UIComponent component, Object value) {
 		if (value != null) {
+			System.out.println("Valor do codigo do veiculo: " + value.toString());
 			Integer codigo = ((Veiculo) value).getCodigo();
 			return codigo == null ? "" : codigo.toString();
 		}

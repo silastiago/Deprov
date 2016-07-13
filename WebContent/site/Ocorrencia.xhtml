@@ -35,18 +35,17 @@
 			</h:form>
 			
 				<h:form enctype="multipart/form-data" id="lista">
-				<p:dataTable value="#{cadastroOcorrrenciaBean.listarVeiculo(codigo)}" var="ocorrencia"   rows="10" rowsPerPageTemplate="5,10,15,20"
-				id="mostraEquipamento"  paginator="true" >
+				<p:dataTable value="#{cadastroOcorrrenciaBean.ocorrencias}" var="ocorrencia"   rows="10" rowsPerPageTemplate="5,10,15,20"
+				id="mostraEquipamento"  paginator="true">
 				
-				
-				<p:column filterBy="#{ocorrencia.ocorrencia}"  style="text-align: center; width:15%" filterMatchMode="startsWith">
+				<p:column filterBy="#{ocorrencia.ocorrencia}"  style="text-align: center; width:25%" filterMatchMode="startsWith">
 					<f:facet name="header">
 						<h:outputText value="Nome da Ocorrencia" />
 					</f:facet>
 					<h:outputText value="#{ocorrencia.ocorrencia}" />
 				</p:column>
 								
-				<p:column filterBy="#{ocorrencia.data}"  style="text-align: center; width:5%" filterMatchMode="startsWith">
+				<p:column filterBy="#{ocorrencia.data}"  style="text-align: center; width:10%" filterMatchMode="startsWith">
 					<f:facet name="header">
 						<h:outputText value="Data da Ocorrencia" />
 					</f:facet>
@@ -68,6 +67,12 @@
 					<f:param name="codigo_ocorrencia"  value="#{ocorrencia.codigo}"/>
 					</h:link>
 			</p:column>
+			
+			<p:column>
+				<h:commandButton value="Excluir" action="#{cadastroOcorrrenciaBean.excluir(ocorrencia.codigo)}" style=" width:10%">
+        		</h:commandButton>
+			</p:column>
+			
 			</p:dataTable>
 		</h:form>
 	</ui:define>	
