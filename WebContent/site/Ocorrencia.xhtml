@@ -63,13 +63,18 @@
 				
 			<p:column style="text-align: center; width:5%">
 					<h:link outcome="Ocorrencia2" value="Editar Ocorrencia">
-					<i class="icon-edit"></i>
 					<f:param name="codigo_ocorrencia"  value="#{ocorrencia.codigo}"/>
 					</h:link>
 			</p:column>
 			
 			<p:column>
-				<h:commandButton value="Excluir" action="#{cadastroOcorrrenciaBean.excluir(ocorrencia.codigo)}" style=" width:10%">
+				<h:commandButton value="Editar" action="#{cadastroOcorrrenciaBean.redirecionar(ocorrencia.codigo)}" >
+        		</h:commandButton>
+			</p:column>
+			
+			
+			<p:column>
+				<h:commandButton value="Excluir" action="#{cadastroOcorrrenciaBean.excluir(ocorrencia.codigo)}" >
         		</h:commandButton>
 			</p:column>
 			

@@ -1,6 +1,5 @@
 package view;
 
-import java.io.IOException;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
@@ -9,9 +8,6 @@ import javax.annotation.PostConstruct;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
 import javax.faces.context.FacesContext;
-import javax.faces.event.ActionEvent;
-
-import org.primefaces.event.SelectEvent;
 
 import model.Ocorrencia;
 import model.Veiculo;
@@ -24,7 +20,6 @@ public class CadastroOcorrenciaBean implements Serializable {
 
 	private Repositorios repositorios = new Repositorios();
 	private Ocorrencia ocorrencia = new Ocorrencia();
-	private Ocorrencia ocorrenciaSelecionada = new Ocorrencia();
 	private List<Ocorrencia> ocorrencias = new ArrayList<Ocorrencia>();
 	private List<Ocorrencia> ocorrenciasFiltradas = new ArrayList<Ocorrencia>();
 	private List<Veiculo> veiculos = new ArrayList<Veiculo>();
@@ -48,6 +43,12 @@ public class CadastroOcorrenciaBean implements Serializable {
 		ocorrencias.salvar(ocorrencia);
 		return null;
 	}
+	
+	public String redirecionar(String codigo){
+		return "Ocorrencia2?codigo_ocorrencia="+codigo+"faces-redirect=true";
+		
+	}
+	
 	
 	public String editar() {
 		Ocorrencias ocorrencias = this.repositorios.getocorrencia();
@@ -76,15 +77,12 @@ public class CadastroOcorrenciaBean implements Serializable {
 	}
 	
 	public void listarVeiculo(){
-		
 		String codigo = FacesContext.getCurrentInstance().getExternalContext().getRequestParameterMap().get("codigo");
-		System.out.println("ID: " + codigo);
 		int idVeiculo = Integer.parseInt(codigo);
 		Ocorrencias Iocorrencia = this.repositorios.getocorrencia();
 		ocorrencias = Iocorrencia.porCodigoVeiculo(idVeiculo);
 		//return ocorrencias;
 	}
-	
 	
 	public Ocorrencia getOcorrencia() {
 		return ocorrencia;
@@ -130,13 +128,4 @@ public class CadastroOcorrenciaBean implements Serializable {
 	public void setVeiculo(Veiculo veiculo) {
 		this.veiculo = veiculo;
 	}
-
-	public Ocorrencia getOcorrenciaSelecionada() {
-		return ocorrenciaSelecionada;
-	}
-
-	public void setOcorrenciaSelecionada(Ocorrencia ocorrenciaSelecionada) {
-		this.ocorrenciaSelecionada = ocorrenciaSelecionada;
-	}
-	
 }
