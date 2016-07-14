@@ -175,14 +175,14 @@
 			<h:form enctype="multipart/form-data" id="foto">
 			<div class="ui-fluid" align="center">
 				
-			<p:galleria id="galeria" var="image" value="#{cadastroFotoBean.listarFotos(cadastroVeiculoBean.veiculo.codigo)}" autoPlay="false" panelWidth="1280" panelHeight="720" filmstripPosition="bottom"  style="horizontal-align:center" >
+			<p:galleria id="galeria" var="image" value="#{cadastroFotoBean.listaFotos}" autoPlay="false" panelWidth="1280" panelHeight="720" filmstripPosition="bottom"  style="horizontal-align:center" >
 					<p:graphicImage value="#{image.path}" width="100%" height="100%" >
 					<ui:param name="path" value="#{image.path}"/>
 					<ui:param name="codigo_foto" value="#{image.codigo}"/>
 					
 					
 			<h:commandButton icon="ui-icon-trash" style="position:absolute; top:0; right:0; z-index:10;" 
-        			action="#{cadastroFotoBean.excluir(codigo_foto)}" >
+        			action="#{cadastroFotoBean.excluir(image.codigo)}" >
         	</h:commandButton>
 			
 			</p:graphicImage>

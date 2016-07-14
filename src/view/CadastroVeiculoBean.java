@@ -77,12 +77,10 @@ public class CadastroVeiculoBean implements Serializable{
 	
 	public String ocorrencia(ActionEvent event){
 		Veiculo veiculo = (Veiculo) event.getComponent().getAttributes().get("codigo");
-		System.out.println("codigo do veiculo: " + veiculo.getCodigo());
 		
 		String codigo = veiculo.getCodigo().toString();
-		System.out.println("Ocorrencia.xhtml?codigo="+codigo);
 		return "Ocorrencia?codigo="+codigo+"faces-redirect=true";
-		}
+	}
 	
 	public void update(Veiculo veiculo){
 		Veiculos veiculos = this.repositorios.getveiculos();
@@ -133,11 +131,9 @@ public class CadastroVeiculoBean implements Serializable{
 		return veiculosFiltrados;
 	}
 
-
 	public void setVeiculosFiltrados(List<Veiculo> veiculosFiltrados) {
 		this.veiculosFiltrados = veiculosFiltrados;
 	}
-
 
 	public List<Cor> getCores() {
 		return cores;
@@ -163,7 +159,6 @@ public class CadastroVeiculoBean implements Serializable{
 		this.fabricantes = fabricantes;
 	}
 
-
 	public List<Modelo> getModelos() {
 		return modelos;
 	}
@@ -188,14 +183,11 @@ public class CadastroVeiculoBean implements Serializable{
 		this.pericias = pericias;
 	}
 
-
 	public StreamedContent getFile() {
 		return file;
 	}
 
-
 	public void setFile(StreamedContent file) {
 		this.file = file;
 	}	
-	
 }

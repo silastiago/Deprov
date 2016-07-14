@@ -35,6 +35,13 @@
 			</h:form>
 			
 				<h:form enctype="multipart/form-data" id="lista">
+				
+				<p:contextMenu for="ocorrencia" widgetVar="cMenu">   
+       				<p:menuitem value="Edit Cell" icon="ui-icon-search" onclick="PF('cellCars').showCellEditor();return false;"/>  
+       				<p:menuitem value="Hide Menu" icon="ui-icon-close" onclick="PF('cMenu').hide()"/>  
+   				</p:contextMenu> 
+				
+				
 				<p:dataTable value="#{cadastroOcorrrenciaBean.ocorrencias}" var="ocorrencia"   rows="10" rowsPerPageTemplate="5,10,15,20"
 				id="mostraEquipamento"  paginator="true">
 				

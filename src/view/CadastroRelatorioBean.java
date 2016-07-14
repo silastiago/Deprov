@@ -51,7 +51,6 @@ public class CadastroRelatorioBean implements Serializable {
 
 	public String gerarRelatorio(ActionEvent event) throws JRException, IOException{
 		Veiculo veiculo = (Veiculo) event.getComponent().getAttributes().get("codigo");
-		System.out.println("codigo do veiculo: " + veiculo.getCodigo());
 		
 		String codigo = veiculo.getCodigo().toString();
 		System.out.println("iniciando metodo de geracao de relatorio");
@@ -151,6 +150,4 @@ public class CadastroRelatorioBean implements Serializable {
 	public void setVeiculo(Veiculo veiculo) {
 		this.veiculo = veiculo;
 	}
-	
-
 }

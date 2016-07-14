@@ -54,14 +54,14 @@
 				</p:column>
 
 
-				<p:column filterBy="#{veiculo.chassi}"  style="text-align: center; width:7%" filterMatchMode="startsWith">
+				<p:column filterBy="#{veiculo.chassi}"  style="text-align: center; width:7%" filterMatchMode="contains">
 					<f:facet name="header">
 						<h:outputText value="Chassi" />
 					</f:facet>
 					<h:outputText value="#{veiculo.chassi}" />
 				</p:column>
 	
-				<p:column filterBy="#{veiculo.motor}"  style="text-align: center; width:7%" filterMatchMode="startsWith">
+				<p:column filterBy="#{veiculo.motor}"  style="text-align: center; width:7%" filterMatchMode="contains">
 					<f:facet name="header">
 						<h:outputText value="Motor" />
 					</f:facet>

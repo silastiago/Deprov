@@ -31,10 +31,6 @@ public class CadastroOcorrenciaBean implements Serializable {
 	}
 	
 	public String cadastrar(String codigo) {
-		
-		//String codigo = FacesContext.getCurrentInstance().getExternalContext().getRequestParameterMap().get("codigo";)
-		
-		
 		Ocorrencias ocorrencias = this.repositorios.getocorrencia();
 		
 		int idVeiculo = Integer.parseInt(codigo);		

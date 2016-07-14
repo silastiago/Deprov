@@ -11,6 +11,7 @@ import java.util.List;
 import javax.annotation.PostConstruct;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
+import javax.faces.context.FacesContext;
 import javax.faces.event.ActionEvent;
 import org.primefaces.model.UploadedFile;
 
@@ -39,16 +40,14 @@ public class CadastroFotoBean implements Serializable {
 		this.listaFotos = fotos.listar();
 		Veiculos veiculos = this.repositorios.getveiculos();
 		this.veiculos = veiculos.listar();
-	
+		this.listarFotos();
+
 	}
 	
 	public String upload(ActionEvent event){
 		veiculo = (Veiculo) event.getComponent().getAttributes().get("codigo");
-		System.out.println("codigo do veiculo: " + veiculo.getCodigo());
 		
 		String codigo = veiculo.getCodigo().toString();
-		
-		System.out.println("Codigo do veiculo: " + codigo);
 		//File outDir = new File("/var/lib/tomcat8/webapps/Deprov/resources/images/"+ codigo);
 		File outDir = new File("/opt/tomcat/webapps/Deprov/resources/images/"+ codigo);
         if (outDir.exists()) {
@@ -84,10 +83,13 @@ public class CadastroFotoBean implements Serializable {
 		return null;
 	}
 	
-	public List<Foto> listarFotos(int codigo){
+	public List<Foto> listarFotos(){
+		String codigo = FacesContext.getCurrentInstance().getExternalContext().getRequestParameterMap().get("codigo");
+		int idVeiculo = Integer.parseInt(codigo);
+		
 		IFoto Ifoto = repositorios.getFoto();
 		//int idVeiculo = Integer.parseInt(veiculo.getCodigo());
-		listaFotos = Ifoto.porCodigoVeiculo(codigo);
+		listaFotos = Ifoto.porCodigoVeiculo(idVeiculo);
 		
 		return listaFotos;
 	}
@@ -97,10 +99,14 @@ public class CadastroFotoBean implements Serializable {
 		ocorrencias.editar(ocorrencia);
 	}
 
-	public void excluir(Ocorrencia ocorrencia) {
-		Ocorrencias ocorrencias = this.repositorios.getocorrencia();
-		ocorrencias.remover(ocorrencia);
+	public String excluir(String codigo) {
+		
+		IFoto Ifoto = repositorios.getFoto();
+		int idFoto = Integer.parseInt(codigo);
+		Foto foto = Ifoto.porCodigo(idFoto);
+		Ifoto.remover(foto);
 		this.init();
+		return "index?faces-redirect=true";
 	}
 
 	public Foto getFoto() {
