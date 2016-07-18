@@ -19,15 +19,15 @@
 					columnClasses="rotulo, campo">
 
 				<h:outputText value="Nome: " />
-				<h:inputText value="#{cadastroOcorrrenciaBean.ocorrencia.ocorrencia}" />
+				<h:inputText value="#{cadastroOcorrenciaBean.ocorrencia.ocorrencia}" />
 
 				<p:outputLabel for="mask" value="Data:" />
-					<p:calendar id="mask" value="#{cadastroOcorrrenciaBean.ocorrencia.data}"
+					<p:calendar id="mask" value="#{cadastroOcorrenciaBean.ocorrencia.data}"
 						pattern="dd/MM/yyyy" mask="true" navigator="true" showOn="button">
 						<f:convertDateTime pattern="dd/MM/yyyy" type="both" dateStyle="short"/>						
 					</p:calendar>
 				
-				<p:commandButton action="#{cadastroOcorrrenciaBean.cadastrar(codigo)}"  update=":lista" value="Salvar" />
+				<p:commandButton action="#{cadastroOcorrenciaBean.cadastrar(codigo)}"  update=":lista" value="Salvar" />
 				
 
 			</p:panelGrid>
@@ -36,13 +36,8 @@
 			
 				<h:form enctype="multipart/form-data" id="lista">
 				
-				<p:contextMenu for="ocorrencia" widgetVar="cMenu">   
-       				<p:menuitem value="Edit Cell" icon="ui-icon-search" onclick="PF('cellCars').showCellEditor();return false;"/>  
-       				<p:menuitem value="Hide Menu" icon="ui-icon-close" onclick="PF('cMenu').hide()"/>  
-   				</p:contextMenu> 
 				
-				
-				<p:dataTable value="#{cadastroOcorrrenciaBean.ocorrencias}" var="ocorrencia"   rows="10" rowsPerPageTemplate="5,10,15,20"
+				<p:dataTable value="#{cadastroOcorrenciaBean.ocorrencias}" var="ocorrencia"   rows="10" rowsPerPageTemplate="5,10,15,20"
 				id="mostraEquipamento"  paginator="true">
 				
 				<p:column filterBy="#{ocorrencia.ocorrencia}"  style="text-align: center; width:25%" filterMatchMode="startsWith">
@@ -74,16 +69,11 @@
 					</h:link>
 			</p:column>
 			
-			<p:column>
-				<h:commandButton value="Editar" action="#{cadastroOcorrrenciaBean.redirecionar(ocorrencia.codigo)}" >
-        		</h:commandButton>
+			<p:column style="text-align: center; width:3%">
+				<h:commandLink value="Excluir Ocorrencia"
+				 action="#{cadastroOcorrenciaBean.excluir(ocorrencia.codigo)}"/>
 			</p:column>
 			
-			
-			<p:column>
-				<h:commandButton value="Excluir" action="#{cadastroOcorrrenciaBean.excluir(ocorrencia.codigo)}" >
-        		</h:commandButton>
-			</p:column>
 			
 			</p:dataTable>
 		</h:form>

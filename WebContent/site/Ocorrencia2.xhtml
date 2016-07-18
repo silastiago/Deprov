@@ -5,7 +5,7 @@
 	xmlns:ui="http://java.sun.com/jsf/facelets"
 	xmlns:p="http://primefaces.org/ui">
 <f:metadata>
-	<f:viewParam name="codigo_ocorrencia" value="#{cadastroOcorrrenciaBean.ocorrencia}"/>
+	<f:viewParam name="codigo_ocorrencia" value="#{cadastroOcorrenciaBean.ocorrencia}"/>
 </f:metadata>
 
 
@@ -20,16 +20,15 @@
 					columnClasses="rotulo, campo">
 
 				<h:outputText value="Nome: " />
-				<h:inputText value="#{cadastroOcorrrenciaBean.ocorrencia.ocorrencia}" />
+				<h:inputText value="#{cadastroOcorrenciaBean.ocorrencia.ocorrencia}" />
 
 				<p:outputLabel for="mask" value="Data:" />
-					<p:calendar id="mask" value="#{cadastroOcorrrenciaBean.ocorrencia.data}"
+					<p:calendar id="mask" value="#{cadastroOcorrenciaBean.ocorrencia.data}"
 						pattern="dd/MM/yyyy" mask="true" navigator="true" showOn="button">
 						<f:convertDateTime pattern="dd/MM/yyyy" type="both" dateStyle="short"/>						
 					</p:calendar>
 				
-				<p:commandButton action="#{cadastroOcorrrenciaBean.editar()}" value="Salvar" />
-				
+				<p:commandButton action="#{cadastroOcorrenciaBean.editar()}" value="Salvar" />
 
 			</p:panelGrid>
 				</div>
