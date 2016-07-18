@@ -6,11 +6,14 @@ import java.util.List;
 
 import javax.annotation.PostConstruct;
 import javax.faces.bean.ManagedBean;
+import javax.faces.bean.NoneScoped;
 import javax.faces.bean.RequestScoped;
 import javax.faces.bean.SessionScoped;
 import javax.faces.bean.ViewScoped;
 import javax.faces.context.FacesContext;
 import javax.faces.event.ActionEvent;
+
+import org.primefaces.event.RowEditEvent;
 
 import model.Ocorrencia;
 import model.Veiculo;
@@ -18,13 +21,12 @@ import repository.Ocorrencias;
 import util.Repositorios;
 
 @ManagedBean(name = "cadastroOcorrenciaBean")
-@SessionScoped
+@ViewScoped
 public class CadastroOcorrenciaBean implements Serializable {
 
 	private Repositorios repositorios = new Repositorios();
 	private Ocorrencia ocorrencia = new Ocorrencia();
 	private List<Ocorrencia> ocorrencias = new ArrayList<Ocorrencia>();
-	private List<Ocorrencia> ocorrenciasFiltradas = new ArrayList<Ocorrencia>();
 	private List<Veiculo> veiculos = new ArrayList<Veiculo>();
 	private Veiculo veiculo = new Veiculo();
 	
@@ -33,20 +35,20 @@ public class CadastroOcorrenciaBean implements Serializable {
 		ocorrencias = listarVeiculo();
 	}
 	
-	public String cadastrar(String codigo) {
+	public void cadastrar(String codigo) {
 		Ocorrencias ocorrencias = this.repositorios.getocorrencia();
 		
 		int idVeiculo = Integer.parseInt(codigo);		
 		veiculo.setCodigo(idVeiculo);
 		ocorrencia.setVeiculo(veiculo);
 		ocorrencias.salvar(ocorrencia);
-		return null;
+		//return null;
 	}
 	
-	public String redirecionar(Ocorrencia ocorrencia){
+	public String redirecionar(String codigo){
 		//Ocorrencia ocorrencia = (Ocorrencia) event.getComponent().getAttributes().get("codigo_ocorrencia");
-		System.out.println("Codigo da ocorrencia: "+ocorrencia.getCodigo());
-		String pagina = "Ocorrencia2.xhtml?codigo_ocorrencia="+ocorrencia.getCodigo()+"faces-redirect=true";
+		System.out.println("Codigo da ocorrencia: "+codigo);
+		String pagina = "Ocorrencia2.xhtml?codigo_ocorrencia="+codigo+"faces-redirect=true";
 		System.out.println(pagina);
 		return pagina;
 	}
@@ -99,6 +101,20 @@ public class CadastroOcorrenciaBean implements Serializable {
 		}
 	}
 
+	public void onRowEdit(RowEditEvent event) {
+		Ocorrencia novaOcorrencia = (Ocorrencia) event.getObject();
+		Ocorrencias ocorrencias = this.repositorios.getocorrencia();
+		ocorrencias.editar(novaOcorrencia);
+        
+    }
+     
+    public void onRowCancel(RowEditEvent event) {
+        
+    }
+	
+	
+	
+	
 	public List<Ocorrencia> getOcorrencias() {
 		return ocorrencias;
 	}
@@ -113,14 +129,6 @@ public class CadastroOcorrenciaBean implements Serializable {
 
 	public void setVeiculos(List<Veiculo> veiculos) {
 		this.veiculos = veiculos;
-	}
-
-	public List<Ocorrencia> getOcorrenciasFiltradas() {
-		return ocorrenciasFiltradas;
-	}
-
-	public void setOcorrenciasFiltradas(List<Ocorrencia> ocorrenciasFiltradas) {
-		this.ocorrenciasFiltradas = ocorrenciasFiltradas;
 	}
 
 	public Veiculo getVeiculo() {

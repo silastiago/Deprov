@@ -10,6 +10,7 @@ import java.util.List;
 
 import javax.annotation.PostConstruct;
 import javax.faces.bean.ManagedBean;
+import javax.faces.bean.SessionScoped;
 import javax.faces.bean.ViewScoped;
 import javax.faces.context.FacesContext;
 import javax.faces.event.ActionEvent;
@@ -36,11 +37,7 @@ public class CadastroFotoBean implements Serializable {
 
 	@PostConstruct
 	public void init() {
-		IFoto fotos = repositorios.getFoto();
-		//this.listaFotos = fotos.listar();
-		Veiculos veiculos = this.repositorios.getveiculos();
-		this.veiculos = veiculos.listar();
-		listarFotos();
+		listaFotos = listarFotos();
 
 	}
 	
@@ -83,13 +80,14 @@ public class CadastroFotoBean implements Serializable {
 		return null;
 	}
 	
-	public void listarFotos(){
+	public List<Foto> listarFotos(){
 		String codigo = FacesContext.getCurrentInstance().getExternalContext().getRequestParameterMap().get("codigo");
 		int idVeiculo = Integer.parseInt(codigo);
 		
 		IFoto Ifoto = repositorios.getFoto();
 		listaFotos = Ifoto.porCodigoVeiculo(idVeiculo);
-		//return listaFotos;
+		
+		return listaFotos;
 	}
 	
 	public void update(Ocorrencia ocorrencia) {
@@ -99,12 +97,13 @@ public class CadastroFotoBean implements Serializable {
 
 	public String excluir(Foto image) {
 		
+		//System.out.println("Codigo da imagem " + image.getCodigo());
 		System.out.println("Codigo da imagem " + image.getCodigo());
-		//System.out.println("Codigo da imagem " + codigo);
-		//IFoto Ifoto = repositorios.getFoto();
+		IFoto Ifoto = repositorios.getFoto();
 		//int idFoto = Integer.parseInt(codigo);
-		//Foto foto = Ifoto.porCodigo(idFoto);
-		//Ifoto.remover(foto);
+		Foto foto = Ifoto.porCodigo(image.getCodigo());
+		Ifoto.remover(foto);
+		listaFotos.remove(foto);
 		//this.init();
 		//return null;
 		return "index?faces-redirect=true";
