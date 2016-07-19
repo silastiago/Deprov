@@ -1,5 +1,6 @@
 package view;
 
+import java.io.IOException;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
@@ -12,6 +13,7 @@ import javax.faces.bean.SessionScoped;
 import javax.faces.bean.ViewScoped;
 import javax.faces.context.FacesContext;
 import javax.faces.event.ActionEvent;
+import javax.servlet.http.HttpSession;
 
 import org.primefaces.event.RowEditEvent;
 
@@ -35,13 +37,18 @@ public class CadastroOcorrenciaBean implements Serializable {
 		ocorrencias = listarVeiculo();
 	}
 	
-	public void cadastrar(String codigo) {
+	public void cadastrar(String codigo) throws IOException {
 		Ocorrencias ocorrencias = this.repositorios.getocorrencia();
 		
 		int idVeiculo = Integer.parseInt(codigo);		
 		veiculo.setCodigo(idVeiculo);
 		ocorrencia.setVeiculo(veiculo);
 		ocorrencias.salvar(ocorrencia);
+		
+		FacesContext fc = FacesContext.getCurrentInstance();
+	    HttpSession session = (HttpSession)fc.getExternalContext().getSession(false);
+	    FacesContext.getCurrentInstance().getExternalContext().redirect("Ocorrencia.xhtml?codigo="+codigo);
+		
 		//return null;
 	}
 	
@@ -65,13 +72,18 @@ public class CadastroOcorrenciaBean implements Serializable {
 		ocorrencias.editar(ocorrencia);
 	}
 
-	public String excluir(String codigo) {
+	public void excluir(String codigo) throws IOException {
+		String codigo2 = FacesContext.getCurrentInstance().getExternalContext().getRequestParameterMap().get("codigo");
 		System.out.println("Codigo da ocorrencia: "+ codigo);
 		Ocorrencias ocorrencias = this.repositorios.getocorrencia();
 		int idOcorrencia = Integer.parseInt(codigo);
 		Ocorrencia ocorrencia2 = ocorrencias.porCodigo(idOcorrencia);
 		ocorrencias.remover(ocorrencia2);
-		return "index?faces-redirect=true";
+		
+		FacesContext fc = FacesContext.getCurrentInstance();
+	    HttpSession session = (HttpSession)fc.getExternalContext().getSession(false);
+	    FacesContext.getCurrentInstance().getExternalContext().redirect("Ocorrencia.xhtml?codigo="+ocorrencia2.getVeiculo().getCodigo());
+		//return "index?faces-redirect=true";
 	}
 
 	public List<Ocorrencia> listar(){
@@ -101,7 +113,7 @@ public class CadastroOcorrenciaBean implements Serializable {
 		}
 	}
 
-	public void onRowEdit(RowEditEvent event) {
+	public void onRowEdit(RowEditEvent event) throws IOException {
 		Ocorrencia novaOcorrencia = (Ocorrencia) event.getObject();
 		Ocorrencias ocorrencias = this.repositorios.getocorrencia();
 		ocorrencias.editar(novaOcorrencia);

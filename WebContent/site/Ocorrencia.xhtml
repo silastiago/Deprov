@@ -63,13 +63,13 @@
                			<f:facet name="output"><h:outputText value="#{ocorrencia.data}" ><f:convertDateTime pattern="dd-MM-yyyy"/></h:outputText></f:facet>
                			<f:facet name="input"><p:calendar value="#{ocorrencia.data}"
 						pattern="dd/MM/yyyy" mask="true" navigator="true" showOn="button">
-						<f:convertDateTime pattern="dd/MM/yyyy" type="both" dateStyle="short"/>						
+						<f:convertDateTime pattern="dd/MM/yyyy"/>						
 					</p:calendar></f:facet>
            			</p:cellEditor>
        			</p:column>
 				
 				
-			<p:column style="width:32px">
+			<p:column style="width:64px">
            		<p:rowEditor />
        		</p:column>
 			

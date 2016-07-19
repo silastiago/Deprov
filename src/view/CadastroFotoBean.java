@@ -10,10 +10,12 @@ import java.util.List;
 
 import javax.annotation.PostConstruct;
 import javax.faces.bean.ManagedBean;
-import javax.faces.bean.SessionScoped;
+
 import javax.faces.bean.ViewScoped;
 import javax.faces.context.FacesContext;
 import javax.faces.event.ActionEvent;
+import javax.servlet.http.HttpSession;
+
 import org.primefaces.model.UploadedFile;
 
 import model.Foto;
@@ -37,12 +39,13 @@ public class CadastroFotoBean implements Serializable {
 
 	@PostConstruct
 	public void init() {
-		listaFotos = listarFotos();
+		listarFotos();
 
 	}
 	
-	public String upload(ActionEvent event){
+	public void upload(ActionEvent event) throws IOException{
 		veiculo = (Veiculo) event.getComponent().getAttributes().get("codigo");
+		System.out.println("Codigo do veiculo: "+ veiculo.getCodigo());
 		
 		String codigo = veiculo.getCodigo().toString();
 		//File outDir = new File("/var/lib/tomcat8/webapps/Deprov/resources/images/"+ codigo);
@@ -74,19 +77,17 @@ public class CadastroFotoBean implements Serializable {
 		veiculo.setCodigo(idVeiculo);
 		this.foto.setVeiculo(veiculo);
 		Ifoto.salvar(foto);
-		
-		
-        //return "index?faces-redirect=true";
-		return null;
+
+		FacesContext fc = FacesContext.getCurrentInstance();
+	    HttpSession session = (HttpSession)fc.getExternalContext().getSession(false);
+	    FacesContext.getCurrentInstance().getExternalContext().redirect("Veiculo.xhtml?codigo="+veiculo.getCodigo());
 	}
 	
 	public List<Foto> listarFotos(){
 		String codigo = FacesContext.getCurrentInstance().getExternalContext().getRequestParameterMap().get("codigo");
 		int idVeiculo = Integer.parseInt(codigo);
-		
 		IFoto Ifoto = repositorios.getFoto();
 		listaFotos = Ifoto.porCodigoVeiculo(idVeiculo);
-		
 		return listaFotos;
 	}
 	
@@ -95,13 +96,12 @@ public class CadastroFotoBean implements Serializable {
 		ocorrencias.editar(ocorrencia);
 	}
 
-	public String excluir(Foto image) {
-		
+	public String excluir(String codigo) {
 		//System.out.println("Codigo da imagem " + image.getCodigo());
-		System.out.println("Codigo da imagem " + image.getCodigo());
+		System.out.println("Codigo da imagem " + codigo);
 		IFoto Ifoto = repositorios.getFoto();
-		//int idFoto = Integer.parseInt(codigo);
-		Foto foto = Ifoto.porCodigo(image.getCodigo());
+		int idFoto = Integer.parseInt(codigo);
+		Foto foto = Ifoto.porCodigo(idFoto);
 		Ifoto.remover(foto);
 		listaFotos.remove(foto);
 		//this.init();
