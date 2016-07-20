@@ -19,11 +19,8 @@ import javax.servlet.http.HttpSession;
 import org.primefaces.model.UploadedFile;
 
 import model.Foto;
-import model.Ocorrencia;
 import model.Veiculo;
 import repository.IFoto;
-import repository.Ocorrencias;
-import repository.Veiculos;
 import util.Repositorios;
 
 @ManagedBean(name = "cadastroFotoBean")
@@ -39,7 +36,7 @@ public class CadastroFotoBean implements Serializable {
 
 	@PostConstruct
 	public void init() {
-		listarFotos();
+		listaFotos = listarFotos();
 
 	}
 	
@@ -48,8 +45,8 @@ public class CadastroFotoBean implements Serializable {
 		System.out.println("Codigo do veiculo: "+ veiculo.getCodigo());
 		
 		String codigo = veiculo.getCodigo().toString();
-		//File outDir = new File("/var/lib/tomcat8/webapps/Deprov/resources/images/"+ codigo);
-		File outDir = new File("/opt/tomcat/webapps/Deprov/resources/images/"+ codigo);
+		File outDir = new File("/var/lib/tomcat8/webapps/Deprov/resources/images/"+ codigo);
+		//File outDir = new File("/opt/tomcat/webapps/Deprov/resources/images/"+ codigo);
         if (outDir.exists()) {
 			System.out.println("Diretorio já criado ");
 		}else {
@@ -60,8 +57,8 @@ public class CadastroFotoBean implements Serializable {
         String nomeArquivo = file.getFileName();
         byte[] fotos = file.getContents();
         
-        //String path = "/var/lib/tomcat8/webapps/Deprov/resources/images/"+ codigo+"/";
-        String path = "/opt/tomcat/webapps/Deprov/resources/images/"+ codigo+"/";
+        String path = "/var/lib/tomcat8/webapps/Deprov/resources/images/"+ codigo+"/";
+        //String path = "/opt/tomcat/webapps/Deprov/resources/images/"+ codigo+"/";
         String pathBanco = "../resources/images/"+codigo+"/";
 		try {
 		fos = new FileOutputStream(path+nomeArquivo);
@@ -91,22 +88,29 @@ public class CadastroFotoBean implements Serializable {
 		return listaFotos;
 	}
 	
-	public void update(Ocorrencia ocorrencia) {
-		Ocorrencias ocorrencias = this.repositorios.getocorrencia();
-		ocorrencias.editar(ocorrencia);
+	public void update(Foto image) {
+		IFoto Ifoto = this.repositorios.getFoto();
+		Ifoto.editar(image);
 	}
 
-	public String excluir(String codigo) {
+	public void excluir(String codigo) throws IOException {
+		
 		//System.out.println("Codigo da imagem " + image.getCodigo());
 		System.out.println("Codigo da imagem " + codigo);
-		IFoto Ifoto = repositorios.getFoto();
+		IFoto Ifoto = this.repositorios.getFoto();
 		int idFoto = Integer.parseInt(codigo);
 		Foto foto = Ifoto.porCodigo(idFoto);
 		Ifoto.remover(foto);
-		listaFotos.remove(foto);
+		//listaFotos.remove(foto);
 		//this.init();
 		//return null;
-		return "index?faces-redirect=true";
+		//return "index?faces-redirect=true";
+		
+		FacesContext fc = FacesContext.getCurrentInstance();
+	    HttpSession session = (HttpSession)fc.getExternalContext().getSession(false);
+	    FacesContext.getCurrentInstance().getExternalContext().redirect("Veiculo.xhtml?codigo="+foto.getVeiculo().getCodigo()+"faces-redirect=true");
+		
+
 	}
 
 	public Foto getFoto() {

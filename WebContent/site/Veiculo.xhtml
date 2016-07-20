@@ -34,7 +34,7 @@
 					
 					<h:outputLabel value="Tipo" />
 					<h:selectOneMenu value="#{cadastroVeiculoBean.veiculo.tipo}"
-						required="true" label="Tipo">
+						label="Tipo">
 						<f:selectItem itemLabel="Selecione o Tipo do Veiculo"
 							noSelectionOption="true" />
 						<f:selectItems value="#{cadastroVeiculoBean.tipos}" var="tipo"
@@ -43,7 +43,7 @@
 
 					<h:outputLabel value="Cor" />
 					<h:selectOneMenu value="#{cadastroVeiculoBean.veiculo.cor}"
-						required="true" label="Cor">
+						label="Cor">
 						<f:selectItem itemLabel="Selecione a cor do Veiculo"
 							noSelectionOption="true" />
 						<f:selectItems value="#{cadastroVeiculoBean.cores}" var="cor"
@@ -51,7 +51,7 @@
 					</h:selectOneMenu>
 
 					<h:outputLabel value="Fabricante" />
-					<h:selectOneMenu value="#{cadastroVeiculoBean.veiculo.fabricante}" required="true" label="Fabricante" >
+					<h:selectOneMenu value="#{cadastroVeiculoBean.veiculo.fabricante}" label="Fabricante" >
 						<f:selectItem itemLabel="Selecione o Fabricante do Veiculo"
 							noSelectionOption="true" />
 						<f:selectItems value="#{cadastroVeiculoBean.fabricantes}"
@@ -61,7 +61,7 @@
 
 					<h:outputLabel value="Modelo" />
 					<h:selectOneMenu value="#{cadastroVeiculoBean.veiculo.modelo}"
-						required="true" label="Modelo" id="modelos">
+						label="Modelo" id="modelos">
 						<f:selectItem itemLabel="Selecione o Modelo do Veiculo"
 							noSelectionOption="true" />
 						<f:selectItems value="#{cadastroVeiculoBean.modelos}" var="modelo"
@@ -98,7 +98,7 @@
 
 					<h:outputLabel value="Seguro" />
 					<h:selectOneMenu value="#{cadastroVeiculoBean.veiculo.seguro}"
-						required="true" label="Seguro">
+						label="Seguro">
 						<f:selectItem itemLabel="Selecione o Seguro do Veiculo"
 							noSelectionOption="true" />
 						<f:selectItems value="#{cadastroVeiculoBean.seguros}" var="seguro"
@@ -123,7 +123,7 @@
 
 					<h:outputLabel value="Exame Veicular" />
 					<h:selectOneMenu value="#{cadastroVeiculoBean.veiculo.pericia}"
-						required="true" label="Pericia">
+						label="Pericia">
 						<f:selectItem itemLabel="Selecione a Pericia do Veiculo"
 							noSelectionOption="true" />
 						<f:selectItems value="#{cadastroVeiculoBean.pericias}"
@@ -154,7 +154,7 @@
         </p:tab>
          <p:tab title="Fotos do Veiculo">
             
-            <h:form enctype="multipart/form-data" >
+            <h:form enctype="multipart/form-data" acceptcharset="ISO-8859-1">
 			<div class="ui-fluid">
 				<p:panelGrid columns="2" style="width: 100%; margin-top: 20px"
 					columnClasses="rotulo, campo">
@@ -175,9 +175,16 @@
 			<h:form enctype="multipart/form-data" id="foto">
 			<div class="ui-fluid" align="center">
 				
-			<p:galleria id="galeria" var="image" value="#{cadastroFotoBean.listaFotos}" autoPlay="false" panelWidth="1280" panelHeight="720" filmstripPosition="bottom"  style="horizontal-align:center" >
-					<p:graphicImage value="#{image.path}" width="90%" height="90%" />
-			</p:galleria>
+			<p:dataTable id="galeria" var="image" value="#{cadastroFotoBean.listaFotos}">
+				<p:column>
+					<p:graphicImage value="#{image.path}" width="100%" height="100%" />
+				</p:column>
+					
+				<p:column style="text-align: center; width:3%">
+					<h:commandLink value="Excluir" action="#{cadastroFotoBean.excluir(image.codigo)}"> 
+					</h:commandLink>
+				</p:column>
+			</p:dataTable>
 			
 				</div>
 			</h:form>

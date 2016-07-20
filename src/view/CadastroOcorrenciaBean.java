@@ -7,12 +7,8 @@ import java.util.List;
 
 import javax.annotation.PostConstruct;
 import javax.faces.bean.ManagedBean;
-import javax.faces.bean.NoneScoped;
-import javax.faces.bean.RequestScoped;
-import javax.faces.bean.SessionScoped;
 import javax.faces.bean.ViewScoped;
 import javax.faces.context.FacesContext;
-import javax.faces.event.ActionEvent;
 import javax.servlet.http.HttpSession;
 
 import org.primefaces.event.RowEditEvent;
@@ -73,7 +69,6 @@ public class CadastroOcorrenciaBean implements Serializable {
 	}
 
 	public void excluir(String codigo) throws IOException {
-		String codigo2 = FacesContext.getCurrentInstance().getExternalContext().getRequestParameterMap().get("codigo");
 		System.out.println("Codigo da ocorrencia: "+ codigo);
 		Ocorrencias ocorrencias = this.repositorios.getocorrencia();
 		int idOcorrencia = Integer.parseInt(codigo);
@@ -84,12 +79,6 @@ public class CadastroOcorrenciaBean implements Serializable {
 	    HttpSession session = (HttpSession)fc.getExternalContext().getSession(false);
 	    FacesContext.getCurrentInstance().getExternalContext().redirect("Ocorrencia.xhtml?codigo="+ocorrencia2.getVeiculo().getCodigo());
 		//return "index?faces-redirect=true";
-	}
-
-	public List<Ocorrencia> listar(){
-		Ocorrencias Iocorrencia = this.repositorios.getocorrencia();
-		ocorrencias = Iocorrencia.listar();
-		return ocorrencias; 
 	}
 	
 	public List<Ocorrencia> listarVeiculo(){
@@ -123,9 +112,6 @@ public class CadastroOcorrenciaBean implements Serializable {
     public void onRowCancel(RowEditEvent event) {
         
     }
-	
-	
-	
 	
 	public List<Ocorrencia> getOcorrencias() {
 		return ocorrencias;
