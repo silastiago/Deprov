@@ -18,9 +18,9 @@
 			paginator="true" rows="10">
 				
 			<f:facet name="{Exporters}">
-            	<h:commandLink value="Gerar Relatorio" style="text-align: right">
-                	<p:dataExporter type="pdf" target="mostraEquipamento" fileName="cars"/>
-            	</h:commandLink>
+				<h:commandButton actionListener="#{cadastroVeiculoBean.gerarRelatorio(veiculo)}" value="Gerar Relatorio" 
+				onclick="this.form.target='_blank'">
+				</h:commandButton>
        		 </f:facet>
 
 				

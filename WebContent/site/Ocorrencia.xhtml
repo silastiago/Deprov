@@ -24,7 +24,7 @@
 				<p:outputLabel for="mask" value="Data:" />
 					<p:calendar id="mask" value="#{cadastroOcorrenciaBean.ocorrencia.data}"
 						pattern="dd/MM/yyyy" mask="true" navigator="true" showOn="button">
-						<f:convertDateTime pattern="dd/MM/yyyy" type="both" dateStyle="short"/>						
+						<f:convertDateTime pattern="dd/MM/yyyy" />						
 					</p:calendar>
 				
 				<p:commandButton action="#{cadastroOcorrenciaBean.cadastrar(codigo)}"  update="lista" value="Salvar" />

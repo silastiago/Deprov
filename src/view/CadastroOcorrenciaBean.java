@@ -17,6 +17,7 @@ import model.Ocorrencia;
 import model.Veiculo;
 import repository.Ocorrencias;
 import util.Repositorios;
+import util.Utilitaria;
 
 @ManagedBean(name = "cadastroOcorrenciaBean")
 @ViewScoped
@@ -27,6 +28,8 @@ public class CadastroOcorrenciaBean implements Serializable {
 	private List<Ocorrencia> ocorrencias = new ArrayList<Ocorrencia>();
 	private List<Veiculo> veiculos = new ArrayList<Veiculo>();
 	private Veiculo veiculo = new Veiculo();
+	private Utilitaria utilitaria = new Utilitaria();
+	
 	
 	@PostConstruct
 	public void init(){
@@ -39,6 +42,7 @@ public class CadastroOcorrenciaBean implements Serializable {
 		int idVeiculo = Integer.parseInt(codigo);		
 		veiculo.setCodigo(idVeiculo);
 		ocorrencia.setVeiculo(veiculo);
+		ocorrencia.setData(utilitaria.addDia(this.ocorrencia.getData(), 1));
 		ocorrencias.salvar(ocorrencia);
 		
 		FacesContext fc = FacesContext.getCurrentInstance();
