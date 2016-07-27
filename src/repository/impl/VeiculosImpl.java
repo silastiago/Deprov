@@ -24,7 +24,7 @@ public class VeiculosImpl implements Veiculos{
 	@SuppressWarnings("unchecked")
 	@Override
 	public List<Veiculo> listar(){
-		return sessao.createCriteria(Veiculo.class).addOrder(Order.asc("placa")).list();
+		return sessao.createCriteria(Veiculo.class).addOrder(Order.desc("dossie")).list();
 	}
 
 	@Override

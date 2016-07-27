@@ -128,12 +128,14 @@ public class CadastroVeiculoBean implements Serializable{
 	}
 	
 	
-	public String gerarRelatorio(Veiculo veiculo) throws JRException, IOException{
+	/*public String gerarRelatorio(ActionEvent event) throws JRException, IOException{
+		//Veiculo veiculo = (Veiculo) event.getComponent().getAttributes().get("codigo");
 		
-		String codigo = veiculo.getCodigo().toString();
+		
+		//String codigo = veiculo.getCodigo().toString();
 		System.out.println("iniciando metodo de geracao de relatorio");
 		
-		int idVeiculo = Integer.parseInt(codigo);
+		//int idVeiculo = Integer.parseInt(codigo);
 		ConnectionFactory conexao = new ConnectionFactory();
 		
 		String reportSrcFile = "/opt/tomcat/webapps/Deprov/resources/relatorios/RelatorioVeiculo2.jrxml";
@@ -145,7 +147,7 @@ public class CadastroVeiculoBean implements Serializable{
  
         // Parameters for report
         Map<String, Object> parameters = new HashMap<String, Object>();
-        parameters.put("codigo_veiculo", idVeiculo);
+        //parameters.put("codigoCor", idVeiculo);
         
         JasperPrint print = JasperFillManager.fillReport(jasperReport,
                 parameters, conn);
@@ -158,8 +160,8 @@ public class CadastroVeiculoBean implements Serializable{
         exporter.setExporterInput(exporterInput);
  
         // ExporterOutput
-        /*OutputStreamExporterOutput exporterOutput = new SimpleOutputStreamExporterOutput(
-                "/var/lib/tomcat8/webapps/Deprov/resources/relatorios/FirstJasperReport.pdf");*/
+        OutputStreamExporterOutput exporterOutput = new SimpleOutputStreamExporterOutput(
+                "/var/lib/tomcat8/webapps/Deprov/resources/relatorios/FirstJasperReport.pdf");
         
         OutputStreamExporterOutput exporterOutput = new SimpleOutputStreamExporterOutput(
                       "/opt/tomcat/webapps/Deprov/resources/relatorios/relatorio.pdf");
@@ -203,7 +205,7 @@ public class CadastroVeiculoBean implements Serializable{
         
         return "index?faces-redirect=true";
 		
-	}
+	}*/
 	
 	
 	

@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Created with Jaspersoft Studio version 6.2.2.final using JasperReports Library version 6.2.2  -->
-<!-- 2016-07-20T16:50:37 -->
+<!-- 2016-07-22T17:11:35 -->
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="RelatorioVeiculo" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="31633f3b-cf08-4c8e-9dcd-4688c49a5839">
 	<property name="com.jaspersoft.studio.data.sql.tables" value=""/>
 	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="Deprov"/>
@@ -31,9 +31,7 @@ FROM ocorrencia
 	 veiculo.codigo_modelo = modelo.codigo 
 	INNER JOIN fabricante ON 
 	 veiculo.codigo_fabricante = fabricante.codigo 
-	 AND modelo.codigo_fabricante = fabricante.codigo 
-WHERE 
-	 cor.codigo = $P!{codigo_veiculo}]]>
+	 AND modelo.codigo_fabricante = fabricante.codigo]]>
 	</queryString>
 	<field name="codigo" class="java.lang.Integer"/>
 	<field name="chassi" class="java.lang.String"/>
@@ -230,10 +228,11 @@ WHERE
 				<textFieldExpression><![CDATA[$F{chassi}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="516" y="0" width="68" height="20" uuid="71e0f808-dea6-4ec3-90a6-c8b33418da63">
+				<reportElement x="500" y="0" width="68" height="20" uuid="71e0f808-dea6-4ec3-90a6-c8b33418da63">
 					<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
 					<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
 					<property name="com.jaspersoft.studio.unit.y" value="pixel"/>
+					<property name="com.jaspersoft.studio.unit.x" value="pixel"/>
 				</reportElement>
 				<textFieldExpression><![CDATA[$F{motor}]]></textFieldExpression>
 			</textField>
