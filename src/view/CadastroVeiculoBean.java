@@ -1,27 +1,18 @@
 package view;
 
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.OutputStream;
+
 import java.io.Serializable;
-import java.net.URL;
-import java.sql.Connection;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 import javax.annotation.PostConstruct;
 import javax.faces.bean.ManagedBean;
-import javax.faces.bean.RequestScoped;
-import javax.faces.context.FacesContext;
+import javax.faces.bean.ViewScoped;
 import javax.faces.event.ActionEvent;
 import javax.faces.event.ValueChangeEvent;
-import javax.servlet.http.HttpServletResponse;
 
 import org.primefaces.model.StreamedContent;
 
-import conexao.ConnectionFactory;
 import model.Cor;
 import model.Fabricante;
 import model.Modelo;
@@ -29,17 +20,6 @@ import model.Pericia;
 import model.Seguro;
 import model.Tipo;
 import model.Veiculo;
-import net.sf.jasperreports.engine.JRException;
-import net.sf.jasperreports.engine.JasperCompileManager;
-import net.sf.jasperreports.engine.JasperFillManager;
-import net.sf.jasperreports.engine.JasperPrint;
-import net.sf.jasperreports.engine.JasperReport;
-import net.sf.jasperreports.engine.export.JRPdfExporter;
-import net.sf.jasperreports.export.ExporterInput;
-import net.sf.jasperreports.export.OutputStreamExporterOutput;
-import net.sf.jasperreports.export.SimpleExporterInput;
-import net.sf.jasperreports.export.SimpleOutputStreamExporterOutput;
-import net.sf.jasperreports.export.SimplePdfExporterConfiguration;
 import repository.Cores;
 import repository.Fabricantes;
 import repository.Modelos;
@@ -50,7 +30,7 @@ import repository.Veiculos;
 import util.Repositorios;
 
 @ManagedBean(name="cadastroVeiculoBean")
-@RequestScoped
+@ViewScoped
 public class CadastroVeiculoBean implements Serializable{
 
 	private Repositorios repositorios = new Repositorios();
