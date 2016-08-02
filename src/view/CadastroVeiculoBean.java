@@ -73,10 +73,6 @@ public class CadastroVeiculoBean implements Serializable{
 		return "index?faces-redirect=true";
 	}
 	
-	public String visualizar(String codigo){
-	return "Veiculo?codigo="+codigo+"faces-redirect=true";
-	}
-	
 	public String ocorrencia(ActionEvent event){
 		Veiculo veiculo = (Veiculo) event.getComponent().getAttributes().get("codigo");
 		String codigo = veiculo.getCodigo().toString();

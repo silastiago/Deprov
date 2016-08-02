@@ -141,6 +141,11 @@
 				</p:panelGrid>
 			<h:commandButton action="#{cadastroVeiculoBean.cadastrar()}" value="Salvar" />
 			
+			
+			<h:link outcome="Foto" value="Foto">
+				<f:param name="codigo"  value="#{cadastroVeiculoBean.veiculo.codigo}"/>
+			</h:link>
+			
 			<h:commandButton actionListener="#{cadastroRelatorioBean.gerarRelatorio}" value="Gerar Relatorio" 
 				onclick="this.form.target='_blank'">
 				<f:attribute name="codigo" value="#{cadastroVeiculoBean.veiculo}" />
@@ -151,6 +156,9 @@
 				<f:param name="codigo"  value="#{cadastroVeiculoBean.veiculo.codigo}"/>
 			</h:link>
 			
+			
+			
+			
         </p:tab>
          <p:tab title="Fotos do Veiculo">
             
@@ -160,8 +168,6 @@
 					columnClasses="rotulo, campo">
 				
 				<p:fileUpload value="#{cadastroFotoBean.file}" mode="simple" skinSimple="true"/>
-				
-				
 				
 				<p:commandButton value="Submit" ajax="false" actionListener="#{cadastroFotoBean.upload}"  update="galeria">
 					<f:attribute name="codigo" value="#{cadastroVeiculoBean.veiculo}" />
@@ -174,15 +180,15 @@
 			
 			<h:form enctype="multipart/form-data" id="foto">
 			<div class="ui-fluid" align="center">
+			
+			<p:contextMenu for="galeria">
+        		<p:menuitem value="Delete" update="galeria" icon="ui-icon-close" actionListener="#{cadastroFotoBean.excluir}"/>
+    		</p:contextMenu>
 				
-			<p:dataTable id="galeria" var="image" value="#{cadastroFotoBean.listaFotos}">
+			<p:dataTable id="galeria" var="image" value="#{cadastroFotoBean.listaFotos}" 
+			selection="#{cadastroFotoBean.foto}" selectionMode="single" rowKey="#{image.codigo}">
 				<p:column>
 					<p:graphicImage value="#{image.path}" width="100%" height="100%" />
-				</p:column>
-					
-				<p:column style="text-align: center; width:3%">
-					<h:commandLink value="Excluir" action="#{cadastroFotoBean.excluir(image.codigo)}"> 
-					</h:commandLink>
 				</p:column>
 			</p:dataTable>
 			

@@ -93,13 +93,13 @@ public class CadastroFotoBean implements Serializable {
 		Ifoto.editar(image);
 	}
 
-	public void excluir(String codigo) throws IOException {
+	public void excluir() throws IOException {
 		
 		//System.out.println("Codigo da imagem " + image.getCodigo());
-		System.out.println("Codigo da imagem " + codigo);
+		System.out.println("Codigo da imagem " + foto.getCodigo());
 		IFoto Ifoto = this.repositorios.getFoto();
-		int idFoto = Integer.parseInt(codigo);
-		Foto foto = Ifoto.porCodigo(idFoto);
+		//int idFoto = Integer.parseInt(codigo);
+		//Foto foto = Ifoto.porCodigo(idFoto);
 		Ifoto.remover(foto);
 		//listaFotos.remove(foto);
 		//this.init();
@@ -108,8 +108,8 @@ public class CadastroFotoBean implements Serializable {
 		
 		FacesContext fc = FacesContext.getCurrentInstance();
 	    HttpSession session = (HttpSession)fc.getExternalContext().getSession(false);
-	    FacesContext.getCurrentInstance().getExternalContext().redirect("Veiculo.xhtml?codigo="+foto.getVeiculo().getCodigo()+"faces-redirect=true");
-		
+	    //FacesContext.getCurrentInstance().getExternalContext().redirect("Veiculo.xhtml?codigo="+foto.getVeiculo().getCodigo()+"faces-redirect=true");
+	    FacesContext.getCurrentInstance().getExternalContext().redirect("index.xhtml?faces-redirect=true");
 
 	}
 

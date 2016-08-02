@@ -105,8 +105,10 @@
 				</p:column>
 			
 				<p:column style="text-align: center; width:7%">
-					<h:commandLink value="Visualizar" action="#{cadastroVeiculoBean.visualizar(veiculo.codigo)}"> 
-					</h:commandLink>
+					<h:link outcome="Veiculo" value="Visualizar">
+					<i class="icon-edit"></i>
+					<f:param name="codigo"  value="#{veiculo.codigo}"/>
+					</h:link>
 				</p:column>
 
 				<f:facet name="footer">
