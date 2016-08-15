@@ -8,6 +8,13 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
+/** Classe Cor que possui os metodos de acesso getter e setters, 
+ * e também o mapeamento relacional das tabelas via hibernate, da entidade Cor.
+*   
+* @author silas
+*
+*/
+
 @Entity
 @Table
 public class Cor implements Serializable, Cloneable{
@@ -61,10 +68,9 @@ public class Cor implements Serializable, Cloneable{
 			return false;
 		return true;
 	}
+	
 	@Override
 	public Object clone() throws CloneNotSupportedException {
-		// TODO Auto-generated method stub
 		return super.clone();
 	}
-
 }

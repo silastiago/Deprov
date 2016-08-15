@@ -12,6 +12,13 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
+/** Esta Classe que possui os metodos de acesso getter e setters que representa as ocorrencias de umn determinado veiculo, 
+ * e também possui o mapeamento relacional das tabelas via hibernate, da entidade Ocorrencia.
+*   
+* @author silas
+*
+*/
+
 @Entity
 @Table
 public class Ocorrencia implements Serializable, Cloneable{

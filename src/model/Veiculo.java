@@ -12,6 +12,13 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
+/** Classe Veiculo que possui os metodos de acesso getter e setters, 
+ * e também o mapeamento relacional das tabelas via hibernate, da entidade Veiculo.
+*   
+* @author silas
+*
+*/
+
 @Entity
 @Table
 public class Veiculo implements Serializable, Cloneable{

@@ -10,6 +10,13 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
+/** Classe Foto que possui os metodos de acesso getter e setters, 
+ * e também o mapeamento relacional das tabelas via hibernate, da entidade Foto.
+*   
+* @author silas
+*
+*/
+
 @Entity
 @Table
 public class Foto implements Serializable, Cloneable{

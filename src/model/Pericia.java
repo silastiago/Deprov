@@ -8,6 +8,13 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
+/** Esta Classe que possui os metodos de acesso getter e setters que representa uma Exame Veicular do veiculo, 
+ * e também possui o mapeamento relacional das tabelas via hibernate, da entidade Pericia.
+*   
+* @author silas
+*
+*/
+
 @Entity
 @Table
 public class Pericia implements Serializable, Cloneable{
