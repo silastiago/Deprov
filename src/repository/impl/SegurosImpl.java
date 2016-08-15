@@ -28,18 +28,12 @@ public class SegurosImpl implements Seguros{
 	}
 
 	@Override
-	public Seguro salvar(Seguro seguro) {
-		return (Seguro) sessao.merge(seguro);
+	public void salvar(Seguro seguro) {
+		this.sessao.merge(seguro);
 	}
 
 	@Override
 	public void remover(Seguro seguro) {
 		this.sessao.delete(seguro);
-
-	}
-
-	@Override
-	public void editar(Seguro seguro) {
-		this.sessao.update(seguro);
 	}
 }

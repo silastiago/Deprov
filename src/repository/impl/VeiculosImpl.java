@@ -1,11 +1,6 @@
 package repository.impl;
 
-import java.io.IOException;
-import java.io.InputStream;
 import java.util.List;
-
-import org.apache.commons.io.IOUtils;
-import org.hibernate.Criteria;
 import org.hibernate.Session;
 import org.hibernate.criterion.Order;
 import org.hibernate.criterion.Restrictions;
@@ -33,8 +28,8 @@ public class VeiculosImpl implements Veiculos{
 	}
 
 	@Override
-	public Veiculo salvar(Veiculo veiculo) {
-		return (Veiculo) sessao.merge(veiculo);
+	public void salvar(Veiculo veiculo) {
+		this.sessao.merge(veiculo);
 	}
 
 	@Override
@@ -44,13 +39,8 @@ public class VeiculosImpl implements Veiculos{
 	}
 
 	@Override
-	public void editar(Veiculo veiculo) {
-		this.sessao.update(veiculo);
-	}
-
-	@Override
 	public List<Veiculo> listarPorPlaca(int codigo) {
 		//Criteria criteria = sessao.createCriteria(Veiculo.class).addQueryHint("FROM Veiculo E WHERE E.Placa = jfoerhgoh");
-		return sessao. createCriteria(Veiculo.class).add(Restrictions.eq("veiculo.placa", codigo)).list();
+		return sessao.createCriteria(Veiculo.class).add(Restrictions.eq("veiculo.placa", codigo)).list();
 	}
 }

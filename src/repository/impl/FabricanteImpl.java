@@ -27,18 +27,12 @@ public class FabricanteImpl implements Fabricantes{
 	}
 
 	@Override
-	public Fabricante salvar(Fabricante fabricante) {
-		return (Fabricante) sessao.merge(fabricante);
+	public void salvar(Fabricante fabricante) {
+		this.sessao.merge(fabricante);
 	}
 
 	@Override
 	public void remover(Fabricante fabricante) {
 		this.sessao.delete(fabricante);
-
-	}
-
-	@Override
-	public void editar(Fabricante fabricante) {
-		this.sessao.update(fabricante);
 	}
 }

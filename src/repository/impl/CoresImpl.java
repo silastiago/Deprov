@@ -27,18 +27,13 @@ public class CoresImpl implements Cores{
 	}
 
 	@Override
-	public Cor salvar(Cor cor) {
-		return (Cor) sessao.merge(cor);
+	public void salvar(Cor cor) {
+		sessao.merge(cor);
 	}
 
 	@Override
 	public void remover(Cor cor) {
 		this.sessao.delete(cor);
 
-	}
-
-	@Override
-	public void editar(Cor cor) {
-		this.sessao.update(cor);
 	}
 }

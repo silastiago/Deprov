@@ -4,8 +4,6 @@ import java.util.List;
 
 import org.hibernate.Session;
 import org.hibernate.criterion.Order;
-
-import model.Cor;
 import model.Pericia;
 import repository.Pericias;
 
@@ -28,18 +26,13 @@ public class PericiasImpl implements Pericias{
 	}
 
 	@Override
-	public Pericia salvar(Pericia pericia) {
-		return (Pericia) sessao.merge(pericia);
+	public void salvar(Pericia pericia) {
+		this.sessao.merge(pericia);
 	}
 
 	@Override
 	public void remover(Pericia pericia) {
 		this.sessao.delete(pericia);
 
-	}
-
-	@Override
-	public void editar(Pericia pericia) {
-		this.sessao.update(pericia);
 	}
 }

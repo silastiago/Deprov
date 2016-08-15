@@ -78,11 +78,6 @@ public class CadastroVeiculoBean implements Serializable{
 		String codigo = veiculo.getCodigo().toString();
 		return "Ocorrencia?codigo="+codigo+"faces-redirect=true";
 	}
-	
-	public void update(Veiculo veiculo){
-		Veiculos veiculos = this.repositorios.getveiculos();
-		veiculos.editar(veiculo);
-	}
 
 	public void excluir(Veiculo veiculo){
 		Veiculos veiculos = this.repositorios.getveiculos();
@@ -95,95 +90,6 @@ public class CadastroVeiculoBean implements Serializable{
 	Veiculos IVeiculo= this.repositorios.getveiculos();
 	veiculos = IVeiculo.listarPorPlaca(idVeiculo);
 	}
-	
-	public List<Modelo> carregaModelos(ValueChangeEvent evento){
-		Fabricante fab  = (Fabricante) evento.getNewValue();
-		Modelos Imodelos = this.repositorios.getModelos();
-		modelos =  Imodelos.porCodigoFabricante(fab.getCodigo());
-		return modelos;	
-	}
-	
-	
-	/*public String gerarRelatorio(ActionEvent event) throws JRException, IOException{
-		//Veiculo veiculo = (Veiculo) event.getComponent().getAttributes().get("codigo");
-		
-		
-		//String codigo = veiculo.getCodigo().toString();
-		System.out.println("iniciando metodo de geracao de relatorio");
-		
-		//int idVeiculo = Integer.parseInt(codigo);
-		ConnectionFactory conexao = new ConnectionFactory();
-		
-		String reportSrcFile = "/opt/tomcat/webapps/Deprov/resources/relatorios/RelatorioVeiculo2.jrxml";
-		//String reportSrcFile = "/var/lib/tomcat8/webapps/Deprov/resources/relatorios/RelatorioVeiculo.jrxml";
-        // First, compile jrxml file.
-        JasperReport jasperReport =    JasperCompileManager.compileReport(reportSrcFile);
- 
-        Connection conn = conexao.getConnection();
- 
-        // Parameters for report
-        Map<String, Object> parameters = new HashMap<String, Object>();
-        //parameters.put("codigoCor", idVeiculo);
-        
-        JasperPrint print = JasperFillManager.fillReport(jasperReport,
-                parameters, conn);
-         
-        // PDF Exportor.
-        JRPdfExporter exporter = new JRPdfExporter();
- 
-        ExporterInput exporterInput = new SimpleExporterInput(print);
-        // ExporterInput
-        exporter.setExporterInput(exporterInput);
- 
-        // ExporterOutput
-        OutputStreamExporterOutput exporterOutput = new SimpleOutputStreamExporterOutput(
-                "/var/lib/tomcat8/webapps/Deprov/resources/relatorios/FirstJasperReport.pdf");
-        
-        OutputStreamExporterOutput exporterOutput = new SimpleOutputStreamExporterOutput(
-                      "/opt/tomcat/webapps/Deprov/resources/relatorios/relatorio.pdf");
-        
-        // Output
-        exporter.setExporterOutput(exporterOutput);
- 
-        //
-        SimplePdfExporterConfiguration configuration = new SimplePdfExporterConfiguration();
-        exporter.setConfiguration(configuration);
-        exporter.exportReport();	
-        System.out.print("Relatorio criado com sucesso!");
-        
-        
-        
-        FacesContext facesContext = FacesContext.getCurrentInstance();
-	    HttpServletResponse response = (HttpServletResponse) facesContext.getExternalContext().getResponse();
-
-	    response.reset();   // Algum filtro pode ter configurado alguns cabe�alhos no buffer de antem�o. Queremos livrar-se deles, sen�o ele pode colidir.
-	    response.setHeader("Content-Type", "application/pdf");  // Define apenas o tipo de conte�do, Utilize se necess�rio ServletContext#getMimeType() para detec��o autom�tica com base em nome de arquivo. 
-	    OutputStream responseOutputStream = response.getOutputStream();
-
-	    //String PDF_URL = "http://sinf.policiacivil.rn.gov.br:8080/Deprov/resources/relatorios/FirstJasperReport.pdf";
-	    String PDF_URL = "http://snmp.info.ufrn.br:8080/Deprov/resources/relatorios/relatorio.pdf";
-		// L� o conte�do do PDF
-	    URL url = new URL(PDF_URL);
-	    InputStream pdfInputStream = url.openStream();
-
-	    // L� o conte�do do PDF e grava para sa�da
-	    byte[] bytesBuffer = new byte[2048];
-	    int bytesRead;
-	    while ((bytesRead = pdfInputStream.read(bytesBuffer)) > 0) {
-	        responseOutputStream.write(bytesBuffer, 0, bytesRead);
-	    }    
-	    responseOutputStream.flush();
-
-	    // Fecha os streams
-	    pdfInputStream.close();
-	    responseOutputStream.close();         
-	    facesContext.responseComplete();
-        
-        return "index?faces-redirect=true";
-		
-	}*/
-	
-	
 	
 	public Veiculo getVeiculo() {
 		return veiculo;

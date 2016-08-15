@@ -1,16 +1,42 @@
 package repository;
 
 import java.util.List;
-
-import model.Cor;
 import model.Pericia;
 
+/** Esta é uma Interface que possui os metodos da classe Pericia,
+*   
+* @author silas
+* @since 15-08-2016
+*/
 
 public interface Pericias {
 
+	/** Este metodo lista de todos os Exames veiculares cadastrados.
+	*   
+	* @return List<Pericia>, retorna a lista de todos as Pericias cadastradas.
+	*   	
+	*/
 	public List<Pericia> listar();
+	
+	/** Este metodo pesquisa uma pericia por seu id.
+	*  	
+	*  @param codigo, Este codigo é o id do Exame Veicular que você está procurando.
+	*  @return Pericia, retorna a Pericia daquele id que você está pesquisando.
+	*   	
+	*/
 	public Pericia porCodigo(Integer codigo);
-	public Pericia salvar(Pericia pericia);
+	
+	/** Este metodo salva ou altera um Exame Veicular.
+	*  	
+	*  @param pericia, Esta pericia é o objeto Pericia que você irá criar ou modificar.
+	*   	
+	*/
+	public void salvar(Pericia pericia);
+	
+	/** Este metodo Remove uma Pericia.
+	*  	
+	*  @param pericia, Esta pericia é o objeto Pericia que você irá remover.
+	*   	
+	*/
 	public void remover(Pericia pericia);
-	public void editar(Pericia ericia);
 }

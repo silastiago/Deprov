@@ -87,11 +87,6 @@ public class CadastroFotoBean implements Serializable {
 		listaFotos = Ifoto.porCodigoVeiculo(idVeiculo);
 		return listaFotos;
 	}
-	
-	public void update(Foto image) {
-		IFoto Ifoto = this.repositorios.getFoto();
-		Ifoto.editar(image);
-	}
 
 	public void excluir() throws IOException {
 		

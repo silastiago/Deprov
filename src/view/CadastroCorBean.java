@@ -42,11 +42,6 @@ public class CadastroCorBean implements Serializable{
 		return "index?faces-redirect=true";
 	}
 
-	public void update(Cor cor){
-		Cores cores = this.repositorios.getCores();
-		cores.editar(cor);
-	}
-
 	public void excluir(Cor cor){
 		Cores cores = this.repositorios.getCores();
 		cores.remover(cor);

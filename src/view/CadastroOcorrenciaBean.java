@@ -65,12 +65,6 @@ public class CadastroOcorrenciaBean implements Serializable {
 		ocorrencias.salvar(ocorrencia);
 		return "index?faces-redirect=true";
 	}
-	
-	
-	public void update(Ocorrencia ocorrencia) {
-		Ocorrencias ocorrencias = this.repositorios.getocorrencia();
-		ocorrencias.editar(ocorrencia);
-	}
 
 	public void excluir(String codigo) throws IOException {
 		System.out.println("Codigo da ocorrencia: "+ codigo);
@@ -109,7 +103,7 @@ public class CadastroOcorrenciaBean implements Serializable {
 	public void onRowEdit(RowEditEvent event) throws IOException {
 		Ocorrencia novaOcorrencia = (Ocorrencia) event.getObject();
 		Ocorrencias ocorrencias = this.repositorios.getocorrencia();
-		ocorrencias.editar(novaOcorrencia);
+		ocorrencias.salvar(novaOcorrencia);
         
     }
      

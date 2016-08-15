@@ -29,23 +29,13 @@ public class ModelosImpl implements Modelos{
 	}
 
 	@Override
-	public Modelo salvar(Modelo modelo) {
-		return (Modelo) sessao.merge(modelo);
+	public void salvar(Modelo modelo) {
+		this.sessao.merge(modelo);
 	}
 
 	@Override
 	public void remover(Modelo modelo) {
 		this.sessao.delete(modelo);
 
-	}
-
-	@Override
-	public void editar(Modelo modelo) {
-		this.sessao.update(modelo);
-	}
-	
-	@Override
-	public List<Modelo> porCodigoFabricante(Integer codigo_fabricante) {
-		return sessao.createCriteria(Modelo.class).add(Restrictions.eq("fabricante.codigo", codigo_fabricante)).list();
 	}
 }

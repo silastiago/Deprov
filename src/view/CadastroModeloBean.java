@@ -42,11 +42,6 @@ public class CadastroModeloBean implements Serializable{
 		return "index?faces-redirect=true";
 	}
 
-	public void update(Modelo modelo){
-		Modelos modelos = this.repositorios.getModelos();
-		modelos.editar(modelo);
-	}
-
 	public void excluir(Modelo modelo){
 		Modelos modelos = this.repositorios.getModelos();
 		modelos.remover(modelo);

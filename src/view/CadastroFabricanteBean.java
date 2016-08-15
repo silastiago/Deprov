@@ -37,11 +37,6 @@ public class CadastroFabricanteBean implements Serializable{
 		return "index?faces-redirect=true";
 	}
 
-	public void update(Fabricante fabricante){
-		Fabricantes fabricantes = this.repositorios.getFabricantes();
-		fabricantes.editar(fabricante);
-	}
-
 	public void excluir(Fabricante fabricante){
 		Fabricantes fabricantes = this.repositorios.getFabricantes();
 		fabricantes.remover(fabricante);

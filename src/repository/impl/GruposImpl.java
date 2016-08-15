@@ -26,17 +26,12 @@ public class GruposImpl implements Grupos{
 	}
 
 	@Override
-	public Grupo salvar(Grupo grupo) {
-		return (Grupo) sessao.merge(grupo);
+	public void salvar(Grupo grupo) {
+		this.sessao.merge(grupo);
 	}
 
 	@Override
 	public void remover(Grupo grupo) {
 		this.sessao.delete(grupo);
-	}
-
-	@Override
-	public void editar(Grupo grupo) {
-		this.sessao.update(grupo);
 	}
 }

@@ -1,12 +1,16 @@
 package repository;
 
 import java.util.List;
-
-import org.hibernate.Session;
-
 import model.Pessoa;
 
+
+/** Esta é uma Interface que possui os metodos da classe Pessoa,
+*   
+* @author silas
+* @since 15-08-2016
+*/
 public interface Pessoas {
+	
 	
 	public Pessoa login(Pessoa pessoa);
 	public void logout();

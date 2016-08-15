@@ -18,31 +18,20 @@ public class OcorrenciaImpl implements Ocorrencias{
 		this.sessao = sessao;
 	}
 
-	@SuppressWarnings("unchecked")
-	@Override
-	public List<Ocorrencia> listar() {
-		return sessao.createCriteria(Ocorrencia.class).addOrder(Order.asc("data")).list();
-	}
-
 	@Override
 	public Ocorrencia porCodigo(Integer codigo) {
 		return (Ocorrencia) sessao.get(Ocorrencia.class, codigo);
 	}
 
 	@Override
-	public Ocorrencia salvar(Ocorrencia ocorrencia) {
-		return (Ocorrencia) sessao.merge(ocorrencia);
+	public void salvar(Ocorrencia ocorrencia) {
+		this.sessao.merge(ocorrencia);
 	}
 
 	@Override
 	public void remover(Ocorrencia ocorrencia) {
 		this.sessao.delete(ocorrencia);
 
-	}
-
-	@Override
-	public void editar(Ocorrencia ocorrencia) {
-		this.sessao.update(ocorrencia);
 	}
 
 	@SuppressWarnings("unchecked")

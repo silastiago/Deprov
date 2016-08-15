@@ -18,31 +18,15 @@ public class FotoImpl implements IFoto{
 		this.sessao = sessao;
 	}
 
-	@SuppressWarnings("unchecked")
 	@Override
-	public List<Foto> listar(){
-		return sessao.createCriteria(Foto.class).list();
-	}
-
-	@Override
-	public Foto porCodigo(Integer codigo) {
-		return (Foto) sessao.get(Foto.class, codigo);
-	}
-
-	@Override
-	public Foto salvar(Foto foto) {
-		return (Foto) sessao.merge(foto);
+	public void salvar(Foto foto) {
+		this.sessao.merge(foto);
 	}
 
 	@Override
 	public void remover(Foto foto) {
 		this.sessao.delete(foto);
 
-	}
-
-	@Override
-	public void editar(Foto foto) {
-		this.sessao.update(foto);
 	}
 
 	@SuppressWarnings("unchecked")

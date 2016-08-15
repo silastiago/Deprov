@@ -28,18 +28,12 @@ public class TiposImpl implements Tipos{
 	}
 
 	@Override
-	public Tipo salvar(Tipo tipo) {
-		return (Tipo) sessao.merge(tipo);
+	public void salvar(Tipo tipo) {
+		this.sessao.merge(tipo);
 	}
 
 	@Override
 	public void remover(Tipo tipo) {
 		this.sessao.delete(tipo);
-
-	}
-
-	@Override
-	public void editar(Tipo tipo) {
-		this.sessao.update(tipo);
 	}
 }

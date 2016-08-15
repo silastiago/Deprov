@@ -43,11 +43,6 @@ public class CadastroTipoBean implements Serializable{
 		return "index?faces-redirect=true";
 	}
 
-	public void update(Tipo tipo){
-		Tipos tipos = this.repositorios.getTipos();
-		tipos.editar(tipo);
-	}
-
 	public void excluir(Tipo tipo){
 		Tipos tipos = this.repositorios.getTipos();
 		tipos.remover(tipo);
