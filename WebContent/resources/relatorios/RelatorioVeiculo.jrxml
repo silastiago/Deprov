@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Created with Jaspersoft Studio version 6.2.2.final using JasperReports Library version 6.2.2  -->
-<!-- 2016-07-14T13:06:54 -->
+<!-- 2016-08-15T13:07:12 -->
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="RelatorioVeiculo" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="31633f3b-cf08-4c8e-9dcd-4688c49a5839">
 	<property name="com.jaspersoft.studio.data.sql.tables" value=""/>
 	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="Deprov"/>
@@ -169,7 +169,7 @@ WHERE
 				<text><![CDATA[COR]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="35" y="43" width="79" height="20" uuid="a9424ba4-be11-48c0-a0a5-45b28e64eb43">
+				<reportElement x="35" y="42" width="79" height="20" uuid="a9424ba4-be11-48c0-a0a5-45b28e64eb43">
 					<property name="com.jaspersoft.studio.unit.x" value="pixel"/>
 					<property name="com.jaspersoft.studio.unit.y" value="pixel"/>
 				</reportElement>
@@ -198,8 +198,8 @@ WHERE
 				</reportElement>
 				<textFieldExpression><![CDATA[$F{cor}]]></textFieldExpression>
 			</textField>
-			<textField>
-				<reportElement x="65" y="43" width="483" height="20" uuid="e791d855-7eef-4e81-a8c6-97aa6138cc7d">
+			<textField isStretchWithOverflow="true">
+				<reportElement x="65" y="42" width="483" height="20" uuid="e791d855-7eef-4e81-a8c6-97aa6138cc7d">
 					<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
 					<property name="com.jaspersoft.studio.unit.y" value="pixel"/>
 					<property name="com.jaspersoft.studio.unit.x" value="pixel"/>
@@ -240,7 +240,7 @@ WHERE
 				<textFieldExpression><![CDATA[$F{chassi}]]></textFieldExpression>
 			</textField>
 			<staticText>
-				<reportElement x="135" y="86" width="417" height="18" uuid="0af1bd47-428e-4268-9764-0f897d0ed3cc">
+				<reportElement x="135" y="87" width="417" height="18" uuid="0af1bd47-428e-4268-9764-0f897d0ed3cc">
 					<property name="com.jaspersoft.studio.unit.y" value="pixel"/>
 					<property name="com.jaspersoft.studio.unit.x" value="pixel"/>
 					<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
@@ -255,7 +255,7 @@ WHERE
 				<text><![CDATA[PROVIDÊNCIAS]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="35" y="86" width="100" height="18" uuid="cc66b4fd-97f9-4856-9b86-f39025e8d75e">
+				<reportElement x="35" y="87" width="100" height="18" uuid="cc66b4fd-97f9-4856-9b86-f39025e8d75e">
 					<property name="com.jaspersoft.studio.unit.y" value="pixel"/>
 					<property name="com.jaspersoft.studio.unit.x" value="pixel"/>
 				</reportElement>
@@ -275,7 +275,7 @@ WHERE
 				</reportElement>
 				<text><![CDATA[CHASSI:]]></text>
 			</staticText>
-			<textField>
+			<textField isStretchWithOverflow="true">
 				<reportElement x="165" y="64" width="387" height="21" uuid="f11f2e6e-ba4f-4e20-9048-2f6ac12415d8">
 					<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
 					<property name="com.jaspersoft.studio.unit.y" value="pixel"/>
