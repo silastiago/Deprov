@@ -4,8 +4,8 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
 
-/** Classe ConnectioFactory √© uma fabrica de conex√µes, ela servir√° para que quando precisemos utilizar algum metodo que persista no banco,
- *  n√£o precise implementar novamente o metodo de conexao, basta apenas instancias esta classe.
+/** Classe ConnectionFactory È uma fabrica de conexıes, ela servir· para que quando precisarmos utilizar algum metodo que persista no banco,
+ *  n„o precisa implementar novamente o metodo da conexao, basta apenas instancias esta classe.
  *
  * @author Silas Tiago
  *
@@ -25,7 +25,7 @@ public class ConnectionFactory {
 
 /** Metodo getConnection retorna uma conexao
  *
- * @return Connection que √© uma conexao
+ * @return Connection retorna uma conexao
  */
 
 	public Connection getConnection(){
@@ -45,7 +45,7 @@ public class ConnectionFactory {
 			return conexao;
 		}
 
-	/**	Metodo fecharConexao como o proprio nome j√° diz, ele fecha uma conexao ap√≥s o termino de uma conexao.
+	/**	Metodo fecharConexao como o proprio nome j· diz, ele fecha uma conexao apÛs o termino de uma conexao.
 	 *
 	 */
 

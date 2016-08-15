@@ -12,8 +12,6 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
-
-
 @Entity
 @Table
 public class Veiculo implements Serializable, Cloneable{
