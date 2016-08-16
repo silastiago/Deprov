@@ -4,7 +4,7 @@ import java.util.List;
 
 import model.Cor;
 
-/** Esta é uma Interface que possui os metodos da classe Cor,
+/** Esta é uma Interface que possui as assinaturas dos metodos da classe Cor,
 *   
 * @author silas
 * @since 15-08-2016
@@ -13,9 +13,7 @@ import model.Cor;
 public interface Cores {
 
 	/** Este metodo lista todas as cores cadastradas.
-	*   
-	* 	@return List<Cor>, retorna a lista de cores cadastradas.
-	*   	
+	* 	@return retorna a lista de cores cadastradas.
 	*/
 	public List<Cor> listar();
 	
@@ -27,7 +25,7 @@ public interface Cores {
 	*/
 	public Cor porCodigo(Integer codigo);
 	
-	/** Este metodo salva ou altera uma cor.
+	/** Este metodo cria ou altera uma cor.
 	*  	
 	*  @param cor, Esta cor é o objeto cor que você irá criar ou modificar.
 	*   	

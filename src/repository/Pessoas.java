@@ -3,8 +3,7 @@ package repository;
 import java.util.List;
 import model.Pessoa;
 
-
-/** Esta é uma Interface que possui os metodos da classe Pessoa,
+/** Esta é uma Interface que possui as assinaturas dos metodos da classe Pessoa,
 *   
 * @author silas
 * @since 15-08-2016
@@ -21,15 +20,14 @@ public interface Pessoas {
 	public boolean login(Pessoa pessoa);
 	
 	/** Este metodo faz o logout do usuario no sistema.
-	 * 	Este metodo ainda não está funcionando por alguns bugs.
-	*
+	* 	Este metodo ainda não está funcionando por alguns bugs.
 	*   	
 	*/
 	public void logout();
 	
 	/** Este metodo lista todas as pessoas cadastradas
 	*   
-	* @return List<Pessoa>, retorna a lista das pessoas cadastradas.
+	* @return retorna a lista das pessoas cadastradas.
 	*   	
 	*/
 	public List<Pessoa> listar();
@@ -37,12 +35,12 @@ public interface Pessoas {
 	/** Este metodo pesquisa uma pessoa por seu id.
 	*  	
 	*  @param codigo, Este codigo é o id da pessoa que você está procurando.
-	*  @return Pessoa, retorna a Pessoa daquele id que você está pesquisando.
+	*  @return retorna a Pessoa daquele id que você está pesquisando.
 	*   	
 	*/
 	public Pessoa porCodigo(Integer codigo);
 	
-	/** Este metodo salva ou altera uma pessoa.
+	/** Este metodo cria ou altera uma pessoa.
 	*  	
 	*  @param pessoa, Esta pessoa é o objeto Pessoa que você irá criar ou modificar.
 	*   	

@@ -4,7 +4,7 @@ import java.util.List;
 
 import model.Veiculo;
 
-/** Esta é uma Interface que possui os metodos da classe veiculo,
+/** Esta é uma Interface que possui as assinaturas dos metodos da classe veiculo,
 *   
 * @author silas
 * @since 15-08-2016
@@ -14,7 +14,7 @@ public interface Veiculos {
 
 	/** Este metodo lista todos os veiculos cadastrados.
 	*   
-	* @return List<Veiculo>, retorna a lista de todos os veiculos cadastrados.
+	* @return retorna a lista de todos os veiculos cadastrados.
 	*   	
 	*/
 	public List<Veiculo> listar();
@@ -27,7 +27,7 @@ public interface Veiculos {
 	*/
 	public Veiculo porCodigo(Integer codigo);
 	
-	/** Este metodo salva ou altera um veiculo.
+	/** Este metodo cria ou altera um veiculo.
 	*  	
 	*  @param veiculo, Esta veiculo é o objeto veiculo que você irá criar ou modificar.
 	*   	
@@ -44,7 +44,7 @@ public interface Veiculos {
 	/** Este metodo pesquisa um veiculo por sua placa.
 	*  	
 	*  @param codigo, Este codigo é a placa do veiculo que você está procurando.
-	*  @return List<Veiculo>, retorna uma lista contendo todos os carros com aquela placa.
+	*  @return retorna uma lista contendo todos os carros com aquela placa.
 	*   	
 	*/
 	public List<Veiculo> listarPorPlaca(int codigo);

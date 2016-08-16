@@ -3,7 +3,7 @@ package repository;
 import java.util.List;
 import model.Ocorrencia;
 
-/** Esta é uma Interface que possui os metodos da classe Ocorrencia,
+/** Esta é uma Interface que possui as assinaturas dos metodos da classe Ocorrencia,
 *   
 * @author silas
 * @since 15-08-2016
@@ -14,7 +14,7 @@ public interface Ocorrencias {
 	/** Este metodo pesquisa uma ocorrencia por seu id.
 	*  	
 	*  @param codigo, Este codigo é o id da ocorrencia que você está procurando.
-	*  @return Ocorrencia, retorna a Ocorrencia daquele id que você está pesquisando.
+	*  @return retorna a Ocorrencia daquele id que você está pesquisando.
 	*   	
 	*/
 	public Ocorrencia porCodigo(Integer codigo);
@@ -22,13 +22,12 @@ public interface Ocorrencias {
 	/** Este metodo lista todas as ocorrencias de um determinado veiculo.
 	*   
 	*   @param codigo, Este codigo é o id do veiculo que você está procurando.
-	*   
-	* 	@return List<Ocorrencia>, retorna a lista de todas as ocorrencias daquele veiculo.
+	* 	@return retorna a lista de todas as ocorrencias daquele veiculo.
 	*   	
 	*/
 	public List<Ocorrencia> porCodigoVeiculo(Integer codigo);
 	
-	/** Este metodo salva ou altera uma ocorrencia.
+	/** Este metodo cria ou altera uma ocorrencia.
 	*  	
 	*  @param ocorrencia, Esta ocorrencia é o objeto Ocorrencia que você irá criar ou modificar.
 	*   	

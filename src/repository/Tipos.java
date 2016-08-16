@@ -3,7 +3,7 @@ package repository;
 import java.util.List;
 import model.Tipo;
 
-/** Esta é uma Interface que possui os metodos da classe Tipo,
+/** Esta é uma Interface que possui assinaturas dos metodos da classe Tipo,
 *   
 * @author silas
 * @since 15-08-2016
@@ -13,7 +13,7 @@ public interface Tipos {
 
 	/** Este metodo lista todos os tipos de veiculos cadastrados.
 	*   
-	* @return List<Tipo>, retorna uma lista contendo todos os tipos de veiculos cadastrados
+	* @return retorna a lista de todos os tipos de veiculos cadastrados
 	*   	
 	*/
 	public List<Tipo> listar();
@@ -21,12 +21,12 @@ public interface Tipos {
 	/** Este metodo pesquisa um tipo de veiculo por seu id.
 	*  	
 	*  @param codigo, Este codigo é o id do Tipo do Veiculo que você está procurando.
-	*  @return Tipo, retorna o Tipo do veiculo daquele id que você está pesquisando.
+	*  @return retorna o Tipo do veiculo daquele id que você está pesquisando.
 	*   	
 	*/
 	public Tipo porCodigo(Integer codigo);
 	
-	/** Este metodo salva ou altera um Tipo de Veiculo.
+	/** Este metodo cria ou altera um Tipo de Veiculo.
 	*  	
 	*  @param tipo, Este tipo é o objeto Tipo que você irá criar ou modificar.
 	*   	

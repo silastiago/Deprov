@@ -3,7 +3,7 @@ package repository;
 import java.util.List;
 import model.Pericia;
 
-/** Esta é uma Interface que possui os metodos da classe Pericia,
+/** Esta é uma Interface que possui as assinaturas dos metodos da classe Pericia,
 *   
 * @author silas
 * @since 15-08-2016
@@ -13,7 +13,7 @@ public interface Pericias {
 
 	/** Este metodo lista de todos os Exames veiculares cadastrados.
 	*   
-	* @return List<Pericia>, retorna a lista de todos as Pericias cadastradas.
+	* @return retorna a lista de todos as Pericias cadastradas.
 	*   	
 	*/
 	public List<Pericia> listar();
@@ -21,12 +21,12 @@ public interface Pericias {
 	/** Este metodo pesquisa uma pericia por seu id.
 	*  	
 	*  @param codigo, Este codigo é o id do Exame Veicular que você está procurando.
-	*  @return Pericia, retorna a Pericia daquele id que você está pesquisando.
+	*  @return retorna a Pericia daquele id que você está pesquisando.
 	*   	
 	*/
 	public Pericia porCodigo(Integer codigo);
 	
-	/** Este metodo salva ou altera um Exame Veicular.
+	/** Este metodo cria ou altera um Exame Veicular.
 	*  	
 	*  @param pericia, Esta pericia é o objeto Pericia que você irá criar ou modificar.
 	*   	

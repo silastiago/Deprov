@@ -4,7 +4,7 @@ import java.util.List;
 
 import model.Foto;
 
-/** Esta é uma Interface que possui os metodos da classe Foto,
+/** Esta é uma Interface que possui as assinaturas dos metodos da classe Foto,
 *   
 * @author silas
 * @since 15-08-2016
@@ -16,12 +16,12 @@ public interface IFoto {
 	*   
 	*   @param codigo, Este codigo é o id do veiculo que você está procurando.
 	*   
-	* 	@return List<Foto>, retorna a lista de todas as fotos daquele veiculo.
+	* 	@return retorna a lista de todas as fotos daquele veiculo.
 	*   	
 	*/
 	public List<Foto> porCodigoVeiculo(Integer codigo);
 	
-	/** Este metodo salva uma Foto.
+	/** Este metodo cria uma Foto.
 	*  	
 	*  @param foto, Esta cor é o objeto cor que você irá criar.
 	*   	

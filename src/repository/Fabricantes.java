@@ -4,7 +4,7 @@ import java.util.List;
 
 import model.Fabricante;
 
-/** Esta é uma Interface que possui os metodos da classe Fabricante,
+/** Esta é uma Interface que possui as assinaturas dos metodos da classe Fabricante,
 *   
 * @author silas
 * @since 15-08-2016
@@ -12,10 +12,8 @@ import model.Fabricante;
 
 public interface Fabricantes {
 
-	/** Este metodo lista de todos os Fabricantes cadastrados.
-	*   
-	* @return List<Fabricante>, retorna a lista de todos os Fabricantes cadastrados.
-	*   	
+	/** Este metodo lista todos os Fabricantes cadastrados.
+	* 	@return retorna a lista de todos os Fabricantes cadastrados.
 	*/
 	public List<Fabricante> listar();
 	
@@ -27,7 +25,7 @@ public interface Fabricantes {
 	*/
 	public Fabricante porCodigo(Integer codigo);
 	
-	/** Este metodo salva ou altera um fabricante.
+	/** Este metodo cria ou altera um fabricante.
 	*  	
 	*  @param fabricante, Esta fabricante é o objeto Fabricante que você irá criar ou modificar.
 	*   	
