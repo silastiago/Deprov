@@ -14,7 +14,7 @@ public interface Cores {
 
 	/** Este metodo lista todas as cores cadastradas.
 	*   
-	* @return List<Cor>, retorna a lista de cores cadastradas.
+	* 	@return List<Cor>, retorna a lista de cores cadastradas.
 	*   	
 	*/
 	public List<Cor> listar();

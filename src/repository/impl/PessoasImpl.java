@@ -33,21 +33,19 @@ public class PessoasImpl implements Pessoas{
 	}
 
 	@Override
-	public Pessoa salvar(Pessoa pessoa) {
-		return (Pessoa) sessao.merge(pessoa);
+	public void salvar(Pessoa pessoa) {
+		this.sessao.merge(pessoa);
 	}
 
 	@Override
 	public void remover(Pessoa pessoa) {
 		this.sessao.delete(pessoa);
 	}
-
+	
+	
 	@Override
-	public void editar(Pessoa pessoa) {
-		this.sessao.update(pessoa);
-	}
-	@Override
-	public Pessoa login(Pessoa pessoa) {
+	public boolean login(Pessoa pessoa) {
+		boolean pessoaExistente = true;
 		Criteria c = this.sessao.createCriteria(Pessoa.class);
 		c.add(Restrictions.eq("login", pessoa.getLogin()));
 		c.add(Restrictions.eq("senha", pessoa.getSenha()));
@@ -55,7 +53,13 @@ public class PessoasImpl implements Pessoas{
 		HttpSession session = (HttpSession) fc.getExternalContext().getSession(false);
 		session.setAttribute("usuario", pessoa.getLogin());
 		session.setAttribute("senha", pessoa.getSenha());
-		return (Pessoa) c.uniqueResult();
+		if (c.uniqueResult() == null) {
+			pessoaExistente = false;
+		}else{
+			pessoaExistente = true;
+		}
+		
+		return pessoaExistente;
 	}
 
 	@Override

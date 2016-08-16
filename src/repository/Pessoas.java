@@ -11,12 +11,48 @@ import model.Pessoa;
 */
 public interface Pessoas {
 	
+	/** Este metodo faz o login do usuario no sistema.
+	 * 	Este metodo ainda não está funcionando por alguns bugs.
+	*   
+	*   @param pessoa, Esta pessoa é o objeto Pessoa que irá fazer o login.
+	* 	@return boolean, retorna verdadeiro se a pessoa fez o login correto caso contrario retorna false.
+	*   	
+	*/
+	public boolean login(Pessoa pessoa);
 	
-	public Pessoa login(Pessoa pessoa);
+	/** Este metodo faz o logout do usuario no sistema.
+	 * 	Este metodo ainda não está funcionando por alguns bugs.
+	*
+	*   	
+	*/
 	public void logout();
+	
+	/** Este metodo lista todas as pessoas cadastradas
+	*   
+	* @return List<Pessoa>, retorna a lista das pessoas cadastradas.
+	*   	
+	*/
 	public List<Pessoa> listar();
+	
+	/** Este metodo pesquisa uma pessoa por seu id.
+	*  	
+	*  @param codigo, Este codigo é o id da pessoa que você está procurando.
+	*  @return Pessoa, retorna a Pessoa daquele id que você está pesquisando.
+	*   	
+	*/
 	public Pessoa porCodigo(Integer codigo);
-	public Pessoa salvar(Pessoa pessoa);
+	
+	/** Este metodo salva ou altera uma pessoa.
+	*  	
+	*  @param pessoa, Esta pessoa é o objeto Pessoa que você irá criar ou modificar.
+	*   	
+	*/
+	public void salvar(Pessoa pessoa);
+	
+	/** Este metodo Remove uma Pessoa.
+	*  	
+	*  @param pessoa, Esta pessoa é o objeto Pessoa que você irá remover.
+	*   	
+	*/
 	public void remover(Pessoa pessoa);
-	public void editar(Pessoa pessoa);
 }

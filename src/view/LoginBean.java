@@ -1,19 +1,14 @@
 package view;
 
 import java.io.IOException;
-import java.io.Serializable;
 
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
 import javax.faces.context.FacesContext;
-import javax.servlet.DispatcherType;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
-
-import model.Pessoa;
-import repository.impl.PessoasImpl;
 
 @ManagedBean(name="loginBean")
 @SessionScoped
