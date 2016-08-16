@@ -47,5 +47,5 @@ public interface Veiculos {
 	*  @return retorna uma lista contendo todos os carros com aquela placa.
 	*   	
 	*/
-	public List<Veiculo> listarPorPlaca(int codigo);
+	public List<Veiculo> listarPorPlaca(String codigo);
 }

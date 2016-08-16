@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.hibernate.Session;
+import org.hibernate.criterion.Order;
 
 import model.Cor;
 import repository.Cores;
@@ -18,23 +19,23 @@ public class CoresImpl implements Cores{
 	
 	private Session sessao;
 
-	 /**
+	/**
      * Constructor.
-     * @param sessao será a sessao que o hibernate cria.
+     * @param sessao será a sessao que o hibernate cria para conexoes com o banco.
      */
-	
 	public CoresImpl(Session sessao){
 		this.sessao = sessao;
 	}
 	
 	/** Este metodo lista todas as cores cadastradas.
 	* 	@return retorna a lista de cores cadastradas.
+	* 	Este metodo sobrescreve o da interface Cores.
 	*/
 	@SuppressWarnings("unchecked")
 	@Override
 	public List<Cor> listar() {
 		List<Cor> listaCor = new ArrayList<Cor>();
-		listaCor = this.sessao.createCriteria(Cor.class).list();
+		listaCor = this.sessao.createCriteria(Cor.class).addOrder(Order.asc("cor")).list();
 		return listaCor;
 	}
 
@@ -42,18 +43,17 @@ public class CoresImpl implements Cores{
 	*  	
 	*  @param codigo, Este codigo é o id da cor que você está procurando.
 	*  @return Cor, retorna a Cor daquele id que você está pesquisando.
-	*   	
+	*  Este metodo sobrescreve o da interface Cores.	
 	*/
-	
 	@Override
 	public Cor porCodigo(Integer codigo) {
 		return (Cor) sessao.get(Cor.class, codigo);
 	}
 
-	/** Este metodo salva ou altera uma cor.
+	/** Este metodo cria ou altera uma cor.
 	*  	
-	*  @param cor, Esta cor é o objeto cor que você irá criar ou modificar.
-	*   	
+	*  @param cor, Esta cor é o objeto Cor que você irá criar ou modificar.
+	*  Este metodo sobrescreve o da interface Cores.
 	*/
 	@Override
 	public void salvar(Cor cor) {
@@ -63,7 +63,7 @@ public class CoresImpl implements Cores{
 	/** Este metodo Remove uma cor.
 	*  	
 	*  @param cor, Esta cor é o objeto cor que você irá remover.
-	*   	
+	*  Este metodo sobrescreve o da interface Cores.
 	*/
 	@Override
 	public void remover(Cor cor) {

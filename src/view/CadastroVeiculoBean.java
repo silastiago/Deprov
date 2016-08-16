@@ -85,11 +85,11 @@ public class CadastroVeiculoBean implements Serializable{
 		this.init();
 	}
 	
-	public void listarVeiculo(String codigo){
+	/*public void listarVeiculo(String codigo){
 	int idVeiculo = Integer.parseInt(codigo);
 	Veiculos IVeiculo= this.repositorios.getveiculos();
 	veiculos = IVeiculo.listarPorPlaca(idVeiculo);
-	}
+	}*/
 	
 	public Veiculo getVeiculo() {
 		return veiculo;
