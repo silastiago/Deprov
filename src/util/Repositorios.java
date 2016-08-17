@@ -27,9 +27,9 @@ import repository.impl.SegurosImpl;
 import repository.impl.TiposImpl;
 import repository.impl.VeiculosImpl;
 
-
 public class Repositorios implements Serializable {
 
+	
 	public Pessoas getPessoas() {
 		return new PessoasImpl(this.getSession());
 	}
