@@ -58,7 +58,7 @@
 		</auth-constraint>
 	</security-constraint>
 
-
+<!-- 
 <security-constraint>
             <web-resource-collection>
                 <web-resource-name>secured</web-resource-name>
@@ -67,6 +67,6 @@
             <user-data-constraint>
                 <transport-guarantee>CONFIDENTIAL</transport-guarantee>
             </user-data-constraint>
-  </security-constraint>
-
+</security-constraint>
+ -->
 </web-app>

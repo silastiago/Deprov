@@ -58,8 +58,8 @@ public class CadastroRelatorioBean implements Serializable {
 		int idVeiculo = Integer.parseInt(codigo);
 		ConnectionFactory conexao = new ConnectionFactory();
 		
-		String reportSrcFile = "/opt/tomcat/webapps/Deprov/resources/relatorios/RelatorioVeiculo.jrxml";
-		//String reportSrcFile = "/var/lib/tomcat8/webapps/Deprov/resources/relatorios/RelatorioVeiculo.jrxml";
+		//String reportSrcFile = "/opt/tomcat/webapps/Deprov/resources/relatorios/RelatorioVeiculo.jrxml";
+		String reportSrcFile = "/var/lib/tomcat8/webapps/Deprov/resources/relatorios/RelatorioVeiculo.jrxml";
         // First, compile jrxml file.
         JasperReport jasperReport =    JasperCompileManager.compileReport(reportSrcFile);
  
@@ -80,11 +80,11 @@ public class CadastroRelatorioBean implements Serializable {
         exporter.setExporterInput(exporterInput);
  
         // ExporterOutput
-        /*OutputStreamExporterOutput exporterOutput = new SimpleOutputStreamExporterOutput(
-                "/var/lib/tomcat8/webapps/Deprov/resources/relatorios/"+idVeiculo+".pdf");*/
-        
         OutputStreamExporterOutput exporterOutput = new SimpleOutputStreamExporterOutput(
-                      "/opt/tomcat/webapps/Deprov/resources/relatorios/"+idVeiculo+".pdf");
+                "/var/lib/tomcat8/webapps/Deprov/resources/relatorios/"+idVeiculo+".pdf");
+        
+        /*OutputStreamExporterOutput exporterOutput = new SimpleOutputStreamExporterOutput(
+                      "/opt/tomcat/webapps/Deprov/resources/relatorios/"+idVeiculo+".pdf");*/
         
         // Output
         exporter.setExporterOutput(exporterOutput);
@@ -104,8 +104,8 @@ public class CadastroRelatorioBean implements Serializable {
 	    response.setHeader("Content-Type", "application/pdf");  // Define apenas o tipo de conte�do, Utilize se necess�rio ServletContext#getMimeType() para detec��o autom�tica com base em nome de arquivo. 
 	    OutputStream responseOutputStream = response.getOutputStream();
 
-	    //String PDF_URL = "http://sinf.policiacivil.rn.gov.br:8080/Deprov/resources/relatorios/"+idVeiculo+".pdf";
-	    String PDF_URL = "http://snmp.info.ufrn.br:8080/Deprov/resources/relatorios/"+idVeiculo+".pdf";
+	    String PDF_URL = "http://sinf.policiacivil.rn.gov.br:8080/Deprov/resources/relatorios/"+idVeiculo+".pdf";
+	    //String PDF_URL = "http://snmp.info.ufrn.br:8080/Deprov/resources/relatorios/"+idVeiculo+".pdf";
 		// L� o conte�do do PDF
 	    URL url = new URL(PDF_URL);
 	    InputStream pdfInputStream = url.openStream();
