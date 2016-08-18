@@ -6,33 +6,21 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.Serializable;
 import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.List;
 
 import javax.annotation.PostConstruct;
 import javax.faces.bean.ManagedBean;
+
 import javax.faces.bean.ViewScoped;
 import javax.faces.context.FacesContext;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
+import javax.faces.event.ActionEvent;
+import javax.servlet.http.HttpSession;
 
-import org.apache.commons.fileupload.FileItem;
-import org.apache.commons.fileupload.FileItemFactory;
-import org.apache.commons.fileupload.FileUpload;
-import org.apache.commons.fileupload.FileUploadException;
-import org.apache.commons.fileupload.disk.DiskFileItemFactory;
-import org.apache.commons.fileupload.servlet.ServletFileUpload;
-import org.primefaces.event.FileUploadEvent;
-import org.primefaces.model.DefaultStreamedContent;
-import org.primefaces.model.StreamedContent;
 import org.primefaces.model.UploadedFile;
 
 import model.Foto;
-import model.Ocorrencia;
 import model.Veiculo;
 import repository.IFoto;
-import repository.Ocorrencias;
-import repository.Veiculos;
 import util.Repositorios;
 
 @ManagedBean(name = "cadastroFotoBean")
@@ -48,15 +36,16 @@ public class CadastroFotoBean implements Serializable {
 
 	@PostConstruct
 	public void init() {
-		IFoto fotos = repositorios.getFoto();
-		this.listaFotos = fotos.listar();
-		Veiculos veiculos = this.repositorios.getveiculos();
-		this.veiculos = veiculos.listar();
-	
+		listaFotos = listarFotos();
+
 	}
 	
-	public String upload(String codigo){
-		System.out.println("Codigo do veiculo: " + codigo);
+	public void upload(ActionEvent event) throws IOException{
+		veiculo = (Veiculo) event.getComponent().getAttributes().get("codigo");
+		System.out.println("Codigo do veiculo: "+ veiculo.getCodigo());
+		
+		String codigo = veiculo.getCodigo().toString();
+		//File outDir = new File("/var/lib/tomcat8/webapps/Deprov/resources/images/"+ codigo);
 		File outDir = new File("/opt/tomcat/webapps/Deprov/resources/images/"+ codigo);
         if (outDir.exists()) {
 			System.out.println("Diretorio já criado ");
@@ -68,7 +57,8 @@ public class CadastroFotoBean implements Serializable {
         String nomeArquivo = file.getFileName();
         byte[] fotos = file.getContents();
         
-        String path = "/opt/tomcat/webapps/Deprov/resources/images/"+codigo+"/";
+        //String path = "/var/lib/tomcat8/webapps/Deprov/resources/images/"+ codigo+"/";
+        String path = "/opt/tomcat/webapps/Deprov/resources/images/"+ codigo+"/";
         String pathBanco = "../resources/images/"+codigo+"/";
 		try {
 		fos = new FileOutputStream(path+nomeArquivo);
@@ -84,28 +74,38 @@ public class CadastroFotoBean implements Serializable {
 		veiculo.setCodigo(idVeiculo);
 		this.foto.setVeiculo(veiculo);
 		Ifoto.salvar(foto);
-		
-		
-        return "index?faces-redirect=true";
+
+		FacesContext fc = FacesContext.getCurrentInstance();
+	    HttpSession session = (HttpSession)fc.getExternalContext().getSession(false);
+	    FacesContext.getCurrentInstance().getExternalContext().redirect("Veiculo.xhtml?codigo="+veiculo.getCodigo());
 	}
 	
-	public List<Foto> listarFotos(String codigo){
-		IFoto Ifoto = repositorios.getFoto();
+	public List<Foto> listarFotos(){
+		String codigo = FacesContext.getCurrentInstance().getExternalContext().getRequestParameterMap().get("codigo");
 		int idVeiculo = Integer.parseInt(codigo);
+		IFoto Ifoto = repositorios.getFoto();
 		listaFotos = Ifoto.porCodigoVeiculo(idVeiculo);
-		
 		return listaFotos;
 	}
-	
-	public void update(Ocorrencia ocorrencia) {
-		Ocorrencias ocorrencias = this.repositorios.getocorrencia();
-		ocorrencias.editar(ocorrencia);
-	}
 
-	public void excluir(Ocorrencia ocorrencia) {
-		Ocorrencias ocorrencias = this.repositorios.getocorrencia();
-		ocorrencias.remover(ocorrencia);
-		this.init();
+	public void excluir() throws IOException {
+		
+		//System.out.println("Codigo da imagem " + image.getCodigo());
+		System.out.println("Codigo da imagem " + foto.getCodigo());
+		IFoto Ifoto = this.repositorios.getFoto();
+		//int idFoto = Integer.parseInt(codigo);
+		//Foto foto = Ifoto.porCodigo(idFoto);
+		Ifoto.remover(foto);
+		//listaFotos.remove(foto);
+		//this.init();
+		//return null;
+		//return "index?faces-redirect=true";
+		
+		FacesContext fc = FacesContext.getCurrentInstance();
+	    HttpSession session = (HttpSession)fc.getExternalContext().getSession(false);
+	    //FacesContext.getCurrentInstance().getExternalContext().redirect("Veiculo.xhtml?codigo="+foto.getVeiculo().getCodigo()+"faces-redirect=true");
+	    FacesContext.getCurrentInstance().getExternalContext().redirect("index.xhtml?faces-redirect=true");
+
 	}
 
 	public Foto getFoto() {

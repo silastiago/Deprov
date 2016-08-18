@@ -13,12 +13,17 @@
 
 	<ui:define name="tituloJanela">Sistema com JSF 2.0 e Facelets</ui:define>
 	<ui:define name="conteudo">
-		<h:form enctype="multipart/form-data">
+		<h:form enctype="multipart/form-data" acceptcharset="ISO-8859-1">
 			<div class="ui-fluid">
-				<h1>Cadastro de Veiculo</h1>
-				<p:panelGrid columns="4" style="width: 100%; margin-top: 20px"
-					columnClasses="rotulo, campo, rotulo, campo">
+				
 
+			
+			
+		<p:tabView>
+        <p:tab title="Veiculo">
+            
+            				<p:panelGrid columns="4" style="width: 100%; margin-top: 20px"
+					columnClasses="rotulo, campo, rotulo, campo">
 					
 
 					<h:outputText value="Placa no Veiculo" />
@@ -29,7 +34,7 @@
 					
 					<h:outputLabel value="Tipo" />
 					<h:selectOneMenu value="#{cadastroVeiculoBean.veiculo.tipo}"
-						required="true" label="Tipo">
+						label="Tipo">
 						<f:selectItem itemLabel="Selecione o Tipo do Veiculo"
 							noSelectionOption="true" />
 						<f:selectItems value="#{cadastroVeiculoBean.tipos}" var="tipo"
@@ -38,7 +43,7 @@
 
 					<h:outputLabel value="Cor" />
 					<h:selectOneMenu value="#{cadastroVeiculoBean.veiculo.cor}"
-						required="true" label="Cor">
+						label="Cor">
 						<f:selectItem itemLabel="Selecione a cor do Veiculo"
 							noSelectionOption="true" />
 						<f:selectItems value="#{cadastroVeiculoBean.cores}" var="cor"
@@ -46,8 +51,7 @@
 					</h:selectOneMenu>
 
 					<h:outputLabel value="Fabricante" />
-					<h:selectOneMenu value="#{cadastroVeiculoBean.veiculo.fabricante}"
-						required="true" label="Fabricante">
+					<h:selectOneMenu value="#{cadastroVeiculoBean.veiculo.fabricante}" label="Fabricante" >
 						<f:selectItem itemLabel="Selecione o Fabricante do Veiculo"
 							noSelectionOption="true" />
 						<f:selectItems value="#{cadastroVeiculoBean.fabricantes}"
@@ -57,7 +61,7 @@
 
 					<h:outputLabel value="Modelo" />
 					<h:selectOneMenu value="#{cadastroVeiculoBean.veiculo.modelo}"
-						required="true" label="Modelo">
+						label="Modelo" id="modelos">
 						<f:selectItem itemLabel="Selecione o Modelo do Veiculo"
 							noSelectionOption="true" />
 						<f:selectItems value="#{cadastroVeiculoBean.modelos}" var="modelo"
@@ -94,7 +98,7 @@
 
 					<h:outputLabel value="Seguro" />
 					<h:selectOneMenu value="#{cadastroVeiculoBean.veiculo.seguro}"
-						required="true" label="Seguro">
+						label="Seguro">
 						<f:selectItem itemLabel="Selecione o Seguro do Veiculo"
 							noSelectionOption="true" />
 						<f:selectItems value="#{cadastroVeiculoBean.seguros}" var="seguro"
@@ -119,7 +123,7 @@
 
 					<h:outputLabel value="Exame Veicular" />
 					<h:selectOneMenu value="#{cadastroVeiculoBean.veiculo.pericia}"
-						required="true" label="Pericia">
+						label="Pericia">
 						<f:selectItem itemLabel="Selecione a Pericia do Veiculo"
 							noSelectionOption="true" />
 						<f:selectItems value="#{cadastroVeiculoBean.pericias}"
@@ -131,19 +135,80 @@
 
 					<p:outputLabel for="mask" value="Data:" />
 					<p:calendar id="mask" value="#{cadastroVeiculoBean.veiculo.date4}"
-						pattern="dd-MM-yyyy" mask="true" />
- 					
-					
+						pattern="dd/MM/yyyy" mask="true" navigator="true" showOn="button">
+						<f:convertDateTime pattern="dd/MM/yyyy" type="both" dateStyle="short"/>						
+						</p:calendar>
 				</p:panelGrid>
-
 			<h:commandButton action="#{cadastroVeiculoBean.cadastrar()}" value="Salvar" />
-
-
-
-
+			
+			
+			<h:link outcome="Foto" value="Foto">
+				<f:param name="codigo"  value="#{cadastroVeiculoBean.veiculo.codigo}"/>
+			</h:link>
+			
+			<h:commandButton actionListener="#{cadastroRelatorioBean.gerarRelatorio}" value="Gerar Relatorio" 
+				onclick="this.form.target='_blank'">
+				<f:attribute name="codigo" value="#{cadastroVeiculoBean.veiculo}" />
+			</h:commandButton>			
+			
+			
+			<h:link outcome="Ocorrencia" value="Gerar Ocorrencia">
+				<f:param name="codigo"  value="#{cadastroVeiculoBean.veiculo.codigo}"/>
+			</h:link>
+			
+			
+			
+			
+        </p:tab>
+         <p:tab title="Fotos do Veiculo">
+            
+            <h:form enctype="multipart/form-data" acceptcharset="ISO-8859-1">
+			<div class="ui-fluid">
+				<p:panelGrid columns="2" style="width: 100%; margin-top: 20px"
+					columnClasses="rotulo, campo">
 				
+				<p:fileUpload value="#{cadastroFotoBean.file}" mode="simple" skinSimple="true"/>
 				
+				<p:commandButton value="Submit" ajax="false" actionListener="#{cadastroFotoBean.upload}"  update="galeria">
+					<f:attribute name="codigo" value="#{cadastroVeiculoBean.veiculo}" />
+				</p:commandButton>
+				
+			</p:panelGrid>
+				</div>
+			</h:form>
+			
+			
+			<h:form enctype="multipart/form-data" id="foto">
+			<div class="ui-fluid" align="center">
+			
+			<p:contextMenu for="galeria">
+        		<p:menuitem value="Delete" update="galeria" icon="ui-icon-close" actionListener="#{cadastroFotoBean.excluir}"/>
+    		</p:contextMenu>
+				
+			<p:dataTable id="galeria" var="image" value="#{cadastroFotoBean.listaFotos}" 
+			selection="#{cadastroFotoBean.foto}" selectionMode="single" rowKey="#{image.codigo}">
+				
+				<p:column >
+					<f:facet name="header">
+					</f:facet>
+					<p:graphicImage value="#{image.path}" width="100%" height="100%"/>
+				</p:column>
+				
+			</p:dataTable>
+			
+				</div>
+			</h:form>
+            
+		</p:tab>
+    </p:tabView>
+			
 			</div>
+		
+		
+		
+		
+		
+		
 		</h:form>
 
 	</ui:define>	

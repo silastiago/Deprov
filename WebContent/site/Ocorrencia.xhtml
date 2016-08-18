@@ -8,70 +8,81 @@
 	<f:viewParam name="codigo"/>
 </f:metadata>
 
-
 <ui:composition template="/templates/template.xhtml">
 
 	<ui:define name="tituloJanela">Sistema com JSF 2.0 e Facelets</ui:define>
 	<ui:define name="conteudo">
-		<h:form enctype="multipart/form-data" >
+		<h:form enctype="multipart/form-data" acceptcharset="ISO-8859-1" id="form">
 			<div class="ui-fluid">
 				<h1>Cadastro de Ocorrencia</h1>
 				<p:panelGrid columns="2" style="width: 100%; margin-top: 20px"
 					columnClasses="rotulo, campo">
 
 				<h:outputText value="Nome: " />
-				<h:inputText value="#{cadastroOcorrrenciaBean.ocorrencia.ocorrencia}" />
+				<h:inputText value="#{cadastroOcorrenciaBean.ocorrencia.ocorrencia}" />
 
-				<h:outputText value="Data: " />
-				<p:calendar id="mask" value="#{cadastroOcorrrenciaBean.ocorrencia.data}"
-						pattern="dd-MM-yyyy" mask="true" />
+				<p:outputLabel for="mask" value="Data:" />
+					<p:calendar id="mask" value="#{cadastroOcorrenciaBean.ocorrencia.data}"
+						pattern="dd/MM/yyyy" mask="true" navigator="true" showOn="button">
+						<f:convertDateTime pattern="dd/MM/yyyy" type="both" dateStyle="short"/>						
+					</p:calendar>
+					
+					
 				
-				<p:commandButton action="#{cadastroOcorrrenciaBean.cadastrar(codigo)}" value="Salvar" />
+				<p:commandButton action="#{cadastroOcorrenciaBean.cadastrar(codigo)}"  update="lista" value="Salvar" />
 				
 
 			</p:panelGrid>
 				</div>
 			</h:form>
 			
-				<h:form enctype="multipart/form-data">
-				<p:dataTable value="#{cadastroOcorrrenciaBean.listarVeiculo(codigo)}" var="ocorrencia"   rows="10" rowsPerPageTemplate="5,10,15,20"
-				id="mostraEquipamento"  paginator="true" >
+				<h:form enctype="multipart/form-data" id="lista">
 				
 				
-				<p:column filterBy="#{ocorrencia.ocorrencia}"  style="text-align: center; width:10%" filterMatchMode="startsWith">
-					<f:facet name="header">
-						<h:outputText value="Nome da Ocorrencia" />
-					</f:facet>
-					<h:outputText value="#{ocorrencia.ocorrencia}" />
-				</p:column>
-								
-				<p:column filterBy="#{ocorrencia.data}"  style="text-align: center; width:10%" filterMatchMode="startsWith">
-					<f:facet name="header">
-						<h:outputText value="Data da Ocorrencia" />
-					</f:facet>
-					<h:outputText value="#{ocorrencia.data}" />
-				</p:column>
+				<p:dataTable value="#{cadastroOcorrenciaBean.ocorrencias}" var="ocorrencia"   rows="10" rowsPerPageTemplate="5,10,15,20"
+				id="mostraEquipamento"  paginator="true" editable="true">
 				
-				<p:column filterBy="#{ocorrencia.veiculo.placa}"  style="text-align: center; width:10%" filterMatchMode="startsWith">
-					<f:facet name="header">
-						<h:outputText value="Veiculo da Ocorrencia" />
-					</f:facet>
-					<h:outputText value="#{ocorrencia.veiculo.placa}" />
-				</p:column>
+				<p:ajax event="rowEdit" listener="#{cadastroOcorrenciaBean.onRowEdit}" update="lista" />
+       			<p:ajax event="rowEditCancel" listener="#{cadastroOcorrenciaBean.onRowCancel}" update="lista" />
 				
-			<p:column style="text-align: center; width:5%">
-					<h:link outcome="Ocorrencia" value="Editar Ocorrencia">
-					<i class="icon-edit"></i>
-					<f:param name="codigo_ocorrencia"  value="#{ocorrencia.codigo}"/>
-					</h:link>
-				</p:column>
+				
+				<p:column headerText="Codigo">
+           			<p:cellEditor>
+               			<f:facet name="output"><h:outputText value="#{ocorrencia.codigo}" /></f:facet>
+               			<f:facet name="input"><p:inputText id="modelInput" value="#{ocorrencia.codigo}" /></f:facet>
+           			</p:cellEditor>
+       			</p:column>
+				
+				<p:column headerText="Ocorrencia">
+           			<p:cellEditor>
+               			<f:facet name="output"><h:outputText value="#{ocorrencia.ocorrencia}" /></f:facet>
+               			<f:facet name="input"><p:inputText value="#{ocorrencia.ocorrencia}"/></f:facet>
+           			</p:cellEditor>
+       			</p:column>
+				
+				<p:column headerText="Data da Ocorrencia">
+           			<p:cellEditor>
+               			<f:facet name="output"><h:outputText value="#{ocorrencia.data}" ><f:convertDateTime pattern="dd-MM-yyyy"/></h:outputText></f:facet>
+               			<f:facet name="input"><p:calendar value="#{ocorrencia.data}"
+						pattern="dd/MM/yyyy" mask="true" navigator="true" showOn="button">
+						<f:convertDateTime pattern="dd/MM/yyyy"/>						
+					</p:calendar></f:facet>
+           			</p:cellEditor>
+       			</p:column>
+				
+				
+			<p:column style="width:64px">
+           		<p:rowEditor />
+       		</p:column>
 			
-			<p:column style="text-align: center; width:5%">
-				<h:commandLink value="Excluir"
-				 action="#{cadastroOcorrenciaBean.excluir(ocorrencia)}"
-				 onclick="if (!confirm('Confirmar a exclusão desta Ocorrencia? ')) return false"/>
-				 <i class="icon-remove-sign"></i>
+			
+			<p:column style="text-align: center; width:3%">
+				<h:commandLink value="Excluir Ocorrencia"
+				 action="#{cadastroOcorrenciaBean.excluir(ocorrencia.codigo)}">
+				 </h:commandLink>
 			</p:column>
+			
+			
 			</p:dataTable>
 		</h:form>
 	</ui:define>	

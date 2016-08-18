@@ -45,11 +45,6 @@ public class CadastroSeguroBean implements Serializable{
 		return "index?faces-redirect=true";
 	}
 
-	public void update(Seguro seguro){
-		Seguros seguros = this.repositorios.getSeguros();
-		seguros.editar(seguro);
-	}
-
 	public void excluir(Seguro seguro){
 		Seguros seguros = this.repositorios.getSeguros();
 		seguros.remover(seguro);

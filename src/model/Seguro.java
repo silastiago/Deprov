@@ -8,6 +8,13 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
+/** Classe Seguro que possui os metodos de acesso getter e setters, 
+ * e também o mapeamento relacional das tabelas via hibernate, da entidade Seguro do veiculo.
+*   
+* @author silas
+*
+*/
+
 @Entity
 @Table
 public class Seguro implements Serializable, Cloneable{

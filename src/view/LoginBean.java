@@ -1,16 +1,14 @@
 package view;
 
-import java.io.Serializable;
+import java.io.IOException;
 
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
 import javax.faces.context.FacesContext;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
-
-
-import model.Pessoa;
-import repository.impl.PessoasImpl;
+import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 @ManagedBean(name="loginBean")
 @SessionScoped
@@ -30,16 +28,23 @@ public class LoginBean {
 		}
 	}
 
-	public String sair() throws ServletException {
-		this.getRequest().logout();
-		getRequest().getSession().invalidate();
-		return "../Login?faces-redirect=true";
+	public void sair() throws ServletException, IOException {
+		FacesContext fc = FacesContext.getCurrentInstance();
+	    HttpSession session = (HttpSession)fc.getExternalContext().getSession(false);
+	    session.invalidate();
+	    FacesContext.getCurrentInstance().getExternalContext().redirect("../Login.xhtml");
 	}
 
 	private HttpServletRequest getRequest() {
 		FacesContext context = FacesContext.getCurrentInstance();
 		return (HttpServletRequest) context.getExternalContext().getRequest();
 	}
+	
+	private HttpServletResponse getResponse() {
+		FacesContext context = FacesContext.getCurrentInstance();
+		return (HttpServletResponse) context.getExternalContext().getResponse();
+	}
+	
 
 	public String getUsuario() {
 		return usuario;

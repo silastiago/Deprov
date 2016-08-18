@@ -1,6 +1,5 @@
 package view;
 
-import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
@@ -13,20 +12,13 @@ import java.util.List;
 import java.util.Map;
 
 import javax.annotation.PostConstruct;
-import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.RequestScoped;
-import javax.faces.bean.ViewScoped;
 import javax.faces.context.FacesContext;
-import javax.servlet.http.HttpServletRequest;
+import javax.faces.event.ActionEvent;
 import javax.servlet.http.HttpServletResponse;
-
-import org.primefaces.event.CellEditEvent;
-import org.primefaces.model.DefaultStreamedContent;
 import org.primefaces.model.StreamedContent;
-
 import conexao.ConnectionFactory;
-
 import model.Veiculo;
 import net.sf.jasperreports.engine.JRException;
 import net.sf.jasperreports.engine.JasperCompileManager;
@@ -39,7 +31,6 @@ import net.sf.jasperreports.export.OutputStreamExporterOutput;
 import net.sf.jasperreports.export.SimpleExporterInput;
 import net.sf.jasperreports.export.SimpleOutputStreamExporterOutput;
 import net.sf.jasperreports.export.SimplePdfExporterConfiguration;
-import repository.Ocorrencias;
 import repository.Veiculos;
 import util.Repositorios;
 
@@ -58,13 +49,17 @@ public class CadastroRelatorioBean implements Serializable {
 		this.veiculos = veiculos.listar();
 	}
 
-	public String gerarRelatorio(String codigo) throws JRException, IOException {
+	public String gerarRelatorio(ActionEvent event) throws JRException, IOException{
+		Veiculo veiculo = (Veiculo) event.getComponent().getAttributes().get("codigo");
+		
+		String codigo = veiculo.getCodigo().toString();
 		System.out.println("iniciando metodo de geracao de relatorio");
 		
 		int idVeiculo = Integer.parseInt(codigo);
 		ConnectionFactory conexao = new ConnectionFactory();
 		
 		String reportSrcFile = "/opt/tomcat/webapps/Deprov/resources/relatorios/RelatorioVeiculo.jrxml";
+		//String reportSrcFile = "/var/lib/tomcat8/webapps/Deprov/resources/relatorios/RelatorioVeiculo.jrxml";
         // First, compile jrxml file.
         JasperReport jasperReport =    JasperCompileManager.compileReport(reportSrcFile);
  
@@ -76,11 +71,7 @@ public class CadastroRelatorioBean implements Serializable {
         
         JasperPrint print = JasperFillManager.fillReport(jasperReport,
                 parameters, conn);
- 
-        // Make sure the output directory exists.
-        File outDir = new File("/opt/tomcat/webapps/Deprov/resources/images/"+codigo);
-        outDir.mkdirs();
-        
+         
         // PDF Exportor.
         JRPdfExporter exporter = new JRPdfExporter();
  
@@ -89,8 +80,12 @@ public class CadastroRelatorioBean implements Serializable {
         exporter.setExporterInput(exporterInput);
  
         // ExporterOutput
+        /*OutputStreamExporterOutput exporterOutput = new SimpleOutputStreamExporterOutput(
+                "/var/lib/tomcat8/webapps/Deprov/resources/relatorios/"+idVeiculo+".pdf");*/
+        
         OutputStreamExporterOutput exporterOutput = new SimpleOutputStreamExporterOutput(
-                "/opt/tomcat/webapps/Deprov/resources/relatorios/FirstJasperReport.pdf");
+                      "/opt/tomcat/webapps/Deprov/resources/relatorios/"+idVeiculo+".pdf");
+        
         // Output
         exporter.setExporterOutput(exporterOutput);
  
@@ -105,16 +100,17 @@ public class CadastroRelatorioBean implements Serializable {
         FacesContext facesContext = FacesContext.getCurrentInstance();
 	    HttpServletResponse response = (HttpServletResponse) facesContext.getExternalContext().getResponse();
 
-	    response.reset();   // Algum filtro pode ter configurado alguns cabeçalhos no buffer de antemão. Queremos livrar-se deles, senão ele pode colidir.
-	    response.setHeader("Content-Type", "application/pdf");  // Define apenas o tipo de conteúdo, Utilize se necessário ServletContext#getMimeType() para detecção automática com base em nome de arquivo. 
+	    response.reset();   // Algum filtro pode ter configurado alguns cabeï¿½alhos no buffer de antemï¿½o. Queremos livrar-se deles, senï¿½o ele pode colidir.
+	    response.setHeader("Content-Type", "application/pdf");  // Define apenas o tipo de conteï¿½do, Utilize se necessï¿½rio ServletContext#getMimeType() para detecï¿½ï¿½o automï¿½tica com base em nome de arquivo. 
 	    OutputStream responseOutputStream = response.getOutputStream();
 
-	    String PDF_URL = "http://snmp.info.ufrn.br:8080/Deprov/resources/relatorios/FirstJasperReport.pdf";
-		// Lê o conteúdo do PDF
+	    //String PDF_URL = "http://sinf.policiacivil.rn.gov.br:8080/Deprov/resources/relatorios/"+idVeiculo+".pdf";
+	    String PDF_URL = "http://snmp.info.ufrn.br:8080/Deprov/resources/relatorios/"+idVeiculo+".pdf";
+		// Lï¿½ o conteï¿½do do PDF
 	    URL url = new URL(PDF_URL);
 	    InputStream pdfInputStream = url.openStream();
 
-	    // Lê o conteúdo do PDF e grava para saída
+	    // Lï¿½ o conteï¿½do do PDF e grava para saï¿½da
 	    byte[] bytesBuffer = new byte[2048];
 	    int bytesRead;
 	    while ((bytesRead = pdfInputStream.read(bytesBuffer)) > 0) {
@@ -129,35 +125,6 @@ public class CadastroRelatorioBean implements Serializable {
         
         return "index?faces-redirect=true";
 		
-	}
-	
-	public void puxa() throws IOException{
-		
-		FacesContext facesContext = FacesContext.getCurrentInstance();
-	    HttpServletResponse response = (HttpServletResponse) facesContext.getExternalContext().getResponse();
-
-	    response.reset();   // Algum filtro pode ter configurado alguns cabeçalhos no buffer de antemão. Queremos livrar-se deles, senão ele pode colidir.
-	    response.setHeader("Content-Type", "application/pdf");  // Define apenas o tipo de conteúdo, Utilize se necessário ServletContext#getMimeType() para detecção automática com base em nome de arquivo. 
-	    OutputStream responseOutputStream = response.getOutputStream();
-
-	    String PDF_URL = "http://snmp.info.ufrn.br:8080/Deprov/resources/relatorios/FirstJasperReport.pdf";
-		// Lê o conteúdo do PDF
-	    URL url = new URL(PDF_URL);
-	    InputStream pdfInputStream = url.openStream();
-
-	    // Lê o conteúdo do PDF e grava para saída
-	    byte[] bytesBuffer = new byte[2048];
-	    int bytesRead;
-	    while ((bytesRead = pdfInputStream.read(bytesBuffer)) > 0) {
-	        responseOutputStream.write(bytesBuffer, 0, bytesRead);
-	    }    
-	    responseOutputStream.flush();
-
-	    // Fecha os streams
-	    pdfInputStream.close();
-	    responseOutputStream.close();         
-	    facesContext.responseComplete();         
-	
 	}
 	
 	public StreamedContent getFile() {
@@ -183,6 +150,4 @@ public class CadastroRelatorioBean implements Serializable {
 	public void setVeiculo(Veiculo veiculo) {
 		this.veiculo = veiculo;
 	}
-	
-
 }

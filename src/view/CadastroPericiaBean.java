@@ -42,11 +42,6 @@ public class CadastroPericiaBean implements Serializable{
 				new FacesMessage(FacesMessage.SEVERITY_INFO, msg, msg));
 	}
 
-	public void update(Pericia pericia){
-		Pericias pericias = this.repositorios.getPericias();
-		pericias.editar(pericia);
-	}
-
 	public void excluir(Pericia pericia){
 		Pericias pericias = this.repositorios.getPericias();
 		pericias.remover(pericia);

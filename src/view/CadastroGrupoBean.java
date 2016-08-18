@@ -30,12 +30,6 @@ public class CadastroGrupoBean implements Serializable{
 		Grupos grupos = this.repositorios.getGrupos();
 		grupos.salvar(grupo);
 		this.grupo = new Grupo();
-		//this.init();
-	}
-
-	public void update(Grupo grupo){
-		Grupos grupos = this.repositorios.getGrupos();
-		grupos.editar(grupo);
 	}
 
 	public void excluir(Grupo grupo){

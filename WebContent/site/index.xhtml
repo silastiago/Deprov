@@ -2,12 +2,128 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
 	xmlns:h="http://java.sun.com/jsf/html"
 	xmlns:f="http://java.sun.com/jsf/core"
-	xmlns:ui="http://java.sun.com/jsf/facelets">
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui">
 <ui:composition template="/templates/template.xhtml">
 	<ui:define name="tituloJanela">Sistema com JSF 2.0 e Facelets</ui:define>
 	<ui:define name="conteudo">
+
+		<h1>Lista de Veiculos Cadastrados</h1>
+
+		<h:form enctype="multipart/form-data" acceptcharset="ISO-8859-1">
+			
+			
+			<p:dataTable value="#{cadastroVeiculoBean.veiculos}" var="veiculo"  id="mostraEquipamento"
+			paginatorTemplate="{CurrentPageReport} {PageLinks} {Exporters}"
+			paginator="true" rows="10">
+				
+			<f:facet name="{Exporters}">
+				<h:commandButton  value="Gerar Relatorio">
+				<f:attribute name="codigo" value="#{cadastroVeiculoBean.veiculo}" />
+				</h:commandButton>
+       		 </f:facet>
+
+				
+				<p:column filterBy="#{veiculo.dossie}" style="text-align: center; width:4%" 
+					filterMatchMode="startsWith">
+					<f:facet name="header">
+						<h:outputText value="Numero do dossie" />
+					</f:facet>
+					<h:outputText value="#{veiculo.dossie}" />
+				</p:column>
+				
+				<p:column filterBy="#{veiculo.date4}" style="text-align: center; width:4%" 
+					filterMatchMode="startsWith">
+					<f:facet name="header">
+						<h:outputText value="Data" />
+					</f:facet>
+					<h:outputText value="#{veiculo.date4}" >
+					<f:convertDateTime pattern="dd/MM/yyyy"/>
+					</h:outputText>
+				</p:column>
+				
+				<p:column filterBy="#{veiculo.placa}" style="text-align: center; width:4%" 
+					filterMatchMode="startsWith">
+					<f:facet name="header">
+						<h:outputText value="Placa" />
+					</f:facet>
+					<h:outputText value="#{veiculo.placa}" />
+				</p:column>
+
+				<p:column filterBy="#{veiculo.fabricante.fabricante}"  style="text-align: center; width:5%" filterMatchMode="startsWith">
+					<f:facet name="header">
+						<h:outputText value="Fabricante" />
+					</f:facet>
+					<h:outputText value="#{veiculo.fabricante.fabricante}" />
+				</p:column>
+		
+				<p:column filterBy="#{veiculo.modelo.modelo}"  style="text-align: center; width:5%" filterMatchMode="startsWith">
+					<f:facet name="header">
+						<h:outputText value="Modelo" />
+					</f:facet>
+					<h:outputText value="#{veiculo.modelo.modelo}" />
+				</p:column>
+
+
+				<p:column filterBy="#{veiculo.cor.cor}"  style="text-align: center; width:4%" filterMatchMode="startsWith">
+					<f:facet name="header">
+						<h:outputText value="Cor" />
+					</f:facet>
+					<h:outputText value="#{veiculo.cor.cor}" />
+				</p:column>
+				
+				<p:column filterBy="#{veiculo.anofabricacao}"  style="text-align: center; width:4%" filterMatchMode="startsWith">
+					<f:facet name="header">
+						<h:outputText value="Ano Fab/Mod" />
+					</f:facet>
+					<h:outputText value="#{veiculo.anofabricacao}" />
+				</p:column>
+
+
+				<p:column filterBy="#{veiculo.chassi}"  style="text-align: center; width:7%" filterMatchMode="contains">
+					<f:facet name="header">
+						<h:outputText value="Chassi" />
+					</f:facet>
+					<h:outputText value="#{veiculo.chassi}" />
+				</p:column>
+	
+				<p:column filterBy="#{veiculo.motor}"  style="text-align: center; width:7%" filterMatchMode="contains">
+					<f:facet name="header">
+						<h:outputText value="Motor" />
+					</f:facet>
+					<h:outputText value="#{veiculo.motor}" />
+				</p:column>
+				
+				<p:column filterBy="#{veiculo.pericia.pericia}"  style="text-align: center; width:5%" filterMatchMode="startsWith">
+					<f:facet name="header">
+						<h:outputText value="Exame Veicular" />
+					</f:facet>
+					<h:outputText value="#{veiculo.pericia.pericia}" />
+				</p:column>
+				
+				<p:column filterBy="#{veiculo.situacao}"  style="text-align: center; width:4%" filterMatchMode="startsWith">
+					<f:facet name="header">
+						<h:outputText value="Situação" />
+					</f:facet>
+					<h:outputText value="#{veiculo.situacao}" />
+				</p:column>
+			
+			
+			</p:dataTable>
+			
+			<h:commandLink>
+                <p:graphicImage name="/resources/images/excel.png" />
+                <p:dataExporter type="xls" target="mostraEquipamento" fileName="carros" />
+            </h:commandLink>
+ 
+            <h:commandLink>
+                <p:graphicImage name="/resources/images/pdf.png"/>
+                <p:dataExporter type="pdf" target="mostraEquipamento" fileName="carros" />
+            </h:commandLink>
+
+		</h:form>
 	</ui:define>
-	</ui:composition>
+</ui:composition>
 </html>
 
 

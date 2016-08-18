@@ -1,36 +1,18 @@
 package view;
 
-import java.io.ByteArrayInputStream;
-import java.io.File;
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.OutputStream;
+
 import java.io.Serializable;
-import java.sql.Connection;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 import javax.annotation.PostConstruct;
-import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
-import javax.faces.bean.RequestScoped;
-import javax.faces.context.ExternalContext;
-import javax.faces.context.FacesContext;
-import javax.faces.event.PhaseId;
-import javax.servlet.ServletContext;
-import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.Part;
+import javax.faces.bean.ViewScoped;
+import javax.faces.event.ActionEvent;
+import javax.faces.event.ValueChangeEvent;
 
-import org.apache.commons.io.IOUtils;
-import org.primefaces.event.FileUploadEvent;
-import org.primefaces.model.DefaultStreamedContent;
 import org.primefaces.model.StreamedContent;
-import org.primefaces.model.UploadedFile;
 
-import conexao.ConnectionFactory;
 import model.Cor;
 import model.Fabricante;
 import model.Modelo;
@@ -38,17 +20,6 @@ import model.Pericia;
 import model.Seguro;
 import model.Tipo;
 import model.Veiculo;
-import net.sf.jasperreports.engine.JRException;
-import net.sf.jasperreports.engine.JasperCompileManager;
-import net.sf.jasperreports.engine.JasperFillManager;
-import net.sf.jasperreports.engine.JasperPrint;
-import net.sf.jasperreports.engine.JasperReport;
-import net.sf.jasperreports.engine.export.JRPdfExporter;
-import net.sf.jasperreports.export.ExporterInput;
-import net.sf.jasperreports.export.OutputStreamExporterOutput;
-import net.sf.jasperreports.export.SimpleExporterInput;
-import net.sf.jasperreports.export.SimpleOutputStreamExporterOutput;
-import net.sf.jasperreports.export.SimplePdfExporterConfiguration;
 import repository.Cores;
 import repository.Fabricantes;
 import repository.Modelos;
@@ -59,7 +30,7 @@ import repository.Veiculos;
 import util.Repositorios;
 
 @ManagedBean(name="cadastroVeiculoBean")
-@RequestScoped
+@ViewScoped
 public class CadastroVeiculoBean implements Serializable{
 
 	private Repositorios repositorios = new Repositorios();
@@ -72,12 +43,9 @@ public class CadastroVeiculoBean implements Serializable{
 	private List<Modelo> modelos = new ArrayList<Modelo>();
 	private List<Seguro> seguros = new ArrayList<Seguro>();
 	private List<Pericia> pericias = new ArrayList<Pericia>();
+	private StreamedContent file;
 	
 	
-
-
-
-
 	@PostConstruct
 	public void init(){
 		Veiculos veiculos = this.repositorios.getveiculos();
@@ -104,55 +72,11 @@ public class CadastroVeiculoBean implements Serializable{
 			veiculos.salvar(veiculo);
 		return "index?faces-redirect=true";
 	}
-
-	public String gerarRelatorio(String codigo) throws JRException {
-		System.out.println("iunciiando metodo de geracao de relatorio");
-		
-		int idVeiculo = Integer.parseInt(codigo);
-		ConnectionFactory conexao = new ConnectionFactory();
-		
-		String reportSrcFile = "C:/Users/Sinf02/workspace/Deprov/WebContent/resources/relatorios/Relatorio.jrxml";
-        
-        // First, compile jrxml file.
-        JasperReport jasperReport =    JasperCompileManager.compileReport(reportSrcFile);
- 
-        Connection conn = conexao.getConnection();
- 
-        // Parameters for report
-        Map<String, Object> parameters = new HashMap<String, Object>();
-        parameters.put("codigo_veiculo", idVeiculo);
-        
-        JasperPrint print = JasperFillManager.fillReport(jasperReport,
-                parameters, conn);
- 
-        // Make sure the output directory exists.
-        //File outDir = new File("C:/Users/Sinf02/Pictures");
-        //outDir.mkdirs();
- 
-        // PDF Exportor.
-        JRPdfExporter exporter = new JRPdfExporter();
- 
-        ExporterInput exporterInput = new SimpleExporterInput(print);
-        // ExporterInput
-        exporter.setExporterInput(exporterInput);
- 
-        // ExporterOutput
-        OutputStreamExporterOutput exporterOutput = new SimpleOutputStreamExporterOutput(
-                "C:/Users/Sinf02/Downloads/FirstJasperReport.pdf");
-        // Output
-        exporter.setExporterOutput(exporterOutput);
- 
-        //
-        SimplePdfExporterConfiguration configuration = new SimplePdfExporterConfiguration();
-        exporter.setConfiguration(configuration);
-        exporter.exportReport();	
-        System.out.print("Relatorio criado com sucesso!");
-        return "index?faces-redirect=true";
-	}
 	
-	public void update(Veiculo veiculo){
-		Veiculos veiculos = this.repositorios.getveiculos();
-		veiculos.editar(veiculo);
+	public String ocorrencia(ActionEvent event){
+		Veiculo veiculo = (Veiculo) event.getComponent().getAttributes().get("codigo");
+		String codigo = veiculo.getCodigo().toString();
+		return "Ocorrencia?codigo="+codigo+"faces-redirect=true";
 	}
 
 	public void excluir(Veiculo veiculo){
@@ -160,7 +84,13 @@ public class CadastroVeiculoBean implements Serializable{
 		veiculos.remover(veiculo);
 		this.init();
 	}
-
+	
+	/*public void listarVeiculo(String codigo){
+	int idVeiculo = Integer.parseInt(codigo);
+	Veiculos IVeiculo= this.repositorios.getveiculos();
+	veiculos = IVeiculo.listarPorPlaca(idVeiculo);
+	}*/
+	
 	public Veiculo getVeiculo() {
 		return veiculo;
 	}
@@ -173,7 +103,7 @@ public class CadastroVeiculoBean implements Serializable{
 			this.veiculo = (Veiculo) veiculo.clone();
 		}
 	}
-
+	
 	public List<Veiculo> getVeiculos() {
 		return veiculos;
 	}
@@ -186,11 +116,9 @@ public class CadastroVeiculoBean implements Serializable{
 		return veiculosFiltrados;
 	}
 
-
 	public void setVeiculosFiltrados(List<Veiculo> veiculosFiltrados) {
 		this.veiculosFiltrados = veiculosFiltrados;
 	}
-
 
 	public List<Cor> getCores() {
 		return cores;
@@ -216,7 +144,6 @@ public class CadastroVeiculoBean implements Serializable{
 		this.fabricantes = fabricantes;
 	}
 
-
 	public List<Modelo> getModelos() {
 		return modelos;
 	}
@@ -239,5 +166,13 @@ public class CadastroVeiculoBean implements Serializable{
 
 	public void setPericias(List<Pericia> pericias) {
 		this.pericias = pericias;
+	}
+
+	public StreamedContent getFile() {
+		return file;
+	}
+
+	public void setFile(StreamedContent file) {
+		this.file = file;
 	}	
 }

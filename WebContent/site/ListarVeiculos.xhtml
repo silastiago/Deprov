@@ -10,56 +10,65 @@
 
 		<h1>Lista de Veiculos Cadastrados</h1>
 
-		<h:form enctype="multipart/form-data">
-
-			<h:messages />
-			<p:dataTable value="#{cadastroVeiculoBean.veiculos}" var="veiculo"   widgetVar="veiculoTable" filteredValue="#{cadastroVeiculoBean.veiculosFiltrados}" rows="10" rowsPerPageTemplate="5,10,15,20"
-				id="mostraEquipamento"  paginator="true" scrollable="true" >
+		<h:form enctype="multipart/form-data" acceptcharset="ISO-8859-1">
+			
+			
+			
+			<p:dataTable value="#{cadastroVeiculoBean.veiculos}" var="veiculo"  id="mostraEquipamento"
+			widgetVar="veiculoFiltro" filteredValue="#{cadastroVeiculoBean.veiculosFiltrados}" 
+			paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+			paginator="true" rows="10"
+			rowsPerPageTemplate="5,10,15,20,25,30,35,40,45,50">	
 				
 				
 				<f:facet name="header">
-                		<h:outputText value="Busca Avançada :"  />
-                		<p:inputText id="globalFilter" onkeyup="PF('veiculoTable').filter()" />
+            		<p:outputPanel>
+                		<h:outputText value="Busca Avançada:" />
+                		<p:inputText id="globalFilter" onkeyup="PF('veiculoFiltro').filter()"/>
+            		</p:outputPanel>
         		</f:facet>
 				
 				
-				<p:column filterBy="#{veiculo.placa}"  style="text-align: center; width:5%" 
-					filterMatchMode="startsWith">
+				<p:column filterBy="#{veiculo.placa}"  style="text-align: center; width:7%" 
+					filterMatchMode="contains">
 					<f:facet name="header">
-						<h:outputText value="Placa" />
+						<h:outputText value="Placa no Veiculo" />
 					</f:facet>
 					<h:outputText value="#{veiculo.placa}" />
 				</p:column>
-
-				<p:column filterBy="#{veiculo.tipo.tipo}"  style="text-align: center; width:5%" filterMatchMode="startsWith">
-					<f:facet name="header">
-						<h:outputText value="Tipo" />
-					</f:facet>
-					<h:outputText value="#{veiculo.tipo.tipo}" />
-				</p:column>
-
-				<p:column filterBy="#{veiculo.cor.cor}"  style="text-align: center; width:5%" filterMatchMode="startsWith">
-					<f:facet name="header">
-						<h:outputText value="Cor" />
-					</f:facet>
-					<h:outputText value="#{veiculo.cor.cor}" />
-				</p:column>
 				
-				<p:column filterBy="#{veiculo.fabricante.fabricante}"  style="text-align: center; width:5%" filterMatchMode="startsWith">
+				<p:column filterBy="#{veiculo.placaOriginal}"  style="text-align: center; width:7%" 
+					filterMatchMode="contains">
+					<f:facet name="header">
+						<h:outputText value="Placa no Original" />
+					</f:facet>
+					<h:outputText value="#{veiculo.placaOriginal}" />
+				</p:column>
+
+
+				<p:column filterBy="#{veiculo.fabricante.fabricante}"  style="text-align: center; width:7%" filterMatchMode="startsWith">
 					<f:facet name="header">
 						<h:outputText value="Fabricante" />
 					</f:facet>
 					<h:outputText value="#{veiculo.fabricante.fabricante}" />
 				</p:column>
 		
-				<p:column filterBy="#{veiculo.modelo.modelo}"  style="text-align: center; width:5%" filterMatchMode="startsWith">
+				<p:column filterBy="#{veiculo.modelo.modelo}"  style="text-align: center; width:7%" filterMatchMode="startsWith">
 					<f:facet name="header">
 						<h:outputText value="Modelo" />
 					</f:facet>
 					<h:outputText value="#{veiculo.modelo.modelo}" />
 				</p:column>
+
+
+				<p:column filterBy="#{veiculo.cor.cor}"  style="text-align: center; width:7%" filterMatchMode="startsWith">
+					<f:facet name="header">
+						<h:outputText value="Cor" />
+					</f:facet>
+					<h:outputText value="#{veiculo.cor.cor}" />
+				</p:column>
 				
-				<p:column filterBy="#{veiculo.anofabricacao}"  style="text-align: center; width:5%" filterMatchMode="startsWith">
+				<p:column filterBy="#{veiculo.anofabricacao}"  style="text-align: center; width:7%" filterMatchMode="startsWith">
 					<f:facet name="header">
 						<h:outputText value="Ano Fab/Mod" />
 					</f:facet>
@@ -67,81 +76,46 @@
 				</p:column>
 
 
-				<p:column filterBy="#{veiculo.chassi}"  style="text-align: center; width:5%" filterMatchMode="startsWith">
+				<p:column filterBy="#{veiculo.chassi}"  style="text-align: center; width:15%" filterMatchMode="contains">
 					<f:facet name="header">
 						<h:outputText value="Chassi" />
 					</f:facet>
 					<h:outputText value="#{veiculo.chassi}" />
 				</p:column>
 	
-				<p:column filterBy="#{veiculo.motor}"  style="text-align: center; width:5%" filterMatchMode="startsWith">
+				<p:column filterBy="#{veiculo.motor}"  style="text-align: center; width:15%" filterMatchMode="contains">
 					<f:facet name="header">
 						<h:outputText value="Motor" />
 					</f:facet>
 					<h:outputText value="#{veiculo.motor}" />
 				</p:column>
 				
-				<p:column filterBy="#{veiculo.obs}"  style="text-align: center; width:5%" filterMatchMode="startsWith">
+				<p:column filterBy="#{veiculo.pericia.pericia}"  style="text-align: center; width:7%" filterMatchMode="startsWith">
 					<f:facet name="header">
-						<h:outputText value="Observações" />
+						<h:outputText value="Exame Veicular" />
 					</f:facet>
-					<h:inputTextarea value="#{veiculo.obs}" cols="12" />
-				</p:column>
-			
-				<p:column style="text-align: center; width:3%">
-					<h:link outcome="Veiculo" value="Editar">
-					<i class="icon-edit"></i>
-					<f:param name="codigo"  value="#{veiculo.codigo}"/>
-					</h:link>
+					<h:outputText value="#{veiculo.pericia.pericia}" />
 				</p:column>
 				
-				<p:column style="text-align: center; width:5%">
-					<h:link outcome="Ocorrencia" value="Gerar Ocorrencia">
+				<p:column filterBy="#{veiculo.situacao}"  style="text-align: center; width:8%" filterMatchMode="startsWith">
+					<f:facet name="header">
+						<h:outputText value="Situação" />
+					</f:facet>
+					<h:outputText value="#{veiculo.situacao}" />
+				</p:column>
+			
+				<p:column style="text-align: center; width:7%">
+					<h:link outcome="Veiculo" value="Visualizar">
 					<i class="icon-edit"></i>
 					<f:param name="codigo"  value="#{veiculo.codigo}"/>
 					</h:link>
 				</p:column>
-			
-			<p:column style="text-align: center; width:5%">
-					<h:link outcome="Foto" value="Adicionar Foto">
-					<i class="icon-edit"></i>
-					<f:param name="codigo"  value="#{veiculo.codigo}"/>
-					</h:link>
-			</p:column>
-			
-			<p:column style="text-align: center; width:5%">
-					<h:link outcome="Relatorio" value="Gerar Relatorio">
-					<i class="icon-edit"></i>
-					<f:param name="codigo"  value="#{veiculo.codigo}"/>
-					</h:link>
-			</p:column>
-			
-			
-			
-			<p:column style="text-align: center; width:3%">
-				<h:commandLink value="Excluir"
-				 action="#{cadastroVeiculoBean.excluir(veiculo)}"
-				 onclick="if (!confirm('Confirmar a exclusão deste Veiculo? ')) return false"/>
-				 <i class="icon-remove-sign"></i>
-			</p:column>
-
-				
 
 				<f:facet name="footer">
 
 				</f:facet>
 			</p:dataTable>
-
-
-
-
-
-
-
 		</h:form>
 	</ui:define>
 </ui:composition>
 </html>
-
-
-

@@ -7,7 +7,6 @@ import javax.faces.convert.Converter;
 import javax.faces.convert.ConverterException;
 import javax.faces.convert.FacesConverter;
 
-import model.Cor;
 import model.Ocorrencia;
 import repository.Ocorrencias;
 import util.Repositorios;

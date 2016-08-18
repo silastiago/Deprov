@@ -31,7 +31,7 @@ public class CadastroCorBean implements Serializable{
 	}
 
 
-	public void cadastrar(){
+	public String cadastrar(){
 		Cores cores = this.repositorios.getCores();
 		cores.salvar(cor);
 
@@ -39,12 +39,7 @@ public class CadastroCorBean implements Serializable{
 		FacesContext.getCurrentInstance().addMessage(null,
 				new FacesMessage(FacesMessage.SEVERITY_INFO, msg, msg));
 		
-		//return "index?faces-redirect=true";
-	}
-
-	public void update(Cor cor){
-		Cores cores = this.repositorios.getCores();
-		cores.editar(cor);
+		return "index?faces-redirect=true";
 	}
 
 	public void excluir(Cor cor){

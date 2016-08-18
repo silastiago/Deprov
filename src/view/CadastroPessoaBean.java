@@ -5,10 +5,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 import javax.annotation.PostConstruct;
-import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.RequestScoped;
-import javax.faces.context.FacesContext;
 
 import model.Grupo;
 import model.Pessoa;
@@ -38,12 +36,6 @@ public class CadastroPessoaBean implements Serializable{
 		pessoas.salvar(this.pessoa);
 	}
 
-	
-	public void update(Pessoa pessoa){
-		Pessoas pessoas = this.repositorios.getPessoas();
-		pessoas.editar(pessoa);
-	}
-
 	public void excluir(Pessoa pessoa){
 		Pessoas pessoas = this.repositorios.getPessoas();
 		pessoas.remover(pessoa);
@@ -52,18 +44,17 @@ public class CadastroPessoaBean implements Serializable{
 
 	public String logar(){
 		Pessoas pessoas = this.repositorios.getPessoas();
-		System.out.println("Nome da pessoa: " + pessoas.login(pessoa).getLogin());
-		System.out.println("Senha da pessoa: " + pessoas.login(pessoa).getSenha());
-		if (pessoas.login(pessoa) == null ) {
+		if (pessoas.login(pessoa) == false) {
 			return "Login.xhtml";
 		}
-		return "index.xhtml";
+		return "site/index.xhtml?faces-redirect=true";
 	}
 
-	public String logout() {
+	public String sair() {
+		System.out.println("TESTANDO FUNCAO DE SAIR");
 		Pessoas pessoas = this.repositorios.getPessoas();
-		pessoas.logout();
-		return "Login.xhtml";
+		pessoas.logout(); 
+		return "../Login.xhtml?faces-redirect=true";
 	}
 	
 	

@@ -2,18 +2,19 @@ package model;
 
 import java.io.Serializable;
 
-import javax.annotation.Generated;
+
 import javax.persistence.Column;
-import javax.persistence.Embeddable;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
-import org.hibernate.annotations.Index;
-
+/** Esta Classe que possui os metodos de acesso getter e setters que representa grupo de usuarios, 
+ * e também possui o mapeamento relacional das tabelas via hibernate, da entidade Grupo.
+*   
+* @author silas
+*
+*/
 
 @Entity
 @Table

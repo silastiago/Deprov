@@ -1,27 +1,25 @@
 package view;
 
+import java.io.IOException;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
 
 import javax.annotation.PostConstruct;
-import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
-import javax.faces.bean.RequestScoped;
 import javax.faces.bean.ViewScoped;
 import javax.faces.context.FacesContext;
-import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
-import org.primefaces.event.CellEditEvent;
+import org.primefaces.event.RowEditEvent;
 
 import model.Ocorrencia;
 import model.Veiculo;
 import repository.Ocorrencias;
-import repository.Veiculos;
+import util.FacesUtil;
 import util.Repositorios;
 
-@ManagedBean(name = "cadastroOcorrrenciaBean")
+@ManagedBean(name = "cadastroOcorrenciaBean")
 @ViewScoped
 public class CadastroOcorrenciaBean implements Serializable {
 
@@ -30,68 +28,62 @@ public class CadastroOcorrenciaBean implements Serializable {
 	private List<Ocorrencia> ocorrencias = new ArrayList<Ocorrencia>();
 	private List<Veiculo> veiculos = new ArrayList<Veiculo>();
 	private Veiculo veiculo = new Veiculo();
-
+	
+	
 	@PostConstruct
-	public void init() {
-		Ocorrencias ocorrencias = this.repositorios.getocorrencia();
-		this.ocorrencias = ocorrencias.listar();
-		Veiculos veiculos = this.repositorios.getveiculos();
-		this.veiculos = veiculos.listar();
+	public void init(){
+		ocorrencias = listarVeiculo();
 	}
-
-	public String cadastrar(String codigo) {
+	
+	public void cadastrar(String codigo) throws IOException {
 		Ocorrencias ocorrencias = this.repositorios.getocorrencia();
 		
-		int idVeiculo = Integer.parseInt(codigo);
-		
-		
-		//String codigo = FacesContext.getCurrentInstance().getExternalContext().getRequestParameterMap().get("codigo");
-
-		
-		//System.out.println("Codigo do veiculo: " + codigo);
-		
-		// FacesContext fc = FacesContext.getCurrentInstance();
-		// String id_veiculo =
-		// fc.getExternalContext().getRequestParameterMap().get("codigo_veiculo")
-		// ;
-		System.out.println("ID do veiculo: " + codigo);
-		// 
-		//System.out.println("ID do veiculo: " + idVeiculo);
-		
+		int idVeiculo = Integer.parseInt(codigo);		
 		veiculo.setCodigo(idVeiculo);
 		ocorrencia.setVeiculo(veiculo);
-
+		ocorrencia.setData(FacesUtil.addDia(this.ocorrencia.getData(), 1));
 		ocorrencias.salvar(ocorrencia);
 		
-
-		String msg = "Cadastro efetuado com sucesso!";
-		FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, msg, msg));
+		FacesContext fc = FacesContext.getCurrentInstance();
+	    HttpSession session = (HttpSession)fc.getExternalContext().getSession(false);
+	    FacesContext.getCurrentInstance().getExternalContext().redirect("Ocorrencia.xhtml?codigo="+codigo);
+		
+		//return null;
+	}
 	
+	public String redirecionar(String codigo){
+		//Ocorrencia ocorrencia = (Ocorrencia) event.getComponent().getAttributes().get("codigo_ocorrencia");
+		System.out.println("Codigo da ocorrencia: "+codigo);
+		String pagina = "Ocorrencia2.xhtml?codigo_ocorrencia="+codigo+"faces-redirect=true";
+		System.out.println(pagina);
+		return pagina;
+	}
+	
+	public String editar() {
+		Ocorrencias ocorrencias = this.repositorios.getocorrencia();
+		ocorrencias.salvar(ocorrencia);
 		return "index?faces-redirect=true";
 	}
-	
-	public void update(Ocorrencia ocorrencia) {
-		Ocorrencias ocorrencias = this.repositorios.getocorrencia();
-		ocorrencias.editar(ocorrencia);
-	}
 
-	public void excluir(Ocorrencia ocorrencia) {
+	public void excluir(String codigo) throws IOException {
+		System.out.println("Codigo da ocorrencia: "+ codigo);
 		Ocorrencias ocorrencias = this.repositorios.getocorrencia();
-		ocorrencias.remover(ocorrencia);
-		this.init();
-	}
-
-	public List<Ocorrencia> listar(){
-		Ocorrencias Iocorrencia = this.repositorios.getocorrencia();
-		ocorrencias = Iocorrencia.listar();
-		return ocorrencias; 
+		int idOcorrencia = Integer.parseInt(codigo);
+		Ocorrencia ocorrencia2 = ocorrencias.porCodigo(idOcorrencia);
+		ocorrencias.remover(ocorrencia2);
+		
+		FacesContext fc = FacesContext.getCurrentInstance();
+	    HttpSession session = (HttpSession)fc.getExternalContext().getSession(false);
+	    FacesContext.getCurrentInstance().getExternalContext().redirect("Ocorrencia.xhtml?codigo="+ocorrencia2.getVeiculo().getCodigo());
+		//return "index?faces-redirect=true";
 	}
 	
-	public List<Ocorrencia> listarVeiculo(String codigo){
+	public List<Ocorrencia> listarVeiculo(){
+		String codigo = FacesContext.getCurrentInstance().getExternalContext().getRequestParameterMap().get("codigo");
 		int idVeiculo = Integer.parseInt(codigo);
 		Ocorrencias Iocorrencia = this.repositorios.getocorrencia();
 		ocorrencias = Iocorrencia.porCodigoVeiculo(idVeiculo);
-		return ocorrencias; 
+		return ocorrencias;
 	}
 	
 	public Ocorrencia getOcorrencia() {
@@ -107,6 +99,17 @@ public class CadastroOcorrenciaBean implements Serializable {
 		}
 	}
 
+	public void onRowEdit(RowEditEvent event) throws IOException {
+		Ocorrencia novaOcorrencia = (Ocorrencia) event.getObject();
+		Ocorrencias ocorrencias = this.repositorios.getocorrencia();
+		ocorrencias.salvar(novaOcorrencia);
+        
+    }
+     
+    public void onRowCancel(RowEditEvent event) {
+        
+    }
+	
 	public List<Ocorrencia> getOcorrencias() {
 		return ocorrencias;
 	}

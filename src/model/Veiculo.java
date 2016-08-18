@@ -1,26 +1,23 @@
 package model;
 
 import java.io.Serializable;
-import java.util.Arrays;
-import java.util.Date;
-import java.util.List;
 
-import javax.persistence.Basic;
+import java.util.Date;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
-import javax.persistence.Lob;
-import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
 import javax.persistence.Table;
-import javax.servlet.http.Part;
 
-import org.hibernate.annotations.ManyToAny;
-
+/** Classe Veiculo que possui os metodos de acesso getter e setters, 
+ * e também o mapeamento relacional das tabelas via hibernate, da entidade Veiculo.
+*   
+* @author silas
+*
+*/
 
 @Entity
 @Table
@@ -78,7 +75,6 @@ public class Veiculo implements Serializable, Cloneable{
 	public void setDate4(Date date4) {
 		this.date4 = date4;
 	}
-
 
 	@Column
 	public String getPlaca() {
