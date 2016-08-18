@@ -4,17 +4,17 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.annotation.PostConstruct;
-import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.RequestScoped;
-import javax.faces.context.FacesContext;
-
 import model.Cor;
-import model.Fabricante;
 import repository.Cores;
-import repository.Fabricantes;
 import util.Repositorios;
+
+/** Esta é uma Classe concreta que une as implementacoes das interfaces e das paginas xhtml referentes a entidade Cor.
+*   
+* @author silas
+* @since 15-08-2016
+*/
 
 @ManagedBean(name="cadastroCorBean")
 @RequestScoped
@@ -22,36 +22,47 @@ public class CadastroCorBean implements Serializable{
 
 	private Repositorios repositorios = new Repositorios();
 	private Cor cor = new Cor();	
-	private List<Cor> cores = new ArrayList<Cor>();
+	private List<Cor> listaCores = new ArrayList<Cor>();
 
-	@PostConstruct
-	public void init(){
-		Cores cores = this.repositorios.getCores();
-		this.cores = cores.listar();
-	}
-
-
+	/** Este metodo cadastra uma cor.
+	* 	@return retorna a pagina inicial do sistema.
+	*/
 	public String cadastrar(){
+		//Esta linha estou instanciando a interface com sua implementação.
 		Cores cores = this.repositorios.getCores();
+		//Esta linha salva a entidade cor.
 		cores.salvar(cor);
-
-		String msg = "Cadastro efetuado com sucesso!";
-		FacesContext.getCurrentInstance().addMessage(null,
-				new FacesMessage(FacesMessage.SEVERITY_INFO, msg, msg));
-		
+		//Retorno da pagina.
 		return "index?faces-redirect=true";
 	}
-
-	public void excluir(Cor cor){
+	
+	/** Este metodo lista todas as cores cadastradas.
+	* 	@return retorna a lista de todas as cores cadastradas no sistema.
+	*/
+	public List<Cor> listarCores(){
+		//Esta linha estou instanciando a interface com sua implementação
 		Cores cores = this.repositorios.getCores();
+		//Esta linha lista as cores e joga em uma lista de cores.
+		listaCores = cores.listar();
+		//Esta linha retorna a lista de cores
+		return listaCores;
+	}
+
+	/** Este metodo Remove uma cor.
+	*  @param cor, Esta cor é o objeto cor que você irá remover.
+	*/
+	public void excluir(Cor cor){
+		//Esta linha estou instanciando a interface com sua implementação
+		Cores cores = this.repositorios.getCores();
+		//Esta linha remove a cor.
 		cores.remover(cor);
-		this.init();
+		//Esta linha chama a funcao de listar as cores para que a lista de cores seja atualizada.
+		this.listarCores();
 	}
 
 	public Cor getCor() {
 		return cor;
 	}
-
 	
 	public void setCor(Cor cor) throws CloneNotSupportedException {
 		this.cor = cor;
@@ -62,12 +73,11 @@ public class CadastroCorBean implements Serializable{
 		}
 	}
 
-	public List<Cor> getCores() {
-		return cores;
+	public List<Cor> getListaCores() {
+		return listaCores;
 	}
 
-
-	public void setCores(List<Cor> cores) {
-		this.cores = cores;
+	public void setListaCores(List<Cor> listaCores) {
+		this.listaCores = listaCores;
 	}
 }

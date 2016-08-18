@@ -4,15 +4,19 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.annotation.PostConstruct;
-import javax.faces.application.FacesMessage;
+
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.RequestScoped;
-import javax.faces.context.FacesContext;
 
 import model.Fabricante;
 import repository.Fabricantes;
 import util.Repositorios;
+
+/** Esta é uma Classe concreta que une as implementacoes das interfaces e das paginas xhtml referentes a entidade Fabricante.
+*   
+* @author silas
+* @since 18-08-2016
+*/
 
 @ManagedBean(name="cadastroFabricanteBean")
 @RequestScoped
@@ -20,33 +24,48 @@ public class CadastroFabricanteBean implements Serializable{
 
 	private Repositorios repositorios = new Repositorios();
 	private Fabricante fabricante = new Fabricante();
-	private List<Fabricante> fabricantes = new ArrayList<Fabricante>();
+	private List<Fabricante> listaFabricantes = new ArrayList<Fabricante>();
 	
-
-	@PostConstruct
-	public void init(){
-		Fabricantes fabricantes = this.repositorios.getFabricantes();
-		this.fabricantes = fabricantes.listar();
-	}
-
-
+	
+	/** Este metodo cadastra um fabricante.
+	* 	@return retorna a pagina inicial do sistema.
+	*/
 	public String cadastrar(){
+		//Esta linha estou instanciando a interface com sua implementação.
 		Fabricantes fabricantes = this.repositorios.getFabricantes();
+		//Esta linha salva a entidade fabricante.
 		fabricantes.salvar(fabricante);
-		
+		//Retorno da pagina.
 		return "index?faces-redirect=true";
 	}
 
+	/** Este metodo Remove um fabricante.
+	*  @param fabricante, Este fabricante é o objeto Fabricante que você irá remover.
+	*/
 	public void excluir(Fabricante fabricante){
+		//Esta linha estou instanciando a interface com sua implementação.
 		Fabricantes fabricantes = this.repositorios.getFabricantes();
+		//Esta linha remove o fabricante.
 		fabricantes.remover(fabricante);
-		this.init();
+		//Esta linha chama a funcao de listar os fabricantes para que a lista de fabricantes seja atualizada.
+		this.listaFabricantes();
 	}
 
+	/** Este metodo lista todos os fabricantes cadastrados.
+	* 	@return retorna a lista de todos os fabricantes cadastradas no sistema.
+	*/
+	public List<Fabricante> listaFabricantes(){
+		//Esta linha estou instanciando a interface com sua implementação.
+		Fabricantes fabricantes = this.repositorios.getFabricantes();
+		//Esta linha lista os fabricantes e joga em uma lista de fabricantes.
+		listaFabricantes = fabricantes.listar();
+		//Esta linha retorna a lista de fabricantes
+		return listaFabricantes;		
+	}
+	
 	public Fabricante getFabricante() {
 		return fabricante;
 	}
-
 
 	public void setFabricante(Fabricante fabricante) throws CloneNotSupportedException {
 		this.fabricante = fabricante;
@@ -57,16 +76,11 @@ public class CadastroFabricanteBean implements Serializable{
 		}
 	}
 
-
-	public List<Fabricante> getFabricantes() {
-		return fabricantes;
+	public List<Fabricante> getListaFabricantes() {
+		return listaFabricantes;
 	}
 
-
-	public void setFabricantes(List<Fabricante> fabricantes) {
-		this.fabricantes = fabricantes;
+	public void setListaFabricantes(List<Fabricante> listaFabricantes) {
+		this.listaFabricantes = listaFabricantes;
 	}
-
-
-	
 }

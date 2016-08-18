@@ -185,7 +185,7 @@
         		<p:menuitem value="Delete" update="galeria" icon="ui-icon-close" actionListener="#{cadastroFotoBean.excluir}"/>
     		</p:contextMenu>
 				
-			<p:dataTable id="galeria" var="image" value="#{cadastroFotoBean.listaFotos}" 
+			<p:dataTable id="galeria" var="image" value="#{cadastroFotoBean.listarFotos()}" 
 			selection="#{cadastroFotoBean.foto}" selectionMode="single" rowKey="#{image.codigo}">
 				
 				<p:column >

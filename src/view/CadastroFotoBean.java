@@ -96,6 +96,12 @@ public class CadastroFotoBean implements Serializable {
 		//int idFoto = Integer.parseInt(codigo);
 		//Foto foto = Ifoto.porCodigo(idFoto);
 		Ifoto.remover(foto);
+		
+		String path = "/opt/tomcat/webapps/Deprov/resources/"+ foto.getPath();
+		File f = new File(path);
+		f.delete();
+				
+		
 		//listaFotos.remove(foto);
 		//this.init();
 		//return null;

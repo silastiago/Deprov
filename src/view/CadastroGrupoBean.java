@@ -4,7 +4,6 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.annotation.PostConstruct;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.RequestScoped;
 
@@ -18,13 +17,7 @@ public class CadastroGrupoBean implements Serializable{
 
 	private Repositorios repositorios = new Repositorios();
 	private Grupo grupo = new Grupo(); 	
-	private List<Grupo> grupos = new ArrayList<Grupo>();
-	
-	@PostConstruct
-	public void init(){
-		Grupos grupos = this.repositorios.getGrupos();
-		this.grupos = grupos.listar();
-	}
+	private List<Grupo> listaGrupos = new ArrayList<Grupo>();
 
 	public void cadastrar(){
 		Grupos grupos = this.repositorios.getGrupos();
@@ -35,7 +28,13 @@ public class CadastroGrupoBean implements Serializable{
 	public void excluir(Grupo grupo){
 		Grupos grupos = this.repositorios.getGrupos();
 		grupos.remover(grupo);
-		this.init();
+		this.listarGrupos();
+	}
+	
+	public List<Grupo> listarGrupos(){
+		Grupos grupos = this.repositorios.getGrupos();
+		listaGrupos = grupos.listar();
+		return listaGrupos;
 	}
 	
 	public Grupo getGrupo() {
@@ -51,11 +50,11 @@ public class CadastroGrupoBean implements Serializable{
 		}
 	}
 
-	public List<Grupo> getGrupos() {
-		return grupos;
+	public List<Grupo> getListaGrupos() {
+		return listaGrupos;
 	}
 
-	public void setGrupos(List<Grupo> grupos) {
-		this.grupos = grupos;
+	public void setListaGrupos(List<Grupo> listaGrupos) {
+		this.listaGrupos = listaGrupos;
 	}
 }
