@@ -1,5 +1,7 @@
 package util;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
 
@@ -40,4 +42,24 @@ public class FacesUtil {
 		cal.add(Calendar.DAY_OF_MONTH, qtd);
 		return cal.getTime();
 		}
+	
+	public static String DateString(Date data){
+		SimpleDateFormat formatoData = new SimpleDateFormat("dd-MM-yyyy");
+		String dataFormatada = formatoData.format(data);
+		return dataFormatada;
+	}
+	
+	public String converteData(String data) throws ParseException{
+		SimpleDateFormat formatoData = new SimpleDateFormat("dd-MM-yyyy");
+		java.sql.Date sql = (java.sql.Date) formatoData.parse(data);
+		Date dataFormato = sql;
+		String dataFormatada = formatoData.format(dataFormato);
+		System.out.println("Data Convertida: "+ dataFormatada);
+		
+		return dataFormatada;	
+			
+			
+			
+	}
+	
 }

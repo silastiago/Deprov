@@ -136,7 +136,7 @@
 					<p:outputLabel for="mask" value="Data:" />
 					<p:calendar id="mask" value="#{cadastroVeiculoBean.veiculo.date4}"
 						pattern="dd/MM/yyyy" mask="true" navigator="true" showOn="button">
-						<f:convertDateTime pattern="dd/MM/yyyy" type="both" dateStyle="short"/>						
+						<f:convertDateTime pattern="dd/MM/yyyy" type="both" dateStyle="short" timeZone="GMT-3" />						
 						</p:calendar>
 				</p:panelGrid>
 			<h:commandButton action="#{cadastroVeiculoBean.cadastrar()}" value="Salvar" />
@@ -162,6 +162,8 @@
         </p:tab>
          <p:tab title="Fotos do Veiculo">
             
+            
+            
             <h:form enctype="multipart/form-data" acceptcharset="ISO-8859-1">
 			<div class="ui-fluid">
 				<p:panelGrid columns="2" style="width: 100%; margin-top: 20px"
@@ -183,10 +185,13 @@
 			
 			<p:contextMenu for="galeria">
         		<p:menuitem value="Delete" update="galeria" icon="ui-icon-close" actionListener="#{cadastroFotoBean.excluir}"/>
-    		</p:contextMenu>
+    		</p:contextMenu>	
 				
-			<p:dataTable id="galeria" var="image" value="#{cadastroFotoBean.listarFotos()}" 
+				
+			<p:dataTable id="galeria" var="image" value="#{cadastroFotoBean.listaFotos}" 
 			selection="#{cadastroFotoBean.foto}" selectionMode="single" rowKey="#{image.codigo}">
+			
+			
 				
 				<p:column >
 					<f:facet name="header">

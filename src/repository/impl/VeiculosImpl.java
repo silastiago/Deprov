@@ -65,6 +65,9 @@ public class VeiculosImpl implements Veiculos{
 		this.sessao.delete(veiculo);
 
 	}
+	
+	
+	
 
 	/** Este metodo pesquisa um veiculo por sua placa.
 	*  	

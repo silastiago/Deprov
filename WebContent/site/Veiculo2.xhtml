@@ -121,12 +121,13 @@
 						
 					<h:outputText value="Motivo da Apreensão:" />
 					<p:inputText value="#{cadastroVeiculoBean.veiculo.motivoApreensao}" />
-
+					
+					
 					<p:outputLabel for="mask" value="Data:" />
-					<p:calendar id="mask" value="#{cadastroVeiculoBean.veiculo.date4}"
+					<p:calendar id="mask" value="#{cadastroVeiculoBean.veiculo.date4}" locale="pt"
 						pattern="dd/MM/yyyy" mask="true" navigator="true" showOn="button">
 						<f:convertDateTime pattern="dd/MM/yyyy" type="both" dateStyle="short"/>						
-						</p:calendar>
+						</p:calendar>	
 				</p:panelGrid>
 			<h:commandButton action="#{cadastroVeiculoBean.cadastrar()}" value="Salvar" />
 		
