@@ -41,7 +41,7 @@ public class CadastroOcorrenciaBean implements Serializable {
 		int idVeiculo = Integer.parseInt(codigo);		
 		veiculo.setCodigo(idVeiculo);
 		ocorrencia.setVeiculo(veiculo);
-		ocorrencia.setData(FacesUtil.addDia(this.ocorrencia.getData(), 1));
+		//ocorrencia.setData(FacesUtil.addDia(this.ocorrencia.getData(), 1));
 		ocorrencias.salvar(ocorrencia);
 		
 		FacesContext fc = FacesContext.getCurrentInstance();

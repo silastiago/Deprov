@@ -24,11 +24,9 @@
 				<p:outputLabel for="mask" value="Data:" />
 					<p:calendar id="mask" value="#{cadastroOcorrenciaBean.ocorrencia.data}"
 						pattern="dd/MM/yyyy" mask="true" navigator="true" showOn="button">
-						<f:convertDateTime pattern="dd/MM/yyyy" type="both" dateStyle="short"/>						
+						<f:convertDateTime pattern="dd/MM/yyyy" type="both" dateStyle="short" timeZone="GMT-3"/>						
 					</p:calendar>
 					
-					
-				
 				<p:commandButton action="#{cadastroOcorrenciaBean.cadastrar(codigo)}"  update="lista" value="Salvar" />
 				
 
@@ -62,10 +60,12 @@
 				
 				<p:column headerText="Data da Ocorrencia">
            			<p:cellEditor>
-               			<f:facet name="output"><h:outputText value="#{ocorrencia.data}" ><f:convertDateTime pattern="dd-MM-yyyy"/></h:outputText></f:facet>
+               			<f:facet name="output"><h:outputText value="#{ocorrencia.data}" >
+               			<f:convertDateTime pattern="dd/MM/yyyy" type="both" dateStyle="short" timeZone="GMT-3"/> </h:outputText></f:facet>
+               			
                			<f:facet name="input"><p:calendar value="#{ocorrencia.data}"
 						pattern="dd/MM/yyyy" mask="true" navigator="true" showOn="button">
-						<f:convertDateTime pattern="dd/MM/yyyy"/>						
+						<f:convertDateTime pattern="dd/MM/yyyy" type="both" dateStyle="short" timeZone="GMT-3"/>						
 					</p:calendar></f:facet>
            			</p:cellEditor>
        			</p:column>
