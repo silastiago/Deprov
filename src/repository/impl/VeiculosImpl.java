@@ -65,9 +65,6 @@ public class VeiculosImpl implements Veiculos{
 		this.sessao.delete(veiculo);
 
 	}
-	
-	
-	
 
 	/** Este metodo pesquisa um veiculo por sua placa.
 	*  	
@@ -75,6 +72,7 @@ public class VeiculosImpl implements Veiculos{
 	*  @return retorna uma lista contendo todos os carros com aquela placa.
 	*  Este metodo sobrescreve o da interface Veiculos.   
 	*/
+	@SuppressWarnings("unchecked")
 	@Override
 	public List<Veiculo> listarPorPlaca(String codigo) {
 		//Criteria criteria = sessao.createCriteria(Veiculo.class).addQueryHint("FROM Veiculo E WHERE E.Placa = jfoerhgoh");

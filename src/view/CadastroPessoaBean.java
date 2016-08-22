@@ -55,8 +55,7 @@ public class CadastroPessoaBean implements Serializable{
 		Pessoas pessoas = this.repositorios.getPessoas();
 		pessoas.logout(); 
 		return "../Login.xhtml?faces-redirect=true";
-	}
-	
+	}	
 	
 	public Pessoa getPessoa() {
 		return pessoa;
@@ -75,19 +74,15 @@ public class CadastroPessoaBean implements Serializable{
 		return pessoas;
 	}
 
-
 	public List<Grupo> getGrupos() {
 		return grupos;
 	}
-
 
 	public void setGrupos(List<Grupo> grupos) {
 		this.grupos = grupos;
 	}
 
-
 	public void setPessoas(List<Pessoa> pessoas) {
 		this.pessoas = pessoas;
 	}
-	
 }

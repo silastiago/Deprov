@@ -12,7 +12,6 @@ import repository.Cores;
 import util.Repositorios;
 
 
-
 @FacesConverter(forClass=Cor.class)
 public class CorConversor implements Converter{
 

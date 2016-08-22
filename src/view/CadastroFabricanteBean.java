@@ -30,13 +30,11 @@ public class CadastroFabricanteBean implements Serializable{
 	/** Este metodo cadastra um fabricante.
 	* 	@return retorna a pagina inicial do sistema.
 	*/
-	public String cadastrar(){
+	public void cadastrar(){
 		//Esta linha estou instanciando a interface com sua implementação.
 		Fabricantes fabricantes = this.repositorios.getFabricantes();
 		//Esta linha salva a entidade fabricante.
 		fabricantes.salvar(fabricante);
-		//Retorno da pagina.
-		return "index?faces-redirect=true";
 	}
 
 	/** Este metodo Remove um fabricante.

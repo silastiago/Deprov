@@ -10,9 +10,7 @@ import javax.faces.bean.ManagedBean;
 import javax.faces.bean.RequestScoped;
 import javax.faces.context.FacesContext;
 
-import model.Fabricante;
 import model.Tipo;
-import repository.Fabricantes;
 import repository.Tipos;
 import util.Repositorios;
 
@@ -22,38 +20,38 @@ public class CadastroTipoBean implements Serializable{
 
 	private Repositorios repositorios = new Repositorios();
 	private Tipo tipo = new Tipo();
-	private List<Tipo> tipos = new ArrayList<Tipo>();
+	private List<Tipo> listaTipos = new ArrayList<Tipo>();
 	
-	
-
-	@PostConstruct
-	public void init(){
+	/** Este metodo cadastra um Tipo de veiculo.
+	*/
+	public void cadastrar(){
+		//Esta linha estou instanciando a interface com sua implementacao.
 		Tipos tipos = this.repositorios.getTipos();
-		this.tipos = tipos.listar();
-	}
-
-
-	public String cadastrar(){
-		Tipos tipos = this.repositorios.getTipos();
+		//Esta linha salva a entidade Tipo.
 		tipos.salvar(tipo);
-
-		String msg = "Cadastro efetuado com sucesso!";
-		FacesContext.getCurrentInstance().addMessage(null,
-				new FacesMessage(FacesMessage.SEVERITY_INFO, msg, msg));
-		return "index?faces-redirect=true";
 	}
 
 	public void excluir(Tipo tipo){
+		//Esta linha estou instanciando a interface com sua implementacao.
 		Tipos tipos = this.repositorios.getTipos();
+		//Esta linha remove a entidade Tipo.
 		tipos.remover(tipo);
-		this.init();
+		//Atualizar a lista de tipos
+		this.listaTipos();
 	}
 
-
+	public List<Tipo> listaTipos(){
+		//Esta linha estou instanciando a interface com sua implementacao.
+		Tipos tipos = this.repositorios.getTipos();
+		//Esta linha lista os tipos e joga em uma lista de tipos.
+		listaTipos = tipos.listar();
+		//retorna a lista de tipos.
+		return listaTipos;
+	}	
+	
 	public Tipo getTipo() {
 		return tipo;
 	}
-
 
 	public void setTipo(Tipo tipo) throws CloneNotSupportedException {
 		this.tipo = tipo;
@@ -64,12 +62,11 @@ public class CadastroTipoBean implements Serializable{
 		}
 	}
 
-
-	public List<Tipo> getTipos() {
-		return tipos;
+	public List<Tipo> getListaTipos() {
+		return listaTipos;
 	}
 
-	public void setTipos(List<Tipo> tipos) {
-		this.tipos = tipos;
+	public void setListaTipos(List<Tipo> listaTipos) {
+		this.listaTipos = listaTipos;
 	}
 }

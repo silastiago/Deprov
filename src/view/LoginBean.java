@@ -40,12 +40,6 @@ public class LoginBean {
 		return (HttpServletRequest) context.getExternalContext().getRequest();
 	}
 	
-	private HttpServletResponse getResponse() {
-		FacesContext context = FacesContext.getCurrentInstance();
-		return (HttpServletResponse) context.getExternalContext().getResponse();
-	}
-	
-
 	public String getUsuario() {
 		return usuario;
 	}
@@ -58,5 +52,4 @@ public class LoginBean {
 	public void setSenha(String senha) {
 		this.senha = senha;
 	}
-
 }

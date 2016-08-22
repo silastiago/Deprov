@@ -4,17 +4,18 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.annotation.PostConstruct;
-import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.RequestScoped;
-import javax.faces.context.FacesContext;
 
-import model.Pericia;
 import model.Seguro;
-import repository.Pericias;
 import repository.Seguros;
 import util.Repositorios;
+
+/** Esta é uma Classe concreta que une as implementacoes das interfaces e das paginas xhtml referentes a entidade Seguro.
+*   
+* @author silas
+* @since 18-08-2016
+*/
 
 @ManagedBean(name="cadastroSeguroBean")
 @RequestScoped
@@ -22,35 +23,41 @@ public class CadastroSeguroBean implements Serializable{
 
 	private Repositorios repositorios = new Repositorios();
 	private Seguro seguro = new Seguro();
-	private List<Seguro> seguros = new ArrayList<Seguro>();	
-	
-	
+	private List<Seguro> listaSeguros = new ArrayList<Seguro>();		
 
-	@PostConstruct
-	public void init(){
+	/** Este metodo cadastra um Seguro.
+	*/
+	public void cadastrar(){
+		//Esta linha estou instanciando a interface com sua implementacao.
 		Seguros seguros = this.repositorios.getSeguros();
-		this.seguros = seguros.listar();
-		
-		
-	}
-
-
-	public String cadastrar(){
-		Seguros seguros = this.repositorios.getSeguros();
+		//Esta linha salva a entidade seguro.
 		seguros.salvar(seguro);
-
-		String msg = "Cadastro efetuado com sucesso!";
-		FacesContext.getCurrentInstance().addMessage(null,
-				new FacesMessage(FacesMessage.SEVERITY_INFO, msg, msg));
-		return "index?faces-redirect=true";
 	}
 
+	/** Este metodo Remove um Seguro.
+	*  @param seguro, Este seguro é o objeto Seguro que você ira remover.
+	*/
 	public void excluir(Seguro seguro){
+		//Esta linha estou instanciando a interface com sua implementacao.
 		Seguros seguros = this.repositorios.getSeguros();
+		//Esta linha remove o seguro.
 		seguros.remover(seguro);
-		this.init();
+		//Atualizar a lista de seguros
+		this.listaSeguro();
 	}
 
+	/** Este metodo lista todos os seguros cadastrados.
+	* 	@return retorna a lista de todos os seguro cadastradas no sistema.
+	*/
+	public List<Seguro> listaSeguro(){
+		//Esta linha estou instanciando a interface com sua implementacao.
+		Seguros seguros = this.repositorios.getSeguros();
+		//Esta linha lista os seguros e joga em uma lista de seguros.
+		listaSeguros = seguros.listar();
+		//retorna a lista de seguros
+		return listaSeguros;
+	}
+	
 	public Seguro getSeguro() {
 		return seguro;
 	}
@@ -64,11 +71,11 @@ public class CadastroSeguroBean implements Serializable{
 		}
 	}
 
-	public List<Seguro> getSeguros() {
-		return seguros;
+	public List<Seguro> getListaSeguros() {
+		return listaSeguros;
 	}
 
-	public void setSeguros(List<Seguro> seguros) {
-		this.seguros = seguros;
+	public void setListaSeguros(List<Seguro> listaSeguros) {
+		this.listaSeguros = listaSeguros;
 	}
 }

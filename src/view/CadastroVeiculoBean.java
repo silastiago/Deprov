@@ -9,7 +9,6 @@ import javax.annotation.PostConstruct;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
 import javax.faces.event.ActionEvent;
-import javax.faces.event.ValueChangeEvent;
 
 import org.primefaces.model.StreamedContent;
 

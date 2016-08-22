@@ -15,6 +15,12 @@ import repository.Fabricantes;
 import repository.Modelos;
 import util.Repositorios;
 
+/** Esta é uma Classe concreta que une as implementacoes das interfaces e das paginas xhtml referentes a entidade Modelo.
+*   
+* @author silas
+* @since 18-08-2016
+*/
+
 @ManagedBean(name="cadastroModeloBean")
 @RequestScoped
 public class CadastroModeloBean implements Serializable{
@@ -24,7 +30,7 @@ public class CadastroModeloBean implements Serializable{
 	private List<Modelo> modelos = new ArrayList<Modelo>();
 	private List<Fabricante> fabricantes = new ArrayList<Fabricante>();
 	
-
+	//Primeiro metodo a ser executado quando entra nas views referentes a modelo de veiculos.
 	@PostConstruct
 	public void init(){
 		Modelos modelos = this.repositorios.getModelos();
@@ -33,17 +39,24 @@ public class CadastroModeloBean implements Serializable{
 		this.fabricantes = fabricantes.listar();
 	}
 
-
-	public String cadastrar(){
+	/** Este metodo cadastra um Modelo.
+	*/
+	public void cadastrar(){
+		//Esta linha estou instanciando a interface com sua implementação.
 		Modelos modelos = this.repositorios.getModelos();
+		//Esta linha salva a entidade modelo.
 		modelos.salvar(modelo);
-		
-		return "index?faces-redirect=true";
 	}
 
+	/** Este metodo Remove um modelo.
+	*  @param modelo, Este modelo é o objeto Modelo que você irá remover.
+	*/
 	public void excluir(Modelo modelo){
+		//Esta linha estou instanciando a interface com sua implementação.
 		Modelos modelos = this.repositorios.getModelos();
+		//Esta linha remove o modelo.
 		modelos.remover(modelo);
+		//Chamando o metodo init para atualizar a lista de modelos.
 		this.init();
 	}
 	

@@ -3,18 +3,18 @@ package view;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
-
-import javax.annotation.PostConstruct;
-import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.RequestScoped;
-import javax.faces.context.FacesContext;
 
-import model.Cor;
 import model.Pericia;
-import repository.Cores;
 import repository.Pericias;
 import util.Repositorios;
+
+/** Esta é uma Classe concreta que une as implementacoes das interfaces e das paginas xhtml referentes a entidade Pericia.
+*   
+* @author silas
+* @since 18-08-2016
+*/
 
 @ManagedBean(name="cadastroPericiaBean")
 @RequestScoped
@@ -22,37 +22,44 @@ public class CadastroPericiaBean implements Serializable{
 
 	private Repositorios repositorios = new Repositorios();
 	private Pericia pericia = new Pericia();	
-	private List<Pericia> pericias = new ArrayList<Pericia>();
-	
+	private List<Pericia> listaPericias = new ArrayList<Pericia>();
 
-	@PostConstruct
-	public void init(){
-		Pericias pericias = this.repositorios.getPericias();
-		this.pericias = pericias.listar();
-		
-	}
-
-
+	/** Este metodo cadastra uma pericia.
+	*/
 	public void cadastrar(){
+		//Esta linha estou instanciando a interface com sua implementação.
 		Pericias pericias = this.repositorios.getPericias();
+		//Esta linha salva a entidade pericia.
 		pericias.salvar(pericia);
-
-		String msg = "Cadastro efetuado com sucesso!";
-		FacesContext.getCurrentInstance().addMessage(null,
-				new FacesMessage(FacesMessage.SEVERITY_INFO, msg, msg));
 	}
 
+	/** Este metodo Remove uma pericia.
+	*  @param pericia, Esta pericia é o objeto Pericia que você irá remover.
+	*/
 	public void excluir(Pericia pericia){
+		//Esta linha estou instanciando a interface com sua implementação.
 		Pericias pericias = this.repositorios.getPericias();
+		//Esta linha remove a pericia.
 		pericias.remover(pericia);
-		this.init();
+		//Atualizar a lista de pericias.
+		this.listaPericia();
 	}
-
+	
+	/** Este metodo lista todas as pericias cadastradas.
+	* 	@return retorna a lista de todas as pericias cadastradas no sistema.
+	*/
+	public List<Pericia> listaPericia(){
+		//Esta linha estou instanciando a interface com sua implementação.
+		Pericias pericias = this.repositorios.getPericias();
+		//A lista de pericias recebe as pericias.
+		listaPericias = pericias.listar();
+		//Retorna a lista de pericias
+		return listaPericias;
+	}
 
 	public Pericia getPericia() {
 		return pericia;
 	}
-
 
 	public void setPericia(Pericia pericia) throws CloneNotSupportedException {
 		this.pericia = pericia;
@@ -63,15 +70,11 @@ public class CadastroPericiaBean implements Serializable{
 		}
 	}
 
-
-	public List<Pericia> getPericias() {
-		return pericias;
+	public List<Pericia> getListaPericias() {
+		return listaPericias;
 	}
 
-
-	public void setPericias(List<Pericia> pericias) {
-		this.pericias = pericias;
-	}
-
-	
+	public void setListaPericias(List<Pericia> listaPericias) {
+		this.listaPericias = listaPericias;
+	}	
 }
