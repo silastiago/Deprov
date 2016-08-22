@@ -40,7 +40,7 @@
 				<p:dataTable value="#{cadastroOcorrenciaBean.ocorrencias}" var="ocorrencia"   rows="10" rowsPerPageTemplate="5,10,15,20"
 				id="mostraEquipamento"  paginator="true" editable="true">
 				
-				<p:ajax event="rowEdit" listener="#{cadastroOcorrenciaBean.onRowEdit}" update="lista" />
+				<p:ajax event="rowEdit" listener="#{cadastroOcorrenciaBean.onRowEdit}" update="@form" />
        			<p:ajax event="rowEditCancel" listener="#{cadastroOcorrenciaBean.onRowCancel}" update="lista" />
 				
 				

@@ -14,7 +14,6 @@ import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
 import javax.faces.context.FacesContext;
 import javax.faces.event.ActionEvent;
-import javax.servlet.http.HttpSession;
 
 import org.primefaces.model.UploadedFile;
 
@@ -74,9 +73,7 @@ public class CadastroFotoBean implements Serializable {
 		veiculo.setCodigo(idVeiculo);
 		this.foto.setVeiculo(veiculo);
 		Ifoto.salvar(foto);
-
-		FacesContext fc = FacesContext.getCurrentInstance();
-	    HttpSession session = (HttpSession)fc.getExternalContext().getSession(false);
+		
 	    FacesContext.getCurrentInstance().getExternalContext().redirect("Veiculo.xhtml?codigo="+veiculo.getCodigo());
 	}
 	
@@ -90,26 +87,14 @@ public class CadastroFotoBean implements Serializable {
 
 	public void excluir() throws IOException {
 		
-		//System.out.println("Codigo da imagem " + image.getCodigo());
 		System.out.println("Codigo da imagem " + foto.getCodigo());
 		IFoto Ifoto = this.repositorios.getFoto();
-		//int idFoto = Integer.parseInt(codigo);
-		//Foto foto = Ifoto.porCodigo(idFoto);
 		Ifoto.remover(foto);
 		
 		String path = "/opt/tomcat/webapps/Deprov/resources/"+ foto.getPath();
 		File f = new File(path);
-		f.delete();
-				
-		
-		//listaFotos.remove(foto);
-		//this.init();
-		//return null;
-		//return "index?faces-redirect=true";
-		
-		FacesContext fc = FacesContext.getCurrentInstance();
-	    HttpSession session = (HttpSession)fc.getExternalContext().getSession(false);
-	    //FacesContext.getCurrentInstance().getExternalContext().redirect("Veiculo.xhtml?codigo="+foto.getVeiculo().getCodigo()+"faces-redirect=true");
+		f.delete();		
+	    
 	    FacesContext.getCurrentInstance().getExternalContext().redirect("index.xhtml?faces-redirect=true");
 
 	}

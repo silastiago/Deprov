@@ -1,10 +1,5 @@
 package util;
 
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.util.Calendar;
-import java.util.Date;
-
 import javax.faces.context.ExternalContext;
 import javax.faces.context.FacesContext;
 import javax.servlet.http.HttpServletRequest;
@@ -27,39 +22,5 @@ public class FacesUtil {
 		ExternalContext externalContext = facesContext.getExternalContext();
 		HttpServletRequest request = (HttpServletRequest) externalContext.getRequest();
 		return request.getAttribute(name);
-	}
-	
-	
-	/** Este metodo acrescenta qtd dias na data.
-	* 	
-	* 	@param data, Esta data e a data que voce quer que seja acrescida dias nela.
-	* 	@param qtd, Este qtd e a quantidade de dias que voce quer adicionar a data.
-	* 	@return retorna a data com os qtd dias acrescentados.
-	*/
-	public static Date addDia(Date data, int qtd) {
-		Calendar cal = Calendar.getInstance();
-		cal.setTime(data);
-		cal.add(Calendar.DAY_OF_MONTH, qtd);
-		return cal.getTime();
-		}
-	
-	public static String DateString(Date data){
-		SimpleDateFormat formatoData = new SimpleDateFormat("dd-MM-yyyy");
-		String dataFormatada = formatoData.format(data);
-		return dataFormatada;
-	}
-	
-	public String converteData(String data) throws ParseException{
-		SimpleDateFormat formatoData = new SimpleDateFormat("dd-MM-yyyy");
-		java.sql.Date sql = (java.sql.Date) formatoData.parse(data);
-		Date dataFormato = sql;
-		String dataFormatada = formatoData.format(dataFormato);
-		System.out.println("Data Convertida: "+ dataFormatada);
-		
-		return dataFormatada;	
-			
-			
-			
-	}
-	
+	}	
 }

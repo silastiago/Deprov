@@ -16,7 +16,6 @@ import org.primefaces.event.RowEditEvent;
 import model.Ocorrencia;
 import model.Veiculo;
 import repository.Ocorrencias;
-import util.FacesUtil;
 import util.Repositorios;
 
 @ManagedBean(name = "cadastroOcorrenciaBean")
@@ -41,11 +40,8 @@ public class CadastroOcorrenciaBean implements Serializable {
 		int idVeiculo = Integer.parseInt(codigo);		
 		veiculo.setCodigo(idVeiculo);
 		ocorrencia.setVeiculo(veiculo);
-		//ocorrencia.setData(FacesUtil.addDia(this.ocorrencia.getData(), 1));
 		ocorrencias.salvar(ocorrencia);
 		
-		FacesContext fc = FacesContext.getCurrentInstance();
-	    HttpSession session = (HttpSession)fc.getExternalContext().getSession(false);
 	    FacesContext.getCurrentInstance().getExternalContext().redirect("Ocorrencia.xhtml?codigo="+codigo);
 		
 		//return null;
@@ -72,10 +68,9 @@ public class CadastroOcorrenciaBean implements Serializable {
 		Ocorrencia ocorrencia2 = ocorrencias.porCodigo(idOcorrencia);
 		ocorrencias.remover(ocorrencia2);
 		
-		FacesContext fc = FacesContext.getCurrentInstance();
-	    HttpSession session = (HttpSession)fc.getExternalContext().getSession(false);
+		
 	    FacesContext.getCurrentInstance().getExternalContext().redirect("Ocorrencia.xhtml?codigo="+ocorrencia2.getVeiculo().getCodigo());
-		//return "index?faces-redirect=true";
+		
 	}
 	
 	public List<Ocorrencia> listarVeiculo(){
@@ -103,7 +98,9 @@ public class CadastroOcorrenciaBean implements Serializable {
 		Ocorrencia novaOcorrencia = (Ocorrencia) event.getObject();
 		Ocorrencias ocorrencias = this.repositorios.getocorrencia();
 		ocorrencias.salvar(novaOcorrencia);
-        
+		String codigo = novaOcorrencia.getVeiculo().getCodigo().toString();
+		
+	    FacesContext.getCurrentInstance().getExternalContext().redirect("Ocorrencia.xhtml?codigo="+codigo);
     }
      
     public void onRowCancel(RowEditEvent event) {
