@@ -32,12 +32,12 @@
 					<h:outputText value="#{veiculo.dossie}" />
 				</p:column>
 				
-				<p:column filterBy="#{veiculo.date4}" style="text-align: center; width:4%" 
+				<p:column filterBy="#{veiculo.dataEntrada}" style="text-align: center; width:4%" 
 					filterMatchMode="startsWith">
 					<f:facet name="header">
 						<h:outputText value="Data" />
 					</f:facet>
-					<h:outputText value="#{veiculo.date4}" >
+					<h:outputText value="#{veiculo.dataEntrada}" >
 					<f:convertDateTime pattern="dd/MM/yyyy"/>
 					</h:outputText>
 				</p:column>

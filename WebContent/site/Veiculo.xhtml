@@ -134,7 +134,7 @@
 					<p:inputText value="#{cadastroVeiculoBean.veiculo.motivoApreensao}" />
 
 					<p:outputLabel for="mask" value="Data:" />
-					<p:calendar id="mask" value="#{cadastroVeiculoBean.veiculo.date4}"
+					<p:calendar id="mask" value="#{cadastroVeiculoBean.veiculo.dataEntrada}"
 						pattern="dd/MM/yyyy" mask="true" navigator="true" showOn="button">
 						<f:convertDateTime pattern="dd/MM/yyyy" type="both" dateStyle="short" timeZone="GMT-3" />						
 						</p:calendar>

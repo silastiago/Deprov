@@ -45,7 +45,7 @@ public class Veiculo implements Serializable, Cloneable{
 	private String comentarios;
 	private String motivoApreensao;
 	private Pericia pericia;
-	private Date date4;
+	private Date dataEntrada;
 
 
 	@Id
@@ -66,14 +66,14 @@ public class Veiculo implements Serializable, Cloneable{
 	public void setDossie(String dossie) {
 		this.dossie = dossie;
 	}
-
+	
 	@Column
-	public Date getDate4() {
-		return date4;
+	public Date getDataEntrada() {
+		return dataEntrada;
 	}
 
-	public void setDate4(Date date4) {
-		this.date4 = date4;
+	public void setDataEntrada(Date dataEntrada) {
+		this.dataEntrada = dataEntrada;
 	}
 
 	@Column
@@ -268,7 +268,7 @@ public class Veiculo implements Serializable, Cloneable{
 		result = prime * result + ((comentarios == null) ? 0 : comentarios.hashCode());
 		result = prime * result + ((condicao == null) ? 0 : condicao.hashCode());
 		result = prime * result + ((cor == null) ? 0 : cor.hashCode());
-		result = prime * result + ((date4 == null) ? 0 : date4.hashCode());
+		result = prime * result + ((dataEntrada == null) ? 0 : dataEntrada.hashCode());
 		result = prime * result + ((fabricante == null) ? 0 : fabricante.hashCode());
 		result = prime * result + ((ip_processo == null) ? 0 : ip_processo.hashCode());
 		result = prime * result + ((modelo == null) ? 0 : modelo.hashCode());
@@ -337,10 +337,10 @@ public class Veiculo implements Serializable, Cloneable{
 				return false;
 		} else if (!cor.equals(other.cor))
 			return false;
-		if (date4 == null) {
-			if (other.date4 != null)
+		if (dataEntrada == null) {
+			if (other.dataEntrada != null)
 				return false;
-		} else if (!date4.equals(other.date4))
+		} else if (!dataEntrada.equals(other.dataEntrada))
 			return false;
 		if (fabricante == null) {
 			if (other.fabricante != null)
