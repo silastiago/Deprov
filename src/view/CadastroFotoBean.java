@@ -35,7 +35,6 @@ public class CadastroFotoBean implements Serializable {
 	private Repositorios repositorios = new Repositorios();
 	private Foto foto = new Foto();
 	private List<Foto> listaFotos = new ArrayList<Foto>();
-	private List<Veiculo> veiculos = new ArrayList<Veiculo>();
 	private Veiculo veiculo = new Veiculo();
     private UploadedFile file;
 
@@ -159,14 +158,6 @@ public class CadastroFotoBean implements Serializable {
 
 	public void setListaFotos(List<Foto> listaFotos) {
 		this.listaFotos = listaFotos;
-	}
-
-	public List<Veiculo> getVeiculos() {
-		return veiculos;
-	}
-
-	public void setVeiculos(List<Veiculo> veiculos) {
-		this.veiculos = veiculos;
 	}
 
 	public Veiculo getVeiculo() {

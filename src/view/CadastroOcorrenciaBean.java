@@ -24,7 +24,6 @@ public class CadastroOcorrenciaBean implements Serializable {
 	private Repositorios repositorios = new Repositorios();
 	private Ocorrencia ocorrencia = new Ocorrencia();
 	private List<Ocorrencia> ocorrencias = new ArrayList<Ocorrencia>();
-	private List<Veiculo> veiculos = new ArrayList<Veiculo>();
 	private Veiculo veiculo = new Veiculo();
 	
 	//Primeiro metodo a ser executado quando entra nas views referentes as ocorrencias do veiculo.
@@ -126,14 +125,6 @@ public class CadastroOcorrenciaBean implements Serializable {
 
 	public void setOcorrencias(List<Ocorrencia> ocorrencias) {
 		this.ocorrencias = ocorrencias;
-	}
-
-	public List<Veiculo> getVeiculos() {
-		return veiculos;
-	}
-
-	public void setVeiculos(List<Veiculo> veiculos) {
-		this.veiculos = veiculos;
 	}
 
 	public Veiculo getVeiculo() {

@@ -4,14 +4,10 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.annotation.PostConstruct;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.RequestScoped;
 
-
-import model.Fabricante;
 import model.Modelo;
-import repository.Fabricantes;
 import repository.Modelos;
 import util.Repositorios;
 
@@ -27,17 +23,7 @@ public class CadastroModeloBean implements Serializable{
 
 	private Repositorios repositorios = new Repositorios();
 	private Modelo modelo  = new Modelo();
-	private List<Modelo> modelos = new ArrayList<Modelo>();
-	private List<Fabricante> fabricantes = new ArrayList<Fabricante>();
-	
-	//Primeiro metodo a ser executado quando entra nas views referentes a modelo de veiculos.
-	@PostConstruct
-	public void init(){
-		Modelos modelos = this.repositorios.getModelos();
-		Fabricantes fabricantes = this.repositorios.getFabricantes();
-		this.modelos = modelos.listar();
-		this.fabricantes = fabricantes.listar();
-	}
+	private List<Modelo> listaModelos = new ArrayList<Modelo>();
 
 	/** Este metodo cadastra um Modelo.
 	*/
@@ -57,7 +43,19 @@ public class CadastroModeloBean implements Serializable{
 		//Esta linha remove o modelo.
 		modelos.remover(modelo);
 		//Chamando o metodo init para atualizar a lista de modelos.
-		this.init();
+		this.listaModelo();
+	}
+	
+	/** Este metodo lista todas os modelos cadastrados.
+	* 	@return retorna a lista de todos os modelos cadastrados no sistema.
+	*/
+	public List<Modelo> listaModelo(){
+		//Esta linha estou instanciando a interface com sua implementação.
+		Modelos modelos = this.repositorios.getModelos();
+		//A lista de modelos recebe as modelos.
+		listaModelos = modelos.listar();
+		//Retorna a lista de modelos
+		return listaModelos;
 	}
 	
 	public Modelo getModelo() {
@@ -73,20 +71,11 @@ public class CadastroModeloBean implements Serializable{
 		}
 	}
 
-	public List<Modelo> getModelos() {
-		return modelos;
+	public List<Modelo> getListaModelos() {
+		return listaModelos;
 	}
 
-	public void setModelos(List<Modelo> modelos) {
-		this.modelos = modelos;
-	}
-
-
-	public List<Fabricante> getFabricantes() {
-		return fabricantes;
-	}
-
-	public void setFabricantes(List<Fabricante> fabricantes) {
-		this.fabricantes = fabricantes;
+	public void setListaModelos(List<Modelo> listaModelos) {
+		this.listaModelos = listaModelos;
 	}
 }

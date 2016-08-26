@@ -12,7 +12,7 @@
 	
 			<h:form enctype="multipart/form-data">
 			
-			<p:dataTable var="seguro" value="#{cadastroSeguroBean.seguros}"
+			<p:dataTable var="seguro" value="#{cadastroSeguroBean.listaSeguro()}"
 			frame="box" rules="all" cellpadding="3"
 				width="100%" headerClass="cabecalho" rowClasses="cor-sim, cor-nao"
 				columnClasses="nome">

@@ -4,13 +4,10 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.annotation.PostConstruct;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.RequestScoped;
 
-import model.Grupo;
 import model.Pessoa;
-import repository.Grupos;
 import repository.Pessoas;
 import util.Repositorios;
 
@@ -20,16 +17,14 @@ public class CadastroPessoaBean implements Serializable{
 
 	private Repositorios repositorios = new Repositorios();
 	private Pessoa pessoa = new Pessoa();
-	private List<Pessoa> pessoas = new ArrayList<Pessoa>();
-	private List<Grupo> grupos = new ArrayList<Grupo>();
+	private List<Pessoa> listaPessoas = new ArrayList<Pessoa>();
+	//private List<Grupo> grupos = new ArrayList<Grupo>();
 
-	@PostConstruct
+	/*@PostConstruct
 	public void init(){
 		Pessoas pessoas = this.repositorios.getPessoas();
-		Grupos grupos = this.repositorios.getGrupos();
 		this.pessoas = pessoas.listar();
-		this.grupos = grupos.listar();
-	}
+	}*/
 
 	public void cadastrar(){
 		Pessoas pessoas = this.repositorios.getPessoas();
@@ -39,7 +34,7 @@ public class CadastroPessoaBean implements Serializable{
 	public void excluir(Pessoa pessoa){
 		Pessoas pessoas = this.repositorios.getPessoas();
 		pessoas.remover(pessoa);
-		this.init();
+		this.listarPessoas();
 	}
 
 	public String logar(){
@@ -57,6 +52,15 @@ public class CadastroPessoaBean implements Serializable{
 		return "../Login.xhtml?faces-redirect=true";
 	}	
 	
+	public List<Pessoa> listarPessoas(){
+		//Esta linha estou instanciando a interface com sua implementacao.
+		Pessoas pessoas = this.repositorios.getPessoas();
+		//Esta linha lista os tipos e joga em uma lista de tipos.
+		listaPessoas = pessoas.listar();
+		//retorna a lista de tipos.
+		return listaPessoas;
+	}
+	
 	public Pessoa getPessoa() {
 		return pessoa;
 	}
@@ -70,19 +74,11 @@ public class CadastroPessoaBean implements Serializable{
 		}
 	}
 
-	public List<Pessoa> getPessoas(){
-		return pessoas;
+	public List<Pessoa> getListaPessoas() {
+		return listaPessoas;
 	}
 
-	public List<Grupo> getGrupos() {
-		return grupos;
-	}
-
-	public void setGrupos(List<Grupo> grupos) {
-		this.grupos = grupos;
-	}
-
-	public void setPessoas(List<Pessoa> pessoas) {
-		this.pessoas = pessoas;
+	public void setListaPessoas(List<Pessoa> listaPessoas) {
+		this.listaPessoas = listaPessoas;
 	}
 }

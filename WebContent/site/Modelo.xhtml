@@ -25,7 +25,7 @@
 			<h:outputLabel value="Fabricante"/>
 				<h:selectOneMenu value="#{cadastroModeloBean.modelo.fabricante}" required="true" label="Fabricante">
 				<f:selectItem itemLabel="Selecione o Fabricante do Modelo" noSelectionOption="true"/>
-				<f:selectItems value="#{cadastroModeloBean.fabricantes}" var="fabricante" itemValue="#{fabricante}" itemLabel="#{fabricante.fabricante}"/>
+				<f:selectItems value="#{cadastroFabricanteBean.listaFabricantes()}" var="fabricante" itemValue="#{fabricante}" itemLabel="#{fabricante.fabricante}"/>
 				</h:selectOneMenu>
 			
 			</p:panelGrid>
@@ -39,7 +39,7 @@
 	
 			<h:form enctype="multipart/form-data">
 			
-			<p:dataTable var="modelo" value="#{cadastroModeloBean.modelos}"
+			<p:dataTable var="modelo" value="#{cadastroModeloBean.listaModelo()}"
 			frame="box" rules="all" cellpadding="3"
 				width="100%" headerClass="cabecalho" rowClasses="cor-sim, cor-nao"
 				columnClasses="nome">

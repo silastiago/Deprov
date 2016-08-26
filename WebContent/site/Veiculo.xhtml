@@ -37,7 +37,7 @@
 						label="Tipo">
 						<f:selectItem itemLabel="Selecione o Tipo do Veiculo"
 							noSelectionOption="true" />
-						<f:selectItems value="#{cadastroVeiculoBean.tipos}" var="tipo"
+						<f:selectItems value="#{cadastroTipoBean.listaTipos()}" var="tipo"
 							itemValue="#{tipo}" itemLabel="#{tipo.tipo}" />
 					</h:selectOneMenu>
 
@@ -46,7 +46,7 @@
 						label="Cor">
 						<f:selectItem itemLabel="Selecione a cor do Veiculo"
 							noSelectionOption="true" />
-						<f:selectItems value="#{cadastroVeiculoBean.cores}" var="cor"
+						<f:selectItems value="#{cadastroCorBean.listarCores()}" var="cor"
 							itemValue="#{cor}" itemLabel="#{cor.cor}" />
 					</h:selectOneMenu>
 
@@ -54,7 +54,7 @@
 					<h:selectOneMenu value="#{cadastroVeiculoBean.veiculo.fabricante}" label="Fabricante" >
 						<f:selectItem itemLabel="Selecione o Fabricante do Veiculo"
 							noSelectionOption="true" />
-						<f:selectItems value="#{cadastroVeiculoBean.fabricantes}"
+						<f:selectItems value="#{cadastroFabricanteBean.listaFabricantes()}"
 							var="fabricante" itemValue="#{fabricante}"
 							itemLabel="#{fabricante.fabricante}" />
 					</h:selectOneMenu>
@@ -64,7 +64,7 @@
 						label="Modelo" id="modelos">
 						<f:selectItem itemLabel="Selecione o Modelo do Veiculo"
 							noSelectionOption="true" />
-						<f:selectItems value="#{cadastroVeiculoBean.modelos}" var="modelo"
+						<f:selectItems value="#{cadastroModeloBean.listaModelo()}" var="modelo"
 							itemValue="#{modelo}" itemLabel="#{modelo.modelo}" />
 					</h:selectOneMenu>
 
@@ -101,7 +101,7 @@
 						label="Seguro">
 						<f:selectItem itemLabel="Selecione o Seguro do Veiculo"
 							noSelectionOption="true" />
-						<f:selectItems value="#{cadastroVeiculoBean.seguros}" var="seguro"
+						<f:selectItems value="#{cadastroSeguroBean.listaSeguro()}" var="seguro"
 							itemValue="#{seguro}" itemLabel="#{seguro.seguro}" />
 					</h:selectOneMenu>
 
@@ -126,7 +126,7 @@
 						label="Pericia">
 						<f:selectItem itemLabel="Selecione a Pericia do Veiculo"
 							noSelectionOption="true" />
-						<f:selectItems value="#{cadastroVeiculoBean.pericias}"
+						<f:selectItems value="#{cadastroPericiaBean.listaPericia()}"
 							var="pericia" itemValue="#{pericia}" itemLabel="#{pericia.pericia}" />
 					</h:selectOneMenu>
 						
