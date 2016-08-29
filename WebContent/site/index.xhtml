@@ -13,13 +13,14 @@
 		<h:form enctype="multipart/form-data" acceptcharset="ISO-8859-1">
 			
 			
-			<p:dataTable value="#{cadastroVeiculoBean.veiculos}" var="veiculo"  id="mostraEquipamento"
+			<p:dataTable value="#{cadastroVeiculoBean.listaVeiculos}" var="veiculo"  id="mostraEquipamento"
 			paginatorTemplate="{CurrentPageReport} {PageLinks} {Exporters}"
 			paginator="true" rows="10">
+			
+			<p:ajax event="filter" listener="#{cadastroVeiculoBean.listenFilter}" update="@this"/>
 				
 			<f:facet name="{Exporters}">
-				<h:commandButton  value="Gerar Relatorio">
-				<f:attribute name="codigo" value="#{cadastroVeiculoBean.veiculo}" />
+				<h:commandButton  value="Gerar Relatorio" action="#{cadastroVeiculoBean.gerarRelatorio()}">
 				</h:commandButton>
        		 </f:facet>
 
@@ -45,9 +46,17 @@
 				<p:column filterBy="#{veiculo.placa}" style="text-align: center; width:4%" 
 					filterMatchMode="startsWith">
 					<f:facet name="header">
-						<h:outputText value="Placa" />
+						<h:outputText value="Placa no Veiculo" />
 					</f:facet>
 					<h:outputText value="#{veiculo.placa}" />
+				</p:column>
+
+				<p:column filterBy="#{veiculo.placaOriginal}" style="text-align: center; width:4%" 
+					filterMatchMode="startsWith">
+					<f:facet name="header">
+						<h:outputText value="Placa Original" />
+					</f:facet>
+					<h:outputText value="#{veiculo.placaOriginal}" />
 				</p:column>
 
 				<p:column filterBy="#{veiculo.fabricante.fabricante}"  style="text-align: center; width:5%" filterMatchMode="startsWith">
