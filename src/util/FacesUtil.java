@@ -7,10 +7,7 @@ import javax.faces.context.ExternalContext;
 import javax.faces.context.FacesContext;
 import javax.servlet.http.HttpServletRequest;
 
-import conexao.ConnectionFactory;
-import net.sf.jasperreports.engine.JRException;
-import net.sf.jasperreports.engine.JasperCompileManager;
-import net.sf.jasperreports.engine.JasperReport;
+import repository.Modelos;
 
 /** Esta é uma Classe utilitaria que implementa alguns metodos que servirao para ser reutilizados em algumas classes.
 *   
@@ -19,6 +16,7 @@ import net.sf.jasperreports.engine.JasperReport;
 */
 
 public class FacesUtil {
+	private Repositorios repositorios = new Repositorios();
 	
 	/** Este metodo captura o atributo da requisicao pelo nome .
 	* 	
@@ -104,11 +102,52 @@ public class FacesUtil {
             mapaRelatorioParametro.put(parametro, relatorio);   
         }
 		
-		
 		return mapaRelatorioParametro;
 	}
 	
 	
-	
+	public Map<String, Map<String, String>> escolherRelatorio2(Map<String, Object> listaObjetos){
+		Map<String, String> mapaRelatorioParametro = new HashMap<String, String>();
+		String nomeInstancia = "";
+		
+		Map<String, Map<String, String>> mapaRelatorioParametroInstancia = new HashMap<String, Map<String, String>>();
+		
+		String relatorio = "";
+		String parametro = "";
+		
+		for (String key : listaObjetos.keySet()) {
+            if (key.equals("placa")) {
+				relatorio = "/opt/tomcat/webapps/Deprov/resources/relatorios/parametros/1/"+"Placa.jrxml";
+				parametro = "placa";
+				nomeInstancia = "Veiculo";
+			}else if (key.equals("placaOriginal")) {
+				relatorio = "/opt/tomcat/webapps/Deprov/resources/relatorios/parametros/1/"+"PlacaOriginal.jrxml";
+				parametro = "placaoriginal";
+				nomeInstancia = "Veiculo";
+			}else if (key.equals("fabricante.fabricante")) {
+				relatorio = "/opt/tomcat/webapps/Deprov/resources/relatorios/parametros/1/"+"Fabricante.jrxml";
+				parametro = "codigo_fabricante";
+				nomeInstancia = "Fabricante";
+			}else if (key.equals("modelo.modelo")) {
+				relatorio = "/opt/tomcat/webapps/Deprov/resources/relatorios/parametros/1/"+"Modelo.jrxml";
+				parametro = "codigo_modelo";
+				nomeInstancia = "Modelo";
+			}else if (key.equals("chassi")) {
+				relatorio = "/opt/tomcat/webapps/Deprov/resources/relatorios/parametros/1/"+"Chassi.jrxml";
+				parametro = "chassi";
+				nomeInstancia = "Veiculo";
+			}else if (key.equals("cor.cor")) {
+				relatorio = "/opt/tomcat/webapps/Deprov/resources/relatorios/parametros/1/"+"Cor.jrxml";
+				parametro = "codigo_cor";
+				nomeInstancia = "Cor";
+			}
+			/*System.out.println("key: " + key + " \t values: "
+                    + listaObjetos.get(key).toString().toUpperCase());*/
+            mapaRelatorioParametro.put(parametro, relatorio);
+            mapaRelatorioParametroInstancia.put(nomeInstancia, mapaRelatorioParametro);
+        }
+		
+		return mapaRelatorioParametroInstancia;
+	}	
 	
 }

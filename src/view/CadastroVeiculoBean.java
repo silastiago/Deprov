@@ -5,6 +5,8 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
 import java.io.Serializable;
+import java.lang.reflect.InvocationTargetException;
+import java.lang.reflect.Method;
 import java.net.URL;
 import java.sql.Connection;
 import java.util.ArrayList;
@@ -58,6 +60,7 @@ public class CadastroVeiculoBean implements Serializable{
 	private String relatorio;
 	private String parametro;
 	private String valor;
+	private Object instancia;
 	
 	
 	@PostConstruct
@@ -101,21 +104,36 @@ public class CadastroVeiculoBean implements Serializable{
 	            
 	        }
 	        this.setValor(valor);
+	        Map<String, Map<String, String>> mapaRelatorioParametroInstancia = new HashMap<String, Map<String, String>>();
 	        Map<String, String> mapaRelatorioParametro = new HashMap<String, String>();
-	        mapaRelatorioParametro = util.escolherRelatorio(tempString);
+	        mapaRelatorioParametroInstancia = util.escolherRelatorio2(tempString);
 	        
-	        for (String key : mapaRelatorioParametro.keySet()) {
+	        for (String key : mapaRelatorioParametroInstancia.keySet()) {
 	            System.out.println("Parametro: " + key + " \t Relatorio: "
-	                    + mapaRelatorioParametro.get(key).toString());
-	            parametro = key;
-	            relatorio = mapaRelatorioParametro.get(key).toString();
+	                    + mapaRelatorioParametroInstancia.get(key).toString());
+	            instancia = key;
+	            
+	            mapaRelatorioParametro = mapaRelatorioParametroInstancia.get(key);
+	            
+	            for (String key2 : mapaRelatorioParametro.keySet()) {
+	            	System.out.println("Parametro2: " + key2 + " \t Relatorio: "
+		                    + mapaRelatorioParametro.get(key2).toString());
+	            	parametro = key2;
+	            	relatorio = mapaRelatorioParametro.get(key2).toString();
+	            }
+	            
+	            
+	            //relatorio = mapaRelatorioParametro.get(key).toString();
 	        }
+	        this.setInstancia(instancia);
 	        this.setParametro(parametro);
 	        this.setRelatorio(relatorio);
 	    }
 	
 	//public void gerarRelatorio(ActionEvent event) throws JRException, IOException{
-	 public String gerarRelatorio() throws JRException, IOException {
+	 public String gerarRelatorio() throws JRException, IOException, ClassNotFoundException, NoSuchMethodException, SecurityException, InstantiationException, IllegalAccessException, IllegalArgumentException, InvocationTargetException {
+		Class objeto = (Class) Class.forName("model."+this.getInstancia()); 
+		
 		Cor cor = new Cor();
 		Cores cores = this.repositorios.getCores();
 		
@@ -126,8 +144,7 @@ public class CadastroVeiculoBean implements Serializable{
 		Fabricantes fabricantes = this.repositorios.getFabricantes(); 
 		
 		
-		 ConnectionFactory conexao = new ConnectionFactory();
-		 
+		ConnectionFactory conexao = new ConnectionFactory();
 		 String reportSrcFile = this.getRelatorio();
 		 
 		//String reportSrcFile = "/var/lib/tomcat8/webapps/Deprov/resources/relatorios/RelatorioVeiculo.jrxml";
@@ -144,11 +161,15 @@ public class CadastroVeiculoBean implements Serializable{
         //modelo = modelos.pegaCodigo(this.getValor());
         fabricante = fabricantes.pegaCodigo(this.getValor());
         
+        Method numero = objeto.getMethod("getCodigo", null);
         
+        
+        //System.out.println("Codigo do objeto: "+ numero.invoke(objeto));
+        System.out.println("Parametro utilizado: " + this.getParametro());
         System.out.println("Codigo da cor: " + cor.getCodigo());
         System.out.println("Codigo do modelo: " + modelo.getCodigo());
-        //parameters.put(this.getParametro(), this.getValor());
-        parameters.put("codigo_fabricante", fabricante.getCodigo());
+        //parameters.put("codigo_fabricante", fabricante.getCodigo());
+        parameters.put(this.getParametro().toString(), fabricante.getCodigo());
         
         JasperPrint print = JasperFillManager.fillReport(jasperReport,
                 parameters, conn);
@@ -293,6 +314,16 @@ public class CadastroVeiculoBean implements Serializable{
 
 	public void setValor(String valor) {
 		this.valor = valor;
+	}
+
+
+	public Object getInstancia() {
+		return instancia;
+	}
+
+
+	public void setInstancia(Object instancia) {
+		this.instancia = instancia;
 	}
 	
 	
