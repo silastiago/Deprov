@@ -24,6 +24,8 @@ import org.primefaces.model.StreamedContent;
 
 import conexao.ConnectionFactory;
 import model.Cor;
+import model.Fabricante;
+import model.Modelo;
 import model.Veiculo;
 import net.sf.jasperreports.engine.JRException;
 import net.sf.jasperreports.engine.JasperCompileManager;
@@ -37,6 +39,8 @@ import net.sf.jasperreports.export.SimpleExporterInput;
 import net.sf.jasperreports.export.SimpleOutputStreamExporterOutput;
 import net.sf.jasperreports.export.SimplePdfExporterConfiguration;
 import repository.Cores;
+import repository.Fabricantes;
+import repository.Modelos;
 import repository.Veiculos;
 import util.FacesUtil;
 import util.Repositorios;
@@ -114,14 +118,13 @@ public class CadastroVeiculoBean implements Serializable{
 	 public String gerarRelatorio() throws JRException, IOException {
 		Cor cor = new Cor();
 		Cores cores = this.repositorios.getCores();
-		 
-		 //Veiculo veiculo = (Veiculo) event.getComponent().getAttributes().get("codigo");
 		
-		//String codigo = veiculo.getCodigo().toString();
-		//System.out.println("Codigo de veiculos: "+ veiculo.getCodigo());
-		
-		//int idVeiculo = Integer.parseInt(codigo);
+		Modelo modelo = new Modelo();
+		Modelos modelos = this.repositorios.getModelos();
 				
+		Fabricante fabricante = new Fabricante();
+		Fabricantes fabricantes = this.repositorios.getFabricantes(); 
+		
 		
 		 ConnectionFactory conexao = new ConnectionFactory();
 		 
@@ -137,10 +140,15 @@ public class CadastroVeiculoBean implements Serializable{
 	    
 	    // Parameters for report
         Map<String, Object> parameters = new HashMap<String, Object>();
-        cor = cores.pegaCodigo(this.getValor());
+        //cor = cores.pegaCodigo(this.getValor());
+        //modelo = modelos.pegaCodigo(this.getValor());
+        fabricante = fabricantes.pegaCodigo(this.getValor());
+        
+        
         System.out.println("Codigo da cor: " + cor.getCodigo());
+        System.out.println("Codigo do modelo: " + modelo.getCodigo());
         //parameters.put(this.getParametro(), this.getValor());
-        parameters.put("codigo_cor", cor.getCodigo());
+        parameters.put("codigo_fabricante", fabricante.getCodigo());
         
         JasperPrint print = JasperFillManager.fillReport(jasperReport,
                 parameters, conn);

@@ -2,10 +2,13 @@ package repository.impl;
 
 import java.util.List;
 
+import org.hibernate.Criteria;
 import org.hibernate.Session;
 import org.hibernate.criterion.Order;
+import org.hibernate.criterion.Restrictions;
 
 import model.Fabricante;
+import model.Modelo;
 import repository.Fabricantes;
 
 /** Esta é uma Classe concreta que implementa a Interface Fabricantes,
@@ -64,5 +67,13 @@ public class FabricanteImpl implements Fabricantes{
 	@Override
 	public void remover(Fabricante fabricante) {
 		this.sessao.delete(fabricante);
+	}
+	
+	@Override
+	public Fabricante pegaCodigo(String fabricante) {
+		Criteria c = this.sessao.createCriteria(Fabricante.class);
+		c.add(Restrictions.eq("fabricante", fabricante));
+		Fabricante results = (Fabricante) c.uniqueResult();
+		return results;
 	}
 }

@@ -40,4 +40,6 @@ public interface Modelos {
 	*   	
 	*/
 	public void remover(Modelo modelo);
+
+	public Modelo pegaCodigo(String modelo);
 }

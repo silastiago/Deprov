@@ -2,9 +2,12 @@ package repository.impl;
 
 import java.util.List;
 
+import org.hibernate.Criteria;
 import org.hibernate.Session;
 import org.hibernate.criterion.Order;
+import org.hibernate.criterion.Restrictions;
 
+import model.Cor;
 import model.Modelo;
 import repository.Modelos;
 
@@ -64,4 +67,14 @@ public class ModelosImpl implements Modelos{
 	public void remover(Modelo modelo) {
 		this.sessao.delete(modelo);
 	}
+	
+	
+	@Override
+	public Modelo pegaCodigo(String modelo) {
+		Criteria c = this.sessao.createCriteria(Modelo.class);
+		c.add(Restrictions.eq("modelo", modelo));
+		Modelo results = (Modelo) c.uniqueResult();
+		return results;
+	}
+	
 }

@@ -38,4 +38,6 @@ public interface Fabricantes {
 	*   	
 	*/
 	public void remover(Fabricante fabricante);
+
+	public Fabricante pegaCodigo(String fabricante);
 }
