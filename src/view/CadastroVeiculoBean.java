@@ -23,6 +23,7 @@ import org.primefaces.event.data.FilterEvent;
 import org.primefaces.model.StreamedContent;
 
 import conexao.ConnectionFactory;
+import model.Cor;
 import model.Veiculo;
 import net.sf.jasperreports.engine.JRException;
 import net.sf.jasperreports.engine.JasperCompileManager;
@@ -35,6 +36,7 @@ import net.sf.jasperreports.export.OutputStreamExporterOutput;
 import net.sf.jasperreports.export.SimpleExporterInput;
 import net.sf.jasperreports.export.SimpleOutputStreamExporterOutput;
 import net.sf.jasperreports.export.SimplePdfExporterConfiguration;
+import repository.Cores;
 import repository.Veiculos;
 import util.FacesUtil;
 import util.Repositorios;
@@ -110,7 +112,10 @@ public class CadastroVeiculoBean implements Serializable{
 	
 	//public void gerarRelatorio(ActionEvent event) throws JRException, IOException{
 	 public String gerarRelatorio() throws JRException, IOException {
-		//Veiculo veiculo = (Veiculo) event.getComponent().getAttributes().get("codigo");
+		Cor cor = new Cor();
+		Cores cores = this.repositorios.getCores();
+		 
+		 //Veiculo veiculo = (Veiculo) event.getComponent().getAttributes().get("codigo");
 		
 		//String codigo = veiculo.getCodigo().toString();
 		//System.out.println("Codigo de veiculos: "+ veiculo.getCodigo());
@@ -128,11 +133,14 @@ public class CadastroVeiculoBean implements Serializable{
 	 
 	    Connection conn = conexao.getConnection();
 	    
+	    
+	    
 	    // Parameters for report
         Map<String, Object> parameters = new HashMap<String, Object>();
-        
-        parameters.put(this.getParametro(), this.getValor());
-	    
+        cor = cores.pegaCodigo(this.getValor());
+        System.out.println("Codigo da cor: " + cor.getCodigo());
+        //parameters.put(this.getParametro(), this.getValor());
+        parameters.put("codigo_cor", cor.getCodigo());
         
         JasperPrint print = JasperFillManager.fillReport(jasperReport,
                 parameters, conn);

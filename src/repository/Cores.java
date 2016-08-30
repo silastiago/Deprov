@@ -38,4 +38,6 @@ public interface Cores {
 	*   	
 	*/
 	public void remover(Cor cor);
+
+	public Cor pegaCodigo(String cor);
 }

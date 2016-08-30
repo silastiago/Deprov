@@ -3,10 +3,17 @@ package repository.impl;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.faces.context.FacesContext;
+import javax.servlet.http.HttpSession;
+
+import org.hibernate.Criteria;
+import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.criterion.Order;
+import org.hibernate.criterion.Restrictions;
 
 import model.Cor;
+import model.Pessoa;
 import repository.Cores;
 
 /** Esta é uma Classe concreta que implementa a Interface Cores,
@@ -69,4 +76,15 @@ public class CoresImpl implements Cores{
 	public void remover(Cor cor) {
 		this.sessao.delete(cor);
 	}
+	
+	@Override
+	public Cor pegaCodigo(String cor) {
+		Criteria c = this.sessao.createCriteria(Cor.class);
+		c.add(Restrictions.eq("cor", cor));
+		Cor results = (Cor) c.uniqueResult();
+		return results;
+		//return sessao.get(Cor.class, cor);
+	}
+	
+	
 }
