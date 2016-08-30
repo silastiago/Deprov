@@ -5,7 +5,6 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
 import java.io.Serializable;
-import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.net.URL;
 import java.sql.Connection;
@@ -131,9 +130,10 @@ public class CadastroVeiculoBean implements Serializable{
 	    }
 	
 	//public void gerarRelatorio(ActionEvent event) throws JRException, IOException{
-	 public String gerarRelatorio() throws JRException, IOException, ClassNotFoundException, NoSuchMethodException, SecurityException, InstantiationException, IllegalAccessException, IllegalArgumentException, InvocationTargetException {
-		Class objeto = (Class) Class.forName("model."+this.getInstancia()); 
-		
+	 public String gerarRelatorio() throws JRException, IOException, ClassNotFoundException, NoSuchMethodException, SecurityException, InstantiationException, IllegalAccessException {
+		//Class objeto = (Class) Class.forName("model."+this.getInstancia()); 
+		//Class objeto = (Class) Class.forName(""+this.getInstancia());
+		 
 		Cor cor = new Cor();
 		Cores cores = this.repositorios.getCores();
 		
@@ -161,15 +161,15 @@ public class CadastroVeiculoBean implements Serializable{
         //modelo = modelos.pegaCodigo(this.getValor());
         fabricante = fabricantes.pegaCodigo(this.getValor());
         
-        Method numero = objeto.getMethod("getCodigo", null);
-        
-        
-        //System.out.println("Codigo do objeto: "+ numero.invoke(objeto));
+        //Method numero = objeto.getMethod("getCodigo", null);
+        //System.out.println("Codigo do objeto: "+ objeto.getMethod("getCodigo", null).getName());
+        //System.out.println("Codigo do objeto: "+ objeto.getMethod("getCodigo", null).getReturnType().getCanonicalName());
         System.out.println("Parametro utilizado: " + this.getParametro());
         System.out.println("Codigo da cor: " + cor.getCodigo());
         System.out.println("Codigo do modelo: " + modelo.getCodigo());
         //parameters.put("codigo_fabricante", fabricante.getCodigo());
         parameters.put(this.getParametro().toString(), fabricante.getCodigo());
+        //parameters.put(this.getParametro().toString(), this.getInstancia()+"."+objeto.getMethod("getCodigo", null)+"()");
         
         JasperPrint print = JasperFillManager.fillReport(jasperReport,
                 parameters, conn);
