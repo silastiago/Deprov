@@ -1,10 +1,13 @@
 package repository.impl;
 
 import java.util.List;
+
+import org.hibernate.Criteria;
 import org.hibernate.Session;
 import org.hibernate.criterion.Order;
 import org.hibernate.criterion.Restrictions;
 
+import model.Modelo;
 import model.Veiculo;
 import repository.Veiculos;
 
@@ -77,5 +80,19 @@ public class VeiculosImpl implements Veiculos{
 	public List<Veiculo> listarPorPlaca(String codigo) {
 		//Criteria criteria = sessao.createCriteria(Veiculo.class).addQueryHint("FROM Veiculo E WHERE E.Placa = jfoerhgoh");
 		return sessao.createCriteria(Veiculo.class).add(Restrictions.eq("veiculo.placa", codigo)).list();
+	}
+	
+	@Override
+	public boolean chaveExistente(String chave) {
+		boolean existe = false;
+		Criteria c = this.sessao.createCriteria(Veiculo.class);
+		c.add(Restrictions.eq("chave", chave));
+		List<Veiculo> results = c.list();	
+		if (results.size() > 0) {
+			existe = true;
+		}else{
+			existe = false;
+		}
+		return existe;
 	}
 }

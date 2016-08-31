@@ -14,6 +14,7 @@ import java.util.List;
 import java.util.Map;
 
 import javax.annotation.PostConstruct;
+import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
 import javax.faces.context.FacesContext;
@@ -69,10 +70,37 @@ public class CadastroVeiculoBean implements Serializable{
 	}
 
 
-	public String cadastrar(){
+	public void cadastrar(){
 			Veiculos veiculos = this.repositorios.getveiculos();
-			veiculos.salvar(veiculo);
-		return "index?faces-redirect=true";
+			System.out.println("Chave: " + veiculo.getChave());
+			if (veiculo.getChave().toUpperCase().equals("NÃO")) {
+				veiculos.salvar(veiculo);
+				try {
+					FacesContext.getCurrentInstance().getExternalContext().redirect("index.xhtml");
+				} catch (IOException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			}else{
+				if (veiculos.chaveExistente(veiculo.getChave())) {
+					FacesContext.getCurrentInstance().addMessage("message", new FacesMessage(FacesMessage.SEVERITY_ERROR, "","Local da Chave já ocupado"));
+				}else{
+					veiculos.salvar(veiculo);
+					try {
+						FacesContext.getCurrentInstance().getExternalContext().redirect("index.xhtml");
+					} catch (IOException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
+				}
+			}
+			
+			
+			
+			
+			
+			
+		//return "index?faces-redirect=true";
 	}
 	
 	public String ocorrencia(ActionEvent event){
@@ -141,8 +169,7 @@ public class CadastroVeiculoBean implements Serializable{
 		Modelos modelos = this.repositorios.getModelos();
 				
 		Fabricante fabricante = new Fabricante();
-		Fabricantes fabricantes = this.repositorios.getFabricantes(); 
-		
+		Fabricantes fabricantes = this.repositorios.getFabricantes();
 		
 		ConnectionFactory conexao = new ConnectionFactory();
 		 String reportSrcFile = this.getRelatorio();

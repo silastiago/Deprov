@@ -68,11 +68,13 @@
 					<h:outputText value="#{veiculo.cor.cor}" />
 				</p:column>
 				
-				<p:column filterBy="#{veiculo.anofabricacao}"  style="text-align: center; width:7%" filterMatchMode="startsWith">
+				<p:column filterBy="#{veiculo.seguro.seguro}" style="text-align: center; width:4%" 
+					filterMatchMode="startsWith">
 					<f:facet name="header">
-						<h:outputText value="Ano Fab/Mod" />
+						<h:outputText value="Seguro" />
 					</f:facet>
-					<h:outputText value="#{veiculo.anofabricacao}" />
+					<h:outputText value="#{veiculo.seguro.seguro}" >
+					</h:outputText>
 				</p:column>
 
 

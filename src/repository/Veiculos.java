@@ -48,4 +48,6 @@ public interface Veiculos {
 	*   	
 	*/
 	public List<Veiculo> listarPorPlaca(String codigo);
+
+	public boolean chaveExistente(String chave);
 }
