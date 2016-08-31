@@ -158,8 +158,8 @@ public class CadastroVeiculoBean implements Serializable{
 	    // Parameters for report
         Map<String, Object> parameters = new HashMap<String, Object>();
         //cor = cores.pegaCodigo(this.getValor());
-        //modelo = modelos.pegaCodigo(this.getValor());
-        fabricante = fabricantes.pegaCodigo(this.getValor());
+        modelo = modelos.pegaCodigo(this.getValor());
+        //fabricante = fabricantes.pegaCodigo(this.getValor());
         
         //Method numero = objeto.getMethod("getCodigo", null);
         //System.out.println("Codigo do objeto: "+ objeto.getMethod("getCodigo", null).getName());
@@ -167,8 +167,11 @@ public class CadastroVeiculoBean implements Serializable{
         System.out.println("Parametro utilizado: " + this.getParametro());
         System.out.println("Codigo da cor: " + cor.getCodigo());
         System.out.println("Codigo do modelo: " + modelo.getCodigo());
-        //parameters.put("codigo_fabricante", fabricante.getCodigo());
-        parameters.put(this.getParametro().toString(), fabricante.getCodigo());
+        
+        
+        //parameters.put(this.getParametro().toString(), cor.getCodigo());
+        parameters.put(this.getParametro().toString(), modelo.getCodigo());
+        //parameters.put(this.getParametro().toString(), fabricante.getCodigo());
         //parameters.put(this.getParametro().toString(), this.getInstancia()+"."+objeto.getMethod("getCodigo", null)+"()");
         
         JasperPrint print = JasperFillManager.fillReport(jasperReport,
