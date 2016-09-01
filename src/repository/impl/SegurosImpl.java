@@ -2,8 +2,12 @@ package repository.impl;
 
 import java.util.List;
 
+import org.hibernate.Criteria;
 import org.hibernate.Session;
 import org.hibernate.criterion.Order;
+import org.hibernate.criterion.Restrictions;
+
+import model.Modelo;
 import model.Seguro;
 import repository.Seguros;
 
@@ -63,5 +67,13 @@ public class SegurosImpl implements Seguros{
 	@Override
 	public void remover(Seguro seguro) {
 		this.sessao.delete(seguro);
+	}
+	
+	@Override
+	public Seguro pegaCodigo(String seguro) {
+		Criteria c = this.sessao.createCriteria(Seguro.class);
+		c.add(Restrictions.eq("seguro", seguro));
+		Seguro results = (Seguro) c.uniqueResult();
+		return results;
 	}
 }

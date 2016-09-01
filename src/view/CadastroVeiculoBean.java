@@ -5,7 +5,6 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
 import java.io.Serializable;
-import java.lang.reflect.Method;
 import java.net.URL;
 import java.sql.Connection;
 import java.util.ArrayList;
@@ -28,6 +27,7 @@ import conexao.ConnectionFactory;
 import model.Cor;
 import model.Fabricante;
 import model.Modelo;
+import model.Seguro;
 import model.Veiculo;
 import net.sf.jasperreports.engine.JRException;
 import net.sf.jasperreports.engine.JasperCompileManager;
@@ -43,6 +43,7 @@ import net.sf.jasperreports.export.SimplePdfExporterConfiguration;
 import repository.Cores;
 import repository.Fabricantes;
 import repository.Modelos;
+import repository.Seguros;
 import repository.Veiculos;
 import util.FacesUtil;
 import util.Repositorios;
@@ -73,7 +74,7 @@ public class CadastroVeiculoBean implements Serializable{
 	public void cadastrar(){
 			Veiculos veiculos = this.repositorios.getveiculos();
 			System.out.println("Chave: " + veiculo.getChave());
-			if (veiculo.getChave().toUpperCase().equals("NÃO")) {
+			if (veiculo.getChave().toUpperCase().equals("NÃO") || veiculo.getChave().toUpperCase().equals("")) {
 				veiculos.salvar(veiculo);
 				try {
 					FacesContext.getCurrentInstance().getExternalContext().redirect("index.xhtml");
@@ -159,47 +160,69 @@ public class CadastroVeiculoBean implements Serializable{
 	
 	//public void gerarRelatorio(ActionEvent event) throws JRException, IOException{
 	 public String gerarRelatorio() throws JRException, IOException, ClassNotFoundException, NoSuchMethodException, SecurityException, InstantiationException, IllegalAccessException {
-		//Class objeto = (Class) Class.forName("model."+this.getInstancia()); 
-		//Class objeto = (Class) Class.forName(""+this.getInstancia());
 		 
-		Cor cor = new Cor();
-		Cores cores = this.repositorios.getCores();
+		Cor cor = null;
+		Cores cores = null;
 		
-		Modelo modelo = new Modelo();
-		Modelos modelos = this.repositorios.getModelos();
+		Modelo modelo = null;
+		Modelos modelos = null;
 				
-		Fabricante fabricante = new Fabricante();
-		Fabricantes fabricantes = this.repositorios.getFabricantes();
+		Fabricante fabricante = null;
+		Fabricantes fabricantes = null;
+		
+		Seguro seguro = null;
+		Seguros seguros = null;
+		
 		
 		ConnectionFactory conexao = new ConnectionFactory();
 		 String reportSrcFile = this.getRelatorio();
 		 
-		//String reportSrcFile = "/var/lib/tomcat8/webapps/Deprov/resources/relatorios/RelatorioVeiculo.jrxml";
-	        // First, compile jrxml file.
+		
+	    // First, compile jrxml file.
 	    JasperReport jasperReport =    JasperCompileManager.compileReport(reportSrcFile);
 	 
 	    Connection conn = conexao.getConnection();
 	    
-	    
-	    
 	    // Parameters for report
         Map<String, Object> parameters = new HashMap<String, Object>();
-        //cor = cores.pegaCodigo(this.getValor());
-        modelo = modelos.pegaCodigo(this.getValor());
-        //fabricante = fabricantes.pegaCodigo(this.getValor());
-        
-        //Method numero = objeto.getMethod("getCodigo", null);
-        //System.out.println("Codigo do objeto: "+ objeto.getMethod("getCodigo", null).getName());
-        //System.out.println("Codigo do objeto: "+ objeto.getMethod("getCodigo", null).getReturnType().getCanonicalName());
-        System.out.println("Parametro utilizado: " + this.getParametro());
-        System.out.println("Codigo da cor: " + cor.getCodigo());
-        System.out.println("Codigo do modelo: " + modelo.getCodigo());
         
         
-        //parameters.put(this.getParametro().toString(), cor.getCodigo());
-        parameters.put(this.getParametro().toString(), modelo.getCodigo());
-        //parameters.put(this.getParametro().toString(), fabricante.getCodigo());
-        //parameters.put(this.getParametro().toString(), this.getInstancia()+"."+objeto.getMethod("getCodigo", null)+"()");
+        if (this.getParametro().toString().equals("codigo_cor")) {
+			cor = new Cor();
+			cores = this.repositorios.getCores();
+			cor = cores.pegaCodigo(this.getValor());
+			System.out.println("Parametro utilizado: " + this.getParametro());
+			System.out.println("Codigo da cor: " + cor.getCodigo());
+			
+			parameters.put(this.getParametro().toString(), cor.getCodigo());
+		}else if (this.getParametro().toString().equals("codigo_modelo")) {
+			modelo = new Modelo();
+			modelos = this.repositorios.getModelos();
+			modelo = modelos.pegaCodigo(this.getValor());
+			
+			System.out.println("Parametro utilizado: " + this.getParametro());
+			System.out.println("Codigo do modelo: " + modelo.getCodigo());
+			
+			parameters.put(this.getParametro().toString(), modelo.getCodigo());
+		}else if (this.getParametro().toString().equals("codigo_fabricante")) {
+			fabricante = new Fabricante();
+			fabricantes = this.repositorios.getFabricantes();
+			fabricante = fabricantes.pegaCodigo(this.getValor());
+			
+			System.out.println("Parametro utilizado: " + this.getParametro());
+			System.out.println("Codigo do fabricante: " + fabricante.getCodigo());
+			
+			parameters.put(this.getParametro().toString(), fabricante.getCodigo());
+		}else if (this.getParametro().toString().equals("codigo_seguro")) {
+			seguro = new Seguro();
+			seguros = this.repositorios.getSeguros();
+			seguro = seguros.pegaCodigo(this.getValor());
+			
+			System.out.println("Parametro utilizado: " + this.getParametro());
+			System.out.println("Codigo do seguro: " + seguro.getCodigo());
+			
+			parameters.put(this.getParametro().toString(), seguro.getCodigo());
+		}
         
         JasperPrint print = JasperFillManager.fillReport(jasperReport,
                 parameters, conn);
@@ -211,9 +234,9 @@ public class CadastroVeiculoBean implements Serializable{
         // ExporterInput
         exporter.setExporterInput(exporterInput);
 	    
-     // ExporterOutput
+        //ExporterOutput
         /*OutputStreamExporterOutput exporterOutput = new SimpleOutputStreamExporterOutput(
-                "/var/lib/tomcat8/webapps/Deprov/resources/relatorios/"+idVeiculo+".pdf");*/
+                "/var/lib/tomcat8/webapps/Deprov/resources/relatorios/parametros/1/relatorio.pdf");*/
         
         OutputStreamExporterOutput exporterOutput = new SimpleOutputStreamExporterOutput(
                       "/opt/tomcat/webapps/Deprov/resources/relatorios/parametros/1/relatorio.pdf");
@@ -227,8 +250,6 @@ public class CadastroVeiculoBean implements Serializable{
         exporter.exportReport();	
         System.out.print("Relatorio criado com sucesso!");
         
-        
-        
         FacesContext facesContext = FacesContext.getCurrentInstance();
 	    HttpServletResponse response = (HttpServletResponse) facesContext.getExternalContext().getResponse();
 
@@ -236,7 +257,7 @@ public class CadastroVeiculoBean implements Serializable{
 	    response.setHeader("Content-Type", "application/pdf");  // Define apenas o tipo de conteï¿½do, Utilize se necessï¿½rio ServletContext#getMimeType() para detecï¿½ï¿½o automï¿½tica com base em nome de arquivo. 
 	    OutputStream responseOutputStream = response.getOutputStream();
 
-	    //String PDF_URL = "http://sinf.policiacivil.rn.gov.br:8080/Deprov/resources/relatorios/"+idVeiculo+".pdf";
+	    //String PDF_URL = "http://sinf.policiacivil.rn.gov.br:8080/Deprov/resources/relatorios/parametros/1/relatorio.pdf";
 	    String PDF_URL = "http://snmp.info.ufrn.br:8080/Deprov/resources/relatorios/parametros/1/relatorio.pdf";
 		// Lï¿½ o conteï¿½do do PDF
 	    URL url = new URL(PDF_URL);

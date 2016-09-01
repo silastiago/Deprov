@@ -40,4 +40,6 @@ public interface Seguros {
 	*   	
 	*/
 	public void remover(Seguro seguro);
+
+	public Seguro pegaCodigo(String seguro);
 }

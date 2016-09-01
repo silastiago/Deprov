@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Created with Jaspersoft Studio version 6.2.2.final using JasperReports Library version 6.2.2  -->
-<!-- 2016-09-01T14:12:26 -->
+<!-- 2016-09-01T13:58:11 -->
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="RelatorioVeiculo" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="31633f3b-cf08-4c8e-9dcd-4688c49a5839">
 	<property name="com.jaspersoft.studio.data.sql.tables" value="bW9kZWxvICwxNzYsMTMwLDI0ZTYyN2U1LTVkYmItNDhkMy1iYjFmLTg2OTE4MWZlODI1NDtmYWJy&#xA;aWNhbnRlICwzMzcsMjI0LGQyNWIxODBmLWZjOWUtNDdlZC05YzFlLTgyZjU3NmFiZDE5MDtjb3Ig&#xA;LDE3NiwxNSw3N2MyMjM5NC0wZDk1LTQwZWQtOTU4Yi1hM2ZkYjg0NjdmM2Q7dmVpY3VsbyAsMTUs&#xA;NzMsYTFjYTc3MzEtMDNjMC00ZDY3LWI4ZjctYjNmZWYwZGYyNmYwOw=="/>
 	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="Deprov"/>
-	<parameter name="codigo_cor" class="java.lang.Integer"/>
+	<parameter name="codigo_seguro" class="java.lang.Integer"/>
 	<queryString>
 		<![CDATA[SELECT veiculo.chassi,
 	veiculo.placa,
@@ -26,7 +26,7 @@ FROM veiculo
 	 veiculo.codigo_fabricante = fabricante.codigo 
 	 AND modelo.codigo_fabricante = fabricante.codigo 
 WHERE 
-	 veiculo.codigo_cor = $P!{codigo_cor}]]>
+	 veiculo.codigo_seguro = $P!{codigo_seguro}]]>
 	</queryString>
 	<field name="chassi" class="java.lang.String"/>
 	<field name="placa" class="java.lang.String"/>

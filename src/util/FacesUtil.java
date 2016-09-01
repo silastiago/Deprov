@@ -28,47 +28,7 @@ public class FacesUtil {
 		ExternalContext externalContext = facesContext.getExternalContext();
 		HttpServletRequest request = (HttpServletRequest) externalContext.getRequest();
 		return request.getAttribute(name);
-	}	
-	
-	/*public String pegarRelatorio(int tamanhoAtributos, Map<String, Object> listaObjetos){
-		String reportSrcFile = "";
-		
-		switch (tamanhoAtributos) {
-		case 1:
-			reportSrcFile = this.escolherRelatorio(listaObjetos);
-		break;
-		case 2:
-		System.out.println("Segunda-feira");
-		
-		break;
-		case 3:
-		System.out.println("Terça-feira");
-		
-		break;
-		case 4:
-		System.out.println("Quarta-feira");
-		
-		break;
-		case 5:
-		System.out.println("Quinta-feira");
-		
-		break;
-		case 6:
-		System.out.println("Sexta-feira");
-		
-		break;
-		case 7:
-		System.out.println("Sábado");
-		
-		break;
-		default:
-		System.out.println("Este não é um dia válido!");
-		
-		}
-		
-		
-		return reportSrcFile;
-	}*/
+	}
 	
 	
 	public Map<String, String> escolherRelatorio(Map<String, Object> listaObjetos){
@@ -79,23 +39,33 @@ public class FacesUtil {
 		
 		for (String key : listaObjetos.keySet()) {
             if (key.equals("placa")) {
-				relatorio = "/opt/tomcat/webapps/Deprov/resources/relatorios/parametros/1/"+"Placa.jrxml";
+				relatorio = "/opt/tomcat/webapps/Deprov/resources/relatorios/parametros/1/Placa.jrxml";
+				//relatorio = "/var/lib/tomcat8/webapps/Deprov/resources/relatorios/parametros/1/Placa.jrxml";
 				parametro = "placa";
 			}else if (key.equals("placaOriginal")) {
-				relatorio = "/opt/tomcat/webapps/Deprov/resources/relatorios/parametros/1/"+"PlacaOriginal.jrxml";
+				relatorio = "/opt/tomcat/webapps/Deprov/resources/relatorios/parametros/1/PlacaOriginal.jrxml";
+				//relatorio = "/var/lib/tomcat8/webapps/Deprov/resources/relatorios/parametros/1/PlacaOriginal.jrxml";
 				parametro = "placaoriginal";
 			}else if (key.equals("fabricante.fabricante")) {
-				relatorio = "/opt/tomcat/webapps/Deprov/resources/relatorios/parametros/1/"+"Fabricante.jrxml";
+				relatorio = "/opt/tomcat/webapps/Deprov/resources/relatorios/parametros/1/Fabricante.jrxml";
+				//relatorio = "/var/lib/tomcat8/webapps/Deprov/resources/relatorios/parametros/1/Fabricante.jrxml";
 				parametro = "codigo_fabricante";
 			}else if (key.equals("modelo.modelo")) {
-				relatorio = "/opt/tomcat/webapps/Deprov/resources/relatorios/parametros/1/"+"Modelo.jrxml";
+				relatorio = "/opt/tomcat/webapps/Deprov/resources/relatorios/parametros/1/Modelo.jrxml";
+				//relatorio = "/var/lib/tomcat8/webapps/Deprov/resources/relatorios/parametros/1/Modelo.jrxml";
 				parametro = "codigo_modelo";
 			}else if (key.equals("chassi")) {
-				relatorio = "/opt/tomcat/webapps/Deprov/resources/relatorios/parametros/1/"+"Chassi.jrxml";
+				relatorio = "/opt/tomcat/webapps/Deprov/resources/relatorios/parametros/1/Chassi.jrxml";
+				//relatorio = "/var/lib/tomcat8/webapps/Deprov/resources/relatorios/parametros/1/Chassi.jrxml";
 				parametro = "chassi";
 			}else if (key.equals("cor.cor")) {
-				relatorio = "/opt/tomcat/webapps/Deprov/resources/relatorios/parametros/1/"+"Cor.jrxml";
+				relatorio = "/opt/tomcat/webapps/Deprov/resources/relatorios/parametros/1/Cor.jrxml";
+				//relatorio = "/var/lib/tomcat8/webapps/Deprov/resources/relatorios/parametros/1/Cor.jrxml";
 				parametro = "codigo_cor";
+			}else if (key.equals("seguro.seguro")) {
+				relatorio = "/opt/tomcat/webapps/Deprov/resources/relatorios/parametros/1/Seguro.jrxml";
+				//relatorio = "/var/lib/tomcat8/webapps/Deprov/resources/relatorios/parametros/1/Seguro.jrxml";
+				parametro = "codigo_seguro";
 			}
 			/*System.out.println("key: " + key + " \t values: "
                     + listaObjetos.get(key).toString().toUpperCase());*/
@@ -117,37 +87,45 @@ public class FacesUtil {
 		
 		for (String key : listaObjetos.keySet()) {
             if (key.equals("placa")) {
-				relatorio = "/opt/tomcat/webapps/Deprov/resources/relatorios/parametros/1/"+"Placa.jrxml";
+				relatorio = "/opt/tomcat/webapps/Deprov/resources/relatorios/parametros/1/Placa.jrxml";
+            	//relatorio = "/var/lib/tomcat8/webapps/Deprov/resources/relatorios/parametros/1/Placa.jrxml";
 				parametro = "placa";
 				nomeInstancia = "Veiculo";
 			}else if (key.equals("placaOriginal")) {
-				relatorio = "/opt/tomcat/webapps/Deprov/resources/relatorios/parametros/1/"+"PlacaOriginal.jrxml";
+				relatorio = "/opt/tomcat/webapps/Deprov/resources/relatorios/parametros/1/PlacaOriginal.jrxml";
+				//relatorio = "/var/lib/tomcat8/webapps/Deprov/resources/relatorios/parametros/1/PlacaOriginal.jrxml";
 				parametro = "placaoriginal";
 				nomeInstancia = "Veiculo";
 			}else if (key.equals("fabricante.fabricante")) {
-				relatorio = "/opt/tomcat/webapps/Deprov/resources/relatorios/parametros/1/"+"Fabricante.jrxml";
+				relatorio = "/opt/tomcat/webapps/Deprov/resources/relatorios/parametros/1/Fabricante.jrxml";
+				//relatorio = "/var/lib/tomcat8/webapps/Deprov/resources/relatorios/parametros/1/Fabricante.jrxml";
 				parametro = "codigo_fabricante";
 				nomeInstancia = "Fabricante";
 			}else if (key.equals("modelo.modelo")) {
-				relatorio = "/opt/tomcat/webapps/Deprov/resources/relatorios/parametros/1/"+"Modelo.jrxml";
+				relatorio = "/opt/tomcat/webapps/Deprov/resources/relatorios/parametros/1/Modelo.jrxml";
+				//relatorio = "/var/lib/tomcat8/webapps/Deprov/resources/relatorios/parametros/1/Modelo.jrxml";
 				parametro = "codigo_modelo";
 				nomeInstancia = "Modelo";
 			}else if (key.equals("chassi")) {
-				relatorio = "/opt/tomcat/webapps/Deprov/resources/relatorios/parametros/1/"+"Chassi.jrxml";
+				relatorio = "/opt/tomcat/webapps/Deprov/resources/relatorios/parametros/1/Chassi.jrxml";
+				//relatorio = "/var/lib/tomcat8/webapps/Deprov/resources/relatorios/parametros/1/Chassi.jrxml";
 				parametro = "chassi";
 				nomeInstancia = "Veiculo";
 			}else if (key.equals("cor.cor")) {
-				relatorio = "/opt/tomcat/webapps/Deprov/resources/relatorios/parametros/1/"+"Cor.jrxml";
+				relatorio = "/opt/tomcat/webapps/Deprov/resources/relatorios/parametros/1/Cor.jrxml";
+				//relatorio = "/var/lib/tomcat8/webapps/Deprov/resources/relatorios/parametros/1/Cor.jrxml";
 				parametro = "codigo_cor";
 				nomeInstancia = "Cor";
+			}else if (key.equals("seguro.seguro")) {
+				relatorio = "/opt/tomcat/webapps/Deprov/resources/relatorios/parametros/1/Seguro.jrxml";
+				//relatorio = "/var/lib/tomcat8/webapps/Deprov/resources/relatorios/parametros/1/Seguro.jrxml";
+				parametro = "codigo_seguro";
 			}
 			/*System.out.println("key: " + key + " \t values: "
                     + listaObjetos.get(key).toString().toUpperCase());*/
             mapaRelatorioParametro.put(parametro, relatorio);
             mapaRelatorioParametroInstancia.put(nomeInstancia, mapaRelatorioParametro);
         }
-		
 		return mapaRelatorioParametroInstancia;
 	}	
-	
 }

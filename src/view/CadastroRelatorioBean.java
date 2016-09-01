@@ -95,8 +95,6 @@ public class CadastroRelatorioBean implements Serializable {
         exporter.exportReport();	
         System.out.print("Relatorio criado com sucesso!");
         
-        
-        
         FacesContext facesContext = FacesContext.getCurrentInstance();
 	    HttpServletResponse response = (HttpServletResponse) facesContext.getExternalContext().getResponse();
 
