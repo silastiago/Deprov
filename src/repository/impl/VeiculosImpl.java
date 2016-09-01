@@ -82,6 +82,12 @@ public class VeiculosImpl implements Veiculos{
 		return sessao.createCriteria(Veiculo.class).add(Restrictions.eq("veiculo.placa", codigo)).list();
 	}
 	
+	/** Este metodo pesquisa se o local da chave já está ocupado.
+	*  	
+	*  @param chave, Esta chave é o local onde a chave vai ficar.
+	*  @return retorna true caso o local da chave esteja já ocupado caso contrário retorna false.
+	*   	
+	*/
 	@Override
 	public boolean chaveExistente(String chave) {
 		boolean existe = false;
@@ -94,5 +100,10 @@ public class VeiculosImpl implements Veiculos{
 			existe = false;
 		}
 		return existe;
+	}
+
+	@Override
+	public void editar(Veiculo veiculo) {
+		this.sessao.merge(veiculo);
 	}
 }

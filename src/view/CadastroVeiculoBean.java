@@ -94,14 +94,14 @@ public class CadastroVeiculoBean implements Serializable{
 						e.printStackTrace();
 					}
 				}
-			}
-			
-			
-			
-			
-			
-			
+			}	
 		//return "index?faces-redirect=true";
+	}
+	
+	public String editar(){
+		Veiculos veiculos = this.repositorios.getveiculos();
+		veiculos.editar(veiculo);
+		return "index?faces-redirect=true";
 	}
 	
 	public String ocorrencia(ActionEvent event){

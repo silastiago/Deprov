@@ -34,6 +34,15 @@ public interface Veiculos {
 	*/
 	public void salvar(Veiculo veiculo);
 	
+	
+	/** Este metodo altera um veiculo.
+	*  	
+	*  @param veiculo, Esta veiculo é o objeto veiculo que você irá modificar.
+	*   	
+	*/
+	public void editar(Veiculo veiculo);
+	
+	
 	/** Este metodo Remove um veiculo.
 	*  	
 	*  @param veiculo, Esta veiculo é o objeto Veiculo que você irá remover.
@@ -48,6 +57,12 @@ public interface Veiculos {
 	*   	
 	*/
 	public List<Veiculo> listarPorPlaca(String codigo);
-
+	
+	/** Este metodo pesquisa se o local da chave já está ocupado.
+	*  	
+	*  @param chave, Esta chave é o local onde a chave vai ficar.
+	*  @return retorna true caso o local da chave esteja já ocupado caso contrário retorna false.
+	*   	
+	*/
 	public boolean chaveExistente(String chave);
 }
