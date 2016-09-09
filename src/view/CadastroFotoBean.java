@@ -131,6 +131,7 @@ public class CadastroFotoBean implements Serializable {
 		
 		//A variavel path recebe o caminho de onde a foto está inserida.
 		String path = "/opt/tomcat/webapps/Deprov/resources/"+ foto.getPath();
+		//String path = "/var/lib/tomcat8/webapps/Deprov/resources/"+ foto.getPath();
 		//Criando arquivo para ser deletado com o caminho especificado logo acima.
 		File f = new File(path);
 		//Deletando o arquivo do diretorio.

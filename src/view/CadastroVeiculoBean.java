@@ -95,8 +95,9 @@ public class CadastroVeiculoBean implements Serializable{
 	
 	public void cadastrar(){
 			Veiculos veiculos = this.repositorios.getveiculos();
+			String placas = "";
 			System.out.println("Chave: " + veiculo.getChave());
-			System.out.println("Lista de veiculos: " + veiculos.chaveExistente(veiculo).size());
+			System.out.println("Lista de veiculos: " + veiculos.chaveExistenteCadastrar(veiculo).size());
 			if (veiculo.getChave().toUpperCase().equals("NÃO") || veiculo.getChave().toUpperCase().equals("")) {
 				veiculos.salvar(veiculo);
 				try {
@@ -106,8 +107,12 @@ public class CadastroVeiculoBean implements Serializable{
 					e.printStackTrace();
 				}
 			}else{
-				if (veiculos.chaveExistente(veiculo).size() > 0) {
-					FacesContext.getCurrentInstance().addMessage("message", new FacesMessage(FacesMessage.SEVERITY_ERROR, "","Local da Chave já ocupado"));
+				if (veiculos.chaveExistenteCadastrar(veiculo).size() > 0) {
+					List<Veiculo> listaVeiculo = veiculos.chaveExistenteCadastrar(veiculo);	
+					for (int i = 0; i < listaVeiculo.size(); i++) {
+						placas = placas + " " + listaVeiculo.get(i).getPlaca();
+					}
+					FacesContext.getCurrentInstance().addMessage("message", new FacesMessage(FacesMessage.SEVERITY_ERROR, "","Local da Chave já ocupado por veiculos de placas "+ placas));
 				}else{
 					veiculos.salvar(veiculo);
 					try {
@@ -124,8 +129,9 @@ public class CadastroVeiculoBean implements Serializable{
 	
 	public void editar(){
 		Veiculos veiculos = this.repositorios.getveiculos();
+		String placas = "";
 		System.out.println("Chave: " + veiculo.getChave());
-		System.out.println("Lista de veiculos: " + veiculos.chaveExistente(veiculo).size());
+		System.out.println("Lista de veiculos: " + veiculos.chaveExistenteEditar(veiculo).size());
 		if (veiculo.getChave().toUpperCase().equals("NÃO") || veiculo.getChave().toUpperCase().equals("")) {
 			veiculos.editar(veiculo);
 			try {
@@ -135,8 +141,12 @@ public class CadastroVeiculoBean implements Serializable{
 				e.printStackTrace();
 			}
 		}else{
-			if (veiculos.chaveExistente(veiculo).size() > 0) {
-				FacesContext.getCurrentInstance().addMessage("message", new FacesMessage(FacesMessage.SEVERITY_ERROR, "","Local da Chave já ocupado"));
+			if (veiculos.chaveExistenteEditar(veiculo).size() > 0) {
+				List<Veiculo> listaVeiculo = veiculos.chaveExistenteEditar(veiculo);	
+				for (int i = 0; i < listaVeiculo.size(); i++) {
+					placas = placas + " " + listaVeiculo.get(i).getPlaca();
+				}
+				FacesContext.getCurrentInstance().addMessage("message", new FacesMessage(FacesMessage.SEVERITY_ERROR, "","Local da Chave já ocupado por veiculos de placas "+ placas));
 			}else{
 				veiculos.editar(veiculo);
 				try {

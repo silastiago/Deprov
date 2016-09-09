@@ -64,7 +64,8 @@ public interface Veiculos {
 	*  @return retorna true caso o local da chave esteja já ocupado caso contrário retorna false.
 	*   	
 	*/
-	//public List<Veiculo> chaveExistente(String chave);
 
-	public List<Veiculo> chaveExistente(Veiculo veiculo);
+	public List<Veiculo> chaveExistenteEditar(Veiculo veiculo);
+
+	public List<Veiculo> chaveExistenteCadastrar(Veiculo veiculo);
 }

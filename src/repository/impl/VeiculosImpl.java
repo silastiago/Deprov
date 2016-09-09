@@ -83,13 +83,14 @@ public class VeiculosImpl implements Veiculos{
 	}
 	
 	/** Este metodo pesquisa se o local da chave já está ocupado.
-	*  	
+	*  	Este metodo será usado apenas quando for editar um veiculo.	
+	*  
 	*  @param chave, Esta chave é o local onde a chave vai ficar.
 	*  @return retorna true caso o local da chave esteja já ocupado caso contrário retorna false.
 	*   	
 	*/
 	@Override
-	public List<Veiculo> chaveExistente(Veiculo veiculo) {
+	public List<Veiculo> chaveExistenteEditar(Veiculo veiculo) {
 		boolean existe = false;
 		Criteria c = this.sessao.createCriteria(Veiculo.class);
 		c.add(Restrictions.eq("chave", veiculo.getChave()));
@@ -105,6 +106,31 @@ public class VeiculosImpl implements Veiculos{
 		return results;
 	}
 
+	/** Este metodo pesquisa se o local da chave já está ocupado.
+	*  Este metodo será usado apenas quando for cadastrar um veiculo novo.
+	*  	
+	*  @param chave, Esta chave é o local onde a chave vai ficar.
+	*  @return retorna true caso o local da chave esteja já ocupado caso contrário retorna false.
+	*  
+	*   	
+	*/
+	@Override
+	public List<Veiculo> chaveExistenteCadastrar(Veiculo veiculo) {
+		boolean existe = false;
+		Criteria c = this.sessao.createCriteria(Veiculo.class);
+		c.add(Restrictions.eq("chave", veiculo.getChave()));
+		List<Veiculo> results = c.list();	
+		/*
+		if (results.size() > 0) {
+			existe = true;
+		}else{
+			existe = false;
+		}
+		*/
+		return results;
+	}
+	
+	
 	@Override
 	public void editar(Veiculo veiculo) {
 		this.sessao.merge(veiculo);
