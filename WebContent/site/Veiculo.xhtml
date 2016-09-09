@@ -52,12 +52,13 @@
 					</h:selectOneMenu>
 
 					<h:outputLabel value="Fabricante" />
-					<h:selectOneMenu value="#{cadastroVeiculoBean.veiculo.fabricante}" label="Fabricante" >
+					<h:selectOneMenu value="#{cadastroVeiculoBean.veiculo.fabricante}" label="Fabricante" valueChangeListener="#{cadastroVeiculoBean.lerFabricante}">
 						<f:selectItem itemLabel="Selecione o Fabricante do Veiculo"
 							noSelectionOption="true" />
 						<f:selectItems value="#{cadastroFabricanteBean.listaFabricantes()}"
 							var="fabricante" itemValue="#{fabricante}"
-							itemLabel="#{fabricante.fabricante}" />
+							itemLabel="#{fabricante.fabricante}" />	
+							<f:ajax event="change" render="modelos"/>
 					</h:selectOneMenu>
 
 					<h:outputLabel value="Modelo" />

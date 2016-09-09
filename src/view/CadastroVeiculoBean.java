@@ -18,6 +18,7 @@ import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
 import javax.faces.context.FacesContext;
 import javax.faces.event.ActionEvent;
+import javax.faces.event.ValueChangeEvent;
 import javax.servlet.http.HttpServletResponse;
 
 import org.primefaces.event.data.FilterEvent;
@@ -62,18 +63,40 @@ public class CadastroVeiculoBean implements Serializable{
 	private String parametro;
 	private String valor;
 	private Object instancia;
+	private List<Modelo> listaModelos;
+	
 	
 	
 	@PostConstruct
 	public void init(){
 		Veiculos veiculos = this.repositorios.getveiculos();
 		this.listaVeiculos = veiculos.listar();
+		this.listaModelos = null;
 	}
 
 
+	public void lerFabricante(ValueChangeEvent evento){
+		Fabricante fabricante = (Fabricante) evento.getNewValue();
+		System.out.println("Codigo do Fabricante: " + fabricante.getCodigo());
+		this.veiculo.setFabricante(fabricante);
+		//return codigoSistemaOperacional;
+	}
+	
+	public List<Modelo> listaModelos(){
+		System.out.println("Codigo do fabricante2: " + this.veiculo.getFabricante().getCodigo());
+		//Esta linha estou instanciando a interface com sua implementação.
+		Modelos modelos = this.repositorios.getModelos();
+		//A lista de modelos recebe as modelos.
+		listaModelos = modelos.pegaModelos(this.veiculo.getFabricante().getCodigo().toString());
+		//Retorna a lista de modelos
+		return listaModelos;
+	}
+	
+	
 	public void cadastrar(){
 			Veiculos veiculos = this.repositorios.getveiculos();
 			System.out.println("Chave: " + veiculo.getChave());
+			System.out.println("Lista de veiculos: " + veiculos.chaveExistente(veiculo).size());
 			if (veiculo.getChave().toUpperCase().equals("NÃO") || veiculo.getChave().toUpperCase().equals("")) {
 				veiculos.salvar(veiculo);
 				try {
@@ -83,7 +106,7 @@ public class CadastroVeiculoBean implements Serializable{
 					e.printStackTrace();
 				}
 			}else{
-				if (veiculos.chaveExistente(veiculo.getChave())) {
+				if (veiculos.chaveExistente(veiculo).size() > 0) {
 					FacesContext.getCurrentInstance().addMessage("message", new FacesMessage(FacesMessage.SEVERITY_ERROR, "","Local da Chave já ocupado"));
 				}else{
 					veiculos.salvar(veiculo);
@@ -98,10 +121,32 @@ public class CadastroVeiculoBean implements Serializable{
 		//return "index?faces-redirect=true";
 	}
 	
-	public String editar(){
+	
+	public void editar(){
 		Veiculos veiculos = this.repositorios.getveiculos();
-		veiculos.editar(veiculo);
-		return "index?faces-redirect=true";
+		System.out.println("Chave: " + veiculo.getChave());
+		System.out.println("Lista de veiculos: " + veiculos.chaveExistente(veiculo).size());
+		if (veiculo.getChave().toUpperCase().equals("NÃO") || veiculo.getChave().toUpperCase().equals("")) {
+			veiculos.editar(veiculo);
+			try {
+				FacesContext.getCurrentInstance().getExternalContext().redirect("index.xhtml");
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}else{
+			if (veiculos.chaveExistente(veiculo).size() > 0) {
+				FacesContext.getCurrentInstance().addMessage("message", new FacesMessage(FacesMessage.SEVERITY_ERROR, "","Local da Chave já ocupado"));
+			}else{
+				veiculos.editar(veiculo);
+				try {
+					FacesContext.getCurrentInstance().getExternalContext().redirect("index.xhtml");
+				} catch (IOException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			}
+		}
 	}
 	
 	public String ocorrencia(ActionEvent event){
@@ -375,6 +420,16 @@ public class CadastroVeiculoBean implements Serializable{
 
 	public void setInstancia(Object instancia) {
 		this.instancia = instancia;
+	}
+
+
+	public List<Modelo> getListaModelos() {
+		return listaModelos;
+	}
+
+
+	public void setListaModelos(List<Modelo> listaModelos) {
+		this.listaModelos = listaModelos;
 	}
 	
 	

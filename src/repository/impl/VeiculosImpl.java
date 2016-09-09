@@ -89,17 +89,20 @@ public class VeiculosImpl implements Veiculos{
 	*   	
 	*/
 	@Override
-	public boolean chaveExistente(String chave) {
+	public List<Veiculo> chaveExistente(Veiculo veiculo) {
 		boolean existe = false;
 		Criteria c = this.sessao.createCriteria(Veiculo.class);
-		c.add(Restrictions.eq("chave", chave));
+		c.add(Restrictions.eq("chave", veiculo.getChave()));
+		c.add(Restrictions.ne("codigo", veiculo.getCodigo()));
 		List<Veiculo> results = c.list();	
+		/*
 		if (results.size() > 0) {
 			existe = true;
 		}else{
 			existe = false;
 		}
-		return existe;
+		*/
+		return results;
 	}
 
 	@Override

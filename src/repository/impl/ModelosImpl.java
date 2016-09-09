@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.hibernate.Criteria;
 import org.hibernate.Session;
+import org.hibernate.criterion.Example;
 import org.hibernate.criterion.Order;
 import org.hibernate.criterion.Restrictions;
 
@@ -74,6 +75,14 @@ public class ModelosImpl implements Modelos{
 		Criteria c = this.sessao.createCriteria(Modelo.class);
 		c.add(Restrictions.eq("modelo", modelo));
 		Modelo results = (Modelo) c.uniqueResult();
+		return results;
+	}
+	
+	@Override
+	public List<Modelo> pegaModelos(String modelo) {
+		Criteria c = this.sessao.createCriteria(Modelo.class);
+		c.add(Restrictions.eq("Modelo.codigo_fabricante", modelo));
+		List<Modelo> results = c.list();
 		return results;
 	}
 	

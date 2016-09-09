@@ -6,7 +6,9 @@ import java.util.List;
 
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.RequestScoped;
+import javax.faces.event.ValueChangeEvent;
 
+import model.Fabricante;
 import model.Modelo;
 import repository.Modelos;
 import util.Repositorios;
@@ -56,8 +58,18 @@ public class CadastroModeloBean implements Serializable{
 		listaModelos = modelos.listar();
 		//Retorna a lista de modelos
 		return listaModelos;
-	}
+	}	
 	
+	public void listarModelos(ValueChangeEvent evento){
+		Fabricante fabricante = (Fabricante) evento.getNewValue();
+		//Esta linha estou instanciando a interface com sua implementação.
+		Modelos modelos = this.repositorios.getModelos();
+		//A lista de modelos recebe as modelos.
+		listaModelos = modelos.pegaModelos(fabricante.getCodigo().toString());
+		//Retorna a lista de modelos
+		//return listaModelos;
+	}
+		
 	public Modelo getModelo() {
 		return modelo;
 	}

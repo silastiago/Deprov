@@ -7,7 +7,6 @@ import javax.faces.context.ExternalContext;
 import javax.faces.context.FacesContext;
 import javax.servlet.http.HttpServletRequest;
 
-import repository.Modelos;
 
 /** Esta é uma Classe utilitaria que implementa alguns metodos que servirao para ser reutilizados em algumas classes.
 *   

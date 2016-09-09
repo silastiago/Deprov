@@ -42,4 +42,8 @@ public interface Modelos {
 	public void remover(Modelo modelo);
 
 	public Modelo pegaCodigo(String modelo);
+
+	public List<Modelo> pegaModelos(String modelo);
+
+
 }
