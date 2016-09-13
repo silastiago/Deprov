@@ -1,6 +1,5 @@
 package view;
 
-
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
@@ -49,6 +48,12 @@ import repository.Veiculos;
 import util.FacesUtil;
 import util.Repositorios;
 
+/** Esta é uma Classe concreta que une as implementacoes das interfaces e das paginas xhtml referentes a entidade Veiculo.
+*   
+* @author silas
+* @since 15-08-2016
+*/
+
 @ManagedBean(name="cadastroVeiculoBean")
 @ViewScoped
 public class CadastroVeiculoBean implements Serializable{
@@ -66,7 +71,6 @@ public class CadastroVeiculoBean implements Serializable{
 	private List<Modelo> listaModelos;
 	
 	
-	
 	@PostConstruct
 	public void init(){
 		Veiculos veiculos = this.repositorios.getveiculos();
@@ -74,7 +78,7 @@ public class CadastroVeiculoBean implements Serializable{
 		this.listaModelos = null;
 	}
 
-
+	
 	public void lerFabricante(ValueChangeEvent evento){
 		Fabricante fabricante = (Fabricante) evento.getNewValue();
 		System.out.println("Codigo do Fabricante: " + fabricante.getCodigo());
@@ -90,8 +94,7 @@ public class CadastroVeiculoBean implements Serializable{
 		listaModelos = modelos.pegaModelos(this.veiculo.getFabricante().getCodigo().toString());
 		//Retorna a lista de modelos
 		return listaModelos;
-	}
-	
+	}	
 	
 	public void cadastrar(){
 			Veiculos veiculos = this.repositorios.getveiculos();
@@ -103,7 +106,7 @@ public class CadastroVeiculoBean implements Serializable{
 				try {
 					FacesContext.getCurrentInstance().getExternalContext().redirect("index.xhtml");
 				} catch (IOException e) {
-					// TODO Auto-generated catch block
+					
 					e.printStackTrace();
 				}
 			}else{
@@ -118,7 +121,7 @@ public class CadastroVeiculoBean implements Serializable{
 					try {
 						FacesContext.getCurrentInstance().getExternalContext().redirect("index.xhtml");
 					} catch (IOException e) {
-						// TODO Auto-generated catch block
+						
 						e.printStackTrace();
 					}
 				}
@@ -137,7 +140,7 @@ public class CadastroVeiculoBean implements Serializable{
 			try {
 				FacesContext.getCurrentInstance().getExternalContext().redirect("index.xhtml");
 			} catch (IOException e) {
-				// TODO Auto-generated catch block
+				
 				e.printStackTrace();
 			}
 		}else{
@@ -152,7 +155,7 @@ public class CadastroVeiculoBean implements Serializable{
 				try {
 					FacesContext.getCurrentInstance().getExternalContext().redirect("index.xhtml");
 				} catch (IOException e) {
-					// TODO Auto-generated catch block
+					
 					e.printStackTrace();
 				}
 			}
@@ -177,8 +180,6 @@ public class CadastroVeiculoBean implements Serializable{
 	        System.out.println("size filter: "+ tempString.size());
 	        FacesUtil util = new FacesUtil();
 	        
-	        
-	        
 	        for (String key : tempString.keySet()) {
 	            System.out.println("key: " + key + " \t values: "
 	                    + tempString.get(key).toString().toUpperCase());
@@ -189,7 +190,7 @@ public class CadastroVeiculoBean implements Serializable{
 	        this.setValor(valor);
 	        Map<String, Map<String, String>> mapaRelatorioParametroInstancia = new HashMap<String, Map<String, String>>();
 	        Map<String, String> mapaRelatorioParametro = new HashMap<String, String>();
-	        mapaRelatorioParametroInstancia = util.escolherRelatorio2(tempString);
+	        mapaRelatorioParametroInstancia = util.escolherRelatorio(tempString);
 	        
 	        for (String key : mapaRelatorioParametroInstancia.keySet()) {
 	            System.out.println("Parametro: " + key + " \t Relatorio: "
@@ -203,8 +204,7 @@ public class CadastroVeiculoBean implements Serializable{
 		                    + mapaRelatorioParametro.get(key2).toString());
 	            	parametro = key2;
 	            	relatorio = mapaRelatorioParametro.get(key2).toString();
-	            }
-	            
+	            }        
 	            
 	            //relatorio = mapaRelatorioParametro.get(key).toString();
 	        }
@@ -228,11 +228,9 @@ public class CadastroVeiculoBean implements Serializable{
 		Seguro seguro = null;
 		Seguros seguros = null;
 		
-		
 		ConnectionFactory conexao = new ConnectionFactory();
-		 String reportSrcFile = this.getRelatorio();
+		String reportSrcFile = this.getRelatorio();
 		 
-		
 	    // First, compile jrxml file.
 	    JasperReport jasperReport =    JasperCompileManager.compileReport(reportSrcFile);
 	 
@@ -240,7 +238,6 @@ public class CadastroVeiculoBean implements Serializable{
 	    
 	    // Parameters for report
         Map<String, Object> parameters = new HashMap<String, Object>();
-        
         
         if (this.getParametro().toString().equals("codigo_cor")) {
 			cor = new Cor();
@@ -298,8 +295,7 @@ public class CadastroVeiculoBean implements Serializable{
         
         // Output
         exporter.setExporterOutput(exporterOutput);
-        
-		 
+        	 
         SimplePdfExporterConfiguration configuration = new SimplePdfExporterConfiguration();
         exporter.setConfiguration(configuration);
         exporter.exportReport();	
@@ -332,13 +328,8 @@ public class CadastroVeiculoBean implements Serializable{
 	    facesContext.responseComplete();
         
         return "index?faces-redirect=true";
-        
-        
-        
 	}
-	
-	
-	
+		
 	public Veiculo getVeiculo() {
 		return veiculo;
 	}
@@ -356,33 +347,25 @@ public class CadastroVeiculoBean implements Serializable{
 		return listaVeiculos;
 	}
 
-
 	public void setListaVeiculos(List<Veiculo> listaVeiculos) {
 		this.listaVeiculos = listaVeiculos;
 	}
-
 
 	public List<Veiculo> getListaVeiculosFiltrados() {
 		return listaVeiculosFiltrados;
 	}
 
-
 	public void setListaVeiculosFiltrados(List<Veiculo> listaVeiculosFiltrados) {
 		this.listaVeiculosFiltrados = listaVeiculosFiltrados;
 	}
-
-	
-
 
 	public Map<String, Object> getMapaFiltros() {
 		return mapaFiltros;
 	}
 
-
 	public void setMapaFiltros(Map<String, Object> mapaFiltros) {
 		this.mapaFiltros = mapaFiltros;
 	}
-
 
 	public StreamedContent getFile() {
 		return file;
@@ -392,56 +375,43 @@ public class CadastroVeiculoBean implements Serializable{
 		this.file = file;
 	}
 
-
 	public String getRelatorio() {
 		return relatorio;
 	}
-
 
 	public void setRelatorio(String relatorio) {
 		this.relatorio = relatorio;
 	}
 
-
 	public String getParametro() {
 		return parametro;
 	}
-
 
 	public void setParametro(String parametro) {
 		this.parametro = parametro;
 	}
 
-
 	public String getValor() {
 		return valor;
 	}
-
 
 	public void setValor(String valor) {
 		this.valor = valor;
 	}
 
-
 	public Object getInstancia() {
 		return instancia;
 	}
-
 
 	public void setInstancia(Object instancia) {
 		this.instancia = instancia;
 	}
 
-
 	public List<Modelo> getListaModelos() {
 		return listaModelos;
 	}
 
-
 	public void setListaModelos(List<Modelo> listaModelos) {
 		this.listaModelos = listaModelos;
-	}
-	
-	
-	
+	}	
 }

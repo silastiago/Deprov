@@ -40,6 +40,12 @@ public interface Seguros {
 	*   	
 	*/
 	public void remover(Seguro seguro);
-
+	
+	/** Este metodo pesquisa um seguro pelo seu nome.
+	*  	
+	*  @param seguro, Este seguro é o nome do seguro que você está procurando.
+	*  @return retorna o seguro daquele nome que você está pesquisando.
+	*   	
+	*/
 	public Seguro pegaCodigo(String seguro);
 }

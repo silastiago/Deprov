@@ -12,9 +12,11 @@ public interface Pessoas {
 	
 	/** Este metodo faz o login do usuario no sistema.
 	 * 	Este metodo ainda não está funcionando por alguns bugs.
+	*   por enquanto a classe que faz login é a LoginBean, Mas futuramente Esta classe será a classe de login definitiva.
 	*   
 	*   @param pessoa, Esta pessoa é o objeto Pessoa que irá fazer o login.
 	* 	@return boolean, retorna verdadeiro se a pessoa fez o login correto caso contrario retorna false.
+	* 	
 	*   	
 	*/
 	public boolean login(Pessoa pessoa);

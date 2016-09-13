@@ -58,14 +58,20 @@ public interface Veiculos {
 	*/
 	public List<Veiculo> listarPorPlaca(String codigo);
 	
-	/** Este metodo pesquisa se o local da chave já está ocupado.
+	/** Este metodo pesquisa se o local da chave já está ocupado, isso é feito no processo de edição do veiculo.
 	*  	
-	*  @param chave, Esta chave é o local onde a chave vai ficar.
-	*  @return retorna true caso o local da chave esteja já ocupado caso contrário retorna false.
+	*  @param veiculo, Este veiculo é o veiculo que você esté editando.
+	*  @return retorna uma lista de todos os veiculos que possuem aquela chave menos o veiculo que você está editando,
+	*  				   pois isso garante que você sempre possa editar o veiculo.
 	*   	
 	*/
-
 	public List<Veiculo> chaveExistenteEditar(Veiculo veiculo);
 
+	/** Este metodo pesquisa se o local da chave já está ocupado, isso é feito no processo o cadastro de um novo veiculo.
+	*  	
+	*  @param veiculo, Este veiculo é o veiculo que você esté cadastrando.
+	*  @return retorna uma lista de todos os veiculos que possuem aquela chave.
+	*   	
+	*/
 	public List<Veiculo> chaveExistenteCadastrar(Veiculo veiculo);
 }

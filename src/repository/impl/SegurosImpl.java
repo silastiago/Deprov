@@ -7,7 +7,6 @@ import org.hibernate.Session;
 import org.hibernate.criterion.Order;
 import org.hibernate.criterion.Restrictions;
 
-import model.Modelo;
 import model.Seguro;
 import repository.Seguros;
 
@@ -69,6 +68,12 @@ public class SegurosImpl implements Seguros{
 		this.sessao.delete(seguro);
 	}
 	
+	/** Este metodo pesquisa um seguro pelo seu nome.
+	*  	
+	*  @param seguro, Este seguro é o nome do seguro que você está procurando.
+	*  @return retorna o seguro daquele nome que você está pesquisando.
+	*   	
+	*/
 	@Override
 	public Seguro pegaCodigo(String seguro) {
 		Criteria c = this.sessao.createCriteria(Seguro.class);

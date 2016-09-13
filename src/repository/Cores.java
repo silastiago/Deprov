@@ -39,5 +39,11 @@ public interface Cores {
 	*/
 	public void remover(Cor cor);
 
+	/** Este metodo pesquisa uma cor pelo seu nome.
+	*  	
+	*  @param cor, Este cor é o nome do corque você está procurando.
+	*  @return retorna o cor daquele nome que você está pesquisando.
+	*   	
+	*/
 	public Cor pegaCodigo(String cor);
 }

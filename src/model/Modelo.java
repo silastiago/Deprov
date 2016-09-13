@@ -87,7 +87,7 @@ public class Modelo implements Serializable, Cloneable{
 	}
 	@Override
 	public Object clone() throws CloneNotSupportedException {
-		// TODO Auto-generated method stub
+		
 		return super.clone();
 	}
 

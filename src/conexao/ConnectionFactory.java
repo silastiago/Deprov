@@ -12,11 +12,6 @@ import java.sql.SQLException;
  */
 
 public class ConnectionFactory {
-	//private String url = "jdbc:mysql://localhost/snmp";
-	//private String usuario = "root";
-	//private String senha = "root";
-	//String driver = "org.gjt.mm.mysql.Driver";
-
 	private String url = "jdbc:postgresql://localhost:5432/deprov";
 	private String usuario = "postgres";
 	private String senha = "postgres";
@@ -27,19 +22,18 @@ public class ConnectionFactory {
  *
  * @return Connection retorna uma conexao
  */
-
 	public Connection getConnection(){
 		System.out.println("Iniciando conexao ");
 		try{
 			try {
 				Class.forName(driver);
 			} catch (ClassNotFoundException e) {
-				// TODO Auto-generated catch block
+				
 				e.printStackTrace();
 			}
 			conexao = DriverManager.getConnection(url, usuario, senha);
 			} catch (SQLException e) {
-				// TODO Auto-generated catch block
+				
 				e.printStackTrace();
 			}
 			return conexao;
@@ -48,7 +42,6 @@ public class ConnectionFactory {
 	/**	Metodo fecharConexao como o proprio nome já diz, ele fecha uma conexao após o termino de uma conexao.
 	 *
 	 */
-
 	public void fecharConexao(){
 		try {
 			conexao.close();

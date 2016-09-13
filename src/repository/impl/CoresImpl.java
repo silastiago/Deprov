@@ -3,17 +3,13 @@ package repository.impl;
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.faces.context.FacesContext;
-import javax.servlet.http.HttpSession;
 
 import org.hibernate.Criteria;
-import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.criterion.Order;
 import org.hibernate.criterion.Restrictions;
 
 import model.Cor;
-import model.Pessoa;
 import repository.Cores;
 
 /** Esta é uma Classe concreta que implementa a Interface Cores,
@@ -77,14 +73,17 @@ public class CoresImpl implements Cores{
 		this.sessao.delete(cor);
 	}
 	
+	/** Este metodo pesquisa uma cor pelo seu nome.
+	*  	
+	*  @param cor, Este cor é o nome do corque você está procurando.
+	*  @return retorna o cor daquele nome que você está pesquisando.
+	*   	
+	*/
 	@Override
 	public Cor pegaCodigo(String cor) {
 		Criteria c = this.sessao.createCriteria(Cor.class);
 		c.add(Restrictions.eq("cor", cor));
 		Cor results = (Cor) c.uniqueResult();
 		return results;
-		//return sessao.get(Cor.class, cor);
 	}
-	
-	
 }

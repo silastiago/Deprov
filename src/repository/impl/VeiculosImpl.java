@@ -48,9 +48,9 @@ public class VeiculosImpl implements Veiculos{
 		return (Veiculo) sessao.get(Veiculo.class, codigo);
 	}
 
-	/** Este metodo cria ou altera um veiculo.
+	/** Este metodo cria um veiculo.
 	*  	
-	*  @param veiculo, Este veiculo é o objeto Veiculo que você irá criar ou modificar.
+	*  @param veiculo, Este veiculo é o objeto Veiculo que você irá criar.
 	*  Este metodo sobrescreve o da interface Veiculos.
 	*/
 	@Override
@@ -91,18 +91,10 @@ public class VeiculosImpl implements Veiculos{
 	*/
 	@Override
 	public List<Veiculo> chaveExistenteEditar(Veiculo veiculo) {
-		boolean existe = false;
 		Criteria c = this.sessao.createCriteria(Veiculo.class);
 		c.add(Restrictions.eq("chave", veiculo.getChave()));
 		c.add(Restrictions.ne("codigo", veiculo.getCodigo()));
-		List<Veiculo> results = c.list();	
-		/*
-		if (results.size() > 0) {
-			existe = true;
-		}else{
-			existe = false;
-		}
-		*/
+		List<Veiculo> results = c.list();
 		return results;
 	}
 
@@ -116,21 +108,17 @@ public class VeiculosImpl implements Veiculos{
 	*/
 	@Override
 	public List<Veiculo> chaveExistenteCadastrar(Veiculo veiculo) {
-		boolean existe = false;
 		Criteria c = this.sessao.createCriteria(Veiculo.class);
 		c.add(Restrictions.eq("chave", veiculo.getChave()));
-		List<Veiculo> results = c.list();	
-		/*
-		if (results.size() > 0) {
-			existe = true;
-		}else{
-			existe = false;
-		}
-		*/
+		List<Veiculo> results = c.list();
 		return results;
 	}
 	
-	
+	/** Este metodo altera um veiculo.
+	*  	
+	*  @param veiculo, Esta veiculo é o objeto veiculo que você irá modificar.
+	*   	
+	*/
 	@Override
 	public void editar(Veiculo veiculo) {
 		this.sessao.merge(veiculo);

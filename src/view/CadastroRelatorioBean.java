@@ -34,6 +34,12 @@ import net.sf.jasperreports.export.SimplePdfExporterConfiguration;
 import repository.Veiculos;
 import util.Repositorios;
 
+/** Esta é uma Classe concreta que gerará o Relatorio completo do Veiculo.
+*   
+* @author silas
+* @since 13-09-2016
+*/
+
 @ManagedBean(name = "cadastroRelatorioBean")
 @RequestScoped
 public class CadastroRelatorioBean implements Serializable {
@@ -43,53 +49,68 @@ public class CadastroRelatorioBean implements Serializable {
 	private Veiculo veiculo = new Veiculo();
 	private StreamedContent file;
 
+	//Primeiro metodo a ser executado quando entra nas views referentes a foto de veiculos.
 	@PostConstruct
 	public void init() {
 		Veiculos veiculos = this.repositorios.getveiculos();
 		this.veiculos = veiculos.listar();
 	}
 
+	/** Este metodo gera o relatorio do veiculo.
+	* 	@param event, este event é o evento que buscamos o codigo do veiculo.
+	*/
 	public String gerarRelatorio(ActionEvent event) throws JRException, IOException{
+		//Pegando o valor do atributo event e colocando em veiculo.
 		Veiculo veiculo = (Veiculo) event.getComponent().getAttributes().get("codigo");
 		
+		//Colocando o codigo do veiculo na string codigo.
 		String codigo = veiculo.getCodigo().toString();
 		System.out.println("iniciando metodo de geracao de relatorio");
 		
+		//Convertendo a string codigo em inteiro.
 		int idVeiculo = Integer.parseInt(codigo);
+		//Instancia nossa fabrica de conexao
 		ConnectionFactory conexao = new ConnectionFactory();
 		
+		//Caminho do relatorio
 		String reportSrcFile = "/opt/tomcat/webapps/Deprov/resources/relatorios/RelatorioVeiculo.jrxml";
 		//String reportSrcFile = "/var/lib/tomcat8/webapps/Deprov/resources/relatorios/RelatorioVeiculo.jrxml";
-        // First, compile jrxml file.
+        
+		//Compilando o relatorio
         JasperReport jasperReport =    JasperCompileManager.compileReport(reportSrcFile);
- 
+
+        //Retornando a conexao
         Connection conn = conexao.getConnection();
  
         // Parameters for report
         Map<String, Object> parameters = new HashMap<String, Object>();
+        
+        //Passando o codigo do veiculo como parametro no mapa
         parameters.put("codigo_veiculo", idVeiculo);
+        
         
         JasperPrint print = JasperFillManager.fillReport(jasperReport,
                 parameters, conn);
          
         // PDF Exportor.
         JRPdfExporter exporter = new JRPdfExporter();
- 
+        
         ExporterInput exporterInput = new SimpleExporterInput(print);
         // ExporterInput
         exporter.setExporterInput(exporterInput);
  
-        // ExporterOutput
+        
         /*OutputStreamExporterOutput exporterOutput = new SimpleOutputStreamExporterOutput(
                 "/var/lib/tomcat8/webapps/Deprov/resources/relatorios/"+idVeiculo+".pdf");*/
-        
+
+        //ExporterOutput
         OutputStreamExporterOutput exporterOutput = new SimpleOutputStreamExporterOutput(
                       "/opt/tomcat/webapps/Deprov/resources/relatorios/"+idVeiculo+".pdf");
         
         // Output
         exporter.setExporterOutput(exporterOutput);
  
-        //
+        
         SimplePdfExporterConfiguration configuration = new SimplePdfExporterConfiguration();
         exporter.setConfiguration(configuration);
         exporter.exportReport();	

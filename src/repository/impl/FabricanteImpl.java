@@ -8,7 +8,6 @@ import org.hibernate.criterion.Order;
 import org.hibernate.criterion.Restrictions;
 
 import model.Fabricante;
-import model.Modelo;
 import repository.Fabricantes;
 
 /** Esta é uma Classe concreta que implementa a Interface Fabricantes,
@@ -29,7 +28,7 @@ public class FabricanteImpl implements Fabricantes{
 	}
 
 	/** Este metodo lista os fabricantes cadastrados.
-	* 	@return retorna a lista dos fabricantes cadastrados.
+	* 	@return retorna a lista dos fabricantes cadastrados em ordem ascendente.
 	* 	Este metodo sobrescreve o da interface Fabricantes.
 	*/
 	@SuppressWarnings("unchecked")
@@ -69,6 +68,12 @@ public class FabricanteImpl implements Fabricantes{
 		this.sessao.delete(fabricante);
 	}
 	
+	/** Este metodo pesquisa um fabricante pelo seu nome.
+	*  	
+	*  @param fabricante, Este fabricante é o nome do fabricante que você está procurando.
+	*  @return retorna o fabricante daquele nome que você está pesquisando.
+	*   	
+	*/
 	@Override
 	public Fabricante pegaCodigo(String fabricante) {
 		Criteria c = this.sessao.createCriteria(Fabricante.class);

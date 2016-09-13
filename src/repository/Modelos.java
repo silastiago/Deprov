@@ -40,10 +40,20 @@ public interface Modelos {
 	*   	
 	*/
 	public void remover(Modelo modelo);
-
+	
+	/** Este metodo pesquisa um modelo pelo seu nome.
+	*  	
+	*  @param modelo, Este modelo é o nome do modelo que você está procurando.
+	*  @return retorna o modelo daquele nome que você está pesquisando.
+	*   	
+	*/
 	public Modelo pegaCodigo(String modelo);
 
-	public List<Modelo> pegaModelos(String modelo);
-
-
+	/** Este metodo lista todos os modelos de um determinado fabricante.
+	*  	
+	*  @param fabricante, Este fabricante é o id do fabricante que você está pesquisando.
+	*  @return retorna uma lista de modelos daquele fabricante que você está pesquisando.
+	*   	
+	*/
+	public List<Modelo> pegaModelos(String fabricante);
 }

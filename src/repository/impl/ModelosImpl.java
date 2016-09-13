@@ -4,11 +4,10 @@ import java.util.List;
 
 import org.hibernate.Criteria;
 import org.hibernate.Session;
-import org.hibernate.criterion.Example;
 import org.hibernate.criterion.Order;
 import org.hibernate.criterion.Restrictions;
 
-import model.Cor;
+
 import model.Modelo;
 import repository.Modelos;
 
@@ -29,7 +28,7 @@ public class ModelosImpl implements Modelos{
 	}
 
 	/** Este metodo lista os modelos cadastrados.
-	* 	@return retorna a lista dos modelos cadastrados.
+	* 	@return retorna a lista dos modelos cadastrados em ordem ascendente.
 	* 	Este metodo sobrescreve o da interface Modelos.
 	*/
 	@SuppressWarnings("unchecked")
@@ -69,7 +68,12 @@ public class ModelosImpl implements Modelos{
 		this.sessao.delete(modelo);
 	}
 	
-	
+	/** Este metodo pesquisa um modelo pelo seu nome.
+	*  	
+	*  @param modelo, Este modelo é o nome do modelo que você está procurando.
+	*  @return retorna o modelo daquele nome que você está pesquisando.
+	*   	
+	*/
 	@Override
 	public Modelo pegaCodigo(String modelo) {
 		Criteria c = this.sessao.createCriteria(Modelo.class);
@@ -78,6 +82,12 @@ public class ModelosImpl implements Modelos{
 		return results;
 	}
 	
+	/** Este metodo lista todos os modelos de um determinado fabricante.
+	*  	
+	*  @param fabricante, Este fabricante é o id do fabricante que você está pesquisando.
+	*  @return retorna uma lista de modelos daquele fabricante que você está pesquisando.
+	*   	
+	*/
 	@Override
 	public List<Modelo> pegaModelos(String modelo) {
 		Criteria c = this.sessao.createCriteria(Modelo.class);
@@ -85,5 +95,4 @@ public class ModelosImpl implements Modelos{
 		List<Modelo> results = c.list();
 		return results;
 	}
-	
 }

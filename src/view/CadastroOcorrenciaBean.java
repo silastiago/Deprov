@@ -17,6 +17,12 @@ import model.Veiculo;
 import repository.Ocorrencias;
 import util.Repositorios;
 
+/** Esta é uma Classe concreta que une as implementacoes das interfaces e das paginas xhtml referentes a entidade Ocorrencia.
+*   
+* @author silas
+* @since 13-09-2016
+*/
+
 @ManagedBean(name = "cadastroOcorrenciaBean")
 @ViewScoped
 public class CadastroOcorrenciaBean implements Serializable {

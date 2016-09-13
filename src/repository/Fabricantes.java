@@ -39,5 +39,11 @@ public interface Fabricantes {
 	*/
 	public void remover(Fabricante fabricante);
 
+	/** Este metodo pesquisa um fabricante pelo seu nome.
+	*  	
+	*  @param fabricante, Este fabricante é o nome do fabricante que você está procurando.
+	*  @return retorna o fabricante daquele nome que você está pesquisando.
+	*   	
+	*/
 	public Fabricante pegaCodigo(String fabricante);
 }
