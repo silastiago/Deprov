@@ -27,6 +27,7 @@ import conexao.ConnectionFactory;
 import model.Cor;
 import model.Fabricante;
 import model.Modelo;
+import model.Pericia;
 import model.Seguro;
 import model.Veiculo;
 import net.sf.jasperreports.engine.JRException;
@@ -43,6 +44,7 @@ import net.sf.jasperreports.export.SimplePdfExporterConfiguration;
 import repository.Cores;
 import repository.Fabricantes;
 import repository.Modelos;
+import repository.Pericias;
 import repository.Seguros;
 import repository.Veiculos;
 import util.FacesUtil;
@@ -181,10 +183,9 @@ public class CadastroVeiculoBean implements Serializable{
 	        FacesUtil util = new FacesUtil();
 	        
 	        for (String key : tempString.keySet()) {
-	            System.out.println("key: " + key + " \t values: "
-	                    + tempString.get(key).toString().toUpperCase());
-	            
-	            valor = tempString.get(key).toString().toUpperCase();
+	            /*System.out.println("key: " + key + " \t values: "
+	                    + tempString.get(key).toString().toUpperCase());*/
+	        valor = tempString.get(key).toString().toUpperCase();
 	            
 	        }
 	        this.setValor(valor);
@@ -193,15 +194,14 @@ public class CadastroVeiculoBean implements Serializable{
 	        mapaRelatorioParametroInstancia = util.escolherRelatorio(tempString);
 	        
 	        for (String key : mapaRelatorioParametroInstancia.keySet()) {
-	            System.out.println("Parametro: " + key + " \t Relatorio: "
-	                    + mapaRelatorioParametroInstancia.get(key).toString());
+	            /*System.out.println("Parametro: " + key + " \t Relatorio: "
+	                    + mapaRelatorioParametroInstancia.get(key).toString());*/
 	            instancia = key;
-	            
 	            mapaRelatorioParametro = mapaRelatorioParametroInstancia.get(key);
 	            
 	            for (String key2 : mapaRelatorioParametro.keySet()) {
-	            	System.out.println("Parametro2: " + key2 + " \t Relatorio: "
-		                    + mapaRelatorioParametro.get(key2).toString());
+	            	/*System.out.println("Parametro2: " + key2 + " \t Relatorio: "
+		                    + mapaRelatorioParametro.get(key2).toString());*/
 	            	parametro = key2;
 	            	relatorio = mapaRelatorioParametro.get(key2).toString();
 	            }        
@@ -213,7 +213,7 @@ public class CadastroVeiculoBean implements Serializable{
 	        this.setRelatorio(relatorio);
 	    }
 	
-	//public void gerarRelatorio(ActionEvent event) throws JRException, IOException{
+	
 	 public String gerarRelatorio() throws JRException, IOException, ClassNotFoundException, NoSuchMethodException, SecurityException, InstantiationException, IllegalAccessException {
 		 
 		Cor cor = null;
@@ -227,6 +227,10 @@ public class CadastroVeiculoBean implements Serializable{
 		
 		Seguro seguro = null;
 		Seguros seguros = null;
+		
+		Pericia pericia = null;
+		Pericias pericias = null;
+		
 		
 		ConnectionFactory conexao = new ConnectionFactory();
 		String reportSrcFile = this.getRelatorio();
@@ -244,8 +248,7 @@ public class CadastroVeiculoBean implements Serializable{
 			cores = this.repositorios.getCores();
 			cor = cores.pegaCodigo(this.getValor());
 			System.out.println("Parametro utilizado: " + this.getParametro());
-			System.out.println("Codigo da cor: " + cor.getCodigo());
-			
+			System.out.println("Codigo da cor: " + cor.getCodigo());	
 			parameters.put(this.getParametro().toString(), cor.getCodigo());
 		}else if (this.getParametro().toString().equals("codigo_modelo")) {
 			modelo = new Modelo();
@@ -274,6 +277,14 @@ public class CadastroVeiculoBean implements Serializable{
 			System.out.println("Codigo do seguro: " + seguro.getCodigo());
 			
 			parameters.put(this.getParametro().toString(), seguro.getCodigo());
+		}else if (this.getParametro().toString().equals("codigo_pericia")) {
+			pericia = new Pericia();
+			pericias = this.repositorios.getPericias();
+			pericia = pericias.pegaCodigo(this.getValor());
+			
+			System.out.println("Parametro utilizado: " + this.getParametro());
+			System.out.println("Codigo da pericia: " + pericia.getCodigo());
+			parameters.put(this.getParametro().toString(), pericia.getCodigo());
 		}
         
         JasperPrint print = JasperFillManager.fillReport(jasperReport,
@@ -287,11 +298,11 @@ public class CadastroVeiculoBean implements Serializable{
         exporter.setExporterInput(exporterInput);
 	    
         //ExporterOutput
-        /*OutputStreamExporterOutput exporterOutput = new SimpleOutputStreamExporterOutput(
-                "/var/lib/tomcat8/webapps/Deprov/resources/relatorios/parametros/1/relatorio.pdf");*/
-        
         OutputStreamExporterOutput exporterOutput = new SimpleOutputStreamExporterOutput(
-                      "/opt/tomcat/webapps/Deprov/resources/relatorios/parametros/1/relatorio.pdf");
+                "/var/lib/tomcat/webapps/Deprov/resources/relatorios/parametros/1/relatorio.pdf");
+        
+        /*OutputStreamExporterOutput exporterOutput = new SimpleOutputStreamExporterOutput(
+                      "/opt/tomcat/webapps/Deprov/resources/relatorios/parametros/1/relatorio.pdf");*/
         
         // Output
         exporter.setExporterOutput(exporterOutput);
@@ -308,8 +319,8 @@ public class CadastroVeiculoBean implements Serializable{
 	    response.setHeader("Content-Type", "application/pdf");  // Define apenas o tipo de conte�do, Utilize se necess�rio ServletContext#getMimeType() para detec��o autom�tica com base em nome de arquivo. 
 	    OutputStream responseOutputStream = response.getOutputStream();
 
-	    //String PDF_URL = "http://sinf.policiacivil.rn.gov.br:8080/Deprov/resources/relatorios/parametros/1/relatorio.pdf";
-	    String PDF_URL = "http://snmp.info.ufrn.br:8080/Deprov/resources/relatorios/parametros/1/relatorio.pdf";
+	    String PDF_URL = "http://sinf.policiacivil.rn.gov.br:8080/Deprov/resources/relatorios/parametros/1/relatorio.pdf";
+	    //String PDF_URL = "http://snmp.info.ufrn.br:8080/Deprov/resources/relatorios/parametros/1/relatorio.pdf";
 		// L� o conte�do do PDF
 	    URL url = new URL(PDF_URL);
 	    InputStream pdfInputStream = url.openStream();

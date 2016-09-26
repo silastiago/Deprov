@@ -2,8 +2,12 @@ package repository.impl;
 
 import java.util.List;
 
+import org.hibernate.Criteria;
 import org.hibernate.Session;
 import org.hibernate.criterion.Order;
+import org.hibernate.criterion.Restrictions;
+
+import model.Cor;
 import model.Pericia;
 import repository.Pericias;
 
@@ -62,5 +66,13 @@ public class PericiasImpl implements Pericias{
 	@Override
 	public void remover(Pericia pericia) {
 		this.sessao.delete(pericia);
+	}
+
+	@Override
+	public Pericia pegaCodigo(String pericia) {
+		Criteria c = this.sessao.createCriteria(Pericia.class);
+		c.add(Restrictions.eq("pericia", pericia));
+		Pericia results =  (Pericia) c.uniqueResult();
+		return results;
 	}
 }

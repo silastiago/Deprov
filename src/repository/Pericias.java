@@ -1,6 +1,8 @@
 package repository;
 
 import java.util.List;
+
+import model.Cor;
 import model.Pericia;
 
 /** Esta é uma Interface que possui as assinaturas dos metodos da classe Pericia,
@@ -39,4 +41,12 @@ public interface Pericias {
 	*   	
 	*/
 	public void remover(Pericia pericia);
+	
+	/** Este metodo pesquisa uma pericia pelo seu nome.
+	*  	
+	*  @param pericia, Esta pericia é o nome da pericia que você está procurando.
+	*  @return retorna a pericia daquele nome que você está pesquisando.
+	*   	
+	*/
+	public Pericia pegaCodigo(String pericia);
 }
