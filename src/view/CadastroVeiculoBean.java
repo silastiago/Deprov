@@ -243,6 +243,8 @@ public class CadastroVeiculoBean implements Serializable{
 	    // Parameters for report
         Map<String, Object> parameters = new HashMap<String, Object>();
         
+        System.out.println(this.getValor());
+        
         if (this.getParametro().toString().equals("codigo_cor")) {
 			cor = new Cor();
 			cores = this.repositorios.getCores();
