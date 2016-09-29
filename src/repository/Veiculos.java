@@ -74,4 +74,6 @@ public interface Veiculos {
 	*   	
 	*/
 	public List<Veiculo> chaveExistenteCadastrar(Veiculo veiculo);
+
+	Veiculo pegaSituacaoVeiculo(String situacao);
 }

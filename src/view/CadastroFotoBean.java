@@ -54,7 +54,7 @@ public class CadastroFotoBean implements Serializable {
 		//Variavel codigo recebe o codigo do veiculo referente aquela foto.
 		String codigo = veiculo.getCodigo().toString();
 		//Diretorio de imagens onde as fotos serão salvas.
-		//File outDir = new File("/var/lib/tomcat8/webapps/Deprov/resources/images/"+ codigo);
+		//File outDir = new File("/var/lib/tomcat/webapps/Deprov/resources/images/"+ codigo);
 		File outDir = new File("/opt/tomcat/webapps/Deprov/resources/images/"+ codigo);
         //Verifica se o diretorio já existe.
 		if (outDir.exists()) {
@@ -72,7 +72,7 @@ public class CadastroFotoBean implements Serializable {
         byte[] fotos = file.getContents();
         
         //Diretorio das fotos.
-        //String path = "/var/lib/tomcat8/webapps/Deprov/resources/images/"+ codigo+"/";
+        //String path = "/var/lib/tomcat/webapps/Deprov/resources/images/"+ codigo+"/";
         String path = "/opt/tomcat/webapps/Deprov/resources/images/"+ codigo+"/";
         //Referencia do caminho das fotos para ser salvos no banco, 
         //pois as consultas são mais rápidas salvando as fotos em 1 diretorio e não dentro do banco, no banco salvamos apenas o caminho da foto.
@@ -131,7 +131,7 @@ public class CadastroFotoBean implements Serializable {
 		
 		//A variavel path recebe o caminho de onde a foto está inserida.
 		String path = "/opt/tomcat/webapps/Deprov/resources/"+ foto.getPath();
-		//String path = "/var/lib/tomcat8/webapps/Deprov/resources/"+ foto.getPath();
+		//String path = "/var/lib/tomcat/webapps/Deprov/resources/"+ foto.getPath();
 		//Criando arquivo para ser deletado com o caminho especificado logo acima.
 		File f = new File(path);
 		//Deletando o arquivo do diretorio.

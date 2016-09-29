@@ -28,6 +28,7 @@ public class Veiculo implements Serializable, Cloneable{
 	private String placaOriginal;
 	private Tipo tipo;
 	private Cor cor;
+	private Situacao situacao;
 	private Fabricante fabricante;
 	private Modelo modelo;
 	private String Anofabricacao;
@@ -38,7 +39,6 @@ public class Veiculo implements Serializable, Cloneable{
 	private String numero_ocorrencia;
 	private String ip_processo;
 	private Seguro seguro;
-	private String situacao;
 	private String condicao;
 	private String proprietario;
 	private String chave;
@@ -195,14 +195,7 @@ public class Veiculo implements Serializable, Cloneable{
 	public void setSeguro(Seguro seguro) {
 		this.seguro = seguro;
 	}
-	@Column
-	public String getSituacao() {
-		return situacao;
-	}
-
-	public void setSituacao(String situacao) {
-		this.situacao = situacao.toUpperCase();
-	}
+	
 	@Column
 	public String getCondicao() {
 		return condicao;
@@ -253,6 +246,16 @@ public class Veiculo implements Serializable, Cloneable{
 
 	public void setPericia(Pericia pericia) {
 		this.pericia = pericia;
+	}
+	
+	@ManyToOne
+	@JoinColumn(name="codigo_situacao")
+	public Situacao getSituacao() {
+		return situacao;
+	}
+
+	public void setSituacao(Situacao situacao) {
+		this.situacao = situacao;
 	}
 
 	@Override

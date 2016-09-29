@@ -35,7 +35,7 @@
 					
 					<h:outputLabel value="Tipo" />
 					<h:selectOneMenu value="#{cadastroVeiculoBean.veiculo.tipo}"
-						label="Tipo">
+						required="true" label="Tipo">
 						<f:selectItem itemLabel="Selecione o Tipo do Veiculo"
 							noSelectionOption="true" />
 						<f:selectItems value="#{cadastroTipoBean.listaTipos()}" var="tipo"
@@ -44,7 +44,7 @@
 
 					<h:outputLabel value="Cor" />
 					<h:selectOneMenu value="#{cadastroVeiculoBean.veiculo.cor}"
-						label="Cor">
+						required="true" label="Cor">
 						<f:selectItem itemLabel="Selecione a cor do Veiculo"
 							noSelectionOption="true" />
 						<f:selectItems value="#{cadastroCorBean.listarCores()}" var="cor"
@@ -57,13 +57,13 @@
 							noSelectionOption="true" />
 						<f:selectItems value="#{cadastroFabricanteBean.listaFabricantes()}"
 							var="fabricante" itemValue="#{fabricante}"
-							itemLabel="#{fabricante.fabricante}" />	
+							itemLabel="#{fabricante.fabricante}" />
 							<f:ajax event="change" render="modelos"/>
 					</h:selectOneMenu>
 
 					<h:outputLabel value="Modelo" />
 					<h:selectOneMenu value="#{cadastroVeiculoBean.veiculo.modelo}"
-						label="Modelo" id="modelos">
+						required="true" label="Modelo" id="modelos">
 						<f:selectItem itemLabel="Selecione o Modelo do Veiculo"
 							noSelectionOption="true" />
 						<f:selectItems value="#{cadastroModeloBean.listaModelo()}" var="modelo"
@@ -97,22 +97,28 @@
 					<h:outputText value="Ip Processo" />
 					<p:inputText value="#{cadastroVeiculoBean.veiculo.ip_processo}" />
 
-
 					<h:outputLabel value="Seguro" />
 					<h:selectOneMenu value="#{cadastroVeiculoBean.veiculo.seguro}"
-						label="Seguro">
+						required="true" label="Seguro">
 						<f:selectItem itemLabel="Selecione o Seguro do Veiculo"
 							noSelectionOption="true" />
 						<f:selectItems value="#{cadastroSeguroBean.listaSeguro()}" var="seguro"
 							itemValue="#{seguro}" itemLabel="#{seguro.seguro}" />
 					</h:selectOneMenu>
 
-					<h:outputText value="Situação" />
-					<p:inputText value="#{cadastroVeiculoBean.veiculo.situacao}" />
-
-
 					<h:outputText value="Condição" />
 					<p:inputText value="#{cadastroVeiculoBean.veiculo.condicao}" />
+					
+					<h:outputLabel value="Situacao" />
+					<h:selectOneMenu value="#{cadastroVeiculoBean.veiculo.situacao}" label="Situacao" >
+						<f:selectItem itemLabel="Selecione a Situacao do Veiculo"
+							noSelectionOption="true" />
+						<f:selectItems value="#{cadastroSituacaoBean.listarSituacoes()}"
+							var="situacao" itemValue="#{situacao}"
+							itemLabel="#{situacao.situacao}" />
+					</h:selectOneMenu>
+
+					
 
 					<h:outputText value="Proprietario" />
 					<p:inputText value="#{cadastroVeiculoBean.veiculo.proprietario}" />
@@ -125,7 +131,7 @@
 
 					<h:outputLabel value="Exame Veicular" />
 					<h:selectOneMenu value="#{cadastroVeiculoBean.veiculo.pericia}"
-						label="Pericia">
+						required="true" label="Pericia">
 						<f:selectItem itemLabel="Selecione a Pericia do Veiculo"
 							noSelectionOption="true" />
 						<f:selectItems value="#{cadastroPericiaBean.listaPericia()}"
@@ -134,11 +140,12 @@
 						
 					<h:outputText value="Motivo da Apreensão:" />
 					<p:inputText value="#{cadastroVeiculoBean.veiculo.motivoApreensao}" />
-
+					
+					
 					<p:outputLabel for="mask" value="Data:" />
 					<p:calendar id="mask" value="#{cadastroVeiculoBean.veiculo.dataEntrada}"
 						pattern="dd/MM/yyyy" mask="true" navigator="true" showOn="button">
-						<f:convertDateTime pattern="dd/MM/yyyy" type="both" dateStyle="short" timeZone="GMT-3" />						
+						<f:convertDateTime pattern="dd/MM/yyyy" type="both" dateStyle="short" timeZone="GMT-3"/>						
 						</p:calendar>
 				</p:panelGrid>
 			<h:commandButton action="#{cadastroVeiculoBean.editar()}" value="Editar" />

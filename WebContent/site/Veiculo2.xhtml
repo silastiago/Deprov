@@ -97,11 +97,19 @@
 							itemValue="#{seguro}" itemLabel="#{seguro.seguro}" />
 					</h:selectOneMenu>
 
-					<h:outputText value="Situação" />
-					<p:inputText value="#{cadastroVeiculoBean.veiculo.situacao}" />
-
 					<h:outputText value="Condição" />
 					<p:inputText value="#{cadastroVeiculoBean.veiculo.condicao}" />
+					
+					<h:outputLabel value="Situacao" />
+					<h:selectOneMenu value="#{cadastroVeiculoBean.veiculo.situacao}" label="Situacao" >
+						<f:selectItem itemLabel="Selecione a Situacao do Veiculo"
+							noSelectionOption="true" />
+						<f:selectItems value="#{cadastroSituacaoBean.listarSituacoes()}"
+							var="situacao" itemValue="#{situacao}"
+							itemLabel="#{situacao.situacao}" />
+					</h:selectOneMenu>
+
+					
 
 					<h:outputText value="Proprietario" />
 					<p:inputText value="#{cadastroVeiculoBean.veiculo.proprietario}" />
@@ -126,11 +134,13 @@
 					
 					
 					<p:outputLabel for="mask" value="Data:" />
-					<p:calendar id="mask" value="#{cadastroVeiculoBean.veiculo.dataEntrada}" locale="pt"
+					<p:calendar id="mask" value="#{cadastroVeiculoBean.veiculo.dataEntrada}" 
 						pattern="dd/MM/yyyy" mask="true" navigator="true" showOn="button">
-						<f:convertDateTime pattern="dd/MM/yyyy" type="both" dateStyle="short"/>						
+						<f:convertDateTime pattern="dd/MM/yyyy" type="both" dateStyle="short" timeZone="GMT-3"/>						
 						</p:calendar>	
 				</p:panelGrid>
+				
+				
 			<h:commandButton action="#{cadastroVeiculoBean.cadastrar()}" value="Salvar" />
 		
 		</div>

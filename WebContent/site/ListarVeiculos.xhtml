@@ -99,11 +99,11 @@
 					<h:outputText value="#{veiculo.pericia.pericia}" />
 				</p:column>
 				
-				<p:column filterBy="#{veiculo.situacao}"  style="text-align: center; width:8%" filterMatchMode="startsWith">
+				<p:column filterBy="#{veiculo.situacao.situacao}"  style="text-align: center; width:8%" filterMatchMode="startsWith">
 					<f:facet name="header">
 						<h:outputText value="Situação" />
 					</f:facet>
-					<h:outputText value="#{veiculo.situacao}" />
+					<h:outputText value="#{veiculo.situacao.situacao}" />
 				</p:column>
 			
 				<p:column style="text-align: center; width:7%">

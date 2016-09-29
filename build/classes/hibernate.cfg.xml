@@ -23,6 +23,7 @@
 		<mapping class="model.Tipo"/>
 		<mapping class="model.Pericia"/>
 		<mapping class="model.Seguro"/>
+		<mapping class="model.Situacao"/>
 		<mapping class="model.Veiculo"/>
 		<mapping class="model.Ocorrencia"/>
 

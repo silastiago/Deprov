@@ -7,6 +7,7 @@ import org.hibernate.Session;
 import org.hibernate.criterion.Order;
 import org.hibernate.criterion.Restrictions;
 
+import model.Cor;
 import model.Modelo;
 import model.Veiculo;
 import repository.Veiculos;
@@ -123,4 +124,19 @@ public class VeiculosImpl implements Veiculos{
 	public void editar(Veiculo veiculo) {
 		this.sessao.merge(veiculo);
 	}
+	
+	/** Este metodo pesquisa uma cor pelo seu nome.
+	*  	
+	*  @param cor, Este cor é o nome do corque você está procurando.
+	*  @return retorna o cor daquele nome que você está pesquisando.
+	*   	
+	*/
+	@Override
+	public Veiculo pegaSituacaoVeiculo(String situacao) {
+		Criteria c = this.sessao.createCriteria(Veiculo.class);
+		c.add(Restrictions.eq("situacao", situacao));
+		Veiculo results = (Veiculo) c.uniqueResult();
+		return results;
+	}
+	
 }
