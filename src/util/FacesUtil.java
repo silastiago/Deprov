@@ -15,7 +15,6 @@ import javax.servlet.http.HttpServletRequest;
 */
 
 public class FacesUtil {
-	private Repositorios repositorios = new Repositorios();
 	
 	/** Este metodo captura o atributo da requisicao pelo nome .
 	* 	
@@ -30,71 +29,52 @@ public class FacesUtil {
 	}	
 	
 	
-	public Map<String, Map<String, String>> escolherRelatorio(Map<String, Object> listaObjetos){
+	public Map<String, String> escolherRelatorio(Map<String, Object> listaObjetos){
 		Map<String, String> mapaRelatorioParametro = new HashMap<String, String>();
-		String nomeInstancia = "";
-		
-		Map<String, Map<String, String>> mapaRelatorioParametroInstancia = new HashMap<String, Map<String, String>>();
 		
 		String relatorio = "";
 		String parametro = "";
 		
 		for (String key : listaObjetos.keySet()) {
             if (key.equals("placa")) {
-				//relatorio = "/opt/tomcat/webapps/Deprov/resources/relatorios/parametros/1/Placa.jrxml";
-            	relatorio = "/var/lib/tomcat/webapps/Deprov/resources/relatorios/parametros/1/Placa.jrxml";
+				relatorio = "/opt/tomcat/webapps/Deprov/resources/relatorios/parametros/1/Placa.jrxml";
+            	//relatorio = "/var/lib/tomcat/webapps/Deprov/resources/relatorios/parametros/1/Placa.jrxml";
 				parametro = "placa";
-				nomeInstancia = "Veiculo";
 			}else if (key.equals("placaOriginal")) {
-				//relatorio = "/opt/tomcat/webapps/Deprov/resources/relatorios/parametros/1/PlacaOriginal.jrxml";
-				relatorio = "/var/lib/tomcat/webapps/Deprov/resources/relatorios/parametros/1/PlacaOriginal.jrxml";
+				relatorio = "/opt/tomcat/webapps/Deprov/resources/relatorios/parametros/1/PlacaOriginal.jrxml";
+				//relatorio = "/var/lib/tomcat/webapps/Deprov/resources/relatorios/parametros/1/PlacaOriginal.jrxml";
 				parametro = "placaoriginal";
-				nomeInstancia = "Veiculo";
 			}else if (key.equals("fabricante.fabricante")) {
-				//relatorio = "/opt/tomcat/webapps/Deprov/resources/relatorios/parametros/1/Fabricante.jrxml";
-				relatorio = "/var/lib/tomcat/webapps/Deprov/resources/relatorios/parametros/1/Fabricante.jrxml";
+				relatorio = "/opt/tomcat/webapps/Deprov/resources/relatorios/parametros/1/Fabricante.jrxml";
+				//relatorio = "/var/lib/tomcat/webapps/Deprov/resources/relatorios/parametros/1/Fabricante.jrxml";
 				parametro = "codigo_fabricante";
-				nomeInstancia = "Fabricante";
 			}else if (key.equals("modelo.modelo")) {
-				//relatorio = "/opt/tomcat/webapps/Deprov/resources/relatorios/parametros/1/Modelo.jrxml";
-				relatorio = "/var/lib/tomcat/webapps/Deprov/resources/relatorios/parametros/1/Modelo.jrxml";
+				relatorio = "/opt/tomcat/webapps/Deprov/resources/relatorios/parametros/1/Modelo.jrxml";
+				//relatorio = "/var/lib/tomcat/webapps/Deprov/resources/relatorios/parametros/1/Modelo.jrxml";
 				parametro = "codigo_modelo";
-				nomeInstancia = "Modelo";
 			}else if (key.equals("chassi")) {
-				//relatorio = "/opt/tomcat/webapps/Deprov/resources/relatorios/parametros/1/Chassi.jrxml";
-				relatorio = "/var/lib/tomcat/webapps/Deprov/resources/relatorios/parametros/1/Chassi.jrxml";
+				relatorio = "/opt/tomcat/webapps/Deprov/resources/relatorios/parametros/1/Chassi.jrxml";
+				//relatorio = "/var/lib/tomcat/webapps/Deprov/resources/relatorios/parametros/1/Chassi.jrxml";
 				parametro = "chassi";
-				nomeInstancia = "Veiculo";
 			}else if (key.equals("cor.cor")) {
-				//relatorio = "/opt/tomcat/webapps/Deprov/resources/relatorios/parametros/1/Cor.jrxml";
-				relatorio = "/var/lib/tomcat/webapps/Deprov/resources/relatorios/parametros/1/Cor.jrxml";
+				relatorio = "/opt/tomcat/webapps/Deprov/resources/relatorios/parametros/1/Cor.jrxml";
+				//relatorio = "/var/lib/tomcat/webapps/Deprov/resources/relatorios/parametros/1/Cor.jrxml";
 				parametro = "codigo_cor";
-				nomeInstancia = "Cor";
 			}else if (key.equals("seguro.seguro")) {
-				//relatorio = "/opt/tomcat/webapps/Deprov/resources/relatorios/parametros/1/Seguro.jrxml";
-				relatorio = "/var/lib/tomcat/webapps/Deprov/resources/relatorios/parametros/1/Seguro.jrxml";
+				relatorio = "/opt/tomcat/webapps/Deprov/resources/relatorios/parametros/1/Seguro.jrxml";
+				//relatorio = "/var/lib/tomcat/webapps/Deprov/resources/relatorios/parametros/1/Seguro.jrxml";
 				parametro = "codigo_seguro";
-				nomeInstancia = "Seguro";
 			}else if (key.equals("pericia.pericia")) {
-				//relatorio = "/opt/tomcat/webapps/Deprov/resources/relatorios/parametros/1/Pericia.jrxml";
-				relatorio = "/var/lib/tomcat/webapps/Deprov/resources/relatorios/parametros/1/Pericia.jrxml";
+				relatorio = "/opt/tomcat/webapps/Deprov/resources/relatorios/parametros/1/Pericia.jrxml";
+				//relatorio = "/var/lib/tomcat/webapps/Deprov/resources/relatorios/parametros/1/Pericia.jrxml";
 				parametro = "codigo_pericia";
-				nomeInstancia = "Pericia";
 			}else if (key.equals("situacao.situacao")) {
-				//relatorio = "/opt/tomcat/webapps/Deprov/resources/relatorios/parametros/1/Situacao.jrxml";
-				relatorio = "/var/lib/tomcat/webapps/Deprov/resources/relatorios/parametros/1/Situacao.jrxml";
+				relatorio = "/opt/tomcat/webapps/Deprov/resources/relatorios/parametros/1/Situacao.jrxml";
+				//relatorio = "/var/lib/tomcat/webapps/Deprov/resources/relatorios/parametros/1/Situacao.jrxml";
 				parametro = "codigo_situacao";
-				nomeInstancia = "Situacao";
 			}
-            
-            
-            
-            
-			/*System.out.println("key: " + key + " \t values: "
-                    + listaObjetos.get(key).toString().toUpperCase());*/
             mapaRelatorioParametro.put(parametro, relatorio);
-            mapaRelatorioParametroInstancia.put(nomeInstancia, mapaRelatorioParametro);
         }
-		return mapaRelatorioParametroInstancia;
+		return mapaRelatorioParametro;
 	}	
 }

@@ -71,7 +71,7 @@ public class CadastroVeiculoBean implements Serializable{
 	private String relatorio;
 	private String parametro;
 	private String valor;
-	private Object instancia;
+	//private Object instancia;
 	private List<Modelo> listaModelos;
 	
 	
@@ -192,26 +192,17 @@ public class CadastroVeiculoBean implements Serializable{
 	            
 	        }
 	        this.setValor(valor);
-	        Map<String, Map<String, String>> mapaRelatorioParametroInstancia = new HashMap<String, Map<String, String>>();
 	        Map<String, String> mapaRelatorioParametro = new HashMap<String, String>();
-	        mapaRelatorioParametroInstancia = util.escolherRelatorio(tempString);
+	        mapaRelatorioParametro = util.escolherRelatorio(tempString);
+	            
+	            for (String key : mapaRelatorioParametro.keySet()) {
+	            	System.out.println("Nome do codigo: " + key + " \t Relatorio: "
+		                    + mapaRelatorioParametro.get(key).toString());
+	            	parametro = key;
+	            	relatorio = mapaRelatorioParametro.get(key).toString();
+	            }
 	        
-	        for (String key : mapaRelatorioParametroInstancia.keySet()) {
-	            System.out.println("Parametro: " + key + " \t Relatorio: "
-	                    + mapaRelatorioParametroInstancia.get(key).toString());
-	            instancia = key;
-	            mapaRelatorioParametro = mapaRelatorioParametroInstancia.get(key);
-	            
-	            for (String key2 : mapaRelatorioParametro.keySet()) {
-	            	System.out.println("Parametro2: " + key2 + " \t Relatorio: "
-		                    + mapaRelatorioParametro.get(key2).toString());
-	            	parametro = key2;
-	            	relatorio = mapaRelatorioParametro.get(key2).toString();
-	            }        
-	            
-	            //relatorio = mapaRelatorioParametro.get(key).toString();
-	        }
-	        this.setInstancia(instancia);
+	        //this.setInstancia(instancia);
 	        this.setParametro(parametro);
 	        this.setRelatorio(relatorio);
 	    }
@@ -313,11 +304,11 @@ public class CadastroVeiculoBean implements Serializable{
         exporter.setExporterInput(exporterInput);
 	    
         //ExporterOutput
-        OutputStreamExporterOutput exporterOutput = new SimpleOutputStreamExporterOutput(
-                "/var/lib/tomcat/webapps/Deprov/resources/relatorios/parametros/1/"+this.getInstancia()+".pdf");
-        
         /*OutputStreamExporterOutput exporterOutput = new SimpleOutputStreamExporterOutput(
-                      "/opt/tomcat/webapps/Deprov/resources/relatorios/parametros/1/"+this.getInstancia()+".pdf");*/
+                "/var/lib/tomcat/webapps/Deprov/resources/relatorios/parametros/1/"+this.getInstancia()+".pdf");*/
+        
+        OutputStreamExporterOutput exporterOutput = new SimpleOutputStreamExporterOutput(
+                      "/opt/tomcat/webapps/Deprov/resources/relatorios/parametros/1/relatorio.pdf");
         
         // Output
         exporter.setExporterOutput(exporterOutput);
@@ -334,9 +325,9 @@ public class CadastroVeiculoBean implements Serializable{
 	    response.setHeader("Content-Type", "application/pdf");  // Define apenas o tipo de conteï¿½do, Utilize se necessï¿½rio ServletContext#getMimeType() para detecï¿½ï¿½o automï¿½tica com base em nome de arquivo. 
 	    OutputStream responseOutputStream = response.getOutputStream();
 
-	    String PDF_URL = "http://sinf.policiacivil.rn.gov.br:8080/Deprov/resources/relatorios/parametros/1/"+this.getInstancia()+".pdf";
-	    //String PDF_URL = "http://snmp.info.ufrn.br:8080/Deprov/resources/relatorios/parametros/1/"+this.getInstancia()+".pdf";
-		// Lï¿½ o conteï¿½do do PDF
+	    //String PDF_URL = "http://sinf.policiacivil.rn.gov.br:8080/Deprov/resources/relatorios/parametros/1/relatorio.pdf";
+	    String PDF_URL = "http://snmp.info.ufrn.br:8080/Deprov/resources/relatorios/parametros/1/relatorio.pdf";
+		// Lï¿½ o conteúdo do PDF
 	    URL url = new URL(PDF_URL);
 	    InputStream pdfInputStream = url.openStream();
 
@@ -425,13 +416,13 @@ public class CadastroVeiculoBean implements Serializable{
 		this.valor = valor;
 	}
 
-	public Object getInstancia() {
+	/*public Object getInstancia() {
 		return instancia;
 	}
 
 	public void setInstancia(Object instancia) {
 		this.instancia = instancia;
-	}
+	}*/
 
 	public List<Modelo> getListaModelos() {
 		return listaModelos;
