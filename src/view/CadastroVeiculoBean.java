@@ -64,14 +64,12 @@ public class CadastroVeiculoBean implements Serializable{
 
 	private Repositorios repositorios = new Repositorios();
 	private Veiculo veiculo = new Veiculo();
-	private List<Veiculo> listaVeiculos = new ArrayList<Veiculo>();
-	private List<Veiculo> listaVeiculosFiltrados = new ArrayList<Veiculo>();
-	private Map<String, Object> mapaFiltros = new HashMap<String, Object>();
+	private List<Veiculo> listaVeiculos;
+	private List<Veiculo> listaVeiculosFiltrados;
+	private Map<String, Object> mapaFiltros;
 	private StreamedContent file;
 	private String relatorio;
-	private String parametro;
-	private String valor;
-	//private Object instancia;
+	private Map<String, Object> mapaParametro;
 	private List<Modelo> listaModelos;
 	
 	
@@ -181,6 +179,12 @@ public class CadastroVeiculoBean implements Serializable{
 	 public void listenFilter(FilterEvent event) {
 	        // update datasource
 	        Map<String, Object> tempString = event.getFilters();
+	        ArrayList<String> listaObjetos = new ArrayList<String>();
+	        ArrayList<String> listaValores = new ArrayList<String>();
+	        String relatorio = "";
+	        Map<String, Object> mapa;
+	        
+	        
 	        System.out.println("size filter: "+ tempString.size());
 	        FacesUtil util = new FacesUtil();
 	        
@@ -188,29 +192,31 @@ public class CadastroVeiculoBean implements Serializable{
 	            System.out.println("key: " + key + " \t values: "
 	                    + tempString.get(key).toString().toUpperCase());
 	            
-	        valor = tempString.get(key).toString().toUpperCase();
-	            
+	        
+	        listaObjetos.add(key);
+	        listaValores.add(tempString.get(key).toString().toUpperCase());
 	        }
-	        this.setValor(valor);
-	        Map<String, String> mapaRelatorioParametro = new HashMap<String, String>();
-	        mapaRelatorioParametro = util.escolherRelatorio(tempString);
-	            
-	            for (String key : mapaRelatorioParametro.keySet()) {
+	        
+	        relatorio = util.escolherRelatorio(listaObjetos);
+	        mapa = util.retornarParametro(listaObjetos, listaValores);
+	        System.out.println("Relatorio: " + relatorio);
+	            /*for (String key : mapaRelatorioParametro.keySet()) {
 	            	System.out.println("Nome do codigo: " + key + " \t Relatorio: "
 		                    + mapaRelatorioParametro.get(key).toString());
 	            	parametro = key;
 	            	relatorio = mapaRelatorioParametro.get(key).toString();
-	            }
+	            }*/
 	        
-	        //this.setInstancia(instancia);
-	        this.setParametro(parametro);
+	        
+	        //this.setValor(valor);
+	        this.setMapaParametro(mapa);
 	        this.setRelatorio(relatorio);
 	    }
 	
 	
 	 public String gerarRelatorio() throws JRException, IOException, ClassNotFoundException, NoSuchMethodException, SecurityException, InstantiationException, IllegalAccessException {
 		 
-		Cor cor = null;
+		/*Cor cor = null;
 		Cores cores = null;
 		
 		Modelo modelo = null;
@@ -226,7 +232,7 @@ public class CadastroVeiculoBean implements Serializable{
 		Pericias pericias = null;
 		
 		Situacao situacao = null;
-		ISituacao ISituacao = null;
+		ISituacao ISituacao = null;*/
 		
 		ConnectionFactory conexao = new ConnectionFactory();
 		String reportSrcFile = this.getRelatorio();
@@ -239,9 +245,9 @@ public class CadastroVeiculoBean implements Serializable{
 	    // Parameters for report
         Map<String, Object> parameters = new HashMap<String, Object>();
         
-        //System.out.println(this.getValor());
+        //System.out.println(this.getValor()); 
         
-        if (this.getParametro().toString().equals("codigo_cor")) {
+        /*if (this.getParametro().toString().equals("codigo_cor")) {
 			cor = new Cor();
 			cores = this.repositorios.getCores();
 			cor = cores.pegaCodigo(this.getValor());
@@ -291,7 +297,9 @@ public class CadastroVeiculoBean implements Serializable{
 			System.out.println("Parametro utilizado: " + this.getParametro());
 			System.out.println("Codigo da situacao: " + situacao.getCodigo());
 			parameters.put(this.getParametro().toString(), situacao.getCodigo());
-		}
+		}*/
+        
+        parameters = this.getMapaParametro();
         
         JasperPrint print = JasperFillManager.fillReport(jasperReport,
                 parameters, conn);
@@ -305,7 +313,7 @@ public class CadastroVeiculoBean implements Serializable{
 	    
         //ExporterOutput
         /*OutputStreamExporterOutput exporterOutput = new SimpleOutputStreamExporterOutput(
-                "/var/lib/tomcat/webapps/Deprov/resources/relatorios/parametros/1/"+this.getInstancia()+".pdf");*/
+                "/var/lib/tomcat/webapps/Deprov/resources/relatorios/parametros/1/relatorio.pdf");*/
         
         OutputStreamExporterOutput exporterOutput = new SimpleOutputStreamExporterOutput(
                       "/opt/tomcat/webapps/Deprov/resources/relatorios/parametros/1/relatorio.pdf");
@@ -400,29 +408,16 @@ public class CadastroVeiculoBean implements Serializable{
 		this.relatorio = relatorio;
 	}
 
-	public String getParametro() {
-		return parametro;
+
+
+	public Map<String, Object> getMapaParametro() {
+		return mapaParametro;
 	}
 
-	public void setParametro(String parametro) {
-		this.parametro = parametro;
-	}
 
-	public String getValor() {
-		return valor;
+	public void setMapaParametro(Map<String, Object> mapaParametro) {
+		this.mapaParametro = mapaParametro;
 	}
-
-	public void setValor(String valor) {
-		this.valor = valor;
-	}
-
-	/*public Object getInstancia() {
-		return instancia;
-	}
-
-	public void setInstancia(Object instancia) {
-		this.instancia = instancia;
-	}*/
 
 	public List<Modelo> getListaModelos() {
 		return listaModelos;
