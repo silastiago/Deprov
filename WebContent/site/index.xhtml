@@ -75,14 +75,14 @@
 				</p:column>
 
 
-				<p:column filterBy="#{veiculo.cor.cor}"  style="text-align: center; width:4%" filterMatchMode="startsWith">
+				<p:column filterBy="#{veiculo.cor.cor}"  style="text-align: center; width:6%" filterMatchMode="startsWith">
 					<f:facet name="header">
 						<h:outputText value="Cor" />
 					</f:facet>
 					<h:outputText value="#{veiculo.cor.cor}" />
 				</p:column>
 				
-				<p:column filterBy="#{veiculo.seguro.seguro}" style="text-align: center; width:4%" 
+				<p:column filterBy="#{veiculo.seguro.seguro}" style="text-align: center; width:6%" 
 					filterMatchMode="startsWith">
 					<f:facet name="header">
 						<h:outputText value="Seguro" />
@@ -91,28 +91,21 @@
 				</p:column>
 
 
-				<p:column filterBy="#{veiculo.chassi}"  style="text-align: center; width:7%" filterMatchMode="contains">
+				<p:column filterBy="#{veiculo.localAtual}"  style="text-align: center; width:7%" filterMatchMode="startsWith">
 					<f:facet name="header">
-						<h:outputText value="Chassi" />
+						<h:outputText value="Local Atual" />
 					</f:facet>
-					<h:outputText value="#{veiculo.chassi}" />
-				</p:column>
-	
-				<p:column filterBy="#{veiculo.motor}"  style="text-align: center; width:7%" filterMatchMode="contains">
-					<f:facet name="header">
-						<h:outputText value="Motor" />
-					</f:facet>
-					<h:outputText value="#{veiculo.motor}" />
+					<h:outputText value="#{veiculo.localAtual}" />
 				</p:column>
 				
-				<p:column filterBy="#{veiculo.pericia.pericia}"  style="text-align: center; width:5%" filterMatchMode="startsWith">
+				<p:column filterBy="#{veiculo.pericia.pericia}"  style="text-align: center; width:6%" filterMatchMode="startsWith">
 					<f:facet name="header">
 						<h:outputText value="Exame Veicular" />
 					</f:facet>
 					<h:outputText value="#{veiculo.pericia.pericia}" />
 				</p:column>
 				
-				<p:column filterBy="#{veiculo.situacao.situacao}"  style="text-align: center; width:4%" filterMatchMode="startsWith">
+				<p:column filterBy="#{veiculo.situacao.situacao}"  style="text-align: center; width:6%" filterMatchMode="startsWith">
 					<f:facet name="header">
 						<h:outputText value="Situação" />
 					</f:facet>

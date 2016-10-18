@@ -103,7 +103,10 @@ public class CadastroVeiculoBean implements Serializable{
 			String placas = "";
 			System.out.println("Chave: " + veiculo.getChave());
 			System.out.println("Lista de veiculos: " + veiculos.chaveExistenteCadastrar(veiculo).size());
-			if (veiculo.getChave().toUpperCase().equals("NÃO") || veiculo.getChave().toUpperCase().equals("")) {
+			if (veiculo.getChave().toUpperCase().equals("NÃO") || veiculo.getChave().toUpperCase().equals("NAO") || 
+					veiculo.getChave().toUpperCase().equals("Não") || veiculo.getChave().toUpperCase().equals("Nao") ||
+					veiculo.getChave().toUpperCase().equals("não") || veiculo.getChave().toUpperCase().equals("nao") || 
+					veiculo.getChave().toUpperCase().equals("")) {
 				veiculos.salvar(veiculo);
 				try {
 					FacesContext.getCurrentInstance().getExternalContext().redirect("index.xhtml");
@@ -137,7 +140,10 @@ public class CadastroVeiculoBean implements Serializable{
 		String placas = "";
 		System.out.println("Chave: " + veiculo.getChave());
 		System.out.println("Lista de veiculos: " + veiculos.chaveExistenteEditar(veiculo).size());
-		if (veiculo.getChave().toUpperCase().equals("NÃO") || veiculo.getChave().toUpperCase().equals("")) {
+		if (veiculo.getChave().toUpperCase().equals("NÃO") || veiculo.getChave().toUpperCase().equals("NAO") || 
+				veiculo.getChave().toUpperCase().equals("Não") || veiculo.getChave().toUpperCase().equals("Nao") ||
+				veiculo.getChave().toUpperCase().equals("não") || veiculo.getChave().toUpperCase().equals("nao") || 
+				veiculo.getChave().toUpperCase().equals("")) {
 			veiculos.editar(veiculo);
 			try {
 				FacesContext.getCurrentInstance().getExternalContext().redirect("index.xhtml");
@@ -198,7 +204,7 @@ public class CadastroVeiculoBean implements Serializable{
 	        }
 	        
 	        relatorio = util.escolherRelatorio(listaObjetos);
-	        mapa = util.retornarParametro(listaObjetos, listaValores);
+	        mapa = util.retornarParametros(listaObjetos, listaValores);
 	        System.out.println("Relatorio: " + relatorio);
 	            /*for (String key : mapaRelatorioParametro.keySet()) {
 	            	System.out.println("Nome do codigo: " + key + " \t Relatorio: "
@@ -215,24 +221,6 @@ public class CadastroVeiculoBean implements Serializable{
 	
 	
 	 public String gerarRelatorio() throws JRException, IOException, ClassNotFoundException, NoSuchMethodException, SecurityException, InstantiationException, IllegalAccessException {
-		 
-		/*Cor cor = null;
-		Cores cores = null;
-		
-		Modelo modelo = null;
-		Modelos modelos = null;
-				
-		Fabricante fabricante = null;
-		Fabricantes fabricantes = null;
-		
-		Seguro seguro = null;
-		Seguros seguros = null;
-		
-		Pericia pericia = null;
-		Pericias pericias = null;
-		
-		Situacao situacao = null;
-		ISituacao ISituacao = null;*/
 		
 		ConnectionFactory conexao = new ConnectionFactory();
 		String reportSrcFile = this.getRelatorio();
@@ -244,60 +232,6 @@ public class CadastroVeiculoBean implements Serializable{
 	    
 	    // Parameters for report
         Map<String, Object> parameters = new HashMap<String, Object>();
-        
-        //System.out.println(this.getValor()); 
-        
-        /*if (this.getParametro().toString().equals("codigo_cor")) {
-			cor = new Cor();
-			cores = this.repositorios.getCores();
-			cor = cores.pegaCodigo(this.getValor());
-			System.out.println("Parametro utilizado: " + this.getParametro());
-			System.out.println("Codigo da cor: " + cor.getCodigo());	
-			parameters.put(this.getParametro().toString(), cor.getCodigo());
-		}else if (this.getParametro().toString().equals("codigo_modelo")) {
-			modelo = new Modelo();
-			modelos = this.repositorios.getModelos();
-			modelo = modelos.pegaCodigo(this.getValor());
-			
-			System.out.println("Parametro utilizado: " + this.getParametro());
-			System.out.println("Codigo do modelo: " + modelo.getCodigo());
-			
-			parameters.put(this.getParametro().toString(), modelo.getCodigo());
-		}else if (this.getParametro().toString().equals("codigo_fabricante")) {
-			fabricante = new Fabricante();
-			fabricantes = this.repositorios.getFabricantes();
-			fabricante = fabricantes.pegaCodigo(this.getValor());
-			
-			System.out.println("Parametro utilizado: " + this.getParametro());
-			System.out.println("Codigo do fabricante: " + fabricante.getCodigo());
-			
-			parameters.put(this.getParametro().toString(), fabricante.getCodigo());
-		}else if (this.getParametro().toString().equals("codigo_seguro")) {
-			seguro = new Seguro();
-			seguros = this.repositorios.getSeguros();
-			seguro = seguros.pegaCodigo(this.getValor());
-			
-			System.out.println("Parametro utilizado: " + this.getParametro());
-			System.out.println("Codigo do seguro: " + seguro.getCodigo());
-			
-			parameters.put(this.getParametro().toString(), seguro.getCodigo());
-		}else if (this.getParametro().toString().equals("codigo_pericia")) {
-			pericia = new Pericia();
-			pericias = this.repositorios.getPericias();
-			pericia = pericias.pegaCodigo(this.getValor());
-			
-			System.out.println("Parametro utilizado: " + this.getParametro());
-			System.out.println("Codigo da pericia: " + pericia.getCodigo());
-			parameters.put(this.getParametro().toString(), pericia.getCodigo());
-		}else if (this.getParametro().toString().equals("codigo_situacao")) {
-			situacao = new Situacao();
-			ISituacao = this.repositorios.getSituacao();
-			situacao = ISituacao.pegaCodigo(this.getValor());
-			
-			System.out.println("Parametro utilizado: " + this.getParametro());
-			System.out.println("Codigo da situacao: " + situacao.getCodigo());
-			parameters.put(this.getParametro().toString(), situacao.getCodigo());
-		}*/
         
         parameters = this.getMapaParametro();
         
