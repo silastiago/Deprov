@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Created with Jaspersoft Studio version 6.2.2.final using JasperReports Library version 6.2.2  -->
-<!-- 2016-10-18T16:54:41 -->
+<!-- 2016-10-19T16:06:50 -->
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="RelatorioVeiculo" pageWidth="842" pageHeight="595" columnWidth="802" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="31633f3b-cf08-4c8e-9dcd-4688c49a5839">
 	<property name="com.jaspersoft.studio.data.sql.tables" value=""/>
 	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="Deprov"/>
@@ -26,17 +26,19 @@
 	cor.cor,
 	pericia.pericia,
 	seguro.seguro,
-	veiculo.localatual,
+	local.local,
 	veiculo.ip_processo
 FROM veiculo
 	INNER JOIN cor ON 
 	 veiculo.codigo_cor = cor.codigo 
-	 INNER JOIN situacao ON 
+	INNER JOIN situacao ON 
 	 veiculo.codigo_situacao = situacao.codigo 
-	 INNER JOIN seguro ON 
+	INNER JOIN seguro ON 
 	 veiculo.codigo_seguro = seguro.codigo 
-	 INNER JOIN pericia ON 
+	INNER JOIN pericia ON 
 	 veiculo.codigo_pericia = pericia.codigo 
+	INNER JOIN local ON 
+	 veiculo.codigo_local = local.codigo 
 	INNER JOIN modelo ON 
 	 veiculo.codigo_modelo = modelo.codigo 
 	INNER JOIN fabricante ON 
@@ -53,7 +55,7 @@ WHERE
 	<field name="modelo" class="java.lang.String"/>
 	<field name="fabricante" class="java.lang.String"/>
 	<field name="cor" class="java.lang.String"/>
-	<field name="localatual" class="java.lang.String"/>
+	<field name="local" class="java.lang.String"/>
 	<field name="pericia" class="java.lang.String"/>
 	<field name="situacao" class="java.lang.String"/>
 	<field name="ip_processo" class="java.lang.String"/>
@@ -475,7 +477,7 @@ WHERE
 				<textElement textAlignment="Center" verticalAlignment="Middle">
 					<font size="9"/>
 				</textElement>
-				<textFieldExpression><![CDATA[$F{localatual}]]></textFieldExpression>
+				<textFieldExpression><![CDATA[$F{local}]]></textFieldExpression>
 			</textField>
 			<textField>
 				<reportElement x="50" y="0" width="50" height="50" uuid="22dd3954-22c6-4e06-9225-598432ab45e8">
