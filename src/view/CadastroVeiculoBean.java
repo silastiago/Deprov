@@ -205,11 +205,9 @@ public class CadastroVeiculoBean implements Serializable{
 	            }*/
 	        
 	        
-	        //this.setValor(valor);
 	        this.setMapaParametro(mapa);
 	        this.setRelatorio(relatorio);
-	    }
-	
+	    }	
 	
 	 public String gerarRelatorio() throws JRException, IOException, ClassNotFoundException, NoSuchMethodException, SecurityException, InstantiationException, IllegalAccessException {
 		
@@ -237,11 +235,11 @@ public class CadastroVeiculoBean implements Serializable{
         exporter.setExporterInput(exporterInput);
 	    
         //ExporterOutput
-        /*OutputStreamExporterOutput exporterOutput = new SimpleOutputStreamExporterOutput(
-                "/var/lib/tomcat/webapps/Deprov/resources/relatorios/parametros/1/relatorio.pdf");*/
-        
         OutputStreamExporterOutput exporterOutput = new SimpleOutputStreamExporterOutput(
-                      "/opt/tomcat/webapps/Deprov/resources/relatorios/parametros/1/relatorio.pdf");
+                "/var/lib/tomcat/webapps/Deprov/resources/relatorios/parametros/1/relatorio.pdf");
+        
+        /*OutputStreamExporterOutput exporterOutput = new SimpleOutputStreamExporterOutput(
+                      "/opt/tomcat/webapps/Deprov/resources/relatorios/parametros/1/relatorio.pdf");*/
         
         // Output
         exporter.setExporterOutput(exporterOutput);
@@ -258,8 +256,8 @@ public class CadastroVeiculoBean implements Serializable{
 	    response.setHeader("Content-Type", "application/pdf");  // Define apenas o tipo de conteï¿½do, Utilize se necessï¿½rio ServletContext#getMimeType() para detecï¿½ï¿½o automï¿½tica com base em nome de arquivo. 
 	    OutputStream responseOutputStream = response.getOutputStream();
 
-	    //String PDF_URL = "http://sinf.policiacivil.rn.gov.br:8080/Deprov/resources/relatorios/parametros/1/relatorio.pdf";
-	    String PDF_URL = "http://snmp.info.ufrn.br:8080/Deprov/resources/relatorios/parametros/1/relatorio.pdf";
+	    String PDF_URL = "http://sinf.policiacivil.rn.gov.br:8080/Deprov/resources/relatorios/parametros/1/relatorio.pdf";
+	    //String PDF_URL = "http://snmp.info.ufrn.br:8080/Deprov/resources/relatorios/parametros/1/relatorio.pdf";
 		// Lï¿½ o conteúdo do PDF
 	    URL url = new URL(PDF_URL);
 	    InputStream pdfInputStream = url.openStream();
