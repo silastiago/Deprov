@@ -34,7 +34,7 @@ public class Veiculo implements Serializable, Cloneable{
 	private String Anofabricacao;
 	private String chassi;
 	private String motor;
-	private String LocalAtual;
+	private Local local;
 	private String Obs;
 	private String numero_ocorrencia;
 	private String ip_processo;
@@ -129,7 +129,18 @@ public class Veiculo implements Serializable, Cloneable{
 
 	public void setModelo(Modelo modelo) {
 		this.modelo = modelo;
+	}	
+	
+	@ManyToOne
+	@JoinColumn(name="codigo_local", referencedColumnName="codigo")
+	public Local getLocal() {
+		return local;
 	}
+
+	public void setLocal(Local local) {
+		this.local = local;
+	}
+
 	@Column
 	public String getAnofabricacao() {
 		return Anofabricacao;
@@ -153,15 +164,8 @@ public class Veiculo implements Serializable, Cloneable{
 
 	public void setMotor(String motor) {
 		this.motor = motor.toUpperCase();
-	}
-	@Column
-	public String getLocalAtual() {
-		return LocalAtual;
-	}
-
-	public void setLocalAtual(String localAtual) {
-		LocalAtual = localAtual.toUpperCase();
-	}
+	}	
+	
 	@Column
 	public String getObs() {
 		return Obs;
@@ -257,13 +261,12 @@ public class Veiculo implements Serializable, Cloneable{
 	public void setSituacao(Situacao situacao) {
 		this.situacao = situacao;
 	}
-
+	
 	@Override
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
 		result = prime * result + ((Anofabricacao == null) ? 0 : Anofabricacao.hashCode());
-		result = prime * result + ((LocalAtual == null) ? 0 : LocalAtual.hashCode());
 		result = prime * result + ((Obs == null) ? 0 : Obs.hashCode());
 		result = prime * result + ((chassi == null) ? 0 : chassi.hashCode());
 		result = prime * result + ((chave == null) ? 0 : chave.hashCode());
@@ -272,13 +275,17 @@ public class Veiculo implements Serializable, Cloneable{
 		result = prime * result + ((condicao == null) ? 0 : condicao.hashCode());
 		result = prime * result + ((cor == null) ? 0 : cor.hashCode());
 		result = prime * result + ((dataEntrada == null) ? 0 : dataEntrada.hashCode());
+		result = prime * result + ((dossie == null) ? 0 : dossie.hashCode());
 		result = prime * result + ((fabricante == null) ? 0 : fabricante.hashCode());
 		result = prime * result + ((ip_processo == null) ? 0 : ip_processo.hashCode());
+		result = prime * result + ((local == null) ? 0 : local.hashCode());
 		result = prime * result + ((modelo == null) ? 0 : modelo.hashCode());
+		result = prime * result + ((motivoApreensao == null) ? 0 : motivoApreensao.hashCode());
 		result = prime * result + ((motor == null) ? 0 : motor.hashCode());
 		result = prime * result + ((numero_ocorrencia == null) ? 0 : numero_ocorrencia.hashCode());
 		result = prime * result + ((pericia == null) ? 0 : pericia.hashCode());
 		result = prime * result + ((placa == null) ? 0 : placa.hashCode());
+		result = prime * result + ((placaOriginal == null) ? 0 : placaOriginal.hashCode());
 		result = prime * result + ((proprietario == null) ? 0 : proprietario.hashCode());
 		result = prime * result + ((seguro == null) ? 0 : seguro.hashCode());
 		result = prime * result + ((situacao == null) ? 0 : situacao.hashCode());
@@ -299,11 +306,6 @@ public class Veiculo implements Serializable, Cloneable{
 			if (other.Anofabricacao != null)
 				return false;
 		} else if (!Anofabricacao.equals(other.Anofabricacao))
-			return false;
-		if (LocalAtual == null) {
-			if (other.LocalAtual != null)
-				return false;
-		} else if (!LocalAtual.equals(other.LocalAtual))
 			return false;
 		if (Obs == null) {
 			if (other.Obs != null)
@@ -345,6 +347,11 @@ public class Veiculo implements Serializable, Cloneable{
 				return false;
 		} else if (!dataEntrada.equals(other.dataEntrada))
 			return false;
+		if (dossie == null) {
+			if (other.dossie != null)
+				return false;
+		} else if (!dossie.equals(other.dossie))
+			return false;
 		if (fabricante == null) {
 			if (other.fabricante != null)
 				return false;
@@ -355,10 +362,20 @@ public class Veiculo implements Serializable, Cloneable{
 				return false;
 		} else if (!ip_processo.equals(other.ip_processo))
 			return false;
+		if (local == null) {
+			if (other.local != null)
+				return false;
+		} else if (!local.equals(other.local))
+			return false;
 		if (modelo == null) {
 			if (other.modelo != null)
 				return false;
 		} else if (!modelo.equals(other.modelo))
+			return false;
+		if (motivoApreensao == null) {
+			if (other.motivoApreensao != null)
+				return false;
+		} else if (!motivoApreensao.equals(other.motivoApreensao))
 			return false;
 		if (motor == null) {
 			if (other.motor != null)
@@ -379,6 +396,11 @@ public class Veiculo implements Serializable, Cloneable{
 			if (other.placa != null)
 				return false;
 		} else if (!placa.equals(other.placa))
+			return false;
+		if (placaOriginal == null) {
+			if (other.placaOriginal != null)
+				return false;
+		} else if (!placaOriginal.equals(other.placaOriginal))
 			return false;
 		if (proprietario == null) {
 			if (other.proprietario != null)

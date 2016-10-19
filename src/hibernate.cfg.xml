@@ -24,6 +24,7 @@
 		<mapping class="model.Pericia"/>
 		<mapping class="model.Seguro"/>
 		<mapping class="model.Situacao"/>
+		<mapping class="model.Local"/>
 		<mapping class="model.Veiculo"/>
 		<mapping class="model.Ocorrencia"/>
 

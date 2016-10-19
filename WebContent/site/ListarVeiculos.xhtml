@@ -68,7 +68,7 @@
 					<h:outputText value="#{veiculo.cor.cor}" />
 				</p:column>
 				
-				<p:column filterBy="#{veiculo.seguro.seguro}" style="text-align: center; width:4%" 
+				<p:column filterBy="#{veiculo.seguro.seguro}" style="text-align: center; width:10%" 
 					filterMatchMode="startsWith">
 					<f:facet name="header">
 						<h:outputText value="Seguro" />
@@ -78,14 +78,14 @@
 				</p:column>
 
 
-				<p:column filterBy="#{veiculo.chassi}"  style="text-align: center; width:15%" filterMatchMode="contains">
+				<p:column filterBy="#{veiculo.chassi}"  style="text-align: center; width:12%" filterMatchMode="contains">
 					<f:facet name="header">
 						<h:outputText value="Chassi" />
 					</f:facet>
 					<h:outputText value="#{veiculo.chassi}" />
 				</p:column>
 	
-				<p:column filterBy="#{veiculo.motor}"  style="text-align: center; width:15%" filterMatchMode="contains">
+				<p:column filterBy="#{veiculo.motor}"  style="text-align: center; width:12%" filterMatchMode="contains">
 					<f:facet name="header">
 						<h:outputText value="Motor" />
 					</f:facet>

@@ -24,12 +24,8 @@ import org.primefaces.event.data.FilterEvent;
 import org.primefaces.model.StreamedContent;
 
 import conexao.ConnectionFactory;
-import model.Cor;
 import model.Fabricante;
 import model.Modelo;
-import model.Pericia;
-import model.Seguro;
-import model.Situacao;
 import model.Veiculo;
 import net.sf.jasperreports.engine.JRException;
 import net.sf.jasperreports.engine.JasperCompileManager;
@@ -42,12 +38,7 @@ import net.sf.jasperreports.export.OutputStreamExporterOutput;
 import net.sf.jasperreports.export.SimpleExporterInput;
 import net.sf.jasperreports.export.SimpleOutputStreamExporterOutput;
 import net.sf.jasperreports.export.SimplePdfExporterConfiguration;
-import repository.Cores;
-import repository.Fabricantes;
-import repository.ISituacao;
 import repository.Modelos;
-import repository.Pericias;
-import repository.Seguros;
 import repository.Veiculos;
 import util.FacesUtil;
 import util.Repositorios;
@@ -246,11 +237,11 @@ public class CadastroVeiculoBean implements Serializable{
         exporter.setExporterInput(exporterInput);
 	    
         //ExporterOutput
-        /*OutputStreamExporterOutput exporterOutput = new SimpleOutputStreamExporterOutput(
-                "/var/lib/tomcat/webapps/Deprov/resources/relatorios/parametros/1/relatorio.pdf");*/
-        
         OutputStreamExporterOutput exporterOutput = new SimpleOutputStreamExporterOutput(
-                      "/opt/tomcat/webapps/Deprov/resources/relatorios/parametros/1/relatorio.pdf");
+                "/var/lib/tomcat/webapps/Deprov/resources/relatorios/parametros/1/relatorio.pdf");
+        
+        /*OutputStreamExporterOutput exporterOutput = new SimpleOutputStreamExporterOutput(
+                      "/opt/tomcat/webapps/Deprov/resources/relatorios/parametros/1/relatorio.pdf");*/
         
         // Output
         exporter.setExporterOutput(exporterOutput);
@@ -267,8 +258,8 @@ public class CadastroVeiculoBean implements Serializable{
 	    response.setHeader("Content-Type", "application/pdf");  // Define apenas o tipo de conteï¿½do, Utilize se necessï¿½rio ServletContext#getMimeType() para detecï¿½ï¿½o automï¿½tica com base em nome de arquivo. 
 	    OutputStream responseOutputStream = response.getOutputStream();
 
-	    //String PDF_URL = "http://sinf.policiacivil.rn.gov.br:8080/Deprov/resources/relatorios/parametros/1/relatorio.pdf";
-	    String PDF_URL = "http://snmp.info.ufrn.br:8080/Deprov/resources/relatorios/parametros/1/relatorio.pdf";
+	    String PDF_URL = "http://sinf.policiacivil.rn.gov.br:8080/Deprov/resources/relatorios/parametros/1/relatorio.pdf";
+	    //String PDF_URL = "http://snmp.info.ufrn.br:8080/Deprov/resources/relatorios/parametros/1/relatorio.pdf";
 		// Lï¿½ o conteúdo do PDF
 	    URL url = new URL(PDF_URL);
 	    InputStream pdfInputStream = url.openStream();

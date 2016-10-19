@@ -91,11 +91,11 @@
 				</p:column>
 
 
-				<p:column filterBy="#{veiculo.localAtual}"  style="text-align: center; width:7%" filterMatchMode="startsWith">
+				<p:column filterBy="#{veiculo.local.local}"  style="text-align: center; width:7%" filterMatchMode="startsWith">
 					<f:facet name="header">
 						<h:outputText value="Local Atual" />
 					</f:facet>
-					<h:outputText value="#{veiculo.localAtual}" />
+					<h:outputText value="#{veiculo.local.local}" />
 				</p:column>
 				
 				<p:column filterBy="#{veiculo.pericia.pericia}"  style="text-align: center; width:6%" filterMatchMode="startsWith">

@@ -71,8 +71,14 @@
 					<h:outputText value="Motor" />
 					<p:inputText value="#{cadastroVeiculoBean.veiculo.motor}" />
 
-					<h:outputText value="Local Atual: " />
-					<p:inputText value="#{cadastroVeiculoBean.veiculo.localAtual}" />
+					<h:outputLabel value="Local Atual:" />
+					<h:selectOneMenu value="#{cadastroVeiculoBean.veiculo.seguro}"
+						required="true" label="Local Atual">
+						<f:selectItem itemLabel="Selecione o Local Atual do Veiculo"
+							noSelectionOption="true" />
+						<f:selectItems value="#{cadastroLocalBean.listarLocais()}" var="local"
+							itemValue="#{local}" itemLabel="#{local.local}" />
+					</h:selectOneMenu>
 
 					<h:outputText value="Obs" />
 					<p:inputTextarea value="#{cadastroVeiculoBean.veiculo.obs}" />

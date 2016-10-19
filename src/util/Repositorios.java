@@ -7,6 +7,7 @@ import org.hibernate.Session;
 import repository.Cores;
 import repository.Grupos;
 import repository.IFoto;
+import repository.ILocal;
 import repository.ISituacao;
 import repository.Fabricantes;
 import repository.Modelos;
@@ -19,6 +20,7 @@ import repository.Veiculos;
 import repository.impl.CoresImpl;
 import repository.impl.FotoImpl;
 import repository.impl.GruposImpl;
+import repository.impl.LocalImpl;
 import repository.impl.FabricanteImpl;
 import repository.impl.ModelosImpl;
 import repository.impl.OcorrenciaImpl;
@@ -118,6 +120,14 @@ public class Repositorios implements Serializable {
 	*/
 	public ISituacao getSituacao(){
 		return new SituacaoImpl(this.getSession());
+	}
+	
+	
+	/** Este metodo retorna a interface IFoto instanciada com sua implementacao.
+	* 	@return retorna a interface IFoto.
+	*/
+	public ILocal getLocal(){
+		return new LocalImpl(this.getSession());
 	}
 	
 	
