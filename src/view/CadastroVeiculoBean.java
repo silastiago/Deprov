@@ -179,11 +179,16 @@ public class CadastroVeiculoBean implements Serializable{
 	        ArrayList<String> listaObjetos = new ArrayList<String>();
 	        ArrayList<String> listaValores = new ArrayList<String>();
 	        String relatorio = "";
-	        Map<String, Object> mapa;
+	        Map<String, Object> mapa = null;
 	        
 	        
 	        System.out.println("size filter: "+ tempString.size());
 	        FacesUtil util = new FacesUtil();
+	        
+	        if (tempString.size() == 0) {
+	        	//relatorio = "/opt/tomcat/webapps/Deprov/resources/relatorios/parametros/0/Todos.jrxml";
+				relatorio = "/var/lib/tomcat/webapps/Deprov/resources/relatorios/parametros/0/Todos.jrxml";
+			}else{
 	        
 	        for (String key : tempString.keySet()) {
 	            System.out.println("key: " + key + " \t values: "
@@ -192,10 +197,13 @@ public class CadastroVeiculoBean implements Serializable{
 	        
 	        listaObjetos.add(key);
 	        listaValores.add(tempString.get(key).toString().toUpperCase());
-	        }
-	        
+	        	}
 	        relatorio = util.escolherRelatorio(listaObjetos);
 	        mapa = util.retornarParametros(listaObjetos, listaValores);
+			}
+	        
+	        
+	        
 	        System.out.println("Relatorio: " + relatorio);
 	            /*for (String key : mapaRelatorioParametro.keySet()) {
 	            	System.out.println("Nome do codigo: " + key + " \t Relatorio: "
