@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Created with Jaspersoft Studio version 6.2.2.final using JasperReports Library version 6.2.2  -->
-<!-- 2016-10-19T16:06:29 -->
+<!-- 2016-10-21T13:57:02 -->
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="RelatorioVeiculo" pageWidth="842" pageHeight="595" columnWidth="802" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="31633f3b-cf08-4c8e-9dcd-4688c49a5839">
 	<property name="com.jaspersoft.studio.data.sql.tables" value=""/>
 	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="Deprov"/>
@@ -63,8 +63,7 @@ WHERE
 		<band splitType="Stretch"/>
 	</background>
 	<title>
-		<band height="90" splitType="Stretch">
-			<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+		<band height="120" splitType="Stretch">
 			<textField>
 				<reportElement x="100" y="30" width="480" height="30" uuid="a8f9db46-c74a-495b-b17a-0da016dc8bbc">
 					<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
@@ -129,13 +128,10 @@ WHERE
 				</textElement>
 				<textFieldExpression><![CDATA[$F{cor}]]></textFieldExpression>
 			</textField>
-		</band>
-	</title>
-	<pageHeader>
-		<band height="30">
-			<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
 			<staticText>
-				<reportElement x="507" y="0" width="200" height="30" uuid="58265a41-38c5-400f-86bb-ebbfcbef16b0"/>
+				<reportElement x="507" y="90" width="200" height="30" uuid="0b12d987-af5b-4d70-bbc8-50dcced6c44f">
+					<property name="com.jaspersoft.studio.unit.y" value="pixel"/>
+				</reportElement>
 				<box>
 					<topPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
 					<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
@@ -148,7 +144,7 @@ WHERE
 				<text><![CDATA[RELATORIO GERADO EM:]]></text>
 			</staticText>
 			<textField>
-				<reportElement x="707" y="0" width="95" height="30" uuid="52ed9b0b-fffb-497b-b11e-f2299c4ab018">
+				<reportElement x="707" y="90" width="95" height="30" uuid="10ec1acc-c08c-4cb1-8111-ecb96aca6c28">
 					<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
 					<property name="com.jaspersoft.studio.unit.y" value="pixel"/>
 				</reportElement>
@@ -164,7 +160,7 @@ WHERE
 				<textFieldExpression><![CDATA[new SimpleDateFormat("dd/MM/yyyy").format(new Date())]]></textFieldExpression>
 			</textField>
 		</band>
-	</pageHeader>
+	</title>
 	<columnHeader>
 		<band height="30" splitType="Stretch">
 			<property name="com.jaspersoft.studio.unit.height" value="pixel"/>

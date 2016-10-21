@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Created with Jaspersoft Studio version 6.2.2.final using JasperReports Library version 6.2.2  -->
-<!-- 2016-10-19T15:09:17 -->
+<!-- 2016-10-21T14:03:05 -->
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="RelatorioVeiculo" pageWidth="842" pageHeight="595" columnWidth="802" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="31633f3b-cf08-4c8e-9dcd-4688c49a5839">
 	<property name="com.jaspersoft.studio.data.sql.tables" value="c2l0dWFjYW8gLDE3NiwxMzAsMTVmZTFkMGItMGIyMC00YTQ0LWJlZDEtZDU1ZDY5YTNjYjljO2Nv&#xA;ciAsMTc2LDE1LDFlNDZhZDc0LWVjOTQtNGUxZS04MTdhLTg4ZTc5ODU0YzdlMjttb2RlbG8gLDE3&#xA;NiwyNDUsMmI2NjdiMjMtYjcyYS00NzZjLWJlOWItNTE1ZjQxMGYwZTc0O3ZlaWN1bG8gLDE1LDIw&#xA;OSw1NjJhMTE5Yy1kNGZiLTQ5NzItODIzNC0zYTE0NjkyMmYxNmQ7c2VndXJvICwxNzYsNDA3LDJj&#xA;MWE2YWI5LTYwYjItNDA3OS05MTg0LWM4MWJhNmUyZGU5OTtwZXJpY2lhICwxNzYsNTIyLDU4N2E4&#xA;NGVlLWExOTYtNDdiYy04MTA0LWQ4M2EwNmNlZjUzZjtmYWJyaWNhbnRlICwzMzcsMzM5LDk3YmQx&#xA;YTk2LTk5ODItNGRiMy05NDE3LTcxNTc3MTFkNDA2Nzs="/>
 	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="Deprov"/>
@@ -53,7 +53,7 @@ WHERE
 		<band splitType="Stretch"/>
 	</background>
 	<title>
-		<band height="91" splitType="Stretch">
+		<band height="120" splitType="Stretch">
 			<staticText>
 				<reportElement x="150" y="0" width="560" height="30" uuid="a8828f1a-e294-408e-b809-680c7942788f">
 					<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
@@ -77,13 +77,10 @@ WHERE
 				</textElement>
 				<textFieldExpression><![CDATA[$F{local}]]></textFieldExpression>
 			</textField>
-		</band>
-	</title>
-	<pageHeader>
-		<band height="30">
-			<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
 			<staticText>
-				<reportElement x="507" y="0" width="200" height="30" uuid="9324eac7-13a1-4e10-abcc-2ed59c405d16"/>
+				<reportElement x="507" y="90" width="200" height="30" uuid="35fc74c7-3add-4b31-a2d4-8ed701b352c1">
+					<property name="com.jaspersoft.studio.unit.y" value="pixel"/>
+				</reportElement>
 				<box>
 					<topPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
 					<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
@@ -96,7 +93,7 @@ WHERE
 				<text><![CDATA[RELATORIO GERADO EM:]]></text>
 			</staticText>
 			<textField>
-				<reportElement x="707" y="0" width="95" height="30" uuid="6d0d491e-bf5f-48e0-a59e-307db4567ec8">
+				<reportElement x="707" y="90" width="95" height="30" uuid="002e390f-3c16-448d-b765-6cc84f46d614">
 					<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
 					<property name="com.jaspersoft.studio.unit.y" value="pixel"/>
 				</reportElement>
@@ -112,7 +109,7 @@ WHERE
 				<textFieldExpression><![CDATA[new SimpleDateFormat("dd/MM/yyyy").format(new Date())]]></textFieldExpression>
 			</textField>
 		</band>
-	</pageHeader>
+	</title>
 	<columnHeader>
 		<band height="30" splitType="Stretch">
 			<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
