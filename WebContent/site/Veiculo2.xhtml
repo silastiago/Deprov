@@ -72,7 +72,7 @@
 					<p:inputText value="#{cadastroVeiculoBean.veiculo.motor}" />
 
 					<h:outputLabel value="Local Atual:" />
-					<h:selectOneMenu value="#{cadastroVeiculoBean.veiculo.seguro}"
+					<h:selectOneMenu value="#{cadastroVeiculoBean.veiculo.local}"
 						required="true" label="Local Atual">
 						<f:selectItem itemLabel="Selecione o Local Atual do Veiculo"
 							noSelectionOption="true" />
@@ -115,8 +115,6 @@
 							itemLabel="#{situacao.situacao}" />
 					</h:selectOneMenu>
 
-					
-
 					<h:outputText value="Proprietario" />
 					<p:inputText value="#{cadastroVeiculoBean.veiculo.proprietario}" />
 
@@ -140,7 +138,7 @@
 					
 					
 					<p:outputLabel for="mask" value="Data:" />
-					<p:calendar id="mask" value="#{cadastroVeiculoBean.veiculo.dataEntrada}" 
+					<p:calendar id="mask" value="#{cadastroVeiculoBean.veiculo.dataEntrada}"
 						pattern="dd/MM/yyyy" mask="true" navigator="true" showOn="button">
 						<f:convertDateTime pattern="dd/MM/yyyy" type="both" dateStyle="short" timeZone="GMT-3"/>						
 						</p:calendar>	

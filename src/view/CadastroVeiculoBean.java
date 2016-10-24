@@ -90,14 +90,29 @@ public class CadastroVeiculoBean implements Serializable{
 	}	
 	
 	public void cadastrar(){
-			Veiculos veiculos = this.repositorios.getveiculos();
-			String placas = "";
-			System.out.println("Chave: " + veiculo.getChave());
-			System.out.println("Lista de veiculos: " + veiculos.chaveExistenteCadastrar(veiculo).size());
-			if (veiculo.getChave().toUpperCase().equals("NÃO") || veiculo.getChave().toUpperCase().equals("NAO") || 
-					veiculo.getChave().toUpperCase().equals("Não") || veiculo.getChave().toUpperCase().equals("Nao") ||
-					veiculo.getChave().toUpperCase().equals("não") || veiculo.getChave().toUpperCase().equals("nao") || 
-					veiculo.getChave().toUpperCase().equals("")) {
+		Veiculos veiculos = this.repositorios.getveiculos();
+		String placas = "";
+		System.out.println("Chave: " + veiculo.getChave());
+		System.out.println("Lista de veiculos: " + veiculos.chaveExistenteEditar(veiculo).size());
+		if (veiculo.getChave().toUpperCase().equals("NÃO") || veiculo.getChave().toUpperCase().equals("NAO") || 
+				veiculo.getChave().toUpperCase().equals("Não") || veiculo.getChave().toUpperCase().equals("Nao") ||
+				veiculo.getChave().toUpperCase().equals("não") || veiculo.getChave().toUpperCase().equals("nao") || 
+				veiculo.getChave().toUpperCase().equals("")) {
+			veiculos.salvar(veiculo);
+			try {
+				FacesContext.getCurrentInstance().getExternalContext().redirect("index.xhtml");
+			} catch (IOException e) {
+				
+				e.printStackTrace();
+			}
+		}else{
+			if (veiculos.chaveExistenteCadastrar(veiculo).size() > 0) {
+				List<Veiculo> listaVeiculo = veiculos.chaveExistenteEditar(veiculo);	
+				for (int i = 0; i < listaVeiculo.size(); i++) {
+					placas = placas + " " + listaVeiculo.get(i).getPlaca();
+				}
+				FacesContext.getCurrentInstance().addMessage("message", new FacesMessage(FacesMessage.SEVERITY_ERROR, "","Local da Chave já ocupado por veiculos de placas "+ placas));
+			}else{
 				veiculos.salvar(veiculo);
 				try {
 					FacesContext.getCurrentInstance().getExternalContext().redirect("index.xhtml");
@@ -105,24 +120,8 @@ public class CadastroVeiculoBean implements Serializable{
 					
 					e.printStackTrace();
 				}
-			}else{
-				if (veiculos.chaveExistenteCadastrar(veiculo).size() > 0) {
-					List<Veiculo> listaVeiculo = veiculos.chaveExistenteCadastrar(veiculo);	
-					for (int i = 0; i < listaVeiculo.size(); i++) {
-						placas = placas + " " + listaVeiculo.get(i).getPlaca();
-					}
-					FacesContext.getCurrentInstance().addMessage("message", new FacesMessage(FacesMessage.SEVERITY_ERROR, "","Local da Chave já ocupado por veiculos de placas "+ placas));
-				}else{
-					veiculos.salvar(veiculo);
-					try {
-						FacesContext.getCurrentInstance().getExternalContext().redirect("index.xhtml");
-					} catch (IOException e) {
-						
-						e.printStackTrace();
-					}
-				}
-			}	
-		//return "index?faces-redirect=true";
+			}
+		}
 	}
 	
 	
