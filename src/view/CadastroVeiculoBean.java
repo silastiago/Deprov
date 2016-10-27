@@ -18,6 +18,7 @@ import javax.faces.bean.ViewScoped;
 import javax.faces.context.FacesContext;
 import javax.faces.event.ActionEvent;
 import javax.faces.event.ValueChangeEvent;
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.primefaces.event.data.FilterEvent;
@@ -26,6 +27,7 @@ import org.primefaces.model.StreamedContent;
 import conexao.ConnectionFactory;
 import model.Fabricante;
 import model.Modelo;
+import model.Pessoa;
 import model.Veiculo;
 import net.sf.jasperreports.engine.JRException;
 import net.sf.jasperreports.engine.JasperCompileManager;
@@ -39,6 +41,7 @@ import net.sf.jasperreports.export.SimpleExporterInput;
 import net.sf.jasperreports.export.SimpleOutputStreamExporterOutput;
 import net.sf.jasperreports.export.SimplePdfExporterConfiguration;
 import repository.Modelos;
+import repository.Pessoas;
 import repository.Veiculos;
 import util.FacesUtil;
 import util.Repositorios;
@@ -89,15 +92,27 @@ public class CadastroVeiculoBean implements Serializable{
 		return listaModelos;
 	}	
 	
+	private HttpServletRequest getRequest() {
+		FacesContext context = FacesContext.getCurrentInstance();
+		return (HttpServletRequest) context.getExternalContext().getRequest();
+	}
+	
 	public void cadastrar(){
 		Veiculos veiculos = this.repositorios.getveiculos();
+		Pessoas pessoas = this.repositorios.getPessoas();
+		
 		String placas = "";
+		Pessoa pessoa = new Pessoa();
+		String login = this.getRequest().getSession().getAttribute("login").toString();
+		pessoa = pessoas.retornaPessoa(login);
+		
 		System.out.println("Chave: " + veiculo.getChave());
 		System.out.println("Lista de veiculos: " + veiculos.chaveExistenteEditar(veiculo).size());
 		if (veiculo.getChave().toUpperCase().equals("NÃO") || veiculo.getChave().toUpperCase().equals("NAO") || 
 				veiculo.getChave().toUpperCase().equals("Não") || veiculo.getChave().toUpperCase().equals("Nao") ||
 				veiculo.getChave().toUpperCase().equals("não") || veiculo.getChave().toUpperCase().equals("nao") || 
 				veiculo.getChave().toUpperCase().equals("")) {
+			veiculo.setPessoa(pessoa);
 			veiculos.salvar(veiculo);
 			try {
 				FacesContext.getCurrentInstance().getExternalContext().redirect("index.xhtml");
@@ -113,6 +128,7 @@ public class CadastroVeiculoBean implements Serializable{
 				}
 				FacesContext.getCurrentInstance().addMessage("message", new FacesMessage(FacesMessage.SEVERITY_ERROR, "","Local da Chave já ocupado por veiculos de placas "+ placas));
 			}else{
+				veiculo.setPessoa(pessoa);
 				veiculos.salvar(veiculo);
 				try {
 					FacesContext.getCurrentInstance().getExternalContext().redirect("index.xhtml");
@@ -127,13 +143,21 @@ public class CadastroVeiculoBean implements Serializable{
 	
 	public void editar(){
 		Veiculos veiculos = this.repositorios.getveiculos();
+		Pessoas pessoas = this.repositorios.getPessoas();
+		
 		String placas = "";
+		Pessoa pessoa = new Pessoa();
+		String login = this.getRequest().getSession().getAttribute("login").toString();
+		pessoa = pessoas.retornaPessoa(login);		
+		
+		
 		System.out.println("Chave: " + veiculo.getChave());
 		System.out.println("Lista de veiculos: " + veiculos.chaveExistenteEditar(veiculo).size());
 		if (veiculo.getChave().toUpperCase().equals("NÃO") || veiculo.getChave().toUpperCase().equals("NAO") || 
 				veiculo.getChave().toUpperCase().equals("Não") || veiculo.getChave().toUpperCase().equals("Nao") ||
 				veiculo.getChave().toUpperCase().equals("não") || veiculo.getChave().toUpperCase().equals("nao") || 
 				veiculo.getChave().toUpperCase().equals("")) {
+			veiculo.setPessoa(pessoa);
 			veiculos.editar(veiculo);
 			try {
 				FacesContext.getCurrentInstance().getExternalContext().redirect("index.xhtml");
@@ -149,6 +173,7 @@ public class CadastroVeiculoBean implements Serializable{
 				}
 				FacesContext.getCurrentInstance().addMessage("message", new FacesMessage(FacesMessage.SEVERITY_ERROR, "","Local da Chave já ocupado por veiculos de placas "+ placas));
 			}else{
+				veiculo.setPessoa(pessoa);
 				veiculos.editar(veiculo);
 				try {
 					FacesContext.getCurrentInstance().getExternalContext().redirect("index.xhtml");

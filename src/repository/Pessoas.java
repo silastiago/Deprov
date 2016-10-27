@@ -55,4 +55,6 @@ public interface Pessoas {
 	*   	
 	*/
 	public void remover(Pessoa pessoa);
+
+	public Pessoa retornaPessoa(String login);
 }

@@ -44,6 +44,17 @@ public class FacesUtil {
 		return request.getAttribute(name);
 	}
 	
+	
+	public Integer retornaPosicao(String nome, ArrayList<String> lista){
+		    
+		    for(int pos = 0; pos < lista.size(); pos++){
+		         if(nome == lista.get(pos)){
+		            return pos;
+		         }
+		     }
+		    return -1; // menos um porque vc pode fazer um tratamento depois :D 
+		}
+	
 	public String escolherRelatorio(ArrayList<String> listaObjetos){
 		String relatorio = "";
 		
@@ -525,9 +536,7 @@ public class FacesUtil {
 	            	
 	            	mapaParametro.put(parametro, valor);
 		            
-				}				
-				
-				else if (listaObjetos.get(0).equals("fabricante.fabricante")  && listaObjetos.get(1).equals("seguro.seguro")) {
+				}else if (listaObjetos.get(0).equals("fabricante.fabricante")  && listaObjetos.get(1).equals("seguro.seguro")) {
 					Fabricante fabricante = new Fabricante();
 	        		Fabricantes fabricantes = repositorios.getFabricantes();
 	        		fabricante = fabricantes.pegaCodigo(listavalores.get(0));
@@ -794,9 +803,7 @@ public class FacesUtil {
 	            	
 	            	mapaParametro.put(parametro, valor);
 					
-				}
-				
-				else if (listaObjetos.get(0).equals("modelo.modelo")  && listaObjetos.get(1).equals("local.local")) {
+				}else if (listaObjetos.get(0).equals("modelo.modelo")  && listaObjetos.get(1).equals("local.local")) {
 					Modelo modelo = new Modelo();
 					Modelos modelos = repositorios.getModelos();
 					modelo = modelos.pegaCodigo(listavalores.get(0));
@@ -836,10 +843,7 @@ public class FacesUtil {
 	            	
 	            	mapaParametro.put(parametro, valor);
 	            	
-				}				
-				
-				
-				else if (listaObjetos.get(0).equals("seguro.seguro")  && listaObjetos.get(1).equals("pericia.pericia")) {
+				}else if (listaObjetos.get(0).equals("seguro.seguro")  && listaObjetos.get(1).equals("pericia.pericia")) {
 					Seguro seguro = new Seguro();
 					Seguros seguros = repositorios.getSeguros();
 					seguro = seguros.pegaCodigo(listavalores.get(0));
@@ -915,7 +919,7 @@ public class FacesUtil {
 	            	
 	            	mapaParametro.put(parametro, valor);
 	            	
-				}}else if (listaObjetos.get(0).equals("seguro.seguro")  && listaObjetos.get(1).equals("local.local")) {
+				}else if (listaObjetos.get(0).equals("seguro.seguro")  && listaObjetos.get(1).equals("local.local")) {
 					Seguro seguro = new Seguro();
 					Seguros seguros = repositorios.getSeguros();
 					seguro = seguros.pegaCodigo(listavalores.get(0));
@@ -924,7 +928,6 @@ public class FacesUtil {
 	            	parametro = "codigo_seguro";
 	            	
 	            	mapaParametro.put(parametro, valor);
-					
 					
 	            	Local local = new Local();
 					ILocal Ilocal = repositorios.getLocal();
@@ -955,11 +958,7 @@ public class FacesUtil {
 	            	parametro = "codigo_seguro";
 	            	
 	            	mapaParametro.put(parametro, valor);
-				}
-				
-				
-				
-				else if (listaObjetos.get(0).equals("pericia.pericia")  && listaObjetos.get(1).equals("situacao.situacao")) {
+				}else if (listaObjetos.get(0).equals("pericia.pericia")  && listaObjetos.get(1).equals("situacao.situacao")) {
 					Pericia pericia = new Pericia();
 					Pericias pericias = repositorios.getPericias();
 					pericia = pericias.pegaCodigo(listavalores.get(0));
@@ -968,7 +967,6 @@ public class FacesUtil {
 	            	parametro = "codigo_pericia";
 	            	
 	            	mapaParametro.put(parametro, valor);
-					
 					
 					Situacao situacao = new Situacao();
 					ISituacao ISituacao = repositorios.getSituacao();
@@ -1079,56 +1077,9 @@ public class FacesUtil {
 	            	parametro = "codigo_situacao";
 	            	
 	            	mapaParametro.put(parametro, valor);
-	            	
-				} 
-        
-			
+					}
+				}
 		//}
 		return mapaParametro;
-	}
-	
-	
-	/*public Map<String, Integer> escolherParametro(Map<String, Object> listaObjetos){
-		Map<String, Integer> mapaParametro = new HashMap<String, Integer>();
-		Repositorios repositorios = new Repositorios();
-		int valor = 0;
-		String parametro = "";
-		
-		for (String key : listaObjetos.keySet()) {
-            if (key.contains("fabricante.fabricante")) {
-            	
-            	
-				
-				parametro = "codigo_fabricante";
-			}else if (key.contains("modelo.modelo")) {
-				
-				
-				parametro = "codigo_modelo";
-			}else if (key.contains("chassi")) {
-				
-				//relatorio = "/var/lib/tomcat/webapps/Deprov/resources/relatorios/parametros/1/Chassi.jrxml";
-				parametro = "chassi";
-			}else if (key.contains("cor.cor")) {
-				
-				
-				parametro = "codigo_cor";
-			}else if (key.contains("seguro.seguro")) {
-				
-				
-				parametro = "codigo_seguro";
-			}else if (key.contains("pericia.pericia")) {
-				
-				parametro = "codigo_pericia";
-			}else if (key.contains("situacao.situacao")) {
-				
-				parametro = "codigo_situacao";
-			}
-            
-            
-            mapaParametro.put(parametro, valor);
-        }
-		return mapaParametro;
-	}*/
-	
-	
+	}	
 }

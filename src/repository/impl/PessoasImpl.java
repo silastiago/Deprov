@@ -10,6 +10,7 @@ import org.hibernate.Session;
 import org.hibernate.criterion.Order;
 import org.hibernate.criterion.Restrictions;
 
+import model.Pericia;
 import model.Pessoa;
 import repository.Pessoas;
 
@@ -108,4 +109,14 @@ public class PessoasImpl implements Pessoas{
 		session.removeAttribute("senha");
 		session.invalidate();
 	}
+	
+	
+	@Override
+	public Pessoa retornaPessoa(String login) {
+		Criteria c = this.sessao.createCriteria(Pessoa.class);
+		c.add(Restrictions.eq("login", login));
+		Pessoa results =  (Pessoa) c.uniqueResult();
+		return results;
+	}
+	
 }

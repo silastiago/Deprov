@@ -141,7 +141,11 @@
 					<p:calendar id="mask" value="#{cadastroVeiculoBean.veiculo.dataEntrada}"
 						pattern="dd/MM/yyyy" mask="true" navigator="true" showOn="button">
 						<f:convertDateTime pattern="dd/MM/yyyy" type="both" dateStyle="short" timeZone="GMT-3"/>						
-						</p:calendar>	
+						</p:calendar>
+						
+					<h:outputText value="Pessoa que alterou:" />
+					<p:inputText value="#{cadastroVeiculoBean.veiculo.pessoa.login}" readonly="true"/>
+						
 				</p:panelGrid>
 				
 				

@@ -46,6 +46,7 @@ public class Veiculo implements Serializable, Cloneable{
 	private String motivoApreensao;
 	private Pericia pericia;
 	private Date dataEntrada;
+	private Pessoa pessoa;
 
 
 	@Id
@@ -262,6 +263,16 @@ public class Veiculo implements Serializable, Cloneable{
 		this.situacao = situacao;
 	}
 	
+	@ManyToOne
+	@JoinColumn(name="codigo_pessoa")
+	public Pessoa getPessoa() {
+		return pessoa;
+	}
+
+	public void setPessoa(Pessoa pessoa) {
+		this.pessoa = pessoa;
+	}
+
 	@Override
 	public int hashCode() {
 		final int prime = 31;
