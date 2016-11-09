@@ -8,18 +8,17 @@
 		<welcome-file>Login.xhtml</welcome-file>
 	</welcome-file-list>
 
-	<!-- login filter -->
+	<!-- login filter cadastro-->
     <filter>
-        <filter-name>login</filter-name>
+        <filter-name>Pessoa_Filtro</filter-name>
         <filter-class>filtro.FiltroSeguranca</filter-class>
     </filter>
     <!-- set the login filter to secure all the pages in the /secured/* path
         of the application -->
     <filter-mapping>
-        <filter-name>login</filter-name>
+        <filter-name>Pessoa_Filtro</filter-name>
         <url-pattern>/site/*</url-pattern>
-</filter-mapping>
-
+	</filter-mapping>
 
 	<filter>
 		<filter-name>PrimeFaces FileUpload Filter</filter-name>

@@ -8,7 +8,7 @@
      <div style="float: right;">
 	 <h:form style="display: inline-block" enctype="multipart/form-data" acceptcharset="UTF-8">
 					<p:menubar styleClass="menu-sistema">
-						<p:submenu label="Cadastros">
+						<p:submenu label="Cadastros" rendered="#{Pessoabean.visualizar_cadastro()}">
 							<p:menuitem value="Cor" outcome="Cor"/>
 							<p:menuitem value="Exame Veicular" outcome="ExameVeicular"/>
 							<p:menuitem value="Grupo" outcome="Grupo"/>
@@ -36,7 +36,7 @@
 							</p:submenu>
 						<p:submenu label="Opções">
 						<p:menuitem value="Pagina Inicial" outcome="index"/>
-						<p:menuitem value="Sair" action="#{loginBean.sair()}"  />
+						<p:menuitem value="Sair" action="#{PessoaBean.sair()}"  />
 						</p:submenu>
 					</p:menubar>
 				</h:form>				

@@ -7,6 +7,7 @@ import java.util.List;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.RequestScoped;
 import javax.faces.context.FacesContext;
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import model.Pessoa;
@@ -28,6 +29,11 @@ public class CadastroPessoaBean implements Serializable{
 		this.pessoas = pessoas.listar();
 	}*/
 
+	private HttpServletRequest getRequest() {
+		FacesContext context = FacesContext.getCurrentInstance();
+		return (HttpServletRequest) context.getExternalContext().getRequest();
+	}
+	
 	public void cadastrar(){
 		Pessoas pessoas = this.repositorios.getPessoas();
 		pessoas.salvar(this.pessoa);
@@ -50,6 +56,7 @@ public class CadastroPessoaBean implements Serializable{
 			HttpSession session = (HttpSession) fc.getExternalContext().getSession(false);
 			session.setAttribute("usuario", pessoa.getLogin());
 			session.setAttribute("senha", pessoa.getSenha());
+			
 			pagina = "site/index.xhtml?faces-redirect=true";
 		}
 		return pagina;
@@ -70,6 +77,30 @@ public class CadastroPessoaBean implements Serializable{
 		//retorna a lista de tipos.
 		return listaPessoas;
 	}
+	
+	public boolean visualizar_cadastro(){
+		Pessoa pessoa = new Pessoa();
+		String login = this.getRequest().getSession().getAttribute("usuario").toString();
+		Pessoas pessoas = this.repositorios.getPessoas();
+		pessoa = pessoas.retornaPessoa(login);
+		
+		System.out.println("Grupo: "+ pessoa.getGrupo().getGrupo().toUpperCase() + " do usuario: "+ pessoa.getLogin().toUpperCase());
+		if(pessoa.getGrupo().getGrupo().toUpperCase().equals("CONSULTA")){
+			return true;
+		}else{
+			return false;
+		}	
+	}
+	
+	public boolean visualizar_consulta(Pessoa pessoa){
+		if(pessoa.getGrupo().getGrupo().toUpperCase().equals("")){
+			return true;
+		}else{
+			return false;
+		}	
+	}
+	
+	
 	
 	public Pessoa getPessoa() {
 		return pessoa;
