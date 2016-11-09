@@ -1,5 +1,6 @@
 package view;
 
+import java.io.IOException;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
@@ -62,11 +63,17 @@ public class CadastroPessoaBean implements Serializable{
 		return pagina;
 	}
 
-	public String sair() {
-		System.out.println("TESTANDO FUNCAO DE SAIR");
+	public void sair() {
 		Pessoas pessoas = this.repositorios.getPessoas();
 		pessoas.logout(); 
-		return "../Login.xhtml?faces-redirect=true";
+		try {
+			FacesContext.getCurrentInstance().getExternalContext().redirect("Login.xhtml?faces-redirect=true");
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		//return "../Login.xhtml?faces-redirect=true";
 	}	
 	
 	public List<Pessoa> listarPessoas(){
@@ -84,16 +91,20 @@ public class CadastroPessoaBean implements Serializable{
 		Pessoas pessoas = this.repositorios.getPessoas();
 		pessoa = pessoas.retornaPessoa(login);
 		
-		System.out.println("Grupo: "+ pessoa.getGrupo().getGrupo().toUpperCase() + " do usuario: "+ pessoa.getLogin().toUpperCase());
-		if(pessoa.getGrupo().getGrupo().toUpperCase().equals("CONSULTA")){
+		if(pessoa.getGrupo().getGrupo().toUpperCase().equals("ADMINISTRADOR")){
 			return true;
 		}else{
 			return false;
 		}	
 	}
 	
-	public boolean visualizar_consulta(Pessoa pessoa){
-		if(pessoa.getGrupo().getGrupo().toUpperCase().equals("")){
+	public boolean visualizar_consulta(){
+		Pessoa pessoa = new Pessoa();
+		String login = this.getRequest().getSession().getAttribute("usuario").toString();
+		Pessoas pessoas = this.repositorios.getPessoas();
+		pessoa = pessoas.retornaPessoa(login);
+		
+		if(pessoa.getGrupo().getGrupo().toUpperCase().equals("ADMINISTRADOR") || pessoa.getGrupo().getGrupo().toUpperCase().equals("CONSULTA")){
 			return true;
 		}else{
 			return false;
