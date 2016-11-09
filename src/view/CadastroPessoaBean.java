@@ -6,12 +6,14 @@ import java.util.List;
 
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.RequestScoped;
+import javax.faces.context.FacesContext;
+import javax.servlet.http.HttpSession;
 
 import model.Pessoa;
 import repository.Pessoas;
 import util.Repositorios;
 
-@ManagedBean(name="cadastroPessoaBean")
+@ManagedBean(name="PessoaBean")
 @RequestScoped
 public class CadastroPessoaBean implements Serializable{
 
@@ -39,10 +41,18 @@ public class CadastroPessoaBean implements Serializable{
 
 	public String logar(){
 		Pessoas pessoas = this.repositorios.getPessoas();
+		System.out.println(pessoas.login(pessoa));
+		String pagina = "";
 		if (pessoas.login(pessoa) == false) {
-			return "Login.xhtml";
+			pagina = "Login.xhtml?faces-redirect=true";
+		}else{
+			FacesContext fc = FacesContext.getCurrentInstance();
+			HttpSession session = (HttpSession) fc.getExternalContext().getSession(false);
+			session.setAttribute("usuario", pessoa.getLogin());
+			session.setAttribute("senha", pessoa.getSenha());
+			pagina = "site/index.xhtml?faces-redirect=true";
 		}
-		return "site/index.xhtml?faces-redirect=true";
+		return pagina;
 	}
 
 	public String sair() {

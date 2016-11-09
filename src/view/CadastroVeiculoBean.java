@@ -103,7 +103,7 @@ public class CadastroVeiculoBean implements Serializable{
 		
 		String placas = "";
 		Pessoa pessoa = new Pessoa();
-		String login = this.getRequest().getSession().getAttribute("login").toString();
+		String login = this.getRequest().getSession().getAttribute("usuario").toString();
 		pessoa = pessoas.retornaPessoa(login);
 		
 		System.out.println("Chave: " + veiculo.getChave());
@@ -147,7 +147,7 @@ public class CadastroVeiculoBean implements Serializable{
 		
 		String placas = "";
 		Pessoa pessoa = new Pessoa();
-		String login = this.getRequest().getSession().getAttribute("login").toString();
+		String login = this.getRequest().getSession().getAttribute("usuario").toString();
 		pessoa = pessoas.retornaPessoa(login);		
 		
 		

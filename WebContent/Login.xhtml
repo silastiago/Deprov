@@ -24,13 +24,13 @@
 							columnClasses="label, campo" id="panel">
 					
 						<h:outputLabel value="Login"/>
-						<h:inputText value="#{loginBean.usuario}" size="20"/>
+						<h:inputText value="#{PessoaBean.pessoa.login}" size="20"/>
 						
 						<h:outputLabel value="Senha"/>
-						<h:inputSecret value="#{loginBean.senha}" size="20"/>
+						<h:inputSecret value="#{PessoaBean.pessoa.senha}" size="20"/>
 						
 						<h:panelGroup/>
-						<h:commandButton value="Logar" action="#{loginBean.logar()}"/>
+						<h:commandButton value="Logar" action="#{PessoaBean.logar()}"/>
 					</h:panelGrid>
 				</h:form>
 			</div>

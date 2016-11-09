@@ -84,10 +84,6 @@ public class PessoasImpl implements Pessoas{
 		Criteria c = this.sessao.createCriteria(Pessoa.class);
 		c.add(Restrictions.eq("login", pessoa.getLogin()));
 		c.add(Restrictions.eq("senha", pessoa.getSenha()));
-		FacesContext fc = FacesContext.getCurrentInstance();
-		HttpSession session = (HttpSession) fc.getExternalContext().getSession(false);
-		session.setAttribute("usuario", pessoa.getLogin());
-		session.setAttribute("senha", pessoa.getSenha());
 		if (c.uniqueResult() == null) {
 			pessoaExistente = false;
 		}else{
