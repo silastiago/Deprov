@@ -36,7 +36,7 @@ public class Local implements Serializable, Cloneable{
 		return local;
 	}
 	public void setLocal(String local) {
-		this.local = local;
+		this.local = local.toUpperCase();
 	}
 	@Override
 	public int hashCode() {

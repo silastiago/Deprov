@@ -38,7 +38,7 @@ public class Pessoa implements Serializable, Cloneable{
 		return login;
 	}
 	public void setLogin(String login) {
-		this.login = login;
+		this.login = login.toUpperCase();
 	}
 	@Column(name="senha")
 	public String getSenha() {
