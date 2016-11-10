@@ -48,7 +48,6 @@ public class CadastroPessoaBean implements Serializable{
 
 	public String logar(){
 		Pessoas pessoas = this.repositorios.getPessoas();
-		System.out.println(pessoas.login(pessoa));
 		String pagina = "";
 		if (pessoas.login(pessoa) == false) {
 			pagina = "Login.xhtml?faces-redirect=true";
