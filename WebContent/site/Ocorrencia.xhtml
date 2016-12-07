@@ -19,14 +19,15 @@
 					columnClasses="rotulo, campo">
 
 				<h:outputText value="Nome: " />
-				<h:inputText value="#{cadastroOcorrenciaBean.ocorrencia.ocorrencia}" />
+				<h:inputText value="#{cadastroOcorrenciaBean.ocorrencia.ocorrencia}"  />
 
 				<p:outputLabel for="mask" value="Data:" />
 					<p:calendar id="mask" value="#{cadastroOcorrenciaBean.ocorrencia.data}"
 						pattern="dd/MM/yyyy" mask="true" navigator="true" showOn="button">
 						<f:convertDateTime pattern="dd/MM/yyyy" type="both" dateStyle="short" timeZone="GMT-3"/>						
 					</p:calendar>
-					
+				
+				<p:commandButton action="#{cadastroOcorrenciaBean.voltar(codigo)}"  value="Voltar" />	
 				<p:commandButton action="#{cadastroOcorrenciaBean.cadastrar(codigo)}"  update="lista" value="Salvar" />
 				
 

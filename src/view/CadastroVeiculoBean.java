@@ -239,8 +239,9 @@ public class CadastroVeiculoBean implements Serializable{
 	        
 	        this.setMapaParametro(mapa);
 	        this.setRelatorio(relatorio);
-	    }	
-	
+	    }
+	 
+	 
 	 public String gerarRelatorio() throws JRException, IOException, ClassNotFoundException, NoSuchMethodException, SecurityException, InstantiationException, IllegalAccessException {
 		
 		ConnectionFactory conexao = new ConnectionFactory();
