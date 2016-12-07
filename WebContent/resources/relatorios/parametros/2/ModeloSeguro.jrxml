@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Created with Jaspersoft Studio version 6.2.2.final using JasperReports Library version 6.2.2  -->
-<!-- 2016-10-21T14:05:00 -->
+<!-- 2016-12-07T13:32:11 -->
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="RelatorioVeiculo" pageWidth="842" pageHeight="595" columnWidth="802" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="31633f3b-cf08-4c8e-9dcd-4688c49a5839">
 	<property name="com.jaspersoft.studio.data.sql.tables" value=""/>
 	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="Deprov"/>
@@ -27,7 +27,7 @@
 	pericia.pericia,
 	seguro.seguro,
 	local.local,
-	veiculo.ip_processo
+	veiculo.processo
 FROM veiculo
 	INNER JOIN cor ON 
 	 veiculo.codigo_cor = cor.codigo 
@@ -58,7 +58,7 @@ WHERE
 	<field name="local" class="java.lang.String"/>
 	<field name="pericia" class="java.lang.String"/>
 	<field name="situacao" class="java.lang.String"/>
-	<field name="ip_processo" class="java.lang.String"/>
+	<field name="processo" class="java.lang.String"/>
 	<background>
 		<band splitType="Stretch"/>
 	</background>
@@ -289,7 +289,7 @@ WHERE
 				<textElement textAlignment="Center" verticalAlignment="Middle">
 					<font size="9" isBold="false"/>
 				</textElement>
-				<text><![CDATA[ip_processo]]></text>
+				<text><![CDATA[Processo]]></text>
 			</staticText>
 			<staticText>
 				<reportElement x="167" y="0" width="80" height="30" uuid="260d298b-7370-4330-898f-4df4c701bbf4">
@@ -420,7 +420,7 @@ WHERE
 					<font size="9" isBold="false"/>
 					<paragraph lineSpacing="Proportional"/>
 				</textElement>
-				<textFieldExpression><![CDATA[$F{ip_processo}]]></textFieldExpression>
+				<textFieldExpression><![CDATA[$F{processo}]]></textFieldExpression>
 			</textField>
 			<textField>
 				<reportElement x="312" y="0" width="82" height="50" uuid="7aab63b5-f9fd-4aa8-8220-80dbcd62f4c9">
