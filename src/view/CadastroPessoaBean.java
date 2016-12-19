@@ -5,6 +5,7 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.RequestScoped;
 import javax.faces.context.FacesContext;
@@ -46,20 +47,27 @@ public class CadastroPessoaBean implements Serializable{
 		this.listarPessoas();
 	}
 
-	public String logar(){
+	public void logar(){
 		Pessoas pessoas = this.repositorios.getPessoas();
 		String pagina = "";
+		FacesContext fc = FacesContext.getCurrentInstance();
 		if (pessoas.login(pessoa) == false) {
-			pagina = "Login.xhtml?faces-redirect=true";
+			pagina = "login.xhtml?faces-redirect=true";
+			fc.addMessage("message", new FacesMessage(FacesMessage.SEVERITY_ERROR, "","Login ou Senha errado"));
 		}else{
-			FacesContext fc = FacesContext.getCurrentInstance();
 			HttpSession session = (HttpSession) fc.getExternalContext().getSession(false);
 			session.setAttribute("usuario", pessoa.getLogin());
 			session.setAttribute("senha", pessoa.getSenha());
-			
-			pagina = "site/index.xhtml?faces-redirect=true";
+			//pagina = "site/index.xhtml?faces-redirect=true";
+			pagina = "site/index.xhtml";
+			try {
+				fc.getExternalContext().redirect(pagina);
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 		}
-		return pagina;
+		//return pagina;
 	}
 
 	public void sair() {

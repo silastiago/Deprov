@@ -91,7 +91,7 @@ public class ModelosImpl implements Modelos{
 	@Override
 	public List<Modelo> pegaModelos(String modelo) {
 		Criteria c = this.sessao.createCriteria(Modelo.class);
-		c.add(Restrictions.eq("Modelo.codigo_fabricante", modelo));
+		c.add(Restrictions.eq("modelo.codigo_fabricante", modelo));
 		List<Modelo> results = c.list();
 		return results;
 	}

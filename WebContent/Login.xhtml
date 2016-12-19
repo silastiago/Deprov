@@ -3,7 +3,8 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
 	xmlns:h="http://java.sun.com/jsf/html"
 	xmlns:ui="http://java.sun.com/jsf/facelets"
-	xmlns:f="http://java.sun.com/jsf/core">
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
 	<h:head>
 		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 		<title>#{msg.login}</title>
@@ -17,8 +18,7 @@
 		
 				<h:form id="frm" enctype="multipart/form-data">
 		
-					<h:messages showDetail="false" showSummary="true" 
-						styleClass="form-messages" errorClass="error"/>
+					<p:messages for ="message" showDetail="true" autoUpdate="true" closable="true" />
 		
 					<h:panelGrid columns="2" styleClass="form-grid" style="padding: 10px"
 							columnClasses="label, campo" id="panel">
