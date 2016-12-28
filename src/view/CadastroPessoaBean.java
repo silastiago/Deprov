@@ -14,6 +14,7 @@ import javax.servlet.http.HttpSession;
 
 import model.Pessoa;
 import repository.Pessoas;
+import util.FacesUtil;
 import util.Repositorios;
 
 @ManagedBean(name="PessoaBean")
@@ -38,6 +39,8 @@ public class CadastroPessoaBean implements Serializable{
 	
 	public void cadastrar(){
 		Pessoas pessoas = this.repositorios.getPessoas();
+		String senha = this.pessoa.getSenha();
+		this.pessoa.setSenha(FacesUtil.md5(senha));
 		pessoas.salvar(this.pessoa);
 	}
 
@@ -51,6 +54,11 @@ public class CadastroPessoaBean implements Serializable{
 		Pessoas pessoas = this.repositorios.getPessoas();
 		String pagina = "";
 		FacesContext fc = FacesContext.getCurrentInstance();
+		
+		
+		String senha = this.pessoa.getSenha();
+		pessoa.setSenha(FacesUtil.md5(senha));
+		
 		if (pessoas.login(pessoa) == false) {
 			pagina = "login.xhtml?faces-redirect=true";
 			fc.addMessage("message", new FacesMessage(FacesMessage.SEVERITY_ERROR, "","Login ou Senha errado"));

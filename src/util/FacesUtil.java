@@ -1,5 +1,8 @@
 package util;
 
+import java.math.BigInteger;
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
@@ -31,6 +34,27 @@ import repository.Seguros;
 */
 
 public class FacesUtil {
+	
+	/** Este metodo pega a senha e gera um hash md5.
+	* 	
+	* 	@param senha, Esta senha é sua senha que voc~e cadastrou.
+	* 	@return retorna o hash md5 da sua senha.
+	*/
+	public static String md5(String senha) {
+	       MessageDigest m = null;
+		try {
+			m = MessageDigest.getInstance("MD5");
+		} catch (NoSuchAlgorithmException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	       m.update(senha.getBytes(),0, senha.length());
+	       String hash = new BigInteger(1,m.digest()).toString(16);
+	       //System.out.println("MD5: "+hash);
+	       
+		return hash;
+	}
+	
 	
 	/** Este metodo captura o atributo da requisicao pelo nome .
 	* 	
