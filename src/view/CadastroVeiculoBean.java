@@ -108,19 +108,24 @@ public class CadastroVeiculoBean implements Serializable{
 		
 		System.out.println("Chave: " + veiculo.getChave());
 		System.out.println("Lista de veiculos: " + veiculos.chaveExistenteEditar(veiculo).size());
+		
 		if (veiculo.getChave().toUpperCase().equals("NÃO") || veiculo.getChave().toUpperCase().equals("NAO") || 
 				veiculo.getChave().toUpperCase().equals("Não") || veiculo.getChave().toUpperCase().equals("Nao") ||
 				veiculo.getChave().toUpperCase().equals("não") || veiculo.getChave().toUpperCase().equals("nao") || 
 				veiculo.getChave().toUpperCase().equals("")) {
 			veiculo.setPessoa(pessoa);
 			veiculos.salvar(veiculo);
-			try {
+			
+			FacesContext.getCurrentInstance().addMessage("message", new FacesMessage(FacesMessage.SEVERITY_INFO, "","Veiculo Cadastrado"));
+			
+			/*try {
 				FacesContext.getCurrentInstance().getExternalContext().redirect("index.xhtml");
 			} catch (IOException e) {
 				
 				e.printStackTrace();
-			}
+			}*/
 		}else{
+			
 			if (veiculos.chaveExistenteCadastrar(veiculo).size() > 0) {
 				List<Veiculo> listaVeiculo = veiculos.chaveExistenteEditar(veiculo);	
 				for (int i = 0; i < listaVeiculo.size(); i++) {
@@ -130,12 +135,13 @@ public class CadastroVeiculoBean implements Serializable{
 			}else{
 				veiculo.setPessoa(pessoa);
 				veiculos.salvar(veiculo);
-				try {
+				FacesContext.getCurrentInstance().addMessage("message", new FacesMessage(FacesMessage.SEVERITY_INFO, "","Veiculo Cadastrado"));
+				/*try {
 					FacesContext.getCurrentInstance().getExternalContext().redirect("index.xhtml");
 				} catch (IOException e) {
 					
 					e.printStackTrace();
-				}
+				}*/
 			}
 		}
 	}
@@ -159,12 +165,15 @@ public class CadastroVeiculoBean implements Serializable{
 				veiculo.getChave().toUpperCase().equals("")) {
 			veiculo.setPessoa(pessoa);
 			veiculos.editar(veiculo);
-			try {
+			FacesContext.getCurrentInstance().addMessage("message", new FacesMessage(FacesMessage.SEVERITY_INFO, "","Veiculo Editado"));
+			
+			/*try {
 				FacesContext.getCurrentInstance().getExternalContext().redirect("index.xhtml");
 			} catch (IOException e) {
 				
 				e.printStackTrace();
-			}
+			}*/
+			
 		}else{
 			if (veiculos.chaveExistenteEditar(veiculo).size() > 0) {
 				List<Veiculo> listaVeiculo = veiculos.chaveExistenteEditar(veiculo);	
@@ -175,12 +184,13 @@ public class CadastroVeiculoBean implements Serializable{
 			}else{
 				veiculo.setPessoa(pessoa);
 				veiculos.editar(veiculo);
-				try {
+				FacesContext.getCurrentInstance().addMessage("message", new FacesMessage(FacesMessage.SEVERITY_INFO, "","Veiculo Editado"));
+				/*try {
 					FacesContext.getCurrentInstance().getExternalContext().redirect("index.xhtml");
 				} catch (IOException e) {
 					
 					e.printStackTrace();
-				}
+				}*/
 			}
 		}
 	}
