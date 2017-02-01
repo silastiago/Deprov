@@ -22,6 +22,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.primefaces.event.data.FilterEvent;
+import org.primefaces.event.data.PageEvent;
 import org.primefaces.model.StreamedContent;
 
 import conexao.ConnectionFactory;
@@ -90,7 +91,13 @@ public class CadastroVeiculoBean implements Serializable{
 		listaModelos = modelos.pegaModelos(this.veiculo.getFabricante().getCodigo().toString());
 		//Retorna a lista de modelos
 		return listaModelos;
-	}	
+	}
+	
+	
+	public void pegarPaginaAtual(PageEvent evento){
+		int paginaAtual  = evento.getPage();
+		System.out.println("Pagina Atual: "+ paginaAtual+1);
+	}
 	
 	private HttpServletRequest getRequest() {
 		FacesContext context = FacesContext.getCurrentInstance();
