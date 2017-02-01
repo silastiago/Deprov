@@ -138,5 +138,13 @@ public class VeiculosImpl implements Veiculos{
 		Veiculo results = (Veiculo) c.uniqueResult();
 		return results;
 	}
+
+	@Override
+	public List<Veiculo> placaxistenteCadastrar(Veiculo veiculo) {
+		Criteria c = this.sessao.createCriteria(Veiculo.class);
+		c.add(Restrictions.eq("placa", veiculo.getPlaca()));
+		List<Veiculo> results = c.list();
+		return results;
+	}
 	
 }

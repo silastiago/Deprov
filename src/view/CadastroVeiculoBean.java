@@ -114,16 +114,24 @@ public class CadastroVeiculoBean implements Serializable{
 				veiculo.getChave().toUpperCase().equals("não") || veiculo.getChave().toUpperCase().equals("nao") || 
 				veiculo.getChave().toUpperCase().equals("")) {
 			veiculo.setPessoa(pessoa);
+			
+			if (veiculos.placaxistenteCadastrar(veiculo).size() > 0) {
+				FacesContext.getCurrentInstance().addMessage("message", new FacesMessage(FacesMessage.SEVERITY_WARN, "","Esta placa já foi cadastrada em outro carro"));
+			}			
 			veiculos.salvar(veiculo);
 			
 			FacesContext.getCurrentInstance().addMessage("message", new FacesMessage(FacesMessage.SEVERITY_INFO, "","Veiculo Cadastrado"));
 			
-			/*try {
-				FacesContext.getCurrentInstance().getExternalContext().redirect("index.xhtml");
+			FacesContext.getCurrentInstance()
+		      .getExternalContext()
+		      .getFlash().setKeepMessages(true);
+			
+			try {
+				FacesContext.getCurrentInstance().getExternalContext().redirect("Veiculo2.xhtml");
 			} catch (IOException e) {
 				
 				e.printStackTrace();
-			}*/
+			}
 		}else{
 			
 			if (veiculos.chaveExistenteCadastrar(veiculo).size() > 0) {
@@ -134,14 +142,23 @@ public class CadastroVeiculoBean implements Serializable{
 				FacesContext.getCurrentInstance().addMessage("message", new FacesMessage(FacesMessage.SEVERITY_ERROR, "","Local da Chave já ocupado por veiculos de placas "+ placas));
 			}else{
 				veiculo.setPessoa(pessoa);
+				
+				if (veiculos.placaxistenteCadastrar(veiculo).size() > 0) {
+					FacesContext.getCurrentInstance().addMessage("message", new FacesMessage(FacesMessage.SEVERITY_WARN, "","Esta placa já foi cadastrada em outro carro"));
+				}
+				
 				veiculos.salvar(veiculo);
 				FacesContext.getCurrentInstance().addMessage("message", new FacesMessage(FacesMessage.SEVERITY_INFO, "","Veiculo Cadastrado"));
-				/*try {
-					FacesContext.getCurrentInstance().getExternalContext().redirect("index.xhtml");
+				FacesContext.getCurrentInstance()
+			      .getExternalContext()
+			      .getFlash().setKeepMessages(true);
+				
+				try {
+					FacesContext.getCurrentInstance().getExternalContext().redirect("Veiculo2.xhtml");
 				} catch (IOException e) {
 					
 					e.printStackTrace();
-				}*/
+				}
 			}
 		}
 	}
