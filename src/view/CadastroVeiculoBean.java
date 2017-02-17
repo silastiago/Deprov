@@ -21,6 +21,7 @@ import javax.faces.event.ValueChangeEvent;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.primefaces.component.datatable.DataTable;
 import org.primefaces.event.data.FilterEvent;
 import org.primefaces.event.data.PageEvent;
 import org.primefaces.model.StreamedContent;
@@ -66,6 +67,7 @@ public class CadastroVeiculoBean implements Serializable{
 	private String relatorio;
 	private Map<String, Object> mapaParametro;
 	private List<Modelo> listaModelos;
+	private int paginaAtual;
 	
 	
 	@PostConstruct
@@ -94,10 +96,12 @@ public class CadastroVeiculoBean implements Serializable{
 	}
 	
 	
-	public void pegarPaginaAtual(PageEvent evento){
-		int paginaAtual  = evento.getPage();
-		System.out.println("Pagina Atual: "+ paginaAtual+1);
+	public int pegarPaginaAtual(PageEvent evento){
+		paginaAtual  = evento.getPage();
+		System.out.println("Pagina Atual: "+ paginaAtual);
+		return paginaAtual;
 	}
+	
 	
 	private HttpServletRequest getRequest() {
 		FacesContext context = FacesContext.getCurrentInstance();
@@ -343,8 +347,18 @@ public class CadastroVeiculoBean implements Serializable{
 	    facesContext.responseComplete();
         
         return "index?faces-redirect=true";
+	} 
+	 
+	public int getPaginaAtual() {
+		return paginaAtual;
 	}
-		
+
+
+	public void setPaginaAtual(int paginaAtual) {
+		this.paginaAtual = paginaAtual;
+	}
+
+
 	public Veiculo getVeiculo() {
 		return veiculo;
 	}
