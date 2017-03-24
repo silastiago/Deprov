@@ -1,0 +1,77 @@
+package pcrn.model;
+
+import java.io.Serializable;
+
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+import javax.persistence.Table;
+
+/** Esta Classe que possui os metodos de acesso getter e setters que representa uma Exame Veicular do veiculo, 
+ * e tamb�m possui o mapeamento relacional das tabelas via hibernate, da entidade Pericia.
+*   
+* @author silas
+*
+*/
+
+@Entity
+@Table
+public class Pericia implements Serializable, Cloneable{
+
+	private Integer codigo;
+	private String pericia;
+
+	@Id
+	@GeneratedValue
+	public Integer getCodigo() {
+		return codigo;
+	}
+	public void setCodigo(Integer codigo) {
+		this.codigo = codigo;
+	}
+	
+	@Column	
+	public String getPericia() {
+		return pericia;
+	}
+	public void setPericia(String pericia) {
+		this.pericia = pericia.toUpperCase();
+	}
+	
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + ((codigo == null) ? 0 : codigo.hashCode());
+		result = prime * result + ((pericia == null) ? 0 : pericia.hashCode());
+		return result;
+	}
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Pericia other = (Pericia) obj;
+		if (codigo == null) {
+			if (other.codigo != null)
+				return false;
+		} else if (!codigo.equals(other.codigo))
+			return false;
+		if (pericia == null) {
+			if (other.pericia != null)
+				return false;
+		} else if (!pericia.equals(other.pericia))
+			return false;
+		return true;
+	}
+	@Override
+	public Object clone() throws CloneNotSupportedException {
+		
+		return super.clone();
+	}
+
+}

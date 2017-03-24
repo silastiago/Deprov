@@ -1,0 +1,163 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui">
+
+<ui:composition template="/templates/template.xhtml">
+
+	<ui:define name="tituloJanela">Sistema com JSF 2.0 e Facelets</ui:define>
+	<ui:define name="conteudo">
+			<h:form enctype="multipart/form-data" acceptcharset="ISO-8859-1">
+			<div class="ui-fluid">
+				
+            <p:messages for ="message" showDetail="true" autoUpdate="true" closable="true" />
+            
+            <p:panelGrid columns="4" style="width: 100%; margin-top: 20px"
+					columnClasses="rotulo, campo, rotulo, campo" id="panel">
+					
+
+					<h:outputText value="Placa no Veiculo" />
+					<p:inputText value="#{cadastroVeiculoBean.veiculo.placa}" />
+					
+					<h:outputText value="Placa Original" />
+					<p:inputText value="#{cadastroVeiculoBean.veiculo.placaOriginal}" />
+					
+					<h:outputLabel value="Tipo" />
+					<h:selectOneMenu value="#{cadastroVeiculoBean.veiculo.tipo}"
+						required="true" label="Tipo">
+						<f:selectItem itemLabel="Selecione o Tipo do Veiculo"
+							noSelectionOption="true" />
+						<f:selectItems value="#{cadastroTipoBean.listaTipos()}" var="tipo"
+							itemValue="#{tipo}" itemLabel="#{tipo.tipo}" />
+					</h:selectOneMenu>
+
+					<h:outputLabel value="Cor" />
+					<h:selectOneMenu value="#{cadastroVeiculoBean.veiculo.cor}"
+						required="true" label="Cor">
+						<f:selectItem itemLabel="Selecione a cor do Veiculo"
+							noSelectionOption="true" />
+						<f:selectItems value="#{cadastroCorBean.listarCores()}" var="cor"
+							itemValue="#{cor}" itemLabel="#{cor.cor}" />
+					</h:selectOneMenu>
+
+					<h:outputLabel value="Fabricante" />
+					<h:selectOneMenu value="#{cadastroVeiculoBean.veiculo.fabricante}" label="Fabricante" valueChangeListener="#{cadastroVeiculoBean.lerFabricante}">
+						<f:selectItem itemLabel="Selecione o Fabricante do Veiculo"
+							noSelectionOption="true" />
+						<f:selectItems value="#{cadastroFabricanteBean.listaFabricantes()}"
+							var="fabricante" itemValue="#{fabricante}"
+							itemLabel="#{fabricante.fabricante}" />
+							<f:ajax event="change" render="modelos"/>
+					</h:selectOneMenu>
+
+					<h:outputLabel value="Modelo" />
+					<h:selectOneMenu value="#{cadastroVeiculoBean.veiculo.modelo}"
+						required="true" label="Modelo" id="modelos">
+						<f:selectItem itemLabel="Selecione o Modelo do Veiculo"
+							noSelectionOption="true" />
+						<f:selectItems value="#{cadastroModeloBean.listaModelo()}" var="modelo"
+							itemValue="#{modelo}" itemLabel="#{modelo.modelo}" />
+					</h:selectOneMenu>
+
+					<h:outputText value="Ano de Fabricação" />
+					<p:inputMask value="#{cadastroVeiculoBean.veiculo.anofabricacao}"
+						mask="9999/9999" />
+
+					<h:outputText value="Chassi" />
+					<p:inputText value="#{cadastroVeiculoBean.veiculo.chassi}" />
+
+					<h:outputText value="Motor" />
+					<p:inputText value="#{cadastroVeiculoBean.veiculo.motor}" />
+
+					<h:outputLabel value="Local Atual:" />
+					<h:selectOneMenu value="#{cadastroVeiculoBean.veiculo.local}"
+						required="true" label="Local Atual">
+						<f:selectItem itemLabel="Selecione o Local Atual do Veiculo"
+							noSelectionOption="true" />
+						<f:selectItems value="#{cadastroLocalBean.listarLocais()}" var="local"
+							itemValue="#{local}" itemLabel="#{local.local}" />
+					</h:selectOneMenu>
+
+					<h:outputText value="Obs" />
+					<p:inputTextarea value="#{cadastroVeiculoBean.veiculo.obs}" />
+
+					<h:outputText value="Numero de Dossie" />
+					<p:inputText
+						value="#{cadastroVeiculoBean.veiculo.dossie}" />
+					
+					<h:outputText value="Numero ocorrencia" />
+					<p:inputText
+						value="#{cadastroVeiculoBean.veiculo.numero_ocorrencia}" />
+
+					<h:outputText value="Processo" />
+					<p:inputText value="#{cadastroVeiculoBean.veiculo.processo}" />
+
+					<h:outputText value="IP" />
+					<p:inputText value="#{cadastroVeiculoBean.veiculo.ip}" />
+
+
+					<h:outputLabel value="Seguro" />
+					<h:selectOneMenu value="#{cadastroVeiculoBean.veiculo.seguro}"
+						required="true" label="Seguro">
+						<f:selectItem itemLabel="Selecione o Seguro do Veiculo"
+							noSelectionOption="true" />
+						<f:selectItems value="#{cadastroSeguroBean.listaSeguro()}" var="seguro"
+							itemValue="#{seguro}" itemLabel="#{seguro.seguro}" />
+					</h:selectOneMenu>
+
+					<h:outputText value="Condição" />
+					<p:inputText value="#{cadastroVeiculoBean.veiculo.condicao}" />
+					
+					<h:outputLabel value="Situacao" />
+					<h:selectOneMenu value="#{cadastroVeiculoBean.veiculo.situacao}" label="Situacao" >
+						<f:selectItem itemLabel="Selecione a Situacao do Veiculo"
+							noSelectionOption="true" />
+						<f:selectItems value="#{cadastroSituacaoBean.listarSituacoes()}"
+							var="situacao" itemValue="#{situacao}"
+							itemLabel="#{situacao.situacao}" />
+					</h:selectOneMenu>
+
+					<h:outputText value="Proprietario" />
+					<p:inputText value="#{cadastroVeiculoBean.veiculo.proprietario}" />
+
+					<h:outputText value="Chave: " />
+					<p:inputText value="#{cadastroVeiculoBean.veiculo.chave}" />
+
+					<h:outputText value="Comentarios" />
+					<p:inputText value="#{cadastroVeiculoBean.veiculo.comentarios}" />
+
+					<h:outputLabel value="Exame Veicular" />
+					<h:selectOneMenu value="#{cadastroVeiculoBean.veiculo.pericia}"
+						required="true" label="Pericia">
+						<f:selectItem itemLabel="Selecione a Pericia do Veiculo"
+							noSelectionOption="true" />
+						<f:selectItems value="#{cadastroPericiaBean.listaPericia()}"
+							var="pericia" itemValue="#{pericia}" itemLabel="#{pericia.pericia}" />
+					</h:selectOneMenu>
+						
+					<h:outputText value="Motivo da Apreensão:" />
+					<p:inputText value="#{cadastroVeiculoBean.veiculo.motivoApreensao}" />
+					
+					
+					<p:outputLabel for="mask" value="Data:" />
+					<p:calendar id="mask" value="#{cadastroVeiculoBean.veiculo.dataEntrada}"
+						pattern="dd/MM/yyyy" mask="true" navigator="true" showOn="button">
+						<f:convertDateTime pattern="dd/MM/yyyy" type="both" dateStyle="short" timeZone="GMT-3"/>						
+						</p:calendar>
+						
+					<h:outputText value="Pessoa que alterou:" />
+					<p:inputText value="#{cadastroVeiculoBean.veiculo.pessoa.login}" readonly="true"/>
+						
+				</p:panelGrid>
+				
+				
+			<h:commandButton action="#{cadastroVeiculoBean.cadastrar()}" value="Salvar" />
+		
+		</div>
+		</h:form>
+
+	</ui:define>
+	</ui:composition>
+</html>

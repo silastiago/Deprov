@@ -1,0 +1,91 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui">
+<f:metadata>
+	<f:viewParam name="codigo"/>
+</f:metadata>
+
+<ui:composition template="/templates/template.xhtml">
+
+	<ui:define name="tituloJanela">Sistema com JSF 2.0 e Facelets</ui:define>
+	<ui:define name="conteudo">
+		<h:form enctype="multipart/form-data" acceptcharset="ISO-8859-1" id="form">
+			<div class="ui-fluid">
+				<h1>Cadastro de Ocorrencia</h1>
+				<p:panelGrid columns="2" style="width: 100%; margin-top: 20px"
+					columnClasses="rotulo, campo">
+
+				<h:outputText value="Nome: " />
+				<h:inputText value="#{cadastroOcorrenciaBean.ocorrencia.ocorrencia}"  />
+
+				<p:outputLabel for="mask" value="Data:" />
+					<p:calendar id="mask" value="#{cadastroOcorrenciaBean.ocorrencia.data}"
+						pattern="dd/MM/yyyy" mask="true" navigator="true" showOn="button">
+						<f:convertDateTime pattern="dd/MM/yyyy" type="both" dateStyle="short" timeZone="GMT-3"/>						
+					</p:calendar>
+				
+				<p:commandButton action="#{cadastroOcorrenciaBean.voltar(codigo)}"  value="Voltar" />	
+				<p:commandButton action="#{cadastroOcorrenciaBean.cadastrar(codigo)}"  update="lista" value="Salvar" />
+				
+
+			</p:panelGrid>
+				</div>
+			</h:form>
+			
+				<h:form enctype="multipart/form-data" id="lista">
+				
+				
+				<p:dataTable value="#{cadastroOcorrenciaBean.ocorrencias}" var="ocorrencia"   rows="10" rowsPerPageTemplate="5,10,15,20"
+				id="mostraEquipamento"  paginator="true" editable="true">
+				
+				<p:ajax event="rowEdit" listener="#{cadastroOcorrenciaBean.onRowEdit}" update="@form" />
+       			<p:ajax event="rowEditCancel" listener="#{cadastroOcorrenciaBean.onRowCancel}" update="lista" />
+				
+				
+				<p:column headerText="Codigo">
+           			<p:cellEditor>
+               			<f:facet name="output"><h:outputText value="#{ocorrencia.codigo}" /></f:facet>
+               			<f:facet name="input"><p:inputText id="modelInput" value="#{ocorrencia.codigo}" /></f:facet>
+           			</p:cellEditor>
+       			</p:column>
+				
+				<p:column headerText="Ocorrencia">
+           			<p:cellEditor>
+               			<f:facet name="output"><h:outputText value="#{ocorrencia.ocorrencia}" /></f:facet>
+               			<f:facet name="input"><p:inputText value="#{ocorrencia.ocorrencia}"/></f:facet>
+           			</p:cellEditor>
+       			</p:column>
+				
+				<p:column headerText="Data da Ocorrencia">
+           			<p:cellEditor>
+               			<f:facet name="output"><h:outputText value="#{ocorrencia.data}" >
+               			<f:convertDateTime pattern="dd/MM/yyyy" type="both" dateStyle="short" timeZone="GMT-3"/> </h:outputText></f:facet>
+               			
+               			<f:facet name="input"><p:calendar value="#{ocorrencia.data}"
+						pattern="dd/MM/yyyy" mask="true" navigator="true" showOn="button">
+						<f:convertDateTime pattern="dd/MM/yyyy" type="both" dateStyle="short" timeZone="GMT-3"/>						
+					</p:calendar></f:facet>
+           			</p:cellEditor>
+       			</p:column>
+				
+				
+			<p:column style="width:64px">
+           		<p:rowEditor />
+       		</p:column>
+			
+			
+			<p:column style="text-align: center; width:3%">
+				<h:commandLink value="Excluir Ocorrencia"
+				 action="#{cadastroOcorrenciaBean.excluir(ocorrencia.codigo)}">
+				 </h:commandLink>
+			</p:column>
+			
+			
+			</p:dataTable>
+		</h:form>
+	</ui:define>	
+	</ui:composition>
+</html>
