@@ -23,10 +23,10 @@ public class Fotos implements IFoto, Serializable{
 	
 	@SuppressWarnings("unchecked")
 	@Override
-	public List<Foto> porCodigoVeiculo(Integer codigo_veiculo) {
+	public List<Foto> porCodigoVeiculo(Integer codigoVeiculo) {
 		List<Foto> listaFotos = new ArrayList<Foto>();
 		Query query = manager.createQuery("from Foto where codigo_veiculo = :codigo_veiculo");
-		query.setParameter("codigo_veiculo", codigo_veiculo);
+		query.setParameter("codigo_veiculo", codigoVeiculo);
 		listaFotos = query.getResultList();
 		return listaFotos;
 	}

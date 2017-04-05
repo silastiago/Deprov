@@ -55,5 +55,5 @@ public interface IModelo {
 	*  @return retorna uma lista de modelos daquele fabricante que voc� est� pesquisando.
 	*   	
 	*/
-	public List<Modelo> pegaModelos(String fabricante);
+	public List<Modelo> pegaModelos(int codigo_fabricante);
 }

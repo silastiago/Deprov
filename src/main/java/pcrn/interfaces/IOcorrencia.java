@@ -17,7 +17,7 @@ public interface IOcorrencia {
 	*  @return retorna a Ocorrencia daquele id que voc� est� pesquisando.
 	*   	
 	*/
-	public Ocorrencia porCodigo(Integer codigo);
+	public Ocorrencia porCodigo(int codigo);
 	
 	/** Este metodo lista todas as ocorrencias de um determinado veiculo.
 	*   
@@ -25,7 +25,7 @@ public interface IOcorrencia {
 	* 	@return retorna a lista de todas as ocorrencias daquele veiculo.
 	*   	
 	*/
-	public List<Ocorrencia> porCodigoVeiculo(Integer codigo);
+	public List<Ocorrencia> porCodigoVeiculo(int codigo);
 	
 	/** Este metodo cria ou altera uma ocorrencia.
 	*  	
