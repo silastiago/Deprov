@@ -10,23 +10,6 @@ import pcrn.model.Pessoa;
 */
 public interface IPessoa {
 	
-	/** Este metodo faz o login do usuario no sistema.
-	 * 	Este metodo ainda n�o est� funcionando por alguns bugs.
-	*   por enquanto a classe que faz login � a LoginBean, Mas futuramente Esta classe ser� a classe de login definitiva.
-	*   
-	*   @param pessoa, Esta pessoa � o objeto Pessoa que ir� fazer o login.
-	* 	@return boolean, retorna verdadeiro se a pessoa fez o login correto caso contrario retorna false.
-	* 	
-	*   	
-	*/
-	public boolean login(Pessoa pessoa);
-	
-	/** Este metodo faz o logout do usuario no sistema.
-	* 	Este metodo ainda n�o est� funcionando por alguns bugs.
-	*   	
-	*/
-	public void logout();
-	
 	/** Este metodo lista todas as pessoas cadastradas
 	*   
 	* @return retorna a lista das pessoas cadastradas.
@@ -56,5 +39,5 @@ public interface IPessoa {
 	*/
 	public void remover(Pessoa pessoa);
 
-	public Pessoa retornaPessoa(String login);
+	public Pessoa porLogin(String login);
 }

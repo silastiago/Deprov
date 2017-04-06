@@ -11,7 +11,7 @@
 		<class> pcrn.model.Pessoa </class>
 		<class> pcrn.model.Fabricante </class>
 		<class> pcrn.model.Foto </class>
-		<class> pcrn.model.pcrn.modelo </class>
+		<class> pcrn.model.Modelo </class>
 		<class> pcrn.model.Cor </class>
 		<class> pcrn.model.Tipo </class>
 		<class> pcrn.model.Pericia </class>

@@ -8,11 +8,9 @@ import javax.inject.Inject;
 import javax.persistence.EntityManager;
 import javax.persistence.Query;
 
-import org.hibernate.criterion.Order;
-import org.hibernate.criterion.Restrictions;
+
 
 import pcrn.interfaces.IOcorrencia;
-import pcrn.model.Modelo;
 import pcrn.model.Ocorrencia;
 
 /** Esta � uma Classe concreta que implementa a Interface Ocorrencias,

@@ -21,12 +21,13 @@ import javax.persistence.Table;
 public class Grupo implements Serializable{
 	
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private Integer codigo;
-	private String grupo;
-	
-	public Grupo(){
+	private String nome;
 		
-	}	
 	@Id
 	@GeneratedValue
 	public Integer getCodigo() {
@@ -38,21 +39,23 @@ public class Grupo implements Serializable{
 	}
 
 	@Column
-	public String getGrupo() {
-		return grupo;
+	public String getNome() {
+		return nome;
 	}
-	public void setGrupo(String grupo) {
-		this.grupo = grupo.toUpperCase();
+
+	public void setNome(String nome) {
+		this.nome = nome;
 	}
-	
+
 	@Override
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
 		result = prime * result + ((codigo == null) ? 0 : codigo.hashCode());
-		result = prime * result + ((grupo == null) ? 0 : grupo.hashCode());
+		result = prime * result + ((nome == null) ? 0 : nome.hashCode());
 		return result;
 	}
+
 	@Override
 	public boolean equals(Object obj) {
 		if (this == obj)
@@ -67,18 +70,11 @@ public class Grupo implements Serializable{
 				return false;
 		} else if (!codigo.equals(other.codigo))
 			return false;
-		if (grupo == null) {
-			if (other.grupo != null)
+		if (nome == null) {
+			if (other.nome != null)
 				return false;
-		} else if (!grupo.equals(other.grupo))
+		} else if (!nome.equals(other.nome))
 			return false;
 		return true;
-	}
-	@Override
-	public Object clone() throws CloneNotSupportedException {
-		
-		return super.clone();
-	}
-	
-	
+	}	
 }
