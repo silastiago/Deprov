@@ -11,7 +11,12 @@ import javax.faces.context.ExternalContext;
 import javax.faces.context.FacesContext;
 import javax.servlet.http.HttpServletRequest;
 
+import pcrn.interfaces.ICor;
+import pcrn.interfaces.IFabricante;
 import pcrn.interfaces.ILocal;
+import pcrn.interfaces.IModelo;
+import pcrn.interfaces.IPericia;
+import pcrn.interfaces.ISeguro;
 import pcrn.interfaces.ISituacao;
 import pcrn.model.Cor;
 import pcrn.model.Fabricante;
@@ -20,6 +25,13 @@ import pcrn.model.Modelo;
 import pcrn.model.Pericia;
 import pcrn.model.Seguro;
 import pcrn.model.Situacao;
+import pcrn.repository.Cores;
+import pcrn.repository.Fabricantes;
+import pcrn.repository.Locais;
+import pcrn.repository.Modelos;
+import pcrn.repository.Pericias;
+import pcrn.repository.Seguros;
+import pcrn.repository.Situacoes;
 
 
 
@@ -241,7 +253,6 @@ public class FacesUtil {
 	public Map<String, Object> retornarParametros(ArrayList<String> listaObjetos, ArrayList<String> listavalores){
 		String parametro = "";
 		Map<String, Object> mapaParametro = new HashMap<String, Object>();
-		Repositorios repositorios = new Repositorios();
 		int valor = 0;
 		
 		//for (int i = 0; i < listaObjetos.size(); i++) {
@@ -251,7 +262,8 @@ public class FacesUtil {
 				//System.out.println("Parametro 1");
 	            if (listaObjetos.get(0).equals("fabricante.fabricante")) {
 	            	Fabricante fabricante = new Fabricante();
-	        		Fabricantes fabricantes = repositorios.getFabricantes();
+	        		IFabricante fabricantes = new Fabricantes();
+	        		
 	        		fabricante = fabricantes.pegaCodigo(listavalores.get(0));
 	            	
 	        		valor = fabricante.getCodigo();
@@ -261,7 +273,8 @@ public class FacesUtil {
 				}else if (listaObjetos.get(0).equals("modelo.modelo")) {
 					
 					Modelo modelo = new Modelo();
-					Modelos modelos = repositorios.getModelos();
+					IModelo modelos = new Modelos();
+					
 					modelo = modelos.pegaCodigo(listavalores.get(0));
 					
 					valor = modelo.getCodigo();
@@ -271,7 +284,7 @@ public class FacesUtil {
 					
 				}else if (listaObjetos.get(0).equals("cor.cor")) {
 					Cor cor = new Cor();
-					Cores cores = repositorios.getCores();
+					ICor cores = new Cores();
 					cor = cores.pegaCodigo(listavalores.get(0));
 					
 					valor = cor.getCodigo();
@@ -281,7 +294,7 @@ public class FacesUtil {
 					
 				}else if (listaObjetos.get(0).equals("seguro.seguro")) {
 					Seguro seguro = new Seguro();
-					Seguros seguros = repositorios.getSeguros();
+					ISeguro seguros = new Seguros();
 					seguro = seguros.pegaCodigo(listavalores.get(0));
 					
 					valor = seguro.getCodigo();
@@ -291,7 +304,7 @@ public class FacesUtil {
 	            	
 				}else if (listaObjetos.get(0).equals("pericia.pericia")) {
 					Pericia pericia = new Pericia();
-					Pericias pericias = repositorios.getPericias();
+					IPericia pericias = new Pericias();
 					pericia = pericias.pegaCodigo(listavalores.get(0));
 					
 					valor = pericia.getCodigo();
@@ -301,7 +314,7 @@ public class FacesUtil {
 					
 				}else if (listaObjetos.get(0).equals("situacao.situacao")) {
 					Situacao situacao = new Situacao();
-					ISituacao ISituacao = repositorios.getSituacao();
+					ISituacao ISituacao = new Situacoes();
 					situacao = ISituacao.pegaCodigo(listavalores.get(0));
 					
 					valor = situacao.getCodigo();
@@ -311,7 +324,7 @@ public class FacesUtil {
 				
 				}else if (listaObjetos.get(0).equals("local.local")) {
 					Local local = new Local();
-					ILocal Ilocal = repositorios.getLocal();
+					ILocal Ilocal = new Locais();
 					
 					
 					local = Ilocal.pegaCodigo(listavalores.get(0));
@@ -326,7 +339,7 @@ public class FacesUtil {
 				//System.out.println("Parametro 2");
 				if (listaObjetos.get(0).equals("fabricante.fabricante")  && listaObjetos.get(1).equals("cor.cor")) {
 					Fabricante fabricante = new Fabricante();
-	        		Fabricantes fabricantes = repositorios.getFabricantes();
+	        		IFabricante fabricantes = new Fabricantes();
 	        		fabricante = fabricantes.pegaCodigo(listavalores.get(0));
 	            	
 	        		valor = fabricante.getCodigo();
@@ -335,7 +348,7 @@ public class FacesUtil {
 	            	mapaParametro.put(parametro, valor);
 	            	
 	            	Cor cor = new Cor();
-					Cores cores = repositorios.getCores();
+					ICor cores = new Cores();
 					cor = cores.pegaCodigo(listavalores.get(1));
 					
 					valor = cor.getCodigo();
@@ -346,7 +359,7 @@ public class FacesUtil {
 					
 				}else if (listaObjetos.get(0).equals("cor.cor") && listaObjetos.get(1).equals("fabricante.fabricante")) {
 					Cor cor = new Cor();
-					Cores cores = repositorios.getCores();
+					ICor cores = new Cores();
 					cor = cores.pegaCodigo(listavalores.get(0));
 					
 					valor = cor.getCodigo();
@@ -355,7 +368,7 @@ public class FacesUtil {
 	            	mapaParametro.put(parametro, valor);
 	            	
 	            	Fabricante fabricante = new Fabricante();
-	        		Fabricantes fabricantes = repositorios.getFabricantes();
+	        		IFabricante fabricantes = new Fabricantes();
 	        		fabricante = fabricantes.pegaCodigo(listavalores.get(1));
 	            	
 	        		valor = fabricante.getCodigo();
@@ -365,7 +378,7 @@ public class FacesUtil {
 					
 				}else if (listaObjetos.get(0).equals("modelo.modelo")  && listaObjetos.get(1).equals("cor.cor")) {
 					Modelo modelo = new Modelo();
-					Modelos modelos = repositorios.getModelos();
+					IModelo modelos = new Modelos();
 					modelo = modelos.pegaCodigo(listavalores.get(0));
 					
 					valor = modelo.getCodigo();
@@ -374,7 +387,7 @@ public class FacesUtil {
 	            	mapaParametro.put(parametro, valor);
 		            		        	           	
 		            Cor cor = new Cor();
-					Cores cores = repositorios.getCores();
+					ICor cores = new Cores();
 					cor = cores.pegaCodigo(listavalores.get(1));
 						
 					valor = cor.getCodigo();
@@ -384,7 +397,7 @@ public class FacesUtil {
 						
 				}else if (listaObjetos.get(0).equals("cor.cor") && listaObjetos.get(1).equals("modelo.modelo")) {
 					Cor cor = new Cor();
-					Cores cores = repositorios.getCores();
+					ICor cores = new Cores();
 					cor = cores.pegaCodigo(listavalores.get(0));
 						
 					valor = cor.getCodigo();
@@ -393,7 +406,7 @@ public class FacesUtil {
 		            mapaParametro.put(parametro, valor);
 					
 					Modelo modelo = new Modelo();
-					Modelos modelos = repositorios.getModelos();
+					IModelo modelos = new Modelos();
 					modelo = modelos.pegaCodigo(listavalores.get(1));
 					
 					valor = modelo.getCodigo();
@@ -403,7 +416,7 @@ public class FacesUtil {
 		            
 				}else if (listaObjetos.get(0).equals("seguro.seguro")  && listaObjetos.get(1).equals("cor.cor"))  {
 					Seguro seguro = new Seguro();
-					Seguros seguros = repositorios.getSeguros();
+					ISeguro seguros = new Seguros();
 					seguro = seguros.pegaCodigo(listavalores.get(0));
 					
 					valor = seguro.getCodigo();
@@ -412,7 +425,7 @@ public class FacesUtil {
 	            	mapaParametro.put(parametro, valor);
 					
 	            	Cor cor = new Cor();
-					Cores cores = repositorios.getCores();
+					ICor cores = new Cores();
 					cor = cores.pegaCodigo(listavalores.get(1));
 						
 					valor = cor.getCodigo();
@@ -422,7 +435,7 @@ public class FacesUtil {
 					
 				}else if (listaObjetos.get(0).equals("cor.cor") && listaObjetos.get(1).equals("seguro.seguro")) {
 					Cor cor = new Cor();
-					Cores cores = repositorios.getCores();
+					ICor cores = new Cores();
 					cor = cores.pegaCodigo(listavalores.get(0));
 						
 					valor = cor.getCodigo();
@@ -431,7 +444,7 @@ public class FacesUtil {
 		            mapaParametro.put(parametro, valor);
 					
 		            Seguro seguro = new Seguro();
-					Seguros seguros = repositorios.getSeguros();
+					ISeguro seguros = new Seguros();
 					seguro = seguros.pegaCodigo(listavalores.get(1));
 					
 					valor = seguro.getCodigo();
@@ -441,7 +454,7 @@ public class FacesUtil {
 					
 				}else if (listaObjetos.get(0).equals("cor.cor") && listaObjetos.get(1).equals("pericia.pericia")) {
 					Cor cor = new Cor();
-					Cores cores = repositorios.getCores();
+					ICor cores = new Cores();
 					cor = cores.pegaCodigo(listavalores.get(0));
 						
 					valor = cor.getCodigo();
@@ -450,7 +463,7 @@ public class FacesUtil {
 		            mapaParametro.put(parametro, valor);
 					
 		            Pericia pericia = new Pericia();
-					Pericias pericias = repositorios.getPericias();
+					IPericia pericias = new Pericias();
 					pericia = pericias.pegaCodigo(listavalores.get(1));
 					
 					valor = pericia.getCodigo();
@@ -460,7 +473,7 @@ public class FacesUtil {
 		            
 				}else if (listaObjetos.get(0).equals("pericia.pericia") && listaObjetos.get(1).equals("cor.cor")) {	
 					Pericia pericia = new Pericia();
-					Pericias pericias = repositorios.getPericias();
+					IPericia pericias = new Pericias();
 					pericia = pericias.pegaCodigo(listavalores.get(0));
 					
 					valor = pericia.getCodigo();
@@ -469,7 +482,7 @@ public class FacesUtil {
 	            	mapaParametro.put(parametro, valor);
 					
 	            	Cor cor = new Cor();
-					Cores cores = repositorios.getCores();
+					ICor cores = new Cores();
 					cor = cores.pegaCodigo(listavalores.get(1));
 						
 					valor = cor.getCodigo();
@@ -479,7 +492,7 @@ public class FacesUtil {
 					
 				}else if (listaObjetos.get(0).equals("cor.cor") && listaObjetos.get(1).equals("situacao.situacao")) {
 					Cor cor = new Cor();
-					Cores cores = repositorios.getCores();
+					ICor cores = new Cores();
 					cor = cores.pegaCodigo(listavalores.get(0));
 						
 					valor = cor.getCodigo();
@@ -488,7 +501,7 @@ public class FacesUtil {
 		            mapaParametro.put(parametro, valor);
 		            
 		            Situacao situacao = new Situacao();
-					ISituacao ISituacao = repositorios.getSituacao();
+					ISituacao ISituacao = new Situacoes();
 					situacao = ISituacao.pegaCodigo(listavalores.get(1));
 					
 					valor = situacao.getCodigo();
@@ -498,7 +511,7 @@ public class FacesUtil {
 		            
 				}else if (listaObjetos.get(0).equals("situacao.situacao") && listaObjetos.get(1).equals("cor.cor")) {
 					Situacao situacao = new Situacao();
-					ISituacao ISituacao = repositorios.getSituacao();
+					ISituacao ISituacao = new Situacoes();
 					situacao = ISituacao.pegaCodigo(listavalores.get(0));
 					
 					valor = situacao.getCodigo();
@@ -507,7 +520,7 @@ public class FacesUtil {
 	            	mapaParametro.put(parametro, valor);
 	            	
 	            	Cor cor = new Cor();
-					Cores cores = repositorios.getCores();
+					ICor cores = new Cores();
 					cor = cores.pegaCodigo(listavalores.get(1));
 						
 					valor = cor.getCodigo();
@@ -517,7 +530,7 @@ public class FacesUtil {
 	            	
 				}else if (listaObjetos.get(0).equals("local.local")  && listaObjetos.get(1).equals("cor.cor")) {
 					Local local = new Local();
-					ILocal Ilocal = repositorios.getLocal();
+					ILocal Ilocal = new Locais();
 					
 					
 					local = Ilocal.pegaCodigo(listavalores.get(0));
@@ -528,7 +541,7 @@ public class FacesUtil {
 	            	mapaParametro.put(parametro, valor);
 		            		        	           	
 		            Cor cor = new Cor();
-					Cores cores = repositorios.getCores();
+					ICor cores = new Cores();
 					cor = cores.pegaCodigo(listavalores.get(1));
 						
 					valor = cor.getCodigo();
@@ -538,7 +551,7 @@ public class FacesUtil {
 						
 				}else if (listaObjetos.get(0).equals("cor.cor") && listaObjetos.get(1).equals("local.local")) {
 					Cor cor = new Cor();
-					Cores cores = repositorios.getCores();
+					ICor cores = new Cores();
 					cor = cores.pegaCodigo(listavalores.get(0));
 						
 					valor = cor.getCodigo();
@@ -547,7 +560,7 @@ public class FacesUtil {
 		            mapaParametro.put(parametro, valor);
 					
 		            Local local = new Local();
-					ILocal Ilocal = repositorios.getLocal();
+					ILocal Ilocal = new Locais();
 					
 					
 					local = Ilocal.pegaCodigo(listavalores.get(1));
@@ -559,7 +572,7 @@ public class FacesUtil {
 		            
 				}else if (listaObjetos.get(0).equals("fabricante.fabricante")  && listaObjetos.get(1).equals("seguro.seguro")) {
 					Fabricante fabricante = new Fabricante();
-	        		Fabricantes fabricantes = repositorios.getFabricantes();
+	        		IFabricante fabricantes = new Fabricantes();
 	        		fabricante = fabricantes.pegaCodigo(listavalores.get(0));
 	            	
 	        		valor = fabricante.getCodigo();
@@ -568,7 +581,7 @@ public class FacesUtil {
 	            	mapaParametro.put(parametro, valor); 
 					
 					Seguro seguro = new Seguro();
-					Seguros seguros = repositorios.getSeguros();
+					ISeguro seguros = new Seguros();
 					seguro = seguros.pegaCodigo(listavalores.get(1));
 					
 					valor = seguro.getCodigo();
@@ -578,7 +591,7 @@ public class FacesUtil {
 					
 				}else if (listaObjetos.get(0).equals("seguro.seguro") && listaObjetos.get(1).equals("fabricante.fabricante")) {
 					Seguro seguro = new Seguro();
-					Seguros seguros = repositorios.getSeguros();
+					ISeguro seguros = new Seguros();
 					seguro = seguros.pegaCodigo(listavalores.get(0));
 					
 					valor = seguro.getCodigo();
@@ -587,7 +600,7 @@ public class FacesUtil {
 	            	mapaParametro.put(parametro, valor);
 	            	
 	            	Fabricante fabricante = new Fabricante();
-	        		Fabricantes fabricantes = repositorios.getFabricantes();
+	        		IFabricante fabricantes = new Fabricantes();
 	        		fabricante = fabricantes.pegaCodigo(listavalores.get(1));
 	            	
 	        		valor = fabricante.getCodigo();
@@ -596,7 +609,7 @@ public class FacesUtil {
 	            	mapaParametro.put(parametro, valor);
 				}else if (listaObjetos.get(0).equals("fabricante.fabricante")  && listaObjetos.get(1).equals("pericia.pericia")) {
 					Fabricante fabricante = new Fabricante();
-	        		Fabricantes fabricantes = repositorios.getFabricantes();
+	        		IFabricante fabricantes = new Fabricantes();
 	        		fabricante = fabricantes.pegaCodigo(listavalores.get(0));
 	            	
 	        		valor = fabricante.getCodigo();
@@ -605,7 +618,7 @@ public class FacesUtil {
 	            	mapaParametro.put(parametro, valor); 
 					
 	            	Pericia pericia = new Pericia();
-					Pericias pericias = repositorios.getPericias();
+					IPericia pericias = new Pericias();
 					pericia = pericias.pegaCodigo(listavalores.get(1));
 					
 					valor = pericia.getCodigo();
@@ -615,7 +628,7 @@ public class FacesUtil {
 					
 				}else if (listaObjetos.get(0).equals("pericia.pericia") && listaObjetos.get(1).equals("fabricante.fabricante")) {
 					Pericia pericia = new Pericia();
-					Pericias pericias = repositorios.getPericias();
+					IPericia pericias = new Pericias();
 					pericia = pericias.pegaCodigo(listavalores.get(0));
 					
 					valor = pericia.getCodigo();
@@ -624,7 +637,7 @@ public class FacesUtil {
 	            	mapaParametro.put(parametro, valor);
 	            	
 	            	Fabricante fabricante = new Fabricante();
-	        		Fabricantes fabricantes = repositorios.getFabricantes();
+	        		IFabricante fabricantes = new Fabricantes();
 	        		fabricante = fabricantes.pegaCodigo(listavalores.get(1));
 	            	
 	        		valor = fabricante.getCodigo();
@@ -633,7 +646,7 @@ public class FacesUtil {
 	            	mapaParametro.put(parametro, valor);
 				}else if (listaObjetos.get(0).equals("fabricante.fabricante")  && listaObjetos.get(1).equals("situacao.situacao")) {
 					Fabricante fabricante = new Fabricante();
-	        		Fabricantes fabricantes = repositorios.getFabricantes();
+	        		IFabricante fabricantes = new Fabricantes();
 	        		fabricante = fabricantes.pegaCodigo(listavalores.get(0));
 	            	
 	        		valor = fabricante.getCodigo();
@@ -642,7 +655,7 @@ public class FacesUtil {
 	            	mapaParametro.put(parametro, valor); 
 					
 	            	Situacao situacao = new Situacao();
-					ISituacao ISituacao = repositorios.getSituacao();
+					ISituacao ISituacao = new Situacoes();
 					situacao = ISituacao.pegaCodigo(listavalores.get(1));
 					
 					valor = situacao.getCodigo();
@@ -652,7 +665,7 @@ public class FacesUtil {
 					
 				}else if (listaObjetos.get(0).equals("situacao.situacao") && listaObjetos.get(1).equals("fabricante.fabricante")) {
 					Situacao situacao = new Situacao();
-					ISituacao ISituacao = repositorios.getSituacao();
+					ISituacao ISituacao = new Situacoes();
 					situacao = ISituacao.pegaCodigo(listavalores.get(0));
 					
 					valor = situacao.getCodigo();
@@ -661,7 +674,7 @@ public class FacesUtil {
 	            	mapaParametro.put(parametro, valor);					
 					
 					Fabricante fabricante = new Fabricante();
-	        		Fabricantes fabricantes = repositorios.getFabricantes();
+	        		IFabricante fabricantes = new Fabricantes();
 	        		fabricante = fabricantes.pegaCodigo(listavalores.get(1));
 	            	
 	        		valor = fabricante.getCodigo();
@@ -671,7 +684,7 @@ public class FacesUtil {
 					
 				}else if (listaObjetos.get(0).equals("fabricante.fabricante")  && listaObjetos.get(1).equals("local.local")) {
 					Fabricante fabricante = new Fabricante();
-	        		Fabricantes fabricantes = repositorios.getFabricantes();
+	        		IFabricante fabricantes = new Fabricantes();
 	        		fabricante = fabricantes.pegaCodigo(listavalores.get(0));
 	            	
 	        		valor = fabricante.getCodigo();
@@ -680,7 +693,7 @@ public class FacesUtil {
 	            	mapaParametro.put(parametro, valor);
 	            	
 	            	Local local = new Local();
-					ILocal Ilocal = repositorios.getLocal();
+					ILocal Ilocal = new Locais();
 					
 					
 					local = Ilocal.pegaCodigo(listavalores.get(1));
@@ -692,7 +705,7 @@ public class FacesUtil {
 					
 				}else if (listaObjetos.get(0).equals("local.local") && listaObjetos.get(1).equals("fabricante.fabricante")) {
 					Local local = new Local();
-					ILocal Ilocal = repositorios.getLocal();
+					ILocal Ilocal = new Locais();
 					
 					local = Ilocal.pegaCodigo(listavalores.get(0));
 					
@@ -702,7 +715,7 @@ public class FacesUtil {
 	            	mapaParametro.put(parametro, valor);
 	            	
 	            	Fabricante fabricante = new Fabricante();
-	        		Fabricantes fabricantes = repositorios.getFabricantes();
+	        		IFabricante fabricantes = new Fabricantes();
 	        		fabricante = fabricantes.pegaCodigo(listavalores.get(1));
 	            	
 	        		valor = fabricante.getCodigo();
@@ -712,7 +725,7 @@ public class FacesUtil {
 					
 				}else if (listaObjetos.get(0).equals("modelo.modelo")  && listaObjetos.get(1).equals("seguro.seguro")) {
 					Modelo modelo = new Modelo();
-					Modelos modelos = repositorios.getModelos();
+					IModelo modelos = new Modelos();
 					modelo = modelos.pegaCodigo(listavalores.get(0));
 					
 					valor = modelo.getCodigo();
@@ -721,7 +734,7 @@ public class FacesUtil {
 	            	mapaParametro.put(parametro, valor); 
 					
 					Seguro seguro = new Seguro();
-					Seguros seguros = repositorios.getSeguros();
+					ISeguro seguros = new Seguros();
 					seguro = seguros.pegaCodigo(listavalores.get(1));
 					
 					valor = seguro.getCodigo();
@@ -731,7 +744,7 @@ public class FacesUtil {
 					
 				}else if (listaObjetos.get(0).equals("seguro.seguro") && listaObjetos.get(1).equals("modelo.modelo")) {
 					Seguro seguro = new Seguro();
-					Seguros seguros = repositorios.getSeguros();
+					ISeguro seguros = new Seguros();
 					seguro = seguros.pegaCodigo(listavalores.get(0));
 					
 					valor = seguro.getCodigo();
@@ -740,7 +753,7 @@ public class FacesUtil {
 	            	mapaParametro.put(parametro, valor);
 	            	
 	            	Modelo modelo = new Modelo();
-					Modelos modelos = repositorios.getModelos();
+					IModelo modelos = new Modelos();
 					modelo = modelos.pegaCodigo(listavalores.get(1));
 					
 					valor = modelo.getCodigo();
@@ -750,7 +763,7 @@ public class FacesUtil {
 	            	
 				}else if (listaObjetos.get(0).equals("modelo.modelo")  && listaObjetos.get(1).equals("pericia.pericia")) {
 					Modelo modelo = new Modelo();
-					Modelos modelos = repositorios.getModelos();
+					IModelo modelos = new Modelos();
 					modelo = modelos.pegaCodigo(listavalores.get(0));
 					
 					valor = modelo.getCodigo();
@@ -759,7 +772,7 @@ public class FacesUtil {
 	            	mapaParametro.put(parametro, valor); 
 					
 	            	Pericia pericia = new Pericia();
-					Pericias pericias = repositorios.getPericias();
+					IPericia pericias = new Pericias();
 					pericia = pericias.pegaCodigo(listavalores.get(1));
 					
 					valor = pericia.getCodigo();
@@ -769,7 +782,7 @@ public class FacesUtil {
 					
 				}else if (listaObjetos.get(0).equals("pericia.pericia") && listaObjetos.get(1).equals("modelo.modelo")) {
 					Pericia pericia = new Pericia();
-					Pericias pericias = repositorios.getPericias();
+					IPericia pericias = new Pericias();
 					pericia = pericias.pegaCodigo(listavalores.get(0));
 					
 					valor = pericia.getCodigo();
@@ -778,7 +791,7 @@ public class FacesUtil {
 	            	mapaParametro.put(parametro, valor);
 	            	
 	            	Modelo modelo = new Modelo();
-					Modelos modelos = repositorios.getModelos();
+					IModelo modelos = new Modelos();
 					modelo = modelos.pegaCodigo(listavalores.get(1));
 					
 					valor = modelo.getCodigo();
@@ -788,7 +801,7 @@ public class FacesUtil {
 	            	
 				}else if (listaObjetos.get(0).equals("modelo.modelo")  && listaObjetos.get(1).equals("situacao.situacao")) {
 					Modelo modelo = new Modelo();
-					Modelos modelos = repositorios.getModelos();
+					IModelo modelos = new Modelos();
 					modelo = modelos.pegaCodigo(listavalores.get(0));
 					
 					valor = modelo.getCodigo();
@@ -797,7 +810,7 @@ public class FacesUtil {
 	            	mapaParametro.put(parametro, valor); 
 					
 	            	Situacao situacao = new Situacao();
-					ISituacao ISituacao = repositorios.getSituacao();
+					ISituacao ISituacao = new Situacoes();
 					situacao = ISituacao.pegaCodigo(listavalores.get(1));
 					
 					valor = situacao.getCodigo();
@@ -807,7 +820,7 @@ public class FacesUtil {
 					
 				}else if (listaObjetos.get(0).equals("situacao.situacao") && listaObjetos.get(1).equals("modelo.modelo")) {
 					Situacao situacao = new Situacao();
-					ISituacao ISituacao = repositorios.getSituacao();
+					ISituacao ISituacao = new Situacoes();
 					situacao = ISituacao.pegaCodigo(listavalores.get(0));
 					
 					valor = situacao.getCodigo();
@@ -816,7 +829,7 @@ public class FacesUtil {
 	            	mapaParametro.put(parametro, valor);					
 					
 	            	Modelo modelo = new Modelo();
-					Modelos modelos = repositorios.getModelos();
+					IModelo modelos = new Modelos();
 					modelo = modelos.pegaCodigo(listavalores.get(1));
 					
 					valor = modelo.getCodigo();
@@ -826,7 +839,7 @@ public class FacesUtil {
 					
 				}else if (listaObjetos.get(0).equals("modelo.modelo")  && listaObjetos.get(1).equals("local.local")) {
 					Modelo modelo = new Modelo();
-					Modelos modelos = repositorios.getModelos();
+					IModelo modelos = new Modelos();
 					modelo = modelos.pegaCodigo(listavalores.get(0));
 					
 					valor = modelo.getCodigo();
@@ -835,7 +848,7 @@ public class FacesUtil {
 	            	mapaParametro.put(parametro, valor); 
 					
 	            	Local local = new Local();
-					ILocal Ilocal = repositorios.getLocal();
+					ILocal Ilocal = new Locais();
 					
 					local = Ilocal.pegaCodigo(listavalores.get(1));
 					
@@ -846,7 +859,7 @@ public class FacesUtil {
 					
 				}else if (listaObjetos.get(0).equals("local.local") && listaObjetos.get(1).equals("modelo.modelo")) {
 					Local local = new Local();
-					ILocal Ilocal = repositorios.getLocal();
+					ILocal Ilocal = new Locais();
 					
 					local = Ilocal.pegaCodigo(listavalores.get(0));
 					
@@ -856,7 +869,7 @@ public class FacesUtil {
 	            	mapaParametro.put(parametro, valor);
 	            	
 	            	Modelo modelo = new Modelo();
-					Modelos modelos = repositorios.getModelos();
+					IModelo modelos = new Modelos();
 					modelo = modelos.pegaCodigo(listavalores.get(1));
 					
 					valor = modelo.getCodigo();
@@ -866,7 +879,7 @@ public class FacesUtil {
 	            	
 				}else if (listaObjetos.get(0).equals("seguro.seguro")  && listaObjetos.get(1).equals("pericia.pericia")) {
 					Seguro seguro = new Seguro();
-					Seguros seguros = repositorios.getSeguros();
+					ISeguro seguros = new Seguros();
 					seguro = seguros.pegaCodigo(listavalores.get(0));
 					
 					valor = seguro.getCodigo();
@@ -875,7 +888,7 @@ public class FacesUtil {
 	            	mapaParametro.put(parametro, valor);
 					
 					Pericia pericia = new Pericia();
-					Pericias pericias = repositorios.getPericias();
+					IPericia pericias = new Pericias();
 					pericia = pericias.pegaCodigo(listavalores.get(1));
 					
 					valor = pericia.getCodigo();
@@ -885,7 +898,7 @@ public class FacesUtil {
 					
 				}else if (listaObjetos.get(0).equals("pericia.pericia") && listaObjetos.get(1).equals("seguro.seguro")) {
 					Pericia pericia = new Pericia();
-					Pericias pericias = repositorios.getPericias();
+					IPericia pericias = new Pericias();
 					pericia = pericias.pegaCodigo(listavalores.get(0));
 					
 					valor = pericia.getCodigo();
@@ -894,7 +907,7 @@ public class FacesUtil {
 	            	mapaParametro.put(parametro, valor);
 					
 	            	Seguro seguro = new Seguro();
-					Seguros seguros = repositorios.getSeguros();
+					ISeguro seguros = new Seguros();
 					seguro = seguros.pegaCodigo(listavalores.get(1));
 					
 					valor = seguro.getCodigo();
@@ -904,7 +917,7 @@ public class FacesUtil {
 	            	
 				}else if (listaObjetos.get(0).equals("seguro.seguro")  && listaObjetos.get(1).equals("situacao.situacao")) {
 					Seguro seguro = new Seguro();
-					Seguros seguros = repositorios.getSeguros();
+					ISeguro seguros = new Seguros();
 					seguro = seguros.pegaCodigo(listavalores.get(0));
 					
 					valor = seguro.getCodigo();
@@ -913,7 +926,7 @@ public class FacesUtil {
 	            	mapaParametro.put(parametro, valor);
 					
 					Situacao situacao = new Situacao();
-					ISituacao ISituacao = repositorios.getSituacao();
+					ISituacao ISituacao = new Situacoes();
 					situacao = ISituacao.pegaCodigo(listavalores.get(1));
 					
 					valor = situacao.getCodigo();
@@ -923,7 +936,7 @@ public class FacesUtil {
 					
 				}else if (listaObjetos.get(0).equals("situacao.situacao") && listaObjetos.get(1).equals("seguro.seguro")) {
 					Situacao situacao = new Situacao();
-					ISituacao ISituacao = repositorios.getSituacao();
+					ISituacao ISituacao = new Situacoes();
 					situacao = ISituacao.pegaCodigo(listavalores.get(0));
 					
 					valor = situacao.getCodigo();
@@ -932,7 +945,7 @@ public class FacesUtil {
 	            	mapaParametro.put(parametro, valor);
 					
 	            	Seguro seguro = new Seguro();
-					Seguros seguros = repositorios.getSeguros();
+					ISeguro seguros = new Seguros();
 					seguro = seguros.pegaCodigo(listavalores.get(1));
 					
 					valor = seguro.getCodigo();
@@ -942,7 +955,7 @@ public class FacesUtil {
 	            	
 				}else if (listaObjetos.get(0).equals("seguro.seguro")  && listaObjetos.get(1).equals("local.local")) {
 					Seguro seguro = new Seguro();
-					Seguros seguros = repositorios.getSeguros();
+					ISeguro seguros = new Seguros();
 					seguro = seguros.pegaCodigo(listavalores.get(0));
 					
 					valor = seguro.getCodigo();
@@ -951,7 +964,7 @@ public class FacesUtil {
 	            	mapaParametro.put(parametro, valor);
 					
 	            	Local local = new Local();
-					ILocal Ilocal = repositorios.getLocal();
+					ILocal Ilocal = new Locais();
 					
 					local = Ilocal.pegaCodigo(listavalores.get(1));
 					
@@ -962,7 +975,7 @@ public class FacesUtil {
 					
 				}else if (listaObjetos.get(0).equals("local.local") && listaObjetos.get(1).equals("seguro.seguro")) {
 					Local local = new Local();
-					ILocal Ilocal = repositorios.getLocal();
+					ILocal Ilocal = new Locais();
 					
 					local = Ilocal.pegaCodigo(listavalores.get(0));
 					
@@ -972,7 +985,7 @@ public class FacesUtil {
 	            	mapaParametro.put(parametro, valor);
 					
 	            	Seguro seguro = new Seguro();
-					Seguros seguros = repositorios.getSeguros();
+					ISeguro seguros = new Seguros();
 					seguro = seguros.pegaCodigo(listavalores.get(1));
 					
 					valor = seguro.getCodigo();
@@ -981,7 +994,7 @@ public class FacesUtil {
 	            	mapaParametro.put(parametro, valor);
 				}else if (listaObjetos.get(0).equals("pericia.pericia")  && listaObjetos.get(1).equals("situacao.situacao")) {
 					Pericia pericia = new Pericia();
-					Pericias pericias = repositorios.getPericias();
+					IPericia pericias = new Pericias();
 					pericia = pericias.pegaCodigo(listavalores.get(0));
 					
 					valor = pericia.getCodigo();
@@ -990,7 +1003,7 @@ public class FacesUtil {
 	            	mapaParametro.put(parametro, valor);
 					
 					Situacao situacao = new Situacao();
-					ISituacao ISituacao = repositorios.getSituacao();
+					ISituacao ISituacao = new Situacoes();
 					situacao = ISituacao.pegaCodigo(listavalores.get(1));
 					
 					valor = situacao.getCodigo();
@@ -1000,7 +1013,7 @@ public class FacesUtil {
 					
 				}else if (listaObjetos.get(0).equals("situacao.situacao") && listaObjetos.get(1).equals("pericia.pericia")) {
 					Situacao situacao = new Situacao();
-					ISituacao ISituacao = repositorios.getSituacao();
+					ISituacao ISituacao = new Situacoes();
 					situacao = ISituacao.pegaCodigo(listavalores.get(0));
 					
 					valor = situacao.getCodigo();
@@ -1009,7 +1022,7 @@ public class FacesUtil {
 	            	mapaParametro.put(parametro, valor);
 					
 	            	Pericia pericia = new Pericia();
-					Pericias pericias = repositorios.getPericias();
+					IPericia pericias = new Pericias();
 					pericia = pericias.pegaCodigo(listavalores.get(1));
 					
 					valor = pericia.getCodigo();
@@ -1019,7 +1032,7 @@ public class FacesUtil {
 	            	
 				}else if (listaObjetos.get(0).equals("pericia.pericia")  && listaObjetos.get(1).equals("local.local")) {
 					Pericia pericia = new Pericia();
-					Pericias pericias = repositorios.getPericias();
+					IPericia pericias = new Pericias();
 					pericia = pericias.pegaCodigo(listavalores.get(0));
 					
 					valor = pericia.getCodigo();
@@ -1029,7 +1042,7 @@ public class FacesUtil {
 					
 					
 	            	Local local = new Local();
-					ILocal Ilocal = repositorios.getLocal();
+					ILocal Ilocal = new Locais();
 					
 					local = Ilocal.pegaCodigo(listavalores.get(1));
 					
@@ -1040,7 +1053,7 @@ public class FacesUtil {
 					
 				}else if (listaObjetos.get(0).equals("local.local") && listaObjetos.get(1).equals("pericia.pericia")) {
 					Local local = new Local();
-					ILocal Ilocal = repositorios.getLocal();
+					ILocal Ilocal = new Locais();
 					
 					local = Ilocal.pegaCodigo(listavalores.get(0));
 					
@@ -1050,7 +1063,7 @@ public class FacesUtil {
 	            	mapaParametro.put(parametro, valor);
 					
 	            	Pericia pericia = new Pericia();
-					Pericias pericias = repositorios.getPericias();
+					IPericia pericias = new Pericias();
 					pericia = pericias.pegaCodigo(listavalores.get(1));
 					
 					valor = pericia.getCodigo();
@@ -1060,7 +1073,7 @@ public class FacesUtil {
 	            	
 				}else if (listaObjetos.get(0).equals("situacao.situacao")  && listaObjetos.get(1).equals("local.local")) {
 					Situacao situacao = new Situacao();
-					ISituacao ISituacao = repositorios.getSituacao();
+					ISituacao ISituacao = new Situacoes();
 					situacao = ISituacao.pegaCodigo(listavalores.get(0));
 					
 					valor = situacao.getCodigo();
@@ -1070,7 +1083,7 @@ public class FacesUtil {
 					
 					
 	            	Local local = new Local();
-					ILocal Ilocal = repositorios.getLocal();
+					ILocal Ilocal = new Locais();
 					
 					local = Ilocal.pegaCodigo(listavalores.get(1));
 					
@@ -1081,7 +1094,7 @@ public class FacesUtil {
 					
 				}else if (listaObjetos.get(0).equals("local.local") && listaObjetos.get(1).equals("situacao.situacao")) {
 					Local local = new Local();
-					ILocal Ilocal = repositorios.getLocal();
+					ILocal Ilocal = new Locais();
 					
 					local = Ilocal.pegaCodigo(listavalores.get(0));
 					
@@ -1091,7 +1104,7 @@ public class FacesUtil {
 	            	mapaParametro.put(parametro, valor);
 					
 	            	Situacao situacao = new Situacao();
-					ISituacao ISituacao = repositorios.getSituacao();
+					ISituacao ISituacao = new Situacoes();
 					situacao = ISituacao.pegaCodigo(listavalores.get(1));
 					
 					valor = situacao.getCodigo();
