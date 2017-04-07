@@ -10,16 +10,18 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 
-import pcrn.interfaces.IPessoa;
 import pcrn.model.Grupo;
 import pcrn.model.Pessoa;
+import pcrn.repository.Pessoas;
 import pcrn.util.cdi.CDIServiceLocator;
 
 public class AppUserDetailsService implements UserDetailsService {
 
 	@Override
 	public UserDetails loadUserByUsername(String login) throws UsernameNotFoundException {
-		IPessoa pessoas = CDIServiceLocator.getBean(IPessoa.class);
+		Pessoas pessoas = CDIServiceLocator.getBean(Pessoas.class);
+		
+		
 		Pessoa pessoa = pessoas.porLogin(login);
 		
 		UsuarioSistema user = null;

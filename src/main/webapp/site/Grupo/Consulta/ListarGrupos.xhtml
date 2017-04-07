@@ -1,0 +1,49 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui">
+<ui:composition template="/templates/template.xhtml">
+	<ui:define name="tituloJanela">Sistema com JSF 2.0 e Facelets</ui:define>
+	<ui:define name="conteudo">
+	
+	<h1>Grupos Cadastradas</h1>
+	
+			<h:form enctype="multipart/form-data">
+			
+			<p:dataTable var="grupo" value="#{cadastroGrupoBean.listarGrupos()}"
+			frame="box" rules="all" cellpadding="3"
+				width="100%" headerClass="cabecalho" rowClasses="cor-sim, cor-nao"
+				columnClasses="nome">
+				
+			<p:column filterBy="#{grupo.nome}"  style="text-align: center; width:5%" 
+					filterMatchMode="startsWith">
+					<f:facet name="header">
+						<h:outputText value="Grupo" />
+					</f:facet>
+					<h:outputText value="#{grupo.nome}" />
+			</p:column>	
+				
+			<p:column style="text-align: center; width:3%">
+					<h:link outcome="/site/Grupo/Edicao/Grupo" value="Editar">
+					<i class="icon-edit"></i>
+					<f:param name="codigo"  value="#{grupo.codigo}"/>
+					</h:link>
+			</p:column>
+			
+			<p:column style="text-align: center; width:3%">
+				<h:commandLink value="Excluir"
+				 action="#{cadastroGrupoBean.excluir(grupo)}"
+				 onclick="if (!confirm('Confirmar a exclusão deste Grupo ? ')) return false"/>
+				 <i class="icon-remove-sign"></i>
+			</p:column>
+			
+			</p:dataTable>
+		</h:form>
+	</ui:define>	
+	</ui:composition>
+</html>
+
+
+

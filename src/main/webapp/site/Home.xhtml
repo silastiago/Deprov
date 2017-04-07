@@ -1,0 +1,120 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui">
+	<ui:composition template="../templates/template.xhtml">
+	<ui:define name="tituloJanela">Sistema com JSF 2.0 e Facelets</ui:define>
+	<ui:define name="conteudo">
+
+		<h1>Lista de Veiculos Cadastrados</h1>
+
+		<h:form enctype="multipart/form-data" acceptcharset="ISO-8859-1">
+			
+			
+			<p:dataTable value="#{cadastroVeiculoBean.listaVeiculos}" var="veiculo"  id="mostraEquipamento"
+			paginatorTemplate="{CurrentPageReport} {PageLinks} {Exporters}"
+			paginator="true" rows="10">
+			
+			<p:ajax event="filter" listener="#{cadastroVeiculoBean.listenFilter}" update="@this"/>
+				
+			<f:facet name="{Exporters}">
+				<h:commandButton  value="Gerar Relatorio" action="#{cadastroVeiculoBean.gerarRelatorio()}"
+				 onclick="this.form.target='_blank'">
+				</h:commandButton>
+       		 </f:facet>
+
+				
+				<p:column filterBy="#{veiculo.dossie}" style="text-align: center; width:4%" 
+					filterMatchMode="startsWith">
+					<f:facet name="header">
+						<h:outputText value="Numero do dossie" />
+					</f:facet>
+					<h:outputText value="#{veiculo.dossie}" />
+				</p:column>
+				
+				<p:column filterBy="#{veiculo.dataEntrada}" style="text-align: center; width:4%" 
+					filterMatchMode="startsWith">
+					<f:facet name="header">
+						<h:outputText value="Data" />
+					</f:facet>
+					<h:outputText value="#{veiculo.dataEntrada}" >
+					<f:convertDateTime pattern="dd/MM/yyyy"/>
+					</h:outputText>
+				</p:column>
+				
+				<p:column filterBy="#{veiculo.placa}" style="text-align: center; width:4%" 
+					filterMatchMode="startsWith">
+					<f:facet name="header">
+						<h:outputText value="Placa no Veiculo" />
+					</f:facet>
+					<h:outputText value="#{veiculo.placa}" />
+				</p:column>
+
+				<p:column filterBy="#{veiculo.placaOriginal}" style="text-align: center; width:4%" 
+					filterMatchMode="startsWith">
+					<f:facet name="header">
+						<h:outputText value="Placa Original" />
+					</f:facet>
+					<h:outputText value="#{veiculo.placaOriginal}" />
+				</p:column>
+
+				<p:column filterBy="#{veiculo.fabricante.fabricante}"  style="text-align: center; width:5%" filterMatchMode="startsWith">
+					<f:facet name="header">
+						<h:outputText value="Fabricante" />
+					</f:facet>
+					<h:outputText value="#{veiculo.fabricante.fabricante}" />
+				</p:column>
+		
+				<p:column filterBy="#{veiculo.modelo.modelo}"  style="text-align: center; width:5%" filterMatchMode="startsWith">
+					<f:facet name="header">
+						<h:outputText value="Modelo" />
+					</f:facet>
+					<h:outputText value="#{veiculo.modelo.modelo}" />
+				</p:column>
+
+
+				<p:column filterBy="#{veiculo.cor.cor}"  style="text-align: center; width:6%" filterMatchMode="startsWith">
+					<f:facet name="header">
+						<h:outputText value="Cor" />
+					</f:facet>
+					<h:outputText value="#{veiculo.cor.cor}" />
+				</p:column>
+				
+				<p:column filterBy="#{veiculo.seguro.seguro}" style="text-align: center; width:6%" 
+					filterMatchMode="startsWith">
+					<f:facet name="header">
+						<h:outputText value="Seguro" />
+					</f:facet>
+					<h:outputText value="#{veiculo.seguro.seguro}" />
+				</p:column>
+
+
+				<p:column filterBy="#{veiculo.local.local}"  style="text-align: center; width:7%" filterMatchMode="startsWith">
+					<f:facet name="header">
+						<h:outputText value="Local Atual" />
+					</f:facet>
+					<h:outputText value="#{veiculo.local.local}" />
+				</p:column>
+				
+				<p:column filterBy="#{veiculo.pericia.pericia}"  style="text-align: center; width:6%" filterMatchMode="startsWith">
+					<f:facet name="header">
+						<h:outputText value="Exame Veicular" />
+					</f:facet>
+					<h:outputText value="#{veiculo.pericia.pericia}" />
+				</p:column>
+				
+				<p:column filterBy="#{veiculo.situacao.situacao}"  style="text-align: center; width:6%" filterMatchMode="startsWith">
+					<f:facet name="header">
+						<h:outputText value="Situação" />
+					</f:facet>
+					<h:outputText value="#{veiculo.situacao.situacao}" />
+				</p:column>
+			
+			
+			</p:dataTable>
+		</h:form>
+	</ui:define>
+</ui:composition>
+</html>

@@ -19,6 +19,15 @@ public interface IVeiculo {
 	*/
 	public List<Veiculo> listar();
 	
+	/** Este metodo lista todos os veiculos cadastrados sem foto.
+	*   
+	* @return retorna a lista de todos os veiculos cadastrados sem foto.
+	*   	
+	*/
+	
+	public List<Veiculo> listarSemFoto();
+	
+	
 	/** Este metodo pesquisa um veiculo por seu id.
 	*  	
 	*  @param codigo, Este codigo � o id do Veiculo que voc� est� procurando.
@@ -78,4 +87,6 @@ public interface IVeiculo {
 	public Veiculo pegaSituacaoVeiculo(String situacao);
 	
 	public List<Veiculo> placaxistenteCadastrar(Veiculo veiculo);
+
+	
 }

@@ -7,6 +7,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
+import javax.faces.application.FacesMessage;
 import javax.faces.context.ExternalContext;
 import javax.faces.context.FacesContext;
 import javax.servlet.http.HttpServletRequest;
@@ -77,6 +78,10 @@ public class FacesUtil {
 		return request.getAttribute(name);
 	}
 	
+	public static void addErrorMessage(String message) {
+		FacesContext.getCurrentInstance().addMessage(null, 
+				new FacesMessage(FacesMessage.SEVERITY_ERROR, message, message));
+	}
 	
 	public Integer retornaPosicao(String nome, ArrayList<String> lista){
 		    

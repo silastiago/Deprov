@@ -11,7 +11,7 @@ import org.springframework.security.authentication.UsernamePasswordAuthenticatio
 @Named
 @RequestScoped
 public class Seguranca {
-
+	
 	@Inject
 	private ExternalContext externalContext;
 	
@@ -42,8 +42,12 @@ public class Seguranca {
 	
 	
 	public boolean isAcessoCadastroPermitido() {
-		return externalContext.isUserInRole("ADMINISTRADOR");
-				
+		return externalContext.isUserInRole("ADMINISTRADOR");				
+	}
+	
+	public boolean isAcessoConsultaPermitido() {
+		return externalContext.isUserInRole("ADMINISTRADOR")
+				|| externalContext.isUserInRole("CONSULTA");
 	}
 	
 	public boolean isAcessoEdicaoPermitido() {
@@ -52,8 +56,14 @@ public class Seguranca {
 	}
 	
 	public boolean isAcessoRemocaoPermitido() {
-		return externalContext.isUserInRole("ADMINISTRADOR"); 
-				//|| externalContext.isUserInRole("CONSULTA");
+		return externalContext.isUserInRole("ADMINISTRADOR");
 	}
 	
+	public boolean isAcessoDesabilitado() {
+		return false;
+				
+	}
+	
+	
 }
+

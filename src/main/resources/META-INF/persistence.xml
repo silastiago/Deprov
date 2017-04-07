@@ -6,31 +6,29 @@
 	<persistence-unit name="deprovPU" transaction-type="RESOURCE_LOCAL">
 		<provider>org.hibernate.ejb.HibernatePersistence</provider>		
 		
-		
-		<class> pcrn.model.Grupo </class>
-		<class> pcrn.model.Pessoa </class>
+		<class> pcrn.model.Cor </class>
 		<class> pcrn.model.Fabricante </class>
 		<class> pcrn.model.Foto </class>
+		<class> pcrn.model.Grupo </class>
+		<class> pcrn.model.Pessoa </class>
+		<class> pcrn.model.Local </class>
 		<class> pcrn.model.Modelo </class>
-		<class> pcrn.model.Cor </class>
-		<class> pcrn.model.Tipo </class>
+		<class> pcrn.model.Ocorrencia </class>
 		<class> pcrn.model.Pericia </class>
 		<class> pcrn.model.Seguro </class>
 		<class> pcrn.model.Situacao </class>
-		<class> pcrn.model.Local </class>
+		<class> pcrn.model.Tipo </class>
 		<class> pcrn.model.Veiculo </class>
-		<class> pcrn.model.Ocorrencia </class>
-		
-		
 		
 		<properties>
-			<property name="javax.persistence.jdbc.url" value="jdbc:postgresql://localhost/deprov" />
+			<property name="javax.persistence.jdbc.url" value="jdbc:postgresql://localhost:5432/deprov" />
 			<property name="javax.persistence.jdbc.user" value="postgres" />
 			<property name="javax.persistence.jdbc.password" value="postgres" />
 			<property name="javax.persistence.jdbc.driver" value="org.postgresql.Driver" />
 			
 			<property name="hibernate.hbm2ddl.auto" value="update" />
 			<property name="hibernate.show_sql" value="true" />
+			<property name="hibernate.format_sql" value="true" />
 			<property name="hibernate.dialect" value="org.hibernate.dialect.PostgreSQLDialect" />
 			
 		</properties>

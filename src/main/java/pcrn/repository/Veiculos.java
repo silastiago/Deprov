@@ -41,6 +41,25 @@ public class Veiculos implements IVeiculo, Serializable{
 		return listaVeiculos;
 	}
 
+	@SuppressWarnings("unchecked")
+	@Override
+	public List<Veiculo> listarSemFoto(){
+		
+		List<Veiculo> listaVeiculos = new ArrayList<Veiculo>();
+		List<Veiculo> listaVeiculosSemFoto = new ArrayList<Veiculo>();
+		Query query = manager.createQuery("Select v from Veiculo v order by dossie asc");		
+		listaVeiculos = query.getResultList();
+		
+		for (int i = 0; i < listaVeiculos.size(); i++) {
+			if (listaVeiculos.get(i).getFotos().size() < 1) {
+				listaVeiculosSemFoto.add(listaVeiculos.get(i));
+			}
+		}
+		
+		
+		return listaVeiculosSemFoto;
+	}
+	
 	/** Este metodo pesquisa um veiculo por seu id.
 	*  	
 	*  @param codigo, Este codigo � o id do veiculo que voc� est� procurando.
