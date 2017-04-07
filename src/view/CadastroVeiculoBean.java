@@ -78,6 +78,13 @@ public class CadastroVeiculoBean implements Serializable{
 	}
 
 	
+	public List<Veiculo> listar(){
+		
+		Veiculos veiculos = this.repositorios.getveiculos();
+		
+		return veiculos.listarSemFoto();
+	}
+	
 	public void lerFabricante(ValueChangeEvent evento){
 		Fabricante fabricante = (Fabricante) evento.getNewValue();
 		System.out.println("Codigo do Fabricante: " + fabricante.getCodigo());

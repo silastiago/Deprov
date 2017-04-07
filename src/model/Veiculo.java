@@ -3,6 +3,7 @@ package model;
 import java.io.Serializable;
 
 import java.util.Date;
+import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -10,6 +11,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 /** Classe Veiculo que possui os metodos de acesso getter e setters, 
@@ -48,6 +50,7 @@ public class Veiculo implements Serializable, Cloneable{
 	private Pericia pericia;
 	private Date dataEntrada;
 	private Pessoa pessoa;
+	private List<Foto> fotos;
 
 
 	@Id
@@ -283,6 +286,15 @@ public class Veiculo implements Serializable, Cloneable{
 
 	public void setPessoa(Pessoa pessoa) {
 		this.pessoa = pessoa;
+	}
+	
+	@OneToMany(mappedBy="veiculo")
+	public List<Foto> getFotos() {
+		return fotos;
+	}
+
+	public void setFotos(List<Foto> fotos) {
+		this.fotos = fotos;
 	}
 
 	@Override

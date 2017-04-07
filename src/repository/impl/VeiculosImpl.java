@@ -1,5 +1,6 @@
 package repository.impl;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.hibernate.Criteria;
@@ -38,6 +39,24 @@ public class VeiculosImpl implements Veiculos{
 		return sessao.createCriteria(Veiculo.class).addOrder(Order.desc("dossie")).list();
 	}
 
+	@SuppressWarnings("unchecked")
+	@Override
+	public List<Veiculo> listarSemFoto(){
+		
+		List<Veiculo> listaVeiculos = new ArrayList<Veiculo>();
+		List<Veiculo> listaVeiculosSemFoto = new ArrayList<Veiculo>();
+		listaVeiculos = sessao.createCriteria(Veiculo.class).addOrder(Order.desc("dossie")).list();
+		
+		for (int i = 0; i < listaVeiculos.size(); i++) {
+			if (listaVeiculos.get(i).getFotos().size() < 1) {
+				listaVeiculosSemFoto.add(listaVeiculos.get(i));
+			}
+		}
+		
+		
+		return listaVeiculosSemFoto;
+	}
+	
 	/** Este metodo pesquisa um veiculo por seu id.
 	*  	
 	*  @param codigo, Este codigo é o id do veiculo que você está procurando.

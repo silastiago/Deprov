@@ -78,4 +78,6 @@ public interface Veiculos {
 	public Veiculo pegaSituacaoVeiculo(String situacao);
 	
 	public List<Veiculo> placaxistenteCadastrar(Veiculo veiculo);
+
+	List<Veiculo> listarSemFoto();
 }
