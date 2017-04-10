@@ -14,7 +14,7 @@
 			
 			
 			
-			<p:dataTable value="#{cadastroVeiculoBean.listaVeiculos}" var="veiculo"  id="mostraEquipamento"
+			<p:dataTable value="#{cadastroVeiculoBean.listarVeiculos()}" var="veiculo"  id="mostraEquipamento"
 			widgetVar="veiculoFiltro" filteredValue="#{cadastroVeiculoBean.listaVeiculosFiltrados}" 
 			paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
 			paginator="true" rows="10" 

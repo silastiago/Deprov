@@ -15,19 +15,19 @@
 				<p:panelGrid columns="2" style="width: 100%; margin-top: 20px"
 					columnClasses="rotulo, campo">
 				<h:outputText value="Login" />
-				<h:inputText value="#{PessoaBean.pessoa.login}" />
+				<h:inputText value="#{cadastroPessoaBean.pessoa.login}" />
 				<h:outputText value="Senha" />
-				<h:inputSecret value="#{PessoaBean.pessoa.senha}" />
+				<h:inputSecret value="#{cadastroPessoaBean.pessoa.senha}" />
 				
 				
 				<h:outputLabel value="Grupo"/>
-				<h:selectManyCheckbox value="#{PessoaBean.pessoa.grupos}" converter="grupoConverter" layout="pageDirection">
+				<h:selectManyCheckbox value="#{cadastroPessoaBean.pessoa.grupos}" converter="grupoConverter" layout="pageDirection">
 				<f:selectItems value="#{cadastroGrupoBean.listarGrupos()}" var="grupo" itemValue="#{grupo}" itemLabel="#{grupo.nome}"/>
 				</h:selectManyCheckbox>
 				
 			</p:panelGrid>
 
-			<h:commandButton action="#{PessoaBean.cadastrar()}"
+			<h:commandButton action="#{cadastroPessoaBean.cadastrar()}"
 				value="Salvar" />
 				</div>
 		</h:form>
@@ -36,7 +36,7 @@
 	
 			<h:form enctype="multipart/form-data">
 			
-			<p:dataTable var="pessoa" value="#{PessoaBean.listarPessoas()}"
+			<p:dataTable var="pessoa" value="#{cadastroPessoaBean.listarPessoas()}"
 			frame="box" rules="all" cellpadding="3"
 				width="100%" headerClass="cabecalho" rowClasses="cor-sim, cor-nao"
 				columnClasses="nome">
@@ -59,22 +59,6 @@
 						<h:outputText value="#{grupo.nome}" />
 						<br></br>
 					</ui:repeat>
-			</p:column>
-			
-				
-			<p:column style="text-align: center; width:3%">
-					<h:link outcome="/site/Pessoa/Edicao/Pessoa" value="Editar">
-					<i class="icon-edit"></i>
-					<f:param name="codigo"  value="#{pessoa.codigo}"/>
-					</h:link>
-			</p:column>
-				
-			
-			<p:column style="text-align: center; width:3%">
-				<h:commandLink value="Excluir"
-				 action="#{PessoaBean.excluir(pessoa)}"
-				 onclick="if (!confirm('Confirmar a exclusão desta Pessoa ? ')) return false"/>
-				 <i class="icon-remove-sign"></i>
 			</p:column>
 			
 			</p:dataTable>

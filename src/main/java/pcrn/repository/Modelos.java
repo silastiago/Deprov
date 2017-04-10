@@ -60,7 +60,7 @@ public class Modelos implements IModelo, Serializable {
 	*/
 	@Override
 	public void salvar(Modelo modelo) {
-		manager.persist(modelo);
+		manager.merge(modelo);
 	}
 
 	/** Este metodo Remove um modelo.
@@ -70,7 +70,8 @@ public class Modelos implements IModelo, Serializable {
 	*/
 	@Override
 	public void remover(Modelo modelo) {
-		manager.remove(modelo);
+		Modelo modeloTemporario = manager.find(Modelo.class, modelo.getCodigo());
+		manager.remove(modeloTemporario);
 	}
 	
 	/** Este metodo pesquisa um modelo pelo seu nome.

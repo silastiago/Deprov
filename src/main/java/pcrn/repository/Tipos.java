@@ -60,7 +60,7 @@ public class Tipos implements ITipo, Serializable{
 	*/
 	@Override
 	public void salvar(Tipo tipo) {
-		manager.persist(tipo);
+		manager.merge(tipo);
 	}
 
 	/** Este metodo Remove um tipo.
@@ -70,6 +70,7 @@ public class Tipos implements ITipo, Serializable{
 	*/
 	@Override
 	public void remover(Tipo tipo) {
-		manager.remove(tipo);
+		Tipo tipoTemporario= manager.find(Tipo.class, tipo.getCodigo());
+		manager.remove(tipoTemporario);
 	}
 }

@@ -11,27 +11,27 @@
 						<p:submenu label="Cadastros" rendered="#{seguranca.acessoCadastroPermitido}">
 							<p:menuitem value="Cor" outcome="/site/Cor/Novo/Cor" />
 							<p:menuitem value="Exame Veicular" outcome="/site/ExameVeicular/Novo/ExameVeicular"/>
-							<p:menuitem value="Grupo" outcome="/site/Grupo/Novo/Grupo" rendered="#{seguranca.acessoDesabilitado}"/>
 							<p:menuitem value="Fabricante" outcome="/site/Fabricante/Novo/Fabricante"/>
+							<p:menuitem value="Grupo" outcome="/site/Grupo/Novo/Grupo" rendered="#{seguranca.acessoDesabilitado}"/>
+							<p:menuitem value="Local" outcome="/site/Local/Novo/Local"/>
 							<p:menuitem value="Modelo" outcome="/site/Modelo/Novo/Modelo"/>
 							<p:menuitem value="Pessoa" outcome="/site/Pessoa/Novo/Pessoa"/>
 							<p:menuitem value="Seguro" outcome="/site/Seguro/Novo/Seguro"/>
 							<p:menuitem value="Situacao" outcome="/site/Situacao/Novo/Situacao"/>
 							<p:menuitem value="Tipo" outcome="/site/Tipo/Novo/Tipo"/>
-							<p:menuitem value="Local" outcome="/site/Local/Novo/Local"/>
 							<p:menuitem value="Veiculo" outcome="/site/Veiculo/Novo/Veiculo"/>
 						</p:submenu>
 						<p:submenu label="Consultas" rendered="#{seguranca.acessoConsultaPermitido}">
 							<p:menuitem value="ListarCores" outcome="/site/Cor/Consulta/ListarCores"/>
 							<p:menuitem value="Listar Exame Veicular" outcome="/site/ExameVeicular/Consulta/ListarExamesveiculares"/>
-							<p:menuitem value="ListarGrupos" outcome="/site/Grupo/Consulta/ListarGrupos" rendered="#{seguranca.acessoDesabilitado}"/>
 							<p:menuitem value="ListarFabricantes" outcome="/site/Fabricante/Consulta/ListarFabricantes"/>
+							<p:menuitem value="ListarGrupos" outcome="/site/Grupo/Consulta/ListarGrupos" rendered="#{seguranca.acessoDesabilitado}"/>
+							<p:menuitem value="ListarLocais" outcome="/site/Local/Consulta/ListarLocais"/>
 							<p:menuitem value="ListarModelos" outcome="/site/Modelo/Consulta/ListarModelos"/>
 							<p:menuitem value="ListarPessoas" outcome="/site/Pessoa/Consulta/ListarPessoas"/>
 							<p:menuitem value="ListarSeguros" outcome="/site/Seguro/Consulta/ListarSeguros"/>
 							<p:menuitem value="ListarSituacoes" outcome="/site/Situacao/Consulta/ListarSituacoes"/>
-							<p:menuitem value="ListarTipos" outcome="/site/Tipo/Consulta/ListarTipos"/>
-							<p:menuitem value="ListarLocais" outcome="/site/Local/Consulta/ListarLocais"/>
+							<p:menuitem value="ListarTipos" outcome="/site/Tipo/Consulta/ListarTipos"/>							
 							<p:menuitem value="ListarVeiculos" outcome="/site/Veiculo/Consulta/ListarVeiculos"/>						
 							</p:submenu>
 						<p:submenu label="Opções">

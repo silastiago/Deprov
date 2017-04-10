@@ -4,6 +4,9 @@
 	xmlns:f="http://java.sun.com/jsf/core"
 	xmlns:ui="http://java.sun.com/jsf/facelets"
 	xmlns:p="http://primefaces.org/ui">
+<f:metadata>
+	<f:viewParam name="codigo" value="#{cadastroPessoaBean.pessoa}" />
+</f:metadata>
 
 <ui:composition template="/templates/template.xhtml">
 
@@ -11,20 +14,19 @@
 	<ui:define name="conteudo">
 		<h:form enctype="multipart/form-data" acceptcharset="ISO-8859-1">
 			<div class="ui-fluid">
-				<h1>Alteracao de Senha</h1>
-				<p:messages for ="message" showDetail="true" autoUpdate="true" closable="true" />
-								
+				<h1>Alteracao de Senha</h1>	
+				<p:messages for ="message" showDetail="true" autoUpdate="true" closable="true" />			
 				<p:panelGrid columns="2" style="width: 100%; margin-top: 20px"
 					columnClasses="rotulo, campo">
 				<h:outputText value="Senha" />
 				<h:inputSecret value="#{cadastroPessoaBean.pessoa.senha}" />
+			
 			</p:panelGrid>
 
-			<h:commandButton action="#{cadastroPessoaBean.alterarPropriaSenha()}"
+			<h:commandButton action="#{cadastroPessoaBean.alterarSenha()}"
 				value="Salvar" />
 				</div>
-				</h:form>
-		
+		</h:form>
 
 	</ui:define>	
 	</ui:composition>

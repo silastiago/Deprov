@@ -72,7 +72,8 @@ public class Situacoes implements ISituacao, Serializable{
 	*/
 	@Override
 	public void remover(Situacao situacao) {
-		manager.remove(situacao);
+		Situacao situacaotemporaria = manager.find(Situacao.class, situacao.getCodigo());
+		manager.remove(situacaotemporaria);
 	}
 	
 	/** Este metodo pesquisa uma cor pelo seu nome.

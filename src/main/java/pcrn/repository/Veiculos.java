@@ -78,7 +78,7 @@ public class Veiculos implements IVeiculo, Serializable{
 	*/
 	@Override
 	public void salvar(Veiculo veiculo) {
-		manager.persist(veiculo);
+		manager.merge(veiculo);
 	}
 
 	/** Este metodo Remove um veiculo.
@@ -88,7 +88,8 @@ public class Veiculos implements IVeiculo, Serializable{
 	*/
 	@Override
 	public void remover(Veiculo veiculo) {
-		manager.remove(veiculo);
+		Veiculo veiculoTemporario = manager.find(Veiculo.class, veiculo.getCodigo());
+		manager.remove(veiculoTemporario);
 
 	}
 

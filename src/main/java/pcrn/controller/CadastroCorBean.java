@@ -4,7 +4,7 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.faces.bean.RequestScoped;
+import javax.enterprise.context.RequestScoped;
 import javax.inject.Inject;
 import javax.inject.Named;
 
@@ -27,12 +27,12 @@ public class CadastroCorBean implements Serializable{
 	private List<Cor> listaCores = new ArrayList<Cor>();
 	
 	
-	public String cadastrar(){
+	public void cadastrar(){
 		
 		//Esta linha salva a entidade cor.
 		corService.salvar(cor);
 		//Retorno da pagina.
-		return "index?faces-redirect=true";
+		
 	}
 	
 	/** Este metodo lista todas as cores cadastradas.
@@ -59,14 +59,9 @@ public class CadastroCorBean implements Serializable{
 	public Cor getCor() {
 		return cor;
 	}
-	
-	public void setCor(Cor cor) throws CloneNotSupportedException {
+
+	public void setCor(Cor cor) {
 		this.cor = cor;
-		if (this.cor == null) {
-			this.cor = new Cor();
-		}else {
-			this.cor = (Cor) cor.clone();
-		}
 	}
 
 	public List<Cor> getListaCores() {
@@ -76,4 +71,5 @@ public class CadastroCorBean implements Serializable{
 	public void setListaCores(List<Cor> listaCores) {
 		this.listaCores = listaCores;
 	}
+	
 }

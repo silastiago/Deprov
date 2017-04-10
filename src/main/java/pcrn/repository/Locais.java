@@ -58,7 +58,7 @@ public class Locais implements ILocal, Serializable{
 	*/
 	@Override
 	public void salvar(Local local) {
-		manager.persist(local);
+		manager.merge(local);
 	}
 
 	/** Este metodo Remove uma cor.
@@ -68,7 +68,8 @@ public class Locais implements ILocal, Serializable{
 	*/
 	@Override
 	public void remover(Local local) {
-		manager.remove(local);
+		Local localTemporario = manager.find(Local.class, local.getCodigo());
+		manager.remove(localTemporario);
 	}
 	
 	/** Este metodo pesquisa uma cor pelo seu nome.

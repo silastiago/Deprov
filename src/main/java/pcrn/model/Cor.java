@@ -36,7 +36,7 @@ public class Cor implements Serializable, Cloneable{
 		return cor;
 	}
 	public void setCor(String cor) {
-		this.cor = cor.toUpperCase();
+		this.cor = cor;
 	}
 
 	@Override
@@ -47,6 +47,7 @@ public class Cor implements Serializable, Cloneable{
 		result = prime * result + ((cor == null) ? 0 : cor.hashCode());
 		return result;
 	}
+	
 	@Override
 	public boolean equals(Object obj) {
 		if (this == obj)
@@ -67,10 +68,5 @@ public class Cor implements Serializable, Cloneable{
 		} else if (!cor.equals(other.cor))
 			return false;
 		return true;
-	}
-	
-	@Override
-	public Object clone() throws CloneNotSupportedException {
-		return super.clone();
 	}
 }

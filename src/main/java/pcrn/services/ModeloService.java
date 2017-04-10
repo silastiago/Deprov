@@ -31,7 +31,7 @@ public class ModeloService implements Serializable{
 	}
 	
 	@Transactional
-	public void salavr(Modelo modelo){
+	public void salvar(Modelo modelo){
 		modelos.salvar(modelo);
 	}
 	

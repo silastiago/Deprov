@@ -61,7 +61,7 @@ public class Pericias implements IPericia, Serializable {
 	*/
 	@Override
 	public void salvar(Pericia pericia) {
-		manager.persist(pericia);
+		manager.merge(pericia);
 	}
 
 	/** Este metodo Remove uma pericia.
@@ -71,7 +71,8 @@ public class Pericias implements IPericia, Serializable {
 	*/
 	@Override
 	public void remover(Pericia pericia) {
-		manager.remove(pericia);
+		Pericia periciaTemporaria = manager.find(Pericia.class, pericia.getCodigo());
+		manager.remove(periciaTemporaria);
 	}
 
 	@Override

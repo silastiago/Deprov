@@ -61,7 +61,7 @@ public class Pessoas implements IPessoa, Serializable{
 	*/
 	@Override
 	public void salvar(Pessoa pessoa) {
-		manager.persist(pessoa);
+		manager.merge(pessoa);
 	}
 
 	/** Este metodo Remove uma pessoa.
@@ -71,7 +71,8 @@ public class Pessoas implements IPessoa, Serializable{
 	*/
 	@Override
 	public void remover(Pessoa pessoa) {
-		manager.remove(pessoa);
+		Pessoa pessoaTemporaria = manager.find(Pessoa.class, pessoa.getCodigo());
+		manager.remove(pessoaTemporaria);
 	}	
 	
 	@Override

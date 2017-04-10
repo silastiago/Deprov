@@ -63,7 +63,7 @@ public class Seguros implements ISeguro, Serializable{
 	*/
 	@Override
 	public void salvar(Seguro seguro) {
-		manager.persist(seguro);
+		manager.merge(seguro);
 	}
 
 	/** Este metodo Remove um seguro.
@@ -73,7 +73,8 @@ public class Seguros implements ISeguro, Serializable{
 	*/
 	@Override
 	public void remover(Seguro seguro) {
-		manager.remove(seguro);
+		Seguro seguroTemporario = manager.find(Seguro.class, seguro.getCodigo());
+		manager.remove(seguroTemporario);
 	}
 	
 	/** Este metodo pesquisa um seguro pelo seu nome.

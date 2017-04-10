@@ -13,7 +13,7 @@
 		<h:form enctype="multipart/form-data" acceptcharset="ISO-8859-1">
 			
 			
-			<p:dataTable value="#{cadastroVeiculoBean.listaVeiculos}" var="veiculo"  id="mostraEquipamento"
+			<p:dataTable value="#{cadastroVeiculoBean.listarVeiculos()}" var="veiculo"  id="mostraEquipamento"
 			paginatorTemplate="{CurrentPageReport} {PageLinks} {Exporters}"
 			paginator="true" rows="10">
 			
