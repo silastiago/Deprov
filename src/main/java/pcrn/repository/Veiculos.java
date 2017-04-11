@@ -35,7 +35,7 @@ public class Veiculos implements IVeiculo, Serializable{
 	public List<Veiculo> listar(){
 		
 		List<Veiculo> listaVeiculos = new ArrayList<Veiculo>();
-		Query query = manager.createQuery("Select v from Veiculo v order by dossie asc");
+		Query query = manager.createQuery("from Veiculo v order by dossie asc");
 		listaVeiculos = query.getResultList();
 		
 		return listaVeiculos;
