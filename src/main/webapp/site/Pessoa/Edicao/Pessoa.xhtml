@@ -14,14 +14,16 @@
 	<ui:define name="conteudo">
 		<h:form enctype="multipart/form-data" acceptcharset="ISO-8859-1">
 			<div class="ui-fluid">
-				<h1>Cadastro de Pessoa</h1>				
+			<p:messages for ="message" showDetail="true" autoUpdate="true" closable="true" />
+				<h1>Edicao de Pessoa</h1>				
 				<p:panelGrid columns="2" style="width: 100%; margin-top: 20px"
 					columnClasses="rotulo, campo">
 				<h:outputText value="Login" />
 				<h:inputText value="#{cadastroPessoaBean.pessoa.login}" />
 			
-			<h:outputLabel value="Grupo"/>
+				<h:outputLabel value="Grupo"/>
 				<h:selectManyCheckbox value="#{cadastroPessoaBean.pessoa.grupos}" converter="grupoConverter" layout="pageDirection">
+				<f:attribute name="collectionType" value="java.util.ArrayList"/>
 				<f:selectItems value="#{cadastroGrupoBean.listarGrupos()}" var="grupo" itemValue="#{grupo}" itemLabel="#{grupo.nome}"/>
 				</h:selectManyCheckbox>
 			</p:panelGrid>

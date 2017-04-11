@@ -41,9 +41,9 @@
 		<intercept-url pattern="/site/Cor/Edicao/**" access="hasAnyRole('ADMINISTRADOR')" />
 		<intercept-url pattern="/site/Cor/Novo/**" access="hasAnyRole('ADMINISTRADOR')" />
 		
-		<intercept-url pattern="/site/Grupo/Consulta/**" access="denyAll"  />
-		<intercept-url pattern="/site/Grupo/Edicao/**" access="denyAll"  />
-		<intercept-url pattern="/site/Grupo/Novo/**" access="denyAll"  />
+		<intercept-url pattern="/site/Grupo/Consulta/**" access="hasAnyRole('ADMINISTRADOR')"  />
+		<intercept-url pattern="/site/Grupo/Edicao/**" access="hasAnyRole('ADMINISTRADOR')"  />
+		<intercept-url pattern="/site/Grupo/Novo/**" access="hasAnyRole('ADMINISTRADOR')"  />
 		
 		<intercept-url pattern="/site/Pessoa/Consulta/**" access="hasAnyRole('ADMINISTRADOR')" />
 		<intercept-url pattern="/site/Pessoa/Edicao/**" access="hasAnyRole('ADMINISTRADOR')" />

@@ -10,6 +10,7 @@ import javax.inject.Named;
 
 import pcrn.model.Pericia;
 import pcrn.services.PericiaService;
+import pcrn.util.FacesUtil;
 
 @Named
 @RequestScoped
@@ -28,13 +29,21 @@ public class CadastroPericiaBean implements Serializable{
 	
 	public void cadastrar(){
 		
-		periciaService.salvar(pericia);
-		
+		periciaService.salvar(pericia);	
+		FacesUtil.addInfoMessage("Exame Veicular cadastrado com sucesso");		
 	}
+	
+	public void editar(){
+		
+		periciaService.salvar(pericia);	
+		FacesUtil.addInfoMessage("Exame Veicular alterado com sucesso");		
+	}
+	
 	
 	public void excluir(Pericia pericia){
 		
 		periciaService.remover(pericia);
+		FacesUtil.addInfoMessage("Exame Veicular: " +pericia.getPericia()+ " removido com sucesso");
 		
 	}
 	

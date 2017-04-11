@@ -5,12 +5,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 import javax.enterprise.context.RequestScoped;
-import javax.faces.application.FacesMessage;
-import javax.faces.context.ExternalContext;
 import javax.faces.context.FacesContext;
 import javax.inject.Inject;
 import javax.inject.Named;
-import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 
@@ -39,18 +36,23 @@ public class CadastroPessoaBean implements Serializable{
 		String senha = this.pessoa.getSenha();
 		pessoa.setSenha(FacesUtil.md5(senha));
 		pessoaService.salvar(pessoa);
+		FacesUtil.addInfoMessage("Pessoa cadastrada com sucesso");
 	}
 
 	public void alterarSenha(){
+		
 		String senha = this.pessoa.getSenha();
 		pessoa.setSenha(FacesUtil.md5(senha));
 		pessoaService.salvar(pessoa);
 		
-		FacesContext.getCurrentInstance().addMessage("message" , new FacesMessage(FacesMessage.SEVERITY_INFO, "","Senha alterada com sucesso"));
+		FacesUtil.addInfoMessage("Senha alterada com sucesso");
+		
 	}
 	
 	public void editar(){
+		
 		pessoaService.salvar(pessoa);
+		FacesUtil.addInfoMessage("pessoa alterada com sucesso");
 	}
 	
 	public void alterarPropriaSenha(){
@@ -59,13 +61,13 @@ public class CadastroPessoaBean implements Serializable{
 		pessoa = this.getUsuarioLogado().getPessoa();
 		this.pessoa.setSenha(FacesUtil.md5(senha));
 		pessoaService.salvar(pessoa);	
-		
-		FacesContext.getCurrentInstance().addMessage("message" , new FacesMessage(FacesMessage.SEVERITY_INFO, "","Senha alterada com sucesso"));
+		FacesUtil.addInfoMessage("Senha alterada com sucesso");
 		
 	}	
 	
 	public void excluir(Pessoa pessoa){
 		pessoaService.remover(pessoa);
+		FacesUtil.addInfoMessage("Pessoa: " +pessoa.getLogin()+ " removida com sucesso");
 	}
 	
 	public List<Pessoa> listarPessoas(){

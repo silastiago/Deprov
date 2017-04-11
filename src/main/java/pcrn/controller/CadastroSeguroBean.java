@@ -10,6 +10,7 @@ import javax.inject.Named;
 
 import pcrn.model.Seguro;
 import pcrn.services.SeguroService;
+import pcrn.util.FacesUtil;
 
 @Named
 @RequestScoped
@@ -28,10 +29,17 @@ public class CadastroSeguroBean implements Serializable{
 	
 	public void cadastrar(){
 		seguroService.salvar(seguro);
+		FacesUtil.addInfoMessage("Seguro cadastrado com sucesso");
 	}
 
+	public void editar(){
+		seguroService.salvar(seguro);
+		FacesUtil.addInfoMessage("Seguro alterado com sucesso");
+	}
+	
 	public void excluir(Seguro seguro){
 		seguroService.remover(seguro);
+		FacesUtil.addInfoMessage("Seguro: " +seguro.getSeguro()+ " removido com sucesso");
 	}
 	
 	public List<Seguro> listaSeguro(){

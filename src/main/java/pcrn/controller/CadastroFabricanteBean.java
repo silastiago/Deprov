@@ -10,6 +10,7 @@ import javax.inject.Named;
 
 import pcrn.model.Fabricante;
 import pcrn.services.FabricanteService;
+import pcrn.util.FacesUtil;
 
 @Named
 @RequestScoped
@@ -32,13 +33,19 @@ public class CadastroFabricanteBean implements Serializable{
 	public void cadastrar(){
 		
 		fabricanteService.salvar(fabricante);
-		
+		FacesUtil.addInfoMessage("Marca cadastrada com sucesso");
 	}
 	
+	public void editar(){
+		
+		fabricanteService.salvar(fabricante);
+		FacesUtil.addInfoMessage("Marca alterada com sucesso");
+	}
 	
 	public void excluir(Fabricante fabricante){
 		
 		fabricanteService.remover(fabricante);
+		FacesUtil.addInfoMessage("Marca: " +fabricante.getFabricante()+ " removida com sucesso");
 		
 	}
 	

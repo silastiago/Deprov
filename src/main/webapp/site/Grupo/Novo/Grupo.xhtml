@@ -4,9 +4,6 @@
 	xmlns:f="http://java.sun.com/jsf/core"
 	xmlns:ui="http://java.sun.com/jsf/facelets"
 	xmlns:p="http://primefaces.org/ui">
-<f:metadata>
-	<f:viewParam name="codigo" value="#{cadastroGrupoBean.grupo}" />
-</f:metadata>
 
 
 <ui:composition template="/templates/template.xhtml">
@@ -14,6 +11,7 @@
 	<ui:define name="conteudo">
 		<h:form enctype="multipart/form-data" acceptcharset="ISO-8859-1">
 			<div class="ui-fluid">
+			<p:messages for ="message" showDetail="true" autoUpdate="true" closable="true" />
 				<h1>Cadastro de Grupo</h1>
 				<p:panelGrid columns="2" style="width: 100%; margin-top: 20px"
 					columnClasses="rotulo, campo">
@@ -46,7 +44,7 @@
 			</p:column>	
 				
 			<p:column style="text-align: center; width:3%">
-					<h:link outcome="Grupo" value="Editar">
+					<h:link outcome="/site/Grupo/Edicao/Grupo" value="Editar">
 					<i class="icon-edit"></i>
 					<f:param name="codigo"  value="#{grupo.codigo}"/>
 					</h:link>

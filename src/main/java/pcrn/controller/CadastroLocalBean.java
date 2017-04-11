@@ -10,6 +10,7 @@ import javax.inject.Named;
 
 import pcrn.model.Local;
 import pcrn.services.LocalService;
+import pcrn.util.FacesUtil;
 
 @Named
 @RequestScoped
@@ -27,7 +28,15 @@ public class CadastroLocalBean implements Serializable{
 	private List<Local> listaLocais = new ArrayList<Local>();
 	
 	public void cadastrar(){
+		
 		localService.salvar(local);
+		FacesUtil.addInfoMessage("Local cadastrado com sucesso");
+	}
+	
+	public void editar(){
+		
+		localService.salvar(local);
+		FacesUtil.addInfoMessage("Modelo alterado com sucesso");
 	}
 	
 	public List<Local> listarLocais(){
@@ -37,7 +46,7 @@ public class CadastroLocalBean implements Serializable{
 	
 	public void excluir(Local local){
 		localService.remover(local);
-		this.listarLocais();
+		FacesUtil.addInfoMessage("Local: " +local.getLocal()+ " removido com sucesso");
 	}
 
 	public Local getLocal() {

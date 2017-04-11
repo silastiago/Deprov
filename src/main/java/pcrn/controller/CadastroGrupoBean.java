@@ -10,6 +10,7 @@ import javax.inject.Named;
 
 import pcrn.model.Grupo;
 import pcrn.services.GrupoService;
+import pcrn.util.FacesUtil;
 
 @Named
 @RequestScoped
@@ -26,18 +27,26 @@ public class CadastroGrupoBean implements Serializable{
 	private List<Grupo> listaGrupos = new ArrayList<Grupo>();
 
 	public void cadastrar(){
-		
-		grupoService.salvar(grupo);		
+		grupoService.salvar(grupo);
+		FacesUtil.addInfoMessage("Grupo cadastrado com sucesso");
 	}
 
+	public void editar(){
+		
+		grupoService.salvar(grupo);
+		FacesUtil.addInfoMessage("Grupo alterado com sucesso");
+	}
+	
 	public void excluir(Grupo grupo){
 		
-		grupoService.remover(grupo);		
+		grupoService.remover(grupo);
+		FacesUtil.addInfoMessage("Grupo: " +grupo.getNome()+ " removido com sucesso");
 	}
 	
 	public List<Grupo> listarGrupos(){
 		
 		listaGrupos = grupoService.listar();
+		
 		return listaGrupos;
 	}
 

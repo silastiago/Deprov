@@ -12,6 +12,7 @@ import javax.inject.Named;
 import pcrn.model.Fabricante;
 import pcrn.model.Modelo;
 import pcrn.services.ModeloService;
+import pcrn.util.FacesUtil;
 
 @Named
 @RequestScoped
@@ -30,16 +31,22 @@ public class CadastroModeloBean implements Serializable{
 	
 	
 	public void cadastrar(){
+		
 		modeloService.salvar(modelo);
+		FacesUtil.addInfoMessage("Modelo cadastrado com sucesso");
 	}
 
+	public void editar(){
+		modeloService.salvar(modelo);
+		FacesUtil.addInfoMessage("Modelo alterado com sucesso");
+	}
+	
 	/** Este metodo Remove um modelo.
 	*  @param modelo, Este modelo � o objeto Modelo que voc� ir� remover.
 	*/
 	public void excluir(Modelo modelo){
 		modeloService.remover(modelo);
-		//Chamando o metodo init para atualizar a lista de modelos.
-		this.listaModelo();
+		FacesUtil.addInfoMessage("Modelo: " +modelo.getModelo()+ " removido com sucesso");
 	}
 	
 	/** Este metodo lista todas os modelos cadastrados.

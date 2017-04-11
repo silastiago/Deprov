@@ -62,7 +62,7 @@ public class Situacoes implements ISituacao, Serializable{
 	*/
 	@Override
 	public void salvar(Situacao situacao) {
-		manager.persist(situacao);
+		manager.merge(situacao);
 	}
 
 	/** Este metodo Remove uma cor.

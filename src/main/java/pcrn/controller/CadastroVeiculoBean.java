@@ -18,8 +18,10 @@ import javax.faces.event.ValueChangeEvent;
 import javax.faces.view.ViewScoped;
 import javax.inject.Inject;
 import javax.inject.Named;
+import javax.persistence.EntityManager;
 import javax.servlet.http.HttpServletResponse;
 
+import org.hibernate.Session;
 import org.primefaces.event.data.FilterEvent;
 import org.primefaces.model.StreamedContent;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -42,6 +44,7 @@ import pcrn.model.Veiculo;
 import pcrn.security.UsuarioSistema;
 import pcrn.services.VeiculoService;
 import pcrn.util.FacesUtil;
+import pcrn.util.report.ExecutorRelatorio;
 
 @Named
 @ViewScoped
@@ -55,6 +58,15 @@ public class CadastroVeiculoBean implements Serializable{
 	@Inject
 	private VeiculoService veiculoService;
 
+	@Inject
+	private HttpServletResponse response;
+	
+	@Inject
+	private EntityManager manager;
+	
+	@Inject
+	private FacesContext facesContext;
+	
 	private Veiculo veiculo = new Veiculo();
 	private List<Veiculo> listaVeiculos;
 	private List<Veiculo> listaVeiculosFiltrados;
@@ -194,11 +206,6 @@ public class CadastroVeiculoBean implements Serializable{
 	        System.out.println("size filter: "+ tempString.size());
 	        FacesUtil util = new FacesUtil();
 	        
-	        if (tempString.size() == 0) {
-	        	//relatorio = "/opt/tomcat/webapps/Deprov/resources/relatorios/parametros/0/Todos.jrxml";
-				relatorio = "/var/lib/tomcat/webapps/Deprov/resources/relatorios/parametros/0/Todos.jrxml";
-			}else{
-	        
 	        for (String key : tempString.keySet()) {
 	            System.out.println("key: " + key + " \t values: "
 	                    + tempString.get(key).toString().toUpperCase());
@@ -208,12 +215,10 @@ public class CadastroVeiculoBean implements Serializable{
 	        listaValores.add(tempString.get(key).toString().toUpperCase());
 	        	}
 	        relatorio = util.escolherRelatorio(listaObjetos);
-	        mapa = util.retornarParametros(listaObjetos, listaValores);
-			}
-	        
-	        
-	        
 	        System.out.println("Relatorio: " + relatorio);
+	        mapa = util.retornarParametros(listaObjetos, listaValores);
+	        
+	        
 	            /*for (String key : mapaRelatorioParametro.keySet()) {
 	            	System.out.println("Nome do codigo: " + key + " \t Relatorio: "
 		                    + mapaRelatorioParametro.get(key).toString());
@@ -226,6 +231,27 @@ public class CadastroVeiculoBean implements Serializable{
 	        this.setRelatorio(relatorio);
 	    }
 	
+	 
+	 public void gerarRelatorio() {
+			Map<String, Object> parametros = new HashMap<>();
+			parametros = this.getMapaParametro();
+			String caminhoRelatorio = this.getRelatorio();
+			
+			System.out.println("Caminho relatorio: " + caminhoRelatorio);
+			
+			ExecutorRelatorio executor = new ExecutorRelatorio(caminhoRelatorio,
+					this.response, parametros, "Relatorio.pdf");
+			
+			Session session = manager.unwrap(Session.class);
+			session.doWork(executor);
+			
+			if (executor.isRelatorioGerado()) {
+				facesContext.responseComplete();
+			} else {
+				FacesUtil.addErrorMessage("A execução do relatório não retornou dados.");
+			}
+		}
+	 
 	 public List<Veiculo> listarVeiculos(){
 		 
 		 listaVeiculos = veiculoService.listar();

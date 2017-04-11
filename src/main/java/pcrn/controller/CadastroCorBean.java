@@ -10,6 +10,7 @@ import javax.inject.Named;
 
 import pcrn.model.Cor;
 import pcrn.services.CorService;
+import pcrn.util.FacesUtil;
 
 @Named
 @RequestScoped
@@ -29,11 +30,16 @@ public class CadastroCorBean implements Serializable{
 	
 	public void cadastrar(){
 		
-		//Esta linha salva a entidade cor.
 		corService.salvar(cor);
-		//Retorno da pagina.
-		
+		FacesUtil.addInfoMessage("Cor cadastrada com sucesso");
 	}
+	
+	public void editar(){
+		
+		corService.salvar(cor);
+		FacesUtil.addInfoMessage("Cor alterada com sucesso");
+	}
+	
 	
 	/** Este metodo lista todas as cores cadastradas.
 	* 	@return retorna a lista de todas as cores cadastradas no sistema.
@@ -52,8 +58,7 @@ public class CadastroCorBean implements Serializable{
 	public void excluir(Cor cor){
 		//Esta linha remove a cor.
 		corService.remover(cor);
-		//Esta linha chama a funcao de listar as cores para que a lista de cores seja atualizada.
-		this.listarCores();
+		FacesUtil.addInfoMessage("Cor: " +cor.getCor()+ " removida com sucesso");
 	}
 
 	public Cor getCor() {
