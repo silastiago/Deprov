@@ -252,6 +252,25 @@ public class CadastroVeiculoBean implements Serializable{
 			}
 		}
 	 
+	 
+	 public void gerarRelatorioVeiculo(String codigoVeiculo) {
+			Map<String, Object> parametros = new HashMap<>();
+			parametros.put("codigo_veiculo", codigoVeiculo);
+			System.out.println("Codigo veiculo: " + codigoVeiculo);
+			ExecutorRelatorio executor = new ExecutorRelatorio("/relatorios/RelatorioVeiculo.jasper",
+					this.response, parametros, "Relatorio.pdf");
+			
+			Session session = manager.unwrap(Session.class);
+			session.doWork(executor);
+			
+			if (executor.isRelatorioGerado()) {
+				facesContext.responseComplete();
+			} else {
+				FacesUtil.addErrorMessage("A execução do relatório não retornou dados.");
+			}
+		}
+	 
+	 
 	 public List<Veiculo> listarVeiculos(){
 		 
 		 listaVeiculos = veiculoService.listar();

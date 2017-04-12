@@ -6,6 +6,7 @@
 	xmlns:p="http://primefaces.org/ui">
 <f:metadata>
 	<f:viewParam name="codigoVeiculo"/>
+	<f:viewParam name="codigoOcorrencia" value="#{cadastroOcorrenciaBean.ocorrencia}" />
 </f:metadata>
 
 <ui:composition template="/templates/template.xhtml">
@@ -15,7 +16,7 @@
 		<h:form enctype="multipart/form-data" acceptcharset="ISO-8859-1" id="form">
 			<div class="ui-fluid">
 			<p:messages for ="message" showDetail="true" autoUpdate="true" closable="true" />
-				<h1>Cadastro de Ocorrencia</h1>
+				<h1>Edicao de Ocorrencia</h1>
 				<p:panelGrid columns="2" style="width: 100%; margin-top: 20px"
 					columnClasses="rotulo, campo">
 
@@ -29,7 +30,7 @@
 					</p:calendar>
 				
 				<p:commandButton action="#{cadastroOcorrenciaBean.voltar(codigoVeiculo)}"  value="Voltar" />	
-				<p:commandButton action="#{cadastroOcorrenciaBean.cadastrar(codigoVeiculo)}"  update="lista" value="Salvar" />
+				<p:commandButton action="#{cadastroOcorrenciaBean.editar(codigoVeiculo)}"  update="lista" value="Salvar" />
 				
 
 			</p:panelGrid>
@@ -61,7 +62,7 @@
 			</p:column>
 			
 			<p:column style="text-align: center; width:3%">
-					<h:link outcome="/site/Ocorrencia/Edicao/Ocorrencia" value="Editar">
+					<h:link outcome="Ocorrencia" value="Editar">
 					<i class="icon-edit"></i>
 					<f:param name="codigoOcorrencia"  value="#{ocorrencia.codigo}"/>
 					<f:param name="codigoVeiculo"  value="#{ocorrencia.veiculo.codigo}"/>
@@ -74,6 +75,7 @@
 				 onclick="if (!confirm('Confirmar a exclusão desta ocorrencia #{ocorrencia.ocorrencia} ? ')) return false"/>
 				 <i class="icon-remove-sign"></i>
 			</p:column>
+			
 			
 			
 			</p:dataTable>

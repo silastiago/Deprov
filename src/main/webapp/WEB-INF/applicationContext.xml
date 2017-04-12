@@ -71,6 +71,7 @@
 		<intercept-url pattern="/site/Modelo/Novo/**" access="hasAnyRole('ADMINISTRADOR')" />
 		
 		<intercept-url pattern="/site/Ocorrencia/Consulta/**" access="hasAnyRole('ADMINISTRADOR')"  />
+		<intercept-url pattern="/site/Ocorrencia/Edicao/**" access="hasAnyRole('ADMINISTRADOR')"  />
 		
 		<intercept-url pattern="/site/Seguro/Consulta/**" access="hasAnyRole('ADMINISTRADOR')"  />
 		<intercept-url pattern="/site/Seguro/Edicao/**" access="hasAnyRole('ADMINISTRADOR')" />

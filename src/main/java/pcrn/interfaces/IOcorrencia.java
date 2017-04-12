@@ -39,5 +39,7 @@ public interface IOcorrencia {
 	*  @param ocorrencia, Esta ocorrencia � o objeto Ocorrencia que voc� ir� remover.
 	*   	
 	*/
-	public void remover(Ocorrencia ocorrencia);
+	public void remover(int codigo_ocorrencia);
+
+	
 }
