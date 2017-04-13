@@ -52,22 +52,12 @@ public class CadastroOcorrenciaBean implements Serializable{
 	    return "/site/Ocorrencia/Consulta/Ocorrencia.xhtml?codigoVeiculo="+codigoVeiculo+"faces-redirect=true";
 	}
 	
-	
-	/** Este metodo redireciona para a pagina de ocorrencias de um determinado veiculo.
-	 * 	@param codigo, este codigo � o identificador do veiculo.
-	 * 	@return, retorna a pagina das ocorrencias daquele veiculo.
-	*/
-	public String redirecionar(String codigo){
-		
-		return "Ocorrencia2.xhtml?codigo_ocorrencia="+codigo+"faces-redirect=true";
-	}
-	
 	/** Este metodo redireciona para a pagina de ocorrencias de um determinado veiculo.
 	 * 	@param codigo, este codigo � o identificador do veiculo.
 	 * 	@return, retorna a pagina das ocorrencias daquele veiculo.
 	*/
 	public String voltar(String codigo){
-		return "/site/Veiculo/Edicao/Veiculo.xhtml?codigo="+codigo+"faces-redirect=true";
+		return "/site/Veiculo/Edicao/Veiculo.xhtml?codigoVeiculo="+codigo+"faces-redirect=true";
 	}
 	
 	

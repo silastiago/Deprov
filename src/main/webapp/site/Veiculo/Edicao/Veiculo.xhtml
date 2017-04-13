@@ -5,7 +5,7 @@
 	xmlns:ui="http://java.sun.com/jsf/facelets"
 	xmlns:p="http://primefaces.org/ui">
 <f:metadata>
-	<f:viewParam name="codigo" value="#{cadastroVeiculoBean.veiculo}" />
+	<f:viewParam name="codigoVeiculo" value="#{cadastroVeiculoBean.veiculo}" />
 </f:metadata>
 
 
@@ -14,18 +14,48 @@
 	<ui:define name="tituloJanela">Sistema com JSF 2.0 e Facelets</ui:define>
 	<ui:define name="conteudo">
 		<h:form enctype="multipart/form-data" acceptcharset="ISO-8859-1">
+			<p:toolbar id="toolbar">
+				<p:toolbarGroup>
+				
+					<p:commandButton value="Editar" icon="ui-icon-pencil"
+						action="#{cadastroVeiculoBean.editar()}" process="@this" />
+					
+					<span class="ui-separator"> <span
+						class="ui-icon ui-icon-grip-dotted-vertical" />
+					</span>
+					
+					<p:commandButton value="Foto" icon="ui-icon-image"
+						action="#{cadastroVeiculoBean.redirecionaParaFoto(cadastroVeiculoBean.veiculo)}" process="@this" />
+					
+					
+					<span class="ui-separator"> <span
+						class="ui-icon ui-icon-grip-dotted-vertical" />
+					</span>
+			
+					<p:commandButton value="Emitir Relatorio" icon="ui-icon-document" ajax="false"  onclick="this.form.target='_blank'"
+	    							action="#{cadastroVeiculoBean.gerarRelatorioVeiculo(cadastroVeiculoBean.veiculo.codigo)}" />			
+			
+					<span class="ui-separator"> <span
+						class="ui-icon ui-icon-grip-dotted-vertical" />
+					</span>
+			
+					<p:commandButton value="Gerar Ocorrencia" icon="ui-icon-note"
+						action="#{cadastroVeiculoBean.redirecionaParaOcorrencia(cadastroVeiculoBean.veiculo)}" process="@this" />				
+
+				</p:toolbarGroup>
+			</p:toolbar>
+			
 			<div class="ui-fluid">
 				
 
 		<p:messages for ="message" showDetail="true" autoUpdate="true" closable="true" />
 			
 		<p:tabView>
-        <p:tab title="Veiculo">
+        <p:tab title="Veiculo">            
             
-            				<p:panelGrid columns="4" style="width: 100%; margin-top: 20px"
-					columnClasses="rotulo, campo, rotulo, campo">
-					
-					
+            		<p:panelGrid columns="4" style="width: 100%; margin-top: 20px"
+						columnClasses="rotulo, campo, rotulo, campo">	
+						
 
 					<h:outputText value="Placa no Veiculo" />
 					<p:inputText value="#{cadastroVeiculoBean.veiculo.placa}" />
@@ -158,21 +188,7 @@
 					<h:outputText value="Pessoa que alterou:" />
 					<p:inputText value="#{cadastroVeiculoBean.veiculo.pessoa.login}" readonly="true"/>	
 						
-				</p:panelGrid>
-			<h:commandButton action="#{cadastroVeiculoBean.editar()}" value="Editar" />
-			
-			
-			<h:link outcome="/site/Foto/Edicao/Foto" value="Foto">
-				<f:param name="codigo"  value="#{cadastroVeiculoBean.veiculo.codigo}"/>
-			</h:link>
-			
-			<p:commandButton value="Emitir Relatorio" icon="ui-icon-note" ajax="false"  onclick="this.form.target='_blank'"
-	    				action="#{cadastroVeiculoBean.gerarRelatorioVeiculo(cadastroVeiculoBean.veiculo.codigo)}" />			
-			
-			
-			<h:link outcome="/site/Ocorrencia/Consulta/Ocorrencia" value="Gerar Ocorrencia">
-				<f:param name="codigoVeiculo"  value="#{cadastroVeiculoBean.veiculo.codigo}"/>
-			</h:link>			
+				</p:panelGrid>			
 			
         </p:tab>
          <p:tab title="Fotos do Veiculo">
