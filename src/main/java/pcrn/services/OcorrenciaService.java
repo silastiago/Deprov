@@ -30,8 +30,8 @@ public class OcorrenciaService implements Serializable{
 	}
 	
 	@Transactional
-	public void remover(int codigoOcorrencia){
-		ocorrencias.remover(codigoOcorrencia);
+	public void remover(Ocorrencia ocorrencia){
+		ocorrencias.remover(ocorrencia);
 	}
 	
 	@Transactional

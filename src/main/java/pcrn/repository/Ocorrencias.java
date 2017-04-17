@@ -55,8 +55,8 @@ public class Ocorrencias implements IOcorrencia, Serializable{
 	*  Este metodo sobrescreve o da interface Ocorrencias.
 	*/
 	@Override
-	public void remover(int codigo_ocorrencia) {
-		Ocorrencia ocorrenciaTemporaria = manager.find(Ocorrencia.class, codigo_ocorrencia);
+	public void remover(Ocorrencia ocorrencia) {
+		Ocorrencia ocorrenciaTemporaria = manager.find(Ocorrencia.class, ocorrencia.getCodigo());
 		manager.remove(ocorrenciaTemporaria);
 
 	}

@@ -40,7 +40,7 @@
 			<h:form enctype="multipart/form-data" id="lista">
 				
 				
-			<p:dataTable value="#{cadastroOcorrenciaBean.listarOcorrencias(codigoVeiculo)}" var="ocorrencia" 
+			<p:dataTable value="#{cadastroOcorrenciaBean.ocorrencias}" var="ocorrencia" 
 						rows="10" rowsPerPageTemplate="5,10,15,20" id="mostraEquipamento"  paginator="true" >
 				
 			<p:column filterBy="#{ocorrencia.ocorrencia}"  style="text-align: center; width:5%" 

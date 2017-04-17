@@ -5,14 +5,14 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.annotation.PostConstruct;
 import javax.faces.context.FacesContext;
 import javax.faces.view.ViewScoped;
 import javax.inject.Inject;
 import javax.inject.Named;
 
-import org.primefaces.event.RowEditEvent;
-
 import pcrn.model.Ocorrencia;
+
 import pcrn.model.Veiculo;
 import pcrn.services.OcorrenciaService;
 import pcrn.util.FacesUtil;
@@ -26,20 +26,33 @@ public class CadastroOcorrenciaBean implements Serializable{
 	 */
 	private static final long serialVersionUID = 1L;
 
+	
+	
 	@Inject
 	private OcorrenciaService ocorrenciaService;
 	
 	private Ocorrencia ocorrencia = new Ocorrencia();
+	private Ocorrencia ocorrenciaSelecionada;
 	private List<Ocorrencia> ocorrencias = new ArrayList<Ocorrencia>();
 	private Veiculo veiculo = new Veiculo();
 	
-	public void cadastrar(String codigo) throws IOException {
-		int idVeiculo = Integer.parseInt(codigo);
+	
+	@PostConstruct
+	public void init(){
+		ocorrencias = this.listarOcorrencias();
+	}
+	
+	
+	public String cadastrar(String codigoVeiculo) throws IOException {
+		
+		int idVeiculo = Integer.parseInt(codigoVeiculo);
 		veiculo.setCodigo(idVeiculo);
 		ocorrencia.setVeiculo(veiculo);
 		ocorrenciaService.salvar(ocorrencia);
+		FacesUtil.addInfoMessage("Ocorrencia cadastrada com sucesso");		
+		FacesUtil.contextFlash();
 		
-	    FacesContext.getCurrentInstance().getExternalContext().redirect("Ocorrencia.xhtml?codigo="+codigo);
+		return "/site/Ocorrencia/Consulta/Ocorrencia.xhtml?codigoVeiculo="+codigoVeiculo+"faces-redirect=true";
 	}
 	
 	public String editar(String codigoVeiculo) throws IOException {
@@ -47,6 +60,8 @@ public class CadastroOcorrenciaBean implements Serializable{
 		veiculo.setCodigo(idVeiculo);
 		ocorrencia.setVeiculo(veiculo);
 		ocorrenciaService.salvar(ocorrencia);
+		FacesUtil.addInfoMessage("Ocorrencia alterada com sucesso");		
+		FacesUtil.contextFlash();
 		
 	    //FacesContext.getCurrentInstance().getExternalContext().redirect("/Deprov/site/Ocorrencia/Consulta/Ocorrencia.xhtml?codigoVeiculo="+codigoVeiculo);
 	    return "/site/Ocorrencia/Consulta/Ocorrencia.xhtml?codigoVeiculo="+codigoVeiculo+"faces-redirect=true";
@@ -56,51 +71,60 @@ public class CadastroOcorrenciaBean implements Serializable{
 	 * 	@param codigo, este codigo � o identificador do veiculo.
 	 * 	@return, retorna a pagina das ocorrencias daquele veiculo.
 	*/
-	public String voltar(String codigo){
-		return "/site/Veiculo/Edicao/Veiculo.xhtml?codigoVeiculo="+codigo+"faces-redirect=true";
+	public String voltar(String codigoVeiculo){
+		
+		String pagina = "/site/Veiculo/Edicao/Veiculo.xhtml?codigoVeiculo="+codigoVeiculo+"faces-redirect=true";
+		
+		return pagina;
+	}
+	
+	
+	public String novo(String codigoVeiculo){
+		
+		String pagina = "/site/Ocorrencia/Novo/Ocorrencia.xhtml?codigoVeiculo="+codigoVeiculo+"faces-redirect=true";
+		
+		return pagina;
 	}
 	
 	
 	/** Este metodo remove uma ocorrencia de um determinado veiculo.
 	 * 	@param codigo, este codigo � o identificador da ocorrencia.
 	*/
-	public String excluir(int codigoOcorrencia) throws IOException {
+	public String excluir(Ocorrencia ocorrencia, String codigoVeiculo) throws IOException {
+		
+		
 		System.out.println("Entrou no metodo de remoção");
 		
-		ocorrenciaService.remover(codigoOcorrencia);
+		ocorrenciaService.remover(ocorrencia);
 		FacesUtil.addInfoMessage("Ocorrencia: " +ocorrencia.getOcorrencia()+ " removida com sucesso");
+		FacesUtil.contextFlash();
 		
-		
-		return "/site/Ocorrencia/Consulta/Ocorrencia.xhtml?codigoVeiculo="+ocorrencia.getVeiculo().getCodigo()+"faces-redirect=true";
+		return "/site/Ocorrencia/Consulta/Ocorrencia.xhtml?codigoVeiculo="+codigoVeiculo+"faces-redirect=true";
 		
 	}
 	
 	/** Este metodo lista todoas as ocorrencias de um determinado veiculo.
 	 * 	@return List<Ocorrencia>, retorna a lista de ocorrencias daquele veiculo.
 	*/
-	public List<Ocorrencia> listarOcorrencias(String codigo){
+	public List<Ocorrencia> listarOcorrencias(){
 		
-		//Convertendo a string codigo que � o id do veiculo para um inteiro.
+		String codigo = FacesContext.getCurrentInstance().getExternalContext().getRequestParameterMap().get("codigoVeiculo");
+		//Convertendo a string codigo que o id do veiculo para um inteiro.
 		int idVeiculo = Integer.parseInt(codigo);
 		//A lista de ocorrencias recebe as ocorrencias daquele veiculo que se passou a identificador.
 		ocorrencias = ocorrenciaService.porCodigoVeiculo(idVeiculo);
 		//retorna a lista das ocorrencias daquele veiculo.
 		return ocorrencias;
+	}  
+    
+	public Ocorrencia getOcorrenciaSelecionada() {
+		return ocorrenciaSelecionada;
 	}
 
-	public void onRowEdit(RowEditEvent event) throws IOException {
-		Ocorrencia novaOcorrencia = (Ocorrencia) event.getObject();
-		ocorrenciaService.salvar(novaOcorrencia);
-		String codigo = novaOcorrencia.getVeiculo().getCodigo().toString();
-	    //FacesContext.getCurrentInstance().getExternalContext().redirect("Ocorrencia.xhtml?codigo="+codigo);
-		FacesContext.getCurrentInstance().getExternalContext().redirect("/site/Home.xhtml");
-	    
-    }
-     
-    public void onRowCancel(RowEditEvent event) {
-        
-    }
-	
+	public void setOcorrenciaSelecionada(Ocorrencia ocorrenciaSelecionada) {
+		this.ocorrenciaSelecionada = ocorrenciaSelecionada;
+	}
+
 	public Ocorrencia getOcorrencia() {
 		return ocorrencia;
 	}

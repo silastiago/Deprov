@@ -18,6 +18,7 @@
 				<p:toolbarGroup>
 				
 					<p:commandButton value="Editar" icon="ui-icon-pencil"
+						disabled="#{not seguranca.acessoEdicaoPermitido}" 
 						action="#{cadastroVeiculoBean.editar()}" process="@this" />
 					
 					<span class="ui-separator"> <span

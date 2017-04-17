@@ -12,32 +12,35 @@
 
 	<ui:define name="tituloJanela">Sistema com JSF 2.0 e Facelets</ui:define>
 	<ui:define name="conteudo">
-		<h:form id="frm">
+		<h:form enctype="multipart/form-data" acceptcharset="ISO-8859-1" id="form">
+			<div class="ui-fluid">
 			<p:messages for ="message" showDetail="true" autoUpdate="true" closable="true" />
 				<h1>Cadastro de Ocorrencia</h1>
+				<p:panelGrid columns="2" style="width: 100%; margin-top: 20px"
+					columnClasses="rotulo, campo">
+
+				<h:outputText value="Nome: " />
+				<h:inputText value="#{cadastroOcorrenciaBean.ocorrencia.ocorrencia}"  />
+
+				<p:outputLabel for="mask" value="Data:" />
+					<p:calendar id="mask" value="#{cadastroOcorrenciaBean.ocorrencia.data}"
+						pattern="dd/MM/yyyy" mask="true" navigator="true" showOn="button">
+						<f:convertDateTime pattern="dd/MM/yyyy" type="both" dateStyle="short" timeZone="GMT-3"/>						
+					</p:calendar>
 				
-				<p:toolbar id="toolbar">
-					<p:toolbarGroup>
+				<p:commandButton action="#{cadastroOcorrenciaBean.voltar(codigoVeiculo)}"  value="Voltar" />	
+				<p:commandButton action="#{cadastroOcorrenciaBean.cadastrar(codigoVeiculo)}"  update="lista" value="Salvar" />
+				
 
-					<p:commandButton value="Novo" icon="ui-icon-plus"
-						action="#{cadastroOcorrenciaBean.novo(codigoVeiculo)}" process="@this"
-						disabled="#{not seguranca.acessoCadastroPermitido}"/>
-
-					<span class="ui-separator"> <span
-						class="ui-icon ui-icon-grip-dotted-vertical" />
-					</span>
-
-					<p:commandButton value="Voltar" icon="ui-icon-arrowreturnthick-1-w"
-						title="Voltar" process="@this" action="#{cadastroOcorrenciaBean.voltar(codigoVeiculo)}" />	
-
-				</p:toolbarGroup>
-			</p:toolbar>			
+			</p:panelGrid>
+				</div>
+			</h:form>
+			
+			<h:form enctype="multipart/form-data" id="lista">
 				
 				
-			<p:dataTable id="tabela_ocorrencias" value="#{cadastroOcorrenciaBean.ocorrencias}" var="ocorrencia" 
-						frame="box" rules="all" cellpadding="3" width="100%" headerClass="cabecalho" 
-						rowClasses="cor-sim, cor-nao" columnClasses="nome"
-						rows="10" rowsPerPageTemplate="5,10,15,20" paginator="true" >
+			<p:dataTable value="#{cadastroOcorrenciaBean.ocorrencias}" var="ocorrencia" 
+						rows="10" rowsPerPageTemplate="5,10,15,20" id="mostraEquipamento"  paginator="true" >
 				
 			<p:column filterBy="#{ocorrencia.ocorrencia}"  style="text-align: center; width:5%" 
 					filterMatchMode="startsWith">
@@ -58,8 +61,7 @@
 			</p:column>
 			
 			<p:column style="text-align: center; width:3%">
-					<h:link outcome="/site/Ocorrencia/Edicao/Ocorrencia" value="Editar" 
-					disabled="#{not seguranca.acessoEdicaoPermitido}" >
+					<h:link outcome="Ocorrencia" value="Editar">
 					<i class="icon-edit"></i>
 					<f:param name="codigoOcorrencia"  value="#{ocorrencia.codigo}"/>
 					<f:param name="codigoVeiculo"  value="#{ocorrencia.veiculo.codigo}"/>
@@ -68,11 +70,11 @@
 			
 			<p:column style="text-align: center; width:3%">
 				<h:commandLink value="Excluir Ocorrencia"
-				 action="#{cadastroOcorrenciaBean.excluir(ocorrencia, codigoVeiculo)}" 
-				 disabled="#{not seguranca.acessoRemocaoPermitido}"
+				 action="#{cadastroOcorrenciaBean.excluir(ocorrencia.codigo)}" 
 				 onclick="if (!confirm('Confirmar a exclusão desta ocorrencia #{ocorrencia.ocorrencia} ? ')) return false"/>
 				 <i class="icon-remove-sign"></i>
 			</p:column>
+			
 			
 			
 			</p:dataTable>

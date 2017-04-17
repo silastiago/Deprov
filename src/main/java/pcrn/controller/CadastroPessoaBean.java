@@ -1,12 +1,9 @@
 package pcrn.controller;
 
-import java.io.IOException;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.enterprise.context.RequestScoped;
-import javax.faces.context.ExternalContext;
 import javax.faces.context.FacesContext;
 import javax.faces.view.ViewScoped;
 import javax.inject.Inject;
@@ -14,10 +11,8 @@ import javax.inject.Named;
 
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 
-import pcrn.model.Grupo;
 import pcrn.model.Pessoa;
 import pcrn.security.UsuarioSistema;
-import pcrn.services.GrupoService;
 import pcrn.services.PessoaService;
 import pcrn.util.FacesUtil;
 
@@ -29,10 +24,7 @@ public class CadastroPessoaBean implements Serializable{
 	/**
 	 * 
 	 */
-	private static final long serialVersionUID = 1L;
-	
-	@Inject
-	private ExternalContext externalContext;
+	private static final long serialVersionUID = 1L;	
 	
 	@Inject
 	private PessoaService pessoaService;
@@ -41,11 +33,18 @@ public class CadastroPessoaBean implements Serializable{
 	private Pessoa pessoaSelecionada;
 	private List<Pessoa> listaPessoas = new ArrayList<Pessoa>();
 	
-	public void cadastrar(){
+	public String cadastrar(){
+		
 		String senha = this.pessoa.getSenha();
 		pessoa.setSenha(FacesUtil.md5(senha));
 		pessoaService.salvar(pessoa);
-		FacesUtil.addInfoMessage("Pessoa cadastrada com sucesso");
+		
+		String pagina = "/site/Pessoa/Consulta/ListarPessoas.xhtml?faces-redirect=true";
+		FacesUtil.addInfoMessage("Pessoa cadastrada com sucesso");		
+		FacesUtil.contextFlash();
+		
+		return pagina;
+		
 	}
 
 	public String alterarSenha(){
@@ -87,7 +86,7 @@ public class CadastroPessoaBean implements Serializable{
 	public void excluir(){
 		
 		pessoaService.remover(pessoaSelecionada);
-		FacesUtil.addInfoMessage("Pessoa: " +pessoaSelecionada.getLogin()+ " removida com sucesso");
+		FacesUtil.addInfoMessage("Pessoa: " + pessoaSelecionada.getLogin()+ " removida com sucesso");
 	}
 	
 	public List<Pessoa> listarPessoas(){
