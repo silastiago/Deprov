@@ -4,20 +4,62 @@
 	xmlns:f="http://java.sun.com/jsf/core"
 	xmlns:ui="http://java.sun.com/jsf/facelets"
 	xmlns:p="http://primefaces.org/ui">
+	
 <ui:composition template="../../../templates/template.xhtml">
 	<ui:define name="tituloJanela">Sistema com JSF 2.0 e Facelets</ui:define>
-	<ui:define name="conteudo">
-	<p:messages for ="message" showDetail="true" autoUpdate="true" closable="true" />
-	<h1>Pessoas Cadastrados</h1>
+	<ui:define name="conteudo">	
 	
-			<h:form enctype="multipart/form-data">
+			<h:form id="frm">
+				<p:messages for ="message" showDetail="true" autoUpdate="true" closable="true" />
+				<h1>Pessoas Cadastrados</h1>
 			
-			<p:dataTable var="pessoa" value="#{cadastroPessoaBean.listarPessoas()}"
-			frame="box" rules="all" cellpadding="3"
-				width="100%" headerClass="cabecalho" rowClasses="cor-sim, cor-nao"
-				columnClasses="nome">
+				<p:toolbar id="toolbar">
+					<p:toolbarGroup>
+
+					<p:commandButton value="Novo" icon="ui-icon-plus"
+						action="#{cadastroPessoaBean.novo()}" process="@this"
+						disabled="#{not seguranca.acessoCadastroPermitido}"/>
+
+					<span class="ui-separator"> <span
+						class="ui-icon ui-icon-grip-dotted-vertical" />
+					</span>
+
+					<p:commandButton value="Editar" icon="ui-icon-pencil"
+						title="Editar" process="@this" action="#{cadastroPessoaBean.edicao()}"  
+						disabled="#{cadastroPessoaBean.pessoaSelecionada == null or not seguranca.acessoEdicaoPermitido}" />
+
+					<span class="ui-separator"> <span
+						class="ui-icon ui-icon-grip-dotted-vertical" />
+					</span>
+
+					<p:commandButton value="Excluir" icon="ui-icon-trash"
+						title="Excluir" process="@this" update="tabela_pessoas toolbar"
+						action="#{cadastroPessoaBean.excluir}"
+						disabled="#{cadastroPessoaBean.pessoaSelecionada == null or not seguranca.acessoRemocaoPermitido}"
+						onclick="if (!confirm('Deseja deletar  #{cadastroPessoaBean.pessoaSelecionada.login} ? ')) return false" />
+
+					<span class="ui-separator"> <span
+						class="ui-icon ui-icon-grip-dotted-vertical" />
+					</span>
+
+					<p:commandButton value="Alterar Senha" icon="ui-icon-pencil"
+						title="Editar" process="@this" action="#{cadastroPessoaBean.alteracaoSenha}"
+						disabled="#{cadastroPessoaBean.pessoaSelecionada == null or not seguranca.acessoEdicaoPermitido}" />
+					
+
+				</p:toolbarGroup>
+			</p:toolbar>
+			
+			
+			<p:dataTable id="tabela_pessoas" var="pessoa" value="#{cadastroPessoaBean.listarPessoas()}"
+				frame="box" rules="all" cellpadding="3" width="100%" headerClass="cabecalho" 
+				rowClasses="cor-sim, cor-nao" columnClasses="nome" 
+				selection="#{cadastroPessoaBean.pessoaSelecionada}" 
+				selectionMode="single" rowKey="#{pessoa.codigo}">
 				
 				
+			<p:ajax event="rowSelect" update=":frm:toolbar" />
+			<p:ajax event="rowUnselect" update=":frm:toolbar" />
 				
 			<p:column filterBy="#{pessoa.login}"  style="text-align: center; width:5%" 
 					filterMatchMode="startsWith">
@@ -35,28 +77,6 @@
 						<h:outputText value="#{grupo.nome}" />
 						<br></br>
 					</ui:repeat>
-				</p:column>
-			
-				
-			<p:column style="text-align: center; width:3%">
-					<h:link outcome="/site/Pessoa/Edicao/Pessoa" value="Editar">
-					<i class="icon-edit"></i>
-					<f:param name="codigo"  value="#{pessoa.codigo}"/>
-					</h:link>
-			</p:column>
-				
-			<p:column style="text-align: center; width:3%">
-					<h:link outcome="/site/Pessoa/Edicao/PessoaSenha" value="Alterar Senha">
-					<i class="icon-edit"></i>
-					<f:param name="codigo"  value="#{pessoa.codigo}"/>
-					</h:link>
-			</p:column>
-			
-			<p:column style="text-align: center; width:3%">
-				<h:commandLink value="Excluir"
-				 action="#{cadastroPessoaBean.excluir(pessoa)}"
-				 onclick="if (!confirm('Confirmar a exclusão desta Pessoa ? ')) return false"/>
-				 <i class="icon-remove-sign"></i>
 			</p:column>
 			
 			</p:dataTable>

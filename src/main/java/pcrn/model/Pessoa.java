@@ -59,7 +59,7 @@ public class Pessoa implements Serializable{
 	}
 	
 	@NotNull(message = "Grupo deve ser informado")
-	@ManyToMany(fetch=FetchType.LAZY)
+	@ManyToMany(fetch=FetchType.EAGER)
 	@JoinTable(name = "usuario_grupo", joinColumns = @JoinColumn(name="codigo_usuario"),
 			inverseJoinColumns = @JoinColumn(name = "codigo_grupo"))
 	public List<Grupo> getGrupos() {
@@ -74,7 +74,6 @@ public class Pessoa implements Serializable{
 		final int prime = 31;
 		int result = 1;
 		result = prime * result + ((codigo == null) ? 0 : codigo.hashCode());
-		result = prime * result + ((grupos == null) ? 0 : grupos.hashCode());
 		result = prime * result + ((login == null) ? 0 : login.hashCode());
 		result = prime * result + ((senha == null) ? 0 : senha.hashCode());
 		return result;
@@ -92,11 +91,6 @@ public class Pessoa implements Serializable{
 			if (other.codigo != null)
 				return false;
 		} else if (!codigo.equals(other.codigo))
-			return false;
-		if (grupos == null) {
-			if (other.grupos != null)
-				return false;
-		} else if (!grupos.equals(other.grupos))
 			return false;
 		if (login == null) {
 			if (other.login != null)

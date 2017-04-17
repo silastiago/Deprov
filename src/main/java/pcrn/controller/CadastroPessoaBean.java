@@ -1,24 +1,29 @@
 package pcrn.controller;
 
+import java.io.IOException;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
 import javax.enterprise.context.RequestScoped;
+import javax.faces.context.ExternalContext;
 import javax.faces.context.FacesContext;
+import javax.faces.view.ViewScoped;
 import javax.inject.Inject;
 import javax.inject.Named;
 
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 
+import pcrn.model.Grupo;
 import pcrn.model.Pessoa;
 import pcrn.security.UsuarioSistema;
+import pcrn.services.GrupoService;
 import pcrn.services.PessoaService;
 import pcrn.util.FacesUtil;
 
 
 @Named
-@RequestScoped
+@ViewScoped
 public class CadastroPessoaBean implements Serializable{
 
 	/**
@@ -27,9 +32,13 @@ public class CadastroPessoaBean implements Serializable{
 	private static final long serialVersionUID = 1L;
 	
 	@Inject
+	private ExternalContext externalContext;
+	
+	@Inject
 	private PessoaService pessoaService;
 	
 	private Pessoa pessoa = new Pessoa();
+	private Pessoa pessoaSelecionada;
 	private List<Pessoa> listaPessoas = new ArrayList<Pessoa>();
 	
 	public void cadastrar(){
@@ -39,20 +48,30 @@ public class CadastroPessoaBean implements Serializable{
 		FacesUtil.addInfoMessage("Pessoa cadastrada com sucesso");
 	}
 
-	public void alterarSenha(){
+	public String alterarSenha(){
 		
 		String senha = this.pessoa.getSenha();
 		pessoa.setSenha(FacesUtil.md5(senha));
 		pessoaService.salvar(pessoa);
+		String pagina = "/site/Pessoa/Consulta/ListarPessoas.xhtml?faces-redirect=true";
 		
 		FacesUtil.addInfoMessage("Senha alterada com sucesso");
+		FacesUtil.contextFlash();
+		
+		return pagina;
 		
 	}
 	
-	public void editar(){
+	public String editar(){
 		
 		pessoaService.salvar(pessoa);
-		FacesUtil.addInfoMessage("pessoa alterada com sucesso");
+		FacesUtil.addInfoMessage("Pessoa alterada com sucesso");
+		FacesUtil.contextFlash();
+		
+		String pagina = "/site/Pessoa/Consulta/ListarPessoas.xhtml?faces-redirect=true";
+		
+		return pagina;
+		
 	}
 	
 	public void alterarPropriaSenha(){
@@ -65,16 +84,17 @@ public class CadastroPessoaBean implements Serializable{
 		
 	}	
 	
-	public void excluir(Pessoa pessoa){
-		pessoaService.remover(pessoa);
-		FacesUtil.addInfoMessage("Pessoa: " +pessoa.getLogin()+ " removida com sucesso");
+	public void excluir(){
+		
+		pessoaService.remover(pessoaSelecionada);
+		FacesUtil.addInfoMessage("Pessoa: " +pessoaSelecionada.getLogin()+ " removida com sucesso");
 	}
 	
 	public List<Pessoa> listarPessoas(){
 		listaPessoas = pessoaService.listar();
 		return listaPessoas;
 	}
-
+	
 	private UsuarioSistema getUsuarioLogado() {
 		UsuarioSistema usuario = null;
 		
@@ -88,6 +108,36 @@ public class CadastroPessoaBean implements Serializable{
 		return usuario;
 	} 
 	
+	public String novo(){
+		
+		String pagina = "/site/Pessoa/Novo/Pessoa.xhtml?faces-redirect=true";
+		
+		return pagina;
+	}
+	
+	public String edicao(){
+		
+		String pagina = "/site/Pessoa/Edicao/Pessoa.xhtml?codigo="+pessoaSelecionada.getCodigo()+"faces-redirect=true";
+		
+		return pagina;
+	}
+	
+	public String alteracaoSenha(){
+		
+		String pagina = "/site/Pessoa/Edicao/PessoaSenha.xhtml?codigo="+pessoaSelecionada.getCodigo()+"faces-redirect=true";
+		
+		return pagina;
+	}
+	
+	
+	public Pessoa getPessoaSelecionada() {
+		return pessoaSelecionada;
+	}
+
+	public void setPessoaSelecionada(Pessoa pessoaSelecionada) {
+		this.pessoaSelecionada = pessoaSelecionada;
+	}
+
 	public Pessoa getPessoa() {
 		return pessoa;
 	}

@@ -45,7 +45,7 @@
 		<intercept-url pattern="/site/Grupo/Edicao/**" access="hasAnyRole('ADMINISTRADOR')"  />
 		<intercept-url pattern="/site/Grupo/Novo/**" access="hasAnyRole('ADMINISTRADOR')"  />
 		
-		<intercept-url pattern="/site/Pessoa/Consulta/**" access="hasAnyRole('ADMINISTRADOR')" />
+		<intercept-url pattern="/site/Pessoa/Consulta/**" access="hasAnyRole('ADMINISTRADOR', 'CONSULTA')" />
 		<intercept-url pattern="/site/Pessoa/Edicao/**" access="hasAnyRole('ADMINISTRADOR')" />
 		<intercept-url pattern="/site/Pessoa/Novo/**" access="hasAnyRole('ADMINISTRADOR')" />
 		<intercept-url pattern="/site/Pessoa/MudarSenha/**" access="isAuthenticated()" />

@@ -78,6 +78,12 @@ public class FacesUtil {
 		return request.getAttribute(name);
 	}
 	
+	public static void contextFlash(){
+		FacesContext fc = FacesContext.getCurrentInstance(); 
+		fc.getExternalContext().getFlash().setKeepMessages(true);
+	}
+	
+	
 	public static void addErrorMessage(String message) {
 		FacesContext.getCurrentInstance().addMessage(null, 
 				new FacesMessage(FacesMessage.SEVERITY_ERROR, message, message));
