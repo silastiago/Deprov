@@ -44,21 +44,6 @@
 						<h:outputText value="Cor" />
 					</f:facet>
 					<h:outputText value="#{cor.cor}" />
-			</p:column>	
-				
-			<p:column style="text-align: center; width:3%">
-					<h:link outcome="/site/Cor/Edicao/Cor" value="Editar">
-					<i class="icon-edit"></i>
-					<f:param name="codigo"  value="#{cor.codigo}"/>
-					</h:link>
-			</p:column>
-				
-			
-			<p:column style="text-align: center; width:3%">
-				<h:commandLink value="Excluir"
-				 action="#{cadastroCorBean.excluir(cor)}"
-				 onclick="if (!confirm('Confirmar a exclusão desta Cor ? ')) return false"/>
-				 <i class="icon-remove-sign"></i>
 			</p:column>
 			
 			</p:dataTable>

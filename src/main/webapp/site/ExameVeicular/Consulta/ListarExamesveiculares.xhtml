@@ -8,14 +8,50 @@
 	<ui:define name="tituloJanela">Sistema com JSF 2.0 e Facelets</ui:define>
 	<ui:define name="conteudo">
 	
-	<h1>Exames Veiculares Cadastrados</h1>
 	
-			<h:form enctype="multipart/form-data">
+	
+			<h:form id="frm">
+				<p:messages for ="message" showDetail="true" autoUpdate="true" closable="true" />
+				<h1>Exames Veiculares Cadastrados</h1>
 			
-			<p:dataTable var="exame" value="#{cadastroPericiaBean.listaPericia()}"
-			frame="box" rules="all" cellpadding="3"
-				width="100%" headerClass="cabecalho" rowClasses="cor-sim, cor-nao"
-				columnClasses="nome">
+				<p:toolbar id="toolbar">
+					<p:toolbarGroup>
+
+					<p:commandButton value="Novo" icon="ui-icon-plus"
+						action="#{cadastroPericiaBean.novo()}" process="@this"
+						disabled="#{not seguranca.acessoCadastroPermitido}"/>
+
+					<span class="ui-separator"> <span
+						class="ui-icon ui-icon-grip-dotted-vertical" />
+					</span>
+
+					<p:commandButton value="Editar" icon="ui-icon-pencil"
+						title="Editar" process="@this" action="#{cadastroPericiaBean.edicao()}"  
+						disabled="#{cadastroPericiaBean.periciaSelecionada == null or not seguranca.acessoEdicaoPermitido}" />
+
+					<span class="ui-separator"> <span
+						class="ui-icon ui-icon-grip-dotted-vertical" />
+					</span>
+
+					<p:commandButton value="Excluir" icon="ui-icon-trash"
+						title="Excluir" process="@this" update="tabela_exames toolbar"
+						action="#{cadastroPericiaBean.excluir}"
+						disabled="#{cadastroPericiaBean.periciaSelecionada == null or not seguranca.acessoRemocaoPermitido}"
+						onclick="if (!confirm('Deseja deletar  #{cadastroPericiaBean.periciaSelecionada.pericia} ? ')) return false" />
+					
+
+				</p:toolbarGroup>
+			</p:toolbar>
+			
+			<p:dataTable id="tabela_exames" var="exame" value="#{cadastroPericiaBean.listaPericia()}"
+						frame="box" rules="all" cellpadding="3" width="100%" headerClass="cabecalho" 
+						rowClasses="cor-sim, cor-nao" columnClasses="nome"
+						selection="#{cadastroPericiaBean.periciaSelecionada}" 
+						selectionMode="single" rowKey="#{exame.codigo}">										
+				
+			<p:ajax event="rowSelect" update=":frm:toolbar" />
+			<p:ajax event="rowUnselect" update=":frm:toolbar" />		
+				
 				
 			<p:column filterBy="#{exame.pericia}"  style="text-align: center; width:5%" 
 					filterMatchMode="startsWith">
@@ -23,20 +59,6 @@
 						<h:outputText value="Exame Veicular" />
 					</f:facet>
 					<h:outputText value="#{exame.pericia}" />
-			</p:column>	
-				
-			<p:column style="text-align: center; width:3%">
-					<h:link outcome="/site/ExameVeicular/Edicao/ExameVeicular" value="Editar">
-					<i class="icon-edit"></i>
-					<f:param name="codigo"  value="#{exame.codigo}"/>
-					</h:link>
-			</p:column>
-			
-			<p:column style="text-align: center; width:3%">
-				<h:commandLink value="Excluir"
-				 action="#{cadastroPericiaBean.excluir(exame)}"
-				 onclick="if (!confirm('Confirmar a exclusão deste Exame Veicular? ')) return false"/>
-				 <i class="icon-remove-sign"></i>
 			</p:column>
 			
 			</p:dataTable>

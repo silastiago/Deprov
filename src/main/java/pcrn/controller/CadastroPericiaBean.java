@@ -4,7 +4,7 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.enterprise.context.RequestScoped;
+import javax.faces.view.ViewScoped;
 import javax.inject.Inject;
 import javax.inject.Named;
 
@@ -13,7 +13,7 @@ import pcrn.services.PericiaService;
 import pcrn.util.FacesUtil;
 
 @Named
-@RequestScoped
+@ViewScoped
 public class CadastroPericiaBean implements Serializable{
 
 	/**
@@ -24,26 +24,37 @@ public class CadastroPericiaBean implements Serializable{
 	@Inject
 	private PericiaService periciaService;
 	
-	private Pericia pericia = new Pericia();	
+	private Pericia pericia = new Pericia();
+	private Pericia periciaSelecionada;
 	private List<Pericia> listaPericias = new ArrayList<Pericia>();
 	
-	public void cadastrar(){
+	public String cadastrar(){
 		
-		periciaService.salvar(pericia);	
+		periciaService.salvar(pericia);
+		String pagina = "/site/ExameVeicular/Consulta/ListarExameVeiculares.xhtml?faces-redirect=true";
 		FacesUtil.addInfoMessage("Exame Veicular cadastrado com sucesso");		
+		FacesUtil.contextFlash();
+		
+		return pagina;
 	}
 	
-	public void editar(){
+	public String editar(){
 		
 		periciaService.salvar(pericia);	
+		
+		String pagina = "/site/ExameVeicular/Consulta/ListarExameVeiculares.xhtml?faces-redirect=true";
 		FacesUtil.addInfoMessage("Exame Veicular alterado com sucesso");		
+		FacesUtil.contextFlash();
+		
+		return pagina;
+				
 	}
 	
 	
-	public void excluir(Pericia pericia){
+	public void excluir(){
 		
-		periciaService.remover(pericia);
-		FacesUtil.addInfoMessage("Exame Veicular: " +pericia.getPericia()+ " removido com sucesso");
+		periciaService.remover(periciaSelecionada);
+		FacesUtil.addInfoMessage("Exame Veicular: " +periciaSelecionada.getPericia()+ " removido com sucesso");
 		
 	}
 	
@@ -52,6 +63,29 @@ public class CadastroPericiaBean implements Serializable{
 		listaPericias = periciaService.listar();
 		
 		return listaPericias;
+	}
+	
+	public String novo(){
+		
+		String pagina = "/site/ExameVeicular/Novo/ExameVeicular.xhtml?faces-redirect=true";
+		
+		return pagina;
+	}
+	
+	public String edicao(){
+		
+		String pagina = "/site/ExameVeicular/Edicao/ExameVeicular.xhtml?codigo="+periciaSelecionada.getCodigo()+"faces-redirect=true";
+		
+		return pagina;
+	}
+	
+	
+	public Pericia getPericiaSelecionada() {
+		return periciaSelecionada;
+	}
+
+	public void setPericiaSelecionada(Pericia periciaSelecionada) {
+		this.periciaSelecionada = periciaSelecionada;
 	}
 
 	public Pericia getPericia() {

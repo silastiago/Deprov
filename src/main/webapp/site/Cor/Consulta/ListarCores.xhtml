@@ -8,18 +8,47 @@
 	<ui:define name="tituloJanela">Sistema com JSF 2.0 e Facelets</ui:define>
 	<ui:define name="conteudo">
 	
-	<h1>Lista de Cores Cadastradas</h1>
-	
-			<h:form enctype="multipart/form-data">
+			<h:form id="frm">
+				<p:messages for ="message" showDetail="true" autoUpdate="true" closable="true" />
+				<h1>Cores Cadastradas</h1>
 			
-			<h:messages />
+				<p:toolbar id="toolbar">
+					<p:toolbarGroup>
+
+					<p:commandButton value="Novo" icon="ui-icon-plus"
+						action="#{cadastroCorBean.novo()}" process="@this"
+						disabled="#{not seguranca.acessoCadastroPermitido}"/>
+
+					<span class="ui-separator"> <span
+						class="ui-icon ui-icon-grip-dotted-vertical" />
+					</span>
+
+					<p:commandButton value="Editar" icon="ui-icon-pencil"
+						title="Editar" process="@this" action="#{cadastroCorBean.edicao()}"  
+						disabled="#{cadastroCorBean.corSelecionada == null or not seguranca.acessoEdicaoPermitido}" />
+
+					<span class="ui-separator"> <span
+						class="ui-icon ui-icon-grip-dotted-vertical" />
+					</span>
+
+					<p:commandButton value="Excluir" icon="ui-icon-trash"
+						title="Excluir" process="@this" update="tabela_cores toolbar"
+						action="#{cadastroCorBean.excluir}"
+						disabled="#{cadastroCorBean.corSelecionada == null or not seguranca.acessoRemocaoPermitido}"
+						onclick="if (!confirm('Deseja deletar  #{cadastroCorBean.corSelecionada.cor} ? ')) return false" />
+
+				</p:toolbarGroup>
+			</p:toolbar>
 			
 			
-			<p:dataTable var="cor" value="#{cadastroCorBean.listarCores()}"
-			frame="box" rules="all" cellpadding="3"
-				width="100%" headerClass="cabecalho" rowClasses="cor-sim, cor-nao"
-				columnClasses="nome">
+			<p:dataTable id="tabela_cores" var="cor" value="#{cadastroCorBean.listarCores()}"
+						frame="box" rules="all" cellpadding="3" width="100%" headerClass="cabecalho" 
+						rowClasses="cor-sim, cor-nao" columnClasses="nome"
+						selection="#{cadastroCorBean.corSelecionada}" 
+						selectionMode="single" rowKey="#{cor.codigo}">				
 				
+			<p:ajax event="rowSelect" update=":frm:toolbar" />
+			<p:ajax event="rowUnselect" update=":frm:toolbar" />	
 				
 				
 			<p:column filterBy="#{cor.cor}"  style="text-align: center; width:5%" 
@@ -28,21 +57,6 @@
 						<h:outputText value="Cor" />
 					</f:facet>
 					<h:outputText value="#{cor.cor}" />
-			</p:column>	
-				
-			<p:column style="text-align: center; width:3%">
-					<h:link outcome="/site/Cor/Edicao/Cor" value="Editar">
-					<i class="icon-edit"></i>
-					<f:param name="codigo"  value="#{cor.codigo}"/>
-					</h:link>
-			</p:column>
-				
-			
-			<p:column style="text-align: center; width:3%">
-				<h:commandLink value="Excluir"
-				 action="#{cadastroCorBean.excluir(cor)}"
-				 onclick="if (!confirm('Confirmar a exclusão desta Cor ? ')) return false"/>
-				 <i class="icon-remove-sign"></i>
 			</p:column>
 			
 			</p:dataTable>

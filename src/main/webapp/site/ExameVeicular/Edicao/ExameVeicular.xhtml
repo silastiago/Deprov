@@ -44,20 +44,6 @@
 						<h:outputText value="Exame Veicular" />
 					</f:facet>
 					<h:outputText value="#{exame.pericia}" />
-			</p:column>	
-				
-			<p:column style="text-align: center; width:3%">
-					<h:link outcome="/site/ExameVeicular/Edicao/ExameVeicular" value="Editar">
-					<i class="icon-edit"></i>
-					<f:param name="codigo"  value="#{exame.codigo}"/>
-					</h:link>
-			</p:column>
-			
-			<p:column style="text-align: center; width:3%">
-				<h:commandLink value="Excluir"
-				 action="#{cadastroPericiaBean.excluir(exame)}"
-				 onclick="if (!confirm('Confirmar a exclusão deste Exame Veicular? ')) return false"/>
-				 <i class="icon-remove-sign"></i>
 			</p:column>
 			
 			</p:dataTable>

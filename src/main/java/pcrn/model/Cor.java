@@ -17,8 +17,12 @@ import javax.persistence.Table;
 
 @Entity
 @Table
-public class Cor implements Serializable, Cloneable{
+public class Cor implements Serializable{
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private Integer codigo;
 	private String cor;
 
