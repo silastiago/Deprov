@@ -45,6 +45,7 @@ public class Foto implements Serializable, Cloneable{
 	public void setPath(String path) {
 		this.path = path;
 	}
+	
 	@ManyToOne
 	@JoinColumn(name="codigo_veiculo")
 	public Veiculo getVeiculo() {

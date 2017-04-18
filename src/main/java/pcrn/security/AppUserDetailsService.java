@@ -21,8 +21,7 @@ public class AppUserDetailsService implements UserDetailsService {
 	public UserDetails loadUserByUsername(String login) throws UsernameNotFoundException {
 		Pessoas pessoas = CDIServiceLocator.getBean(Pessoas.class);
 		
-		
-		Pessoa pessoa = pessoas.porLogin(login);
+		Pessoa pessoa = pessoas.porLogin(login);		
 		
 		UsuarioSistema user = null;
 		

@@ -163,7 +163,7 @@ public class CadastroVeiculoBean implements Serializable{
 				}
 				FacesContext.getCurrentInstance().addMessage("message", new FacesMessage(FacesMessage.SEVERITY_ERROR, "","Local da Chave ja ocupado por veiculos de placas "+ placas));
 			}else{
-				veiculo.setPessoa(pessoa);
+				veiculo.setPessoa(pessoa);				
 				veiculoService.editar(veiculo);
 				FacesContext.getCurrentInstance().addMessage("message", new FacesMessage(FacesMessage.SEVERITY_INFO, "","Veiculo Editado"));
 				

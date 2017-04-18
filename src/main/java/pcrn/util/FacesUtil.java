@@ -147,124 +147,164 @@ public class FacesUtil {
 				
 				if (listaObjetos.get(0).equals("fabricante.fabricante")  && listaObjetos.get(1).equals("cor.cor")) {
 					//relatorio = "/opt/tomcat/webapps/Deprov/resources/relatorios/parametros/2/CorFabricante.jasper";
-					relatorio = "/var/lib/tomcat/webapps/Deprov/resources/relatorios/parametros/2/CorFabricante.jasper";
+					//relatorio = "/var/lib/tomcat/webapps/Deprov/resources/relatorios/parametros/2/CorFabricante.jasper";
+					relatorio = "/relatorios/parametros/2/CorFabricante.jasper";
 				}else if (listaObjetos.get(0).equals("cor.cor") && listaObjetos.get(1).equals("fabricante.fabricante")) {
 					//relatorio = "/opt/tomcat/webapps/Deprov/resources/relatorios/parametros/2/CorFabricante.jasper";
-					relatorio = "/var/lib/tomcat/webapps/Deprov/resources/relatorios/parametros/2/CorFabricante.jasper";
+					//relatorio = "/var/lib/tomcat/webapps/Deprov/resources/relatorios/parametros/2/CorFabricante.jasper";
+					relatorio = "/relatorios/parametros/2/CorFabricante.jasper";
 				}else if (listaObjetos.get(0).equals("modelo.modelo")  && listaObjetos.get(1).equals("cor.cor")) {
 					//relatorio = "/opt/tomcat/webapps/Deprov/resources/relatorios/parametros/2/CorModelo.jasper";
-					relatorio = "/var/lib/tomcat/webapps/Deprov/resources/relatorios/parametros/2/CorModelo.jasper";
+					//relatorio = "/var/lib/tomcat/webapps/Deprov/resources/relatorios/parametros/2/CorModelo.jasper";
+					relatorio = "/relatorios/parametros/2/CorModelo.jasper";
 				}else if (listaObjetos.get(0).equals("cor.cor") && listaObjetos.get(1).equals("modelo.modelo")) {
 					//relatorio = "/opt/tomcat/webapps/Deprov/resources/relatorios/parametros/2/CorModelo.jasper";
-					relatorio = "/var/lib/tomcat/webapps/Deprov/resources/relatorios/parametros/2/CorModelo.jasper";
+					//relatorio = "/var/lib/tomcat/webapps/Deprov/resources/relatorios/parametros/2/CorModelo.jasper";
+					relatorio = "/relatorios/parametros/2/CorModelo.jasper";
 				}else if (listaObjetos.get(0).equals("seguro.seguro")  && listaObjetos.get(1).equals("cor.cor")) {
 					//relatorio = "/opt/tomcat/webapps/Deprov/resources/relatorios/parametros/2/CorSeguro.jasper";
-					relatorio = "/var/lib/tomcat/webapps/Deprov/resources/relatorios/parametros/2/CorSeguro.jasper";
+					//relatorio = "/var/lib/tomcat/webapps/Deprov/resources/relatorios/parametros/2/CorSeguro.jasper";
+					relatorio = "/relatorios/parametros/2/CorSeguro.jasper";
 				}else if (listaObjetos.get(0).equals("cor.cor") && listaObjetos.get(1).equals("seguro.seguro")) {
 					//relatorio = "/opt/tomcat/webapps/Deprov/resources/relatorios/parametros/2/CorSeguro.jasper";
-					relatorio = "/var/lib/tomcat/webapps/Deprov/resources/relatorios/parametros/2/CorSeguro.jasper";
+					//relatorio = "/var/lib/tomcat/webapps/Deprov/resources/relatorios/parametros/2/CorSeguro.jasper";
+					relatorio = "/relatorios/parametros/2/CorSeguro.jasper";
 				}else if (listaObjetos.get(0).equals("pericia.pericia")  && listaObjetos.get(1).equals("cor.cor")) {
 					//relatorio = "/opt/tomcat/webapps/Deprov/resources/relatorios/parametros/2/CorPericia.jasper";
-					relatorio = "/var/lib/tomcat/webapps/Deprov/resources/relatorios/parametros/2/CorPericia.jasper";
+					//relatorio = "/var/lib/tomcat/webapps/Deprov/resources/relatorios/parametros/2/CorPericia.jasper";
+					relatorio = "/relatorios/parametros/2/CorPericia.jasper";
 				}else if (listaObjetos.get(0).equals("cor.cor") && listaObjetos.get(1).equals("pericia.pericia")) {
 					//relatorio = "/opt/tomcat/webapps/Deprov/resources/relatorios/parametros/2/CorPericia.jasper";
-					relatorio = "/var/lib/tomcat/webapps/Deprov/resources/relatorios/parametros/2/CorPericia.jasper";	
+					//relatorio = "/var/lib/tomcat/webapps/Deprov/resources/relatorios/parametros/2/CorPericia.jasper";
+					relatorio = "/relatorios/parametros/2/CorPericia.jasper";
 				}else if (listaObjetos.get(0).equals("situacao.situacao")  && listaObjetos.get(1).equals("cor.cor")) {
 					//relatorio = "/opt/tomcat/webapps/Deprov/resources/relatorios/parametros/2/CorSituacao.jasper";
-					relatorio = "/var/lib/tomcat/webapps/Deprov/resources/relatorios/parametros/2/CorSituacao.jasper";
+					//relatorio = "/var/lib/tomcat/webapps/Deprov/resources/relatorios/parametros/2/CorSituacao.jasper";
+					relatorio = "/relatorios/parametros/2/CorSituacao.jasper";
 				}else if (listaObjetos.get(0).equals("cor.cor") && listaObjetos.get(1).equals("situacao.situacao")) {
 					//relatorio = "/opt/tomcat/webapps/Deprov/resources/relatorios/parametros/2/CorSituacao.jasper";
-					relatorio = "/var/lib/tomcat/webapps/Deprov/resources/relatorios/parametros/2/CorSituacao.jasper";
+					//relatorio = "/var/lib/tomcat/webapps/Deprov/resources/relatorios/parametros/2/CorSituacao.jasper";
+					relatorio = "/relatorios/parametros/2/CorSituacao.jasper";
 				}else if (listaObjetos.get(0).equals("local.local")  && listaObjetos.get(1).equals("cor.cor")) {
 					//relatorio = "/opt/tomcat/webapps/Deprov/resources/relatorios/parametros/2/CorLocal.jasper";
-					relatorio = "/var/lib/tomcat/webapps/Deprov/resources/relatorios/parametros/2/CorLocal.jasper";
+					//relatorio = "/var/lib/tomcat/webapps/Deprov/resources/relatorios/parametros/2/CorLocal.jasper";
+					relatorio = "/relatorios/parametros/2/CorLocal.jasper";
 				}else if (listaObjetos.get(0).equals("cor.cor") && listaObjetos.get(1).equals("local.local")) {
 					//relatorio = "/opt/tomcat/webapps/Deprov/resources/relatorios/parametros/2/CorLocal.jasper";
-					relatorio = "/var/lib/tomcat/webapps/Deprov/resources/relatorios/parametros/2/CorLocal.jasper";
+					//relatorio = "/var/lib/tomcat/webapps/Deprov/resources/relatorios/parametros/2/CorLocal.jasper";
+					relatorio = "/relatorios/parametros/2/CorLocal.jasper";
 				}else if (listaObjetos.get(0).equals("fabricante.fabricante")  && listaObjetos.get(1).equals("seguro.seguro")) {
 					//relatorio = "/opt/tomcat/webapps/Deprov/resources/relatorios/parametros/2/FabricanteSeguro.jasper";
-					relatorio = "/var/lib/tomcat/webapps/Deprov/resources/relatorios/parametros/2/FabricanteSeguro.jasper"; 
+					//relatorio = "/var/lib/tomcat/webapps/Deprov/resources/relatorios/parametros/2/FabricanteSeguro.jasper";
+					relatorio = "/relatorios/parametros/2/FabricanteSeguro.jasper";
 				}else if (listaObjetos.get(0).equals("seguro.seguro") && listaObjetos.get(1).equals("fabricante.fabricante")) {
 					//relatorio = "/opt/tomcat/webapps/Deprov/resources/relatorios/parametros/2/FabricanteSeguro.jasper";
-					relatorio = "/var/lib/tomcat/webapps/Deprov/resources/relatorios/parametros/2/FabricanteSeguro.jasper"; 
+					//relatorio = "/var/lib/tomcat/webapps/Deprov/resources/relatorios/parametros/2/FabricanteSeguro.jasper";
+					relatorio = "/relatorios/parametros/2/FabricanteSeguro.jasper";
 				}else if (listaObjetos.get(0).equals("fabricante.fabricante")  && listaObjetos.get(1).equals("pericia.pericia")) {
 					//relatorio = "/opt/tomcat/webapps/Deprov/resources/relatorios/parametros/2/FabricantePericia.jasper";
-					relatorio = "/var/lib/tomcat/webapps/Deprov/resources/relatorios/parametros/2/FabricantePericia.jasper"; 
+					//relatorio = "/var/lib/tomcat/webapps/Deprov/resources/relatorios/parametros/2/FabricantePericia.jasper";
+					relatorio = "/relatorios/parametros/2/FabricantePericia.jasper";
 				}else if (listaObjetos.get(0).equals("pericia.pericia") && listaObjetos.get(1).equals("fabricante.fabricante")) {
 					//relatorio = "/opt/tomcat/webapps/Deprov/resources/relatorios/parametros/2/FabricantePericia.jasper";
-					relatorio = "/var/lib/tomcat/webapps/Deprov/resources/relatorios/parametros/2/FabricantePericia.jasper";
+					//relatorio = "/var/lib/tomcat/webapps/Deprov/resources/relatorios/parametros/2/FabricantePericia.jasper";
+					relatorio = "/relatorios/parametros/2/FabricantePericia.jasper";
 				}else if (listaObjetos.get(0).equals("fabricante.fabricante")  && listaObjetos.get(1).equals("situacao.situacao")) {
 					//relatorio = "/opt/tomcat/webapps/Deprov/resources/relatorios/parametros/2/FabricanteSituacao.jasper";
-					relatorio = "/var/lib/tomcat/webapps/Deprov/resources/relatorios/parametros/2/FabricanteSitaucao.jasper"; 
+					//relatorio = "/var/lib/tomcat/webapps/Deprov/resources/relatorios/parametros/2/FabricanteSitaucao.jasper";
+					relatorio = "/relatorios/parametros/2/FabricanteSitaucao.jasper";
 				}else if (listaObjetos.get(0).equals("situacao.situacao") && listaObjetos.get(1).equals("fabricante.fabricante")) {
 					//relatorio = "/opt/tomcat/webapps/Deprov/resources/relatorios/parametros/2/FabricanteSituacao.jasper";
-					relatorio = "/var/lib/tomcat/webapps/Deprov/resources/relatorios/parametros/2/FabricanteSituacao.jasper";
+					//relatorio = "/var/lib/tomcat/webapps/Deprov/resources/relatorios/parametros/2/FabricanteSituacao.jasper";
+					relatorio = "/relatorios/parametros/2/FabricanteSituacao.jasper";
 				}else if (listaObjetos.get(0).equals("fabricante.fabricante")  && listaObjetos.get(1).equals("local.local")) {
 					//relatorio = "/opt/tomcat/webapps/Deprov/resources/relatorios/parametros/2/FabricanteLocal.jasper";
-					relatorio = "/var/lib/tomcat/webapps/Deprov/resources/relatorios/parametros/2/FabricanteLocal.jasper"; 
+					//relatorio = "/var/lib/tomcat/webapps/Deprov/resources/relatorios/parametros/2/FabricanteLocal.jasper";
+					relatorio = "/relatorios/parametros/2/FabricanteLocal.jasper";
 				}else if (listaObjetos.get(0).equals("local.local") && listaObjetos.get(1).equals("fabricante.fabricante")) {
 					//relatorio = "/opt/tomcat/webapps/Deprov/resources/relatorios/parametros/2/FabricanteLocal.jasper";
-					relatorio = "/var/lib/tomcat/webapps/Deprov/resources/relatorios/parametros/2/FabricanteLocal.jasper";
+					//relatorio = "/var/lib/tomcat/webapps/Deprov/resources/relatorios/parametros/2/FabricanteLocal.jasper";
+					relatorio = "/relatorios/parametros/2/FabricanteLocal.jasper";
 				}else if (listaObjetos.get(0).equals("modelo.modelo")  && listaObjetos.get(1).equals("seguro.seguro")) {
 					//relatorio = "/opt/tomcat/webapps/Deprov/resources/relatorios/parametros/2/ModeloSeguro.jasper";
-					relatorio = "/var/lib/tomcat/webapps/Deprov/resources/relatorios/parametros/2/ModeloSeguro.jasper"; 
+					//relatorio = "/var/lib/tomcat/webapps/Deprov/resources/relatorios/parametros/2/ModeloSeguro.jasper";
+					relatorio = "/relatorios/parametros/2/ModeloSeguro.jasper";
 				}else if (listaObjetos.get(0).equals("seguro.seguro") && listaObjetos.get(1).equals("modelo.modelo")) {
 					//relatorio = "/opt/tomcat/webapps/Deprov/resources/relatorios/parametros/2/ModeloSeguro.jasper";
-					relatorio = "/var/lib/tomcat/webapps/Deprov/resources/relatorios/parametros/2/ModeloSeguro.jasper"; 
+					//relatorio = "/var/lib/tomcat/webapps/Deprov/resources/relatorios/parametros/2/ModeloSeguro.jasper";
+					relatorio = "/relatorios/parametros/2/ModeloSeguro.jasper";
 				}else if (listaObjetos.get(0).equals("modelo.modelo")  && listaObjetos.get(1).equals("pericia.pericia")) {
 					//relatorio = "/opt/tomcat/webapps/Deprov/resources/relatorios/parametros/2/ModeloPericia.jasper";
-					relatorio = "/var/lib/tomcat/webapps/Deprov/resources/relatorios/parametros/2/ModeloPericia.jasper"; 
+					//relatorio = "/var/lib/tomcat/webapps/Deprov/resources/relatorios/parametros/2/ModeloPericia.jasper";
+					relatorio = "/relatorios/parametros/2/ModeloPericia.jasper";
 				}else if (listaObjetos.get(0).equals("pericia.pericia") && listaObjetos.get(1).equals("modelo.modelo")) {
 					//relatorio = "/opt/tomcat/webapps/Deprov/resources/relatorios/parametros/2/ModeloPericia.jasper";
-					relatorio = "/var/lib/tomcat/webapps/Deprov/resources/relatorios/parametros/2/ModeloPericia.jasper";
+					//relatorio = "/var/lib/tomcat/webapps/Deprov/resources/relatorios/parametros/2/ModeloPericia.jasper";
+					relatorio = "/relatorios/parametros/2/ModeloPericia.jasper";
 				}else if (listaObjetos.get(0).equals("modelo.modelo")  && listaObjetos.get(1).equals("situacao.situacao")) {
 					//relatorio = "/opt/tomcat/webapps/Deprov/resources/relatorios/parametros/2/ModeloSituacao.jasper";
-					relatorio = "/var/lib/tomcat/webapps/Deprov/resources/relatorios/parametros/2/ModeloSituacao.jasper"; 
+					//relatorio = "/var/lib/tomcat/webapps/Deprov/resources/relatorios/parametros/2/ModeloSituacao.jasper";
+					relatorio = "/relatorios/parametros/2/ModeloSituacao.jasper";
 				}else if (listaObjetos.get(0).equals("situacao.situacao") && listaObjetos.get(1).equals("modelo.modelo")) {
 					//relatorio = "/opt/tomcat/webapps/Deprov/resources/relatorios/parametros/2/ModeloSituacao.jasper";
-					relatorio = "/var/lib/tomcat/webapps/Deprov/resources/relatorios/parametros/2/ModeloSituacao.jasper";
+					//relatorio = "/var/lib/tomcat/webapps/Deprov/resources/relatorios/parametros/2/ModeloSituacao.jasper";
+					relatorio = "/relatorios/parametros/2/ModeloSituacao.jasper";
 				}else if (listaObjetos.get(0).equals("modelo.modelo")  && listaObjetos.get(1).equals("local.local")) {
 					//relatorio = "/opt/tomcat/webapps/Deprov/resources/relatorios/parametros/2/ModeloLocal.jasper";
-					relatorio = "/var/lib/tomcat/webapps/Deprov/resources/relatorios/parametros/2/ModeloLocal.jasper"; 
+					//relatorio = "/var/lib/tomcat/webapps/Deprov/resources/relatorios/parametros/2/ModeloLocal.jasper";
+					relatorio = "/relatorios/parametros/2/ModeloLocal.jasper";
 				}else if (listaObjetos.get(0).equals("local.local") && listaObjetos.get(1).equals("modelo.modelo")) {
 					//relatorio = "/opt/tomcat/webapps/Deprov/resources/relatorios/parametros/2/ModeloLocal.jasper";
-					relatorio = "/var/lib/tomcat/webapps/Deprov/resources/relatorios/parametros/2/ModeloLocal.jasper";
+					//relatorio = "/var/lib/tomcat/webapps/Deprov/resources/relatorios/parametros/2/ModeloLocal.jasper";
+					relatorio = "/relatorios/parametros/2/ModeloLocal.jasper";
 				}else if (listaObjetos.get(0).equals("seguro.seguro")  && listaObjetos.get(1).equals("pericia.pericia")) {
 					//relatorio = "/opt/tomcat/webapps/Deprov/resources/relatorios/parametros/2/SeguroPericia.jasper";
-					relatorio = "/var/lib/tomcat/webapps/Deprov/resources/relatorios/parametros/2/SeguroPericia.jasper"; 
+					//relatorio = "/var/lib/tomcat/webapps/Deprov/resources/relatorios/parametros/2/SeguroPericia.jasper";
+					relatorio = "/relatorios/parametros/2/SeguroPericia.jasper";
 				}else if (listaObjetos.get(0).equals("pericia.pericia") && listaObjetos.get(1).equals("seguro.segurp")) {
 					//relatorio = "/opt/tomcat/webapps/Deprov/resources/relatorios/parametros/2/SeguroPericia.jasper";
-					relatorio = "/var/lib/tomcat/webapps/Deprov/resources/relatorios/parametros/2/SeguroPericia.jasper";
+					//relatorio = "/var/lib/tomcat/webapps/Deprov/resources/relatorios/parametros/2/SeguroPericia.jasper";
+					relatorio = "/relatorios/parametros/2/SeguroPericia.jasper";
 				}else if (listaObjetos.get(0).equals("seguro.seguro")  && listaObjetos.get(1).equals("situacao.situacao")) {
 					//relatorio = "/opt/tomcat/webapps/Deprov/resources/relatorios/parametros/2/SeguroSituacao.jasper";
-					relatorio = "/var/lib/tomcat/webapps/Deprov/resources/relatorios/parametros/2/SeguroSituacao.jasper"; 
+					//relatorio = "/var/lib/tomcat/webapps/Deprov/resources/relatorios/parametros/2/SeguroSituacao.jasper";
+					relatorio = "/relatorios/parametros/2/SeguroSituacao.jasper";
 				}else if (listaObjetos.get(0).equals("situacao.situacao") && listaObjetos.get(1).equals("seguro.seguro")) {
 					//relatorio = "/opt/tomcat/webapps/Deprov/resources/relatorios/parametros/2/SeguroSituacao.jasper";
-					relatorio = "/var/lib/tomcat/webapps/Deprov/resources/relatorios/parametros/2/SeguroSituacao.jasper";
+					//relatorio = "/var/lib/tomcat/webapps/Deprov/resources/relatorios/parametros/2/SeguroSituacao.jasper";
+					relatorio = "/relatorios/parametros/2/SeguroSituacao.jasper";
 				}else if (listaObjetos.get(0).equals("seguro.seguro")  && listaObjetos.get(1).equals("local.local")) {
 					//relatorio = "/opt/tomcat/webapps/Deprov/resources/relatorios/parametros/2/SeguroLocal.jasper";
-					relatorio = "/var/lib/tomcat/webapps/Deprov/resources/relatorios/parametros/2/SeguroLocal.jasper"; 
+					//relatorio = "/var/lib/tomcat/webapps/Deprov/resources/relatorios/parametros/2/SeguroLocal.jasper"; 
+					relatorio = "/relatorios/parametros/2/SeguroLocal.jasper";
 				}else if (listaObjetos.get(0).equals("local.local") && listaObjetos.get(1).equals("seguro.seguro")) {
 					//relatorio = "/opt/tomcat/webapps/Deprov/resources/relatorios/parametros/2/SeguroLocal.jasper";
-					relatorio = "/var/lib/tomcat/webapps/Deprov/resources/relatorios/parametros/2/SeguroLocal.jasper";
+					//relatorio = "/var/lib/tomcat/webapps/Deprov/resources/relatorios/parametros/2/SeguroLocal.jasper";
+					relatorio = "/relatorios/parametros/2/SeguroLocal.jasper";
 				}else if (listaObjetos.get(0).equals("situacao.situacao")  && listaObjetos.get(1).equals("local.local")) {
 					//relatorio = "/opt/tomcat/webapps/Deprov/resources/relatorios/parametros/2/LocalSituacao.jasper";
-					relatorio = "/var/lib/tomcat/webapps/Deprov/resources/relatorios/parametros/2/LocalSituacao.jasper"; 
+					//relatorio = "/var/lib/tomcat/webapps/Deprov/resources/relatorios/parametros/2/LocalSituacao.jasper";
+					relatorio = "/relatorios/parametros/2/LocalSituacao.jasper";
 				}else if (listaObjetos.get(0).equals("local.local") && listaObjetos.get(1).equals("situacao.situacao")) {
 					//relatorio = "/opt/tomcat/webapps/Deprov/resources/relatorios/parametros/2/LocalSituacao.jasper";
-					relatorio = "/var/lib/tomcat/webapps/Deprov/resources/relatorios/parametros/2/LocalSituacao.jasper";
+					//relatorio = "/var/lib/tomcat/webapps/Deprov/resources/relatorios/parametros/2/LocalSituacao.jasper";
+					relatorio = "/relatorios/parametros/2/LocalSituacao.jasper";
 				}else if (listaObjetos.get(0).equals("pericia.pericia")  && listaObjetos.get(1).equals("situacao.situacao")) {
 					//relatorio = "/opt/tomcat/webapps/Deprov/resources/relatorios/parametros/2/PericiaSituacao.jasper";
-					relatorio = "/var/lib/tomcat/webapps/Deprov/resources/relatorios/parametros/2/PericiaSituacao.jasper"; 
+					//relatorio = "/var/lib/tomcat/webapps/Deprov/resources/relatorios/parametros/2/PericiaSituacao.jasper";
+					relatorio = "/relatorios/parametros/2/PericiaSituacao.jasper";
 				}else if (listaObjetos.get(0).equals("situacao.situacao") && listaObjetos.get(1).equals("pericia.pericia")) {
 					//relatorio = "/opt/tomcat/webapps/Deprov/resources/relatorios/parametros/2/PericiaSituacao.jasper";
-					relatorio = "/var/lib/tomcat/webapps/Deprov/resources/relatorios/parametros/2/PericiaSituacao.jasper";
+					//relatorio = "/var/lib/tomcat/webapps/Deprov/resources/relatorios/parametros/2/PericiaSituacao.jasper";
+					relatorio = "/relatorios/parametros/2/PericiaSituacao.jasper";
 				}else if (listaObjetos.get(0).equals("pericia.pericia")  && listaObjetos.get(1).equals("local.local")) {
 					//relatorio = "/opt/tomcat/webapps/Deprov/resources/relatorios/parametros/2/PericiaLocal.jasper";
-					relatorio = "/var/lib/tomcat/webapps/Deprov/resources/relatorios/parametros/2/PericiaLocal.jasper"; 
+					//relatorio = "/var/lib/tomcat/webapps/Deprov/resources/relatorios/parametros/2/PericiaLocal.jasper"; 
+					relatorio = "/relatorios/parametros/2/PericiaLocal.jasper";
 				}else if (listaObjetos.get(0).equals("local.local") && listaObjetos.get(1).equals("pericia.pericia")) {
 					//relatorio = "/opt/tomcat/webapps/Deprov/resources/relatorios/parametros/2/PericiaLocal.jasper";
-					relatorio = "/var/lib/tomcat/webapps/Deprov/resources/relatorios/parametros/2/PericiaLocal.jasper";
+					//relatorio = "/var/lib/tomcat/webapps/Deprov/resources/relatorios/parametros/2/PericiaLocal.jasper";
+					relatorio = "/relatorios/parametros/2/PericiaLocal.jasper";
 				}
 			}
 		//}
