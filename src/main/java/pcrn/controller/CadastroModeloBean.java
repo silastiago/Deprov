@@ -4,8 +4,8 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.enterprise.context.RequestScoped;
 import javax.faces.event.ValueChangeEvent;
+import javax.faces.view.ViewScoped;
 import javax.inject.Inject;
 import javax.inject.Named;
 
@@ -15,7 +15,7 @@ import pcrn.services.ModeloService;
 import pcrn.util.FacesUtil;
 
 @Named
-@RequestScoped
+@ViewScoped
 public class CadastroModeloBean implements Serializable{
 
 	/**
@@ -27,26 +27,35 @@ public class CadastroModeloBean implements Serializable{
 	private ModeloService modeloService;
 	
 	private Modelo modelo  = new Modelo();
+	private Modelo modeloSelecionado;
 	private List<Modelo> listaModelos = new ArrayList<Modelo>();
 	
 	
-	public void cadastrar(){
+	public String cadastrar(){
 		
-		modeloService.salvar(modelo);
-		FacesUtil.addInfoMessage("Modelo cadastrado com sucesso");
+		modeloService.salvar(modelo);		
+		String pagina = "/site/Modelo/Consulta/Modelo.xhtml?faces-redirect=true";
+		FacesUtil.addInfoMessage("Modelo cadastrado com sucesso");		
+		FacesUtil.contextFlash();
+		
+		return pagina;
 	}
 
-	public void editar(){
-		modeloService.salvar(modelo);
-		FacesUtil.addInfoMessage("Modelo alterado com sucesso");
+	public String editar(){
+		modeloService.salvar(modelo);		
+		String pagina = "/site/Modelo/Consulta/Modelo.xhtml?faces-redirect=true";
+		FacesUtil.addInfoMessage("Modelo alterado com sucesso");		
+		FacesUtil.contextFlash();
+		
+		return pagina;
 	}
 	
 	/** Este metodo Remove um modelo.
 	*  @param modelo, Este modelo � o objeto Modelo que voc� ir� remover.
 	*/
-	public void excluir(Modelo modelo){
-		modeloService.remover(modelo);
-		FacesUtil.addInfoMessage("Modelo: " +modelo.getModelo()+ " removido com sucesso");
+	public void excluir(){
+		modeloService.remover(modeloSelecionado);
+		FacesUtil.addInfoMessage("Modelo: " +modeloSelecionado.getModelo()+ " removido com sucesso");
 	}
 	
 	/** Este metodo lista todas os modelos cadastrados.
@@ -55,11 +64,34 @@ public class CadastroModeloBean implements Serializable{
 	public List<Modelo> listaModelo(){
 		listaModelos = modeloService.listar();
 		return listaModelos;
-	}	
+	}
 	
 	public void listarModelos(ValueChangeEvent evento){
 		Fabricante fabricante = (Fabricante) evento.getNewValue();
 		listaModelos = modeloService.pegaModelos(fabricante.getCodigo());
+	}
+
+	public String novo(){
+		
+		String pagina = "/site/Modelo/Novo/Modelo.xhtml?faces-redirect=true";
+		
+		return pagina;
+	}
+	
+	public String edicao(){
+		
+		String pagina = "/site/Modelo/Edicao/Modelo.xhtml?codigo="+modeloSelecionado.getCodigo()+"faces-redirect=true";
+		
+		return pagina;
+	}
+	
+	
+	public Modelo getModeloSelecionado() {
+		return modeloSelecionado;
+	}
+
+	public void setModeloSelecionado(Modelo modeloSelecionado) {
+		this.modeloSelecionado = modeloSelecionado;
 	}
 
 	public Modelo getModelo() {

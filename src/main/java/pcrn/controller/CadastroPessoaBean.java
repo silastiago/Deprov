@@ -39,7 +39,7 @@ public class CadastroPessoaBean implements Serializable{
 		pessoa.setSenha(FacesUtil.md5(senha));
 		pessoaService.salvar(pessoa);
 		
-		String pagina = "/site/Pessoa/Consulta/ListarPessoas.xhtml?faces-redirect=true";
+		String pagina = "/site/Pessoa/Consulta/Pessoa.xhtml?faces-redirect=true";
 		FacesUtil.addInfoMessage("Pessoa cadastrada com sucesso");		
 		FacesUtil.contextFlash();
 		
@@ -67,7 +67,7 @@ public class CadastroPessoaBean implements Serializable{
 		FacesUtil.addInfoMessage("Pessoa alterada com sucesso");
 		FacesUtil.contextFlash();
 		
-		String pagina = "/site/Pessoa/Consulta/ListarPessoas.xhtml?faces-redirect=true";
+		String pagina = "/site/Pessoa/Consulta/Pessoa.xhtml?faces-redirect=true";
 		
 		return pagina;
 		

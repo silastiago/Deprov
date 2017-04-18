@@ -4,7 +4,7 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.enterprise.context.RequestScoped;
+import javax.faces.view.ViewScoped;
 import javax.inject.Inject;
 import javax.inject.Named;
 
@@ -13,7 +13,7 @@ import pcrn.services.LocalService;
 import pcrn.util.FacesUtil;
 
 @Named
-@RequestScoped
+@ViewScoped
 public class CadastroLocalBean implements Serializable{
 
 	/**
@@ -25,18 +25,27 @@ public class CadastroLocalBean implements Serializable{
 	private LocalService localService;
 	
 	private Local local = new Local();
+	private Local localSelecionado;
 	private List<Local> listaLocais = new ArrayList<Local>();
 	
-	public void cadastrar(){
+	public String cadastrar(){
 		
-		localService.salvar(local);
-		FacesUtil.addInfoMessage("Local cadastrado com sucesso");
+		localService.salvar(local);		
+		String pagina = "/site/Local/Consulta/Local.xhtml?faces-redirect=true";
+		FacesUtil.addInfoMessage("Local cadastrado com sucesso");		
+		FacesUtil.contextFlash();
+		
+		return pagina;
 	}
 	
-	public void editar(){
+	public String editar(){
 		
 		localService.salvar(local);
-		FacesUtil.addInfoMessage("Modelo alterado com sucesso");
+		String pagina = "/site/Local/Consulta/Local.xhtml?faces-redirect=true";
+		FacesUtil.addInfoMessage("Local alterado com sucesso");		
+		FacesUtil.contextFlash();
+		
+		return pagina;
 	}
 	
 	public List<Local> listarLocais(){
@@ -44,9 +53,31 @@ public class CadastroLocalBean implements Serializable{
 		return listaLocais;
 	}
 	
-	public void excluir(Local local){
-		localService.remover(local);
-		FacesUtil.addInfoMessage("Local: " +local.getLocal()+ " removido com sucesso");
+	public void excluir(){
+		localService.remover(localSelecionado);
+		FacesUtil.addInfoMessage("Local: " +localSelecionado.getLocal()+ " removido com sucesso");
+	}
+	
+	public String novo(){
+		
+		String pagina = "/site/Local/Novo/Local.xhtml?faces-redirect=true";
+		
+		return pagina;
+	}
+	
+	public String edicao(){
+		
+		String pagina = "/site/Local/Edicao/Local.xhtml?codigo="+localSelecionado.getCodigo()+"faces-redirect=true";
+		
+		return pagina;
+	}
+	
+	public Local getLocalSelecionado() {
+		return localSelecionado;
+	}
+
+	public void setLocalSelecionado(Local localSelecionado) {
+		this.localSelecionado = localSelecionado;
 	}
 
 	public Local getLocal() {

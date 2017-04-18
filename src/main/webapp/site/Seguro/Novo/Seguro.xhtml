@@ -34,9 +34,9 @@
 			<h:form enctype="multipart/form-data">
 			
 			<p:dataTable var="seguro" value="#{cadastroSeguroBean.listaSeguro()}"
-			frame="box" rules="all" cellpadding="3"
-				width="100%" headerClass="cabecalho" rowClasses="cor-sim, cor-nao"
-				columnClasses="nome">
+							frame="box" rules="all" cellpadding="3"
+							width="100%" headerClass="cabecalho" 
+							rowClasses="cor-sim, cor-nao" columnClasses="nome">
 				
 			<p:column filterBy="#{seguro.seguro}"  style="text-align: center; width:5%" 
 					filterMatchMode="startsWith">
@@ -44,21 +44,8 @@
 						<h:outputText value="Seguro" />
 					</f:facet>
 					<h:outputText value="#{seguro.seguro}" />
-			</p:column>
-				
-			<p:column style="text-align: center; width:3%">
-					<h:link outcome="/site/Seguro/Edicao/Seguro" value="Editar">
-					<i class="icon-edit"></i>
-					<f:param name="codigo"  value="#{seguro.codigo}"/>
-					</h:link>
-			</p:column>
+			</p:column>	
 			
-			<p:column style="text-align: center; width:3%">
-				<h:commandLink value="Excluir"
-				 action="#{cadastroSeguroBean.excluir(seguro)}"
-				 onclick="if (!confirm('Confirmar a exclusão deste Seguro ? ')) return false"/>
-				 <i class="icon-remove-sign"></i>
-			</p:column>
 			</p:dataTable>
 		</h:form>
 	</ui:define>

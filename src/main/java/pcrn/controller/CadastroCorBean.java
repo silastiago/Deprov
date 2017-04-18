@@ -32,7 +32,7 @@ public class CadastroCorBean implements Serializable{
 	public String cadastrar(){
 		
 		corService.salvar(cor);		
-		String pagina = "/site/Cor/Consulta/ListarCores.xhtml?faces-redirect=true";
+		String pagina = "/site/Cor/Consulta/Cor.xhtml?faces-redirect=true";
 		FacesUtil.addInfoMessage("Cor cadastrada com sucesso");		
 		FacesUtil.contextFlash();
 		
@@ -43,7 +43,7 @@ public class CadastroCorBean implements Serializable{
 	public String editar(){
 		
 		corService.salvar(cor);
-		String pagina = "/site/Cor/Consulta/ListarCores.xhtml?faces-redirect=true";
+		String pagina = "/site/Cor/Consulta/Cor.xhtml?faces-redirect=true";
 		FacesUtil.addInfoMessage("Cor alterada com sucesso");		
 		FacesUtil.contextFlash();
 		

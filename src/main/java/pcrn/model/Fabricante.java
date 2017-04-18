@@ -18,8 +18,12 @@ import javax.persistence.Table;
 
 @Entity
 @Table
-public class Fabricante implements Serializable, Cloneable{
+public class Fabricante implements Serializable{
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private Integer codigo;
 	private String fabricante;
 

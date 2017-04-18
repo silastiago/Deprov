@@ -1,0 +1,66 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui">
+<ui:composition template="/templates/template.xhtml">
+	<ui:define name="tituloJanela">Sistema com JSF 2.0 e Facelets</ui:define>
+	<ui:define name="conteudo">
+	
+			<h:form id="frm">
+				<p:messages for ="message" showDetail="true" autoUpdate="true" closable="true" />
+				<h1>Fabricantes Cadastrados</h1>
+			
+				<p:toolbar id="toolbar">
+					<p:toolbarGroup>
+
+					<p:commandButton value="Novo" icon="ui-icon-plus"
+						action="#{cadastroFabricanteBean.novo()}" process="@this"
+						disabled="#{not seguranca.acessoCadastroPermitido}"/>
+
+					<span class="ui-separator"> <span
+						class="ui-icon ui-icon-grip-dotted-vertical" />
+					</span>
+
+					<p:commandButton value="Editar" icon="ui-icon-pencil"
+						title="Editar" process="@this" action="#{cadastroFabricanteBean.edicao()}"  
+						disabled="#{cadastroFabricanteBean.fabricanteSelecionado == null or not seguranca.acessoEdicaoPermitido}" />
+
+					<span class="ui-separator"> <span
+						class="ui-icon ui-icon-grip-dotted-vertical" />
+					</span>
+
+					<p:commandButton value="Excluir" icon="ui-icon-trash"
+						title="Excluir" process="@this" update="tabela_fabricantes toolbar"
+						action="#{cadastroFabricanteBean.excluir}"
+						disabled="#{cadastroFabricanteBean.fabricanteSelecionado == null or not seguranca.acessoRemocaoPermitido}"
+						onclick="if (!confirm('Deseja deletar  #{cadastroFabricanteBean.fabricanteSelecionado.fabricante} ? ')) return false" />
+					
+
+				</p:toolbarGroup>
+			</p:toolbar>
+			
+			<p:dataTable id="tabela_fabricantes" var="fabricante" value="#{cadastroFabricanteBean.listaFabricantes()}"
+							frame="box" rules="all" cellpadding="3"
+							width="100%" headerClass="cabecalho" 
+							rowClasses="cor-sim, cor-nao" columnClasses="nome"
+							selection="#{cadastroFabricanteBean.fabricanteSelecionado}" 
+							selectionMode="single" rowKey="#{fabricante.codigo}">										
+				
+			<p:ajax event="rowSelect" update=":frm:toolbar" />
+			<p:ajax event="rowUnselect" update=":frm:toolbar" />
+				
+			<p:column filterBy="#{fabricante.fabricante}"  style="text-align: center; width:5%" 
+					filterMatchMode="startsWith">
+					<f:facet name="header">
+						<h:outputText value="Fabricante" />
+					</f:facet>
+					<h:outputText value="#{fabricante.fabricante}" />
+			</p:column>
+			
+			</p:dataTable>
+		</h:form>
+	</ui:define>	
+	</ui:composition>
+</html>

@@ -4,7 +4,7 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.enterprise.context.RequestScoped;
+import javax.faces.view.ViewScoped;
 import javax.inject.Inject;
 import javax.inject.Named;
 
@@ -13,7 +13,7 @@ import pcrn.services.GrupoService;
 import pcrn.util.FacesUtil;
 
 @Named
-@RequestScoped
+@ViewScoped
 public class CadastroGrupoBean implements Serializable{
 
 	/**
@@ -23,24 +23,34 @@ public class CadastroGrupoBean implements Serializable{
 	
 	@Inject
 	private GrupoService grupoService;
-	private Grupo grupo = new Grupo(); 	
+	private Grupo grupo = new Grupo();
+	private Grupo grupoSelecionado; 
 	private List<Grupo> listaGrupos = new ArrayList<Grupo>();
 
-	public void cadastrar(){
-		grupoService.salvar(grupo);
-		FacesUtil.addInfoMessage("Grupo cadastrado com sucesso");
+	public String cadastrar(){
+		
+		grupoService.salvar(grupo);		
+		String pagina = "/site/Grupo/Consulta/Grupo.xhtml?faces-redirect=true";
+		FacesUtil.addInfoMessage("Grupo cadastrado com sucesso");		
+		FacesUtil.contextFlash();
+		
+		return pagina;
 	}
 
-	public void editar(){
+	public String editar(){
 		
 		grupoService.salvar(grupo);
-		FacesUtil.addInfoMessage("Grupo alterado com sucesso");
+		String pagina = "/site/Grupo/Consulta/Grupo.xhtml?faces-redirect=true";
+		FacesUtil.addInfoMessage("Grupo alterado com sucesso");		
+		FacesUtil.contextFlash();
+		
+		return pagina;
 	}
 	
-	public void excluir(Grupo grupo){
+	public void excluir(){
 		
-		grupoService.remover(grupo);
-		FacesUtil.addInfoMessage("Grupo: " +grupo.getNome()+ " removido com sucesso");
+		grupoService.remover(grupoSelecionado);
+		FacesUtil.addInfoMessage("Grupo: " +grupoSelecionado.getNome()+ " removido com sucesso");
 	}
 	
 	public List<Grupo> listarGrupos(){
@@ -48,6 +58,28 @@ public class CadastroGrupoBean implements Serializable{
 		listaGrupos = grupoService.listar();
 		
 		return listaGrupos;
+	}
+	
+	public String novo(){
+		
+		String pagina = "/site/Grupo/Novo/Grupo.xhtml?faces-redirect=true";
+		
+		return pagina;
+	}
+	
+	public String edicao(){
+		
+		String pagina = "/site/Grupo/Edicao/Grupo.xhtml?codigo="+grupoSelecionado.getCodigo()+"faces-redirect=true";
+		
+		return pagina;
+	}
+	
+	public Grupo getGrupoSelecionado() {
+		return grupoSelecionado;
+	}
+
+	public void setGrupoSelecionado(Grupo grupoSelecionado) {
+		this.grupoSelecionado = grupoSelecionado;
 	}
 
 	public Grupo getGrupo() {

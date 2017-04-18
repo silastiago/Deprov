@@ -30,9 +30,9 @@
 			<h:form enctype="multipart/form-data">
 			
 			<p:dataTable var="tipo" value="#{cadastroTipoBean.listaTipos()}"
-			frame="box" rules="all" cellpadding="3"
-				width="100%" headerClass="cabecalho" rowClasses="cor-sim, cor-nao"
-				columnClasses="nome">
+							frame="box" rules="all" cellpadding="3"
+							width="100%" headerClass="cabecalho" 
+							rowClasses="cor-sim, cor-nao" columnClasses="nome">
 				
 			<p:column filterBy="#{tipo.tipo}"  style="text-align: center; width:5%" 
 					filterMatchMode="startsWith">
@@ -40,21 +40,8 @@
 						<h:outputText value="Tipo" />
 					</f:facet>
 					<h:outputText value="#{tipo.tipo}" />
-			</p:column>
-				
-			<p:column style="text-align: center; width:3%">
-					<h:link outcome="/site/Tipo/Edicao/Tipo" value="Editar">
-					<i class="icon-edit"></i>
-					<f:param name="codigo"  value="#{tipo.codigo}"/>
-					</h:link>
-			</p:column>
+			</p:column>	
 			
-			<p:column style="text-align: center; width:3%">
-				<h:commandLink value="Excluir"
-				 action="#{cadastroTipoBean.excluir(tipo)}"
-				 onclick="if (!confirm('Confirmar a exclusão deste Tipo ? ')) return false"/>
-				 <i class="icon-remove-sign"></i>
-			</p:column>
 			</p:dataTable>
 		</h:form>
 

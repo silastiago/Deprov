@@ -4,7 +4,7 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.enterprise.context.RequestScoped;
+import javax.faces.view.ViewScoped;
 import javax.inject.Inject;
 import javax.inject.Named;
 
@@ -13,7 +13,7 @@ import pcrn.services.SeguroService;
 import pcrn.util.FacesUtil;
 
 @Named
-@RequestScoped
+@ViewScoped
 public class CadastroSeguroBean implements Serializable{
 
 	/**
@@ -25,26 +25,61 @@ public class CadastroSeguroBean implements Serializable{
 	private SeguroService seguroService;
 	
 	private Seguro seguro = new Seguro();
+	private Seguro seguroSelecionado;
 	private List<Seguro> listaSeguros = new ArrayList<Seguro>();
 	
-	public void cadastrar(){
+	public String cadastrar(){
+		
 		seguroService.salvar(seguro);
-		FacesUtil.addInfoMessage("Seguro cadastrado com sucesso");
+		String pagina = "/site/Seguro/Consulta/Seguro.xhtml?faces-redirect=true";
+		FacesUtil.addInfoMessage("Seguro cadastrado com sucesso");		
+		FacesUtil.contextFlash();
+		
+		return pagina;	
+		
 	}
 
-	public void editar(){
+	public String editar(){
+		
 		seguroService.salvar(seguro);
-		FacesUtil.addInfoMessage("Seguro alterado com sucesso");
+		String pagina = "/site/Seguro/Consulta/Seguro.xhtml?faces-redirect=true";
+		FacesUtil.addInfoMessage("Seguro alterado com sucesso");		
+		FacesUtil.contextFlash();
+		
+		return pagina;
 	}
 	
-	public void excluir(Seguro seguro){
-		seguroService.remover(seguro);
-		FacesUtil.addInfoMessage("Seguro: " +seguro.getSeguro()+ " removido com sucesso");
+	public void excluir(){
+		seguroService.remover(seguroSelecionado);
+		FacesUtil.addInfoMessage("Seguro: " +seguroSelecionado.getSeguro()+ " removido com sucesso");
 	}
 	
 	public List<Seguro> listaSeguro(){
 		listaSeguros = seguroService.listar();
 		return listaSeguros;
+	}
+
+	public String novo(){
+		
+		String pagina = "/site/Seguro/Novo/Seguro.xhtml?faces-redirect=true";
+		
+		return pagina;
+	}
+	
+	public String edicao(){
+		
+		String pagina = "/site/Seguro/Edicao/Seguro.xhtml?codigo="+seguroSelecionado.getCodigo()+"faces-redirect=true";
+		
+		return pagina;
+	}
+	
+	
+	public Seguro getSeguroSelecionado() {
+		return seguroSelecionado;
+	}
+
+	public void setSeguroSelecionado(Seguro seguroSelecionado) {
+		this.seguroSelecionado = seguroSelecionado;
 	}
 
 	public Seguro getSeguro() {

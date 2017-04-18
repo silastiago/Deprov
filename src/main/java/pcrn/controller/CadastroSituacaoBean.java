@@ -4,7 +4,7 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.enterprise.context.RequestScoped;
+import javax.faces.view.ViewScoped;
 import javax.inject.Inject;
 import javax.inject.Named;
 
@@ -13,7 +13,7 @@ import pcrn.services.SituacaoService;
 import pcrn.util.FacesUtil;
 
 @Named
-@RequestScoped
+@ViewScoped
 public class CadastroSituacaoBean implements Serializable{
 
 	/**
@@ -24,17 +24,26 @@ public class CadastroSituacaoBean implements Serializable{
 	@Inject
 	private SituacaoService situacaoService;
 	
-	private Situacao situacao = new Situacao();	
+	private Situacao situacao = new Situacao();
+	private Situacao situacaoSelecionada;
 	private List<Situacao> listaSituacoes = new ArrayList<Situacao>();
 	
-	public void cadastrar(){
+	public String cadastrar(){
 		situacaoService.salvar(situacao);
-		FacesUtil.addInfoMessage("Situacao cadastrada com sucesso");
+		String pagina = "/site/Situacao/Consulta/Situacao.xhtml?faces-redirect=true";
+		FacesUtil.addInfoMessage("Situacao cadastrada com sucesso");		
+		FacesUtil.contextFlash();
+		
+		return pagina;
 	}
 	
-	public void editar(){
+	public String editar(){
 		situacaoService.salvar(situacao);
-		FacesUtil.addInfoMessage("Situacao alterada com sucesso");
+		String pagina = "/site/Situacao/Consulta/Situacao.xhtml?faces-redirect=true";
+		FacesUtil.addInfoMessage("Situacao alterada com sucesso");		
+		FacesUtil.contextFlash();
+		
+		return pagina;
 	}
 	
 	public List<Situacao> listarSituacoes(){
@@ -43,9 +52,31 @@ public class CadastroSituacaoBean implements Serializable{
 		return listaSituacoes;
 	}
 
-	public void excluir(Situacao situacao){
-		situacaoService.remover(situacao);
-		FacesUtil.addInfoMessage("Situacao: " +situacao.getSituacao()+ " removida com sucesso");
+	public void excluir(){
+		situacaoService.remover(situacaoSelecionada);
+		FacesUtil.addInfoMessage("Situacao: " +situacaoSelecionada.getSituacao()+ " removida com sucesso");
+	}
+
+	public String novo(){
+		
+		String pagina = "/site/Situacao/Novo/Situacao.xhtml?faces-redirect=true";
+		
+		return pagina;
+	}
+	
+	public String edicao(){
+		
+		String pagina = "/site/Situacao/Edicao/Situacao.xhtml?codigo="+situacaoSelecionada.getCodigo()+"faces-redirect=true";
+		
+		return pagina;
+	}
+	
+	public Situacao getSituacaoSelecionada() {
+		return situacaoSelecionada;
+	}
+
+	public void setSituacaoSelecionada(Situacao situacaoSelecionada) {
+		this.situacaoSelecionada = situacaoSelecionada;
 	}
 
 	public Situacao getSituacao() {

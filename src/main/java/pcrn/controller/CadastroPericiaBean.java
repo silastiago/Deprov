@@ -31,7 +31,7 @@ public class CadastroPericiaBean implements Serializable{
 	public String cadastrar(){
 		
 		periciaService.salvar(pericia);
-		String pagina = "/site/ExameVeicular/Consulta/ListarExameVeiculares.xhtml?faces-redirect=true";
+		String pagina = "/site/ExameVeicular/Consulta/ExameVeicular.xhtml?faces-redirect=true";
 		FacesUtil.addInfoMessage("Exame Veicular cadastrado com sucesso");		
 		FacesUtil.contextFlash();
 		
@@ -42,7 +42,7 @@ public class CadastroPericiaBean implements Serializable{
 		
 		periciaService.salvar(pericia);	
 		
-		String pagina = "/site/ExameVeicular/Consulta/ListarExameVeiculares.xhtml?faces-redirect=true";
+		String pagina = "/site/ExameVeicular/Consulta/ExameVeicular.xhtml?faces-redirect=true";
 		FacesUtil.addInfoMessage("Exame Veicular alterado com sucesso");		
 		FacesUtil.contextFlash();
 		

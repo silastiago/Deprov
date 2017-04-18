@@ -112,12 +112,12 @@ public class CadastroVeiculoBean implements Serializable{
 				for (int i = 0; i < listaVeiculo.size(); i++) {
 					placas = placas + " " + listaVeiculo.get(i).getPlaca();
 				}
-				FacesContext.getCurrentInstance().addMessage("message", new FacesMessage(FacesMessage.SEVERITY_ERROR, "","Local da Chave j� ocupado por veiculos de placas "+ placas));
+				FacesContext.getCurrentInstance().addMessage("message", new FacesMessage(FacesMessage.SEVERITY_ERROR, "","Local da Chave ja ocupado por veiculos de placas "+ placas));
 			}else{
 				veiculo.setPessoa(pessoa);
 				
 				if (veiculoService.placaxistenteCadastrar(veiculo).size() > 0) {
-					FacesContext.getCurrentInstance().addMessage("message", new FacesMessage(FacesMessage.SEVERITY_WARN, "","Esta placa j� foi cadastrada em outro carro"));
+					FacesContext.getCurrentInstance().addMessage("message", new FacesMessage(FacesMessage.SEVERITY_WARN, "","Esta placa ja foi cadastrada em outro carro"));
 				}
 				
 				veiculoService.salvar(veiculo);
@@ -161,7 +161,7 @@ public class CadastroVeiculoBean implements Serializable{
 				for (int i = 0; i < listaVeiculo.size(); i++) {
 					placas = placas + " " + listaVeiculo.get(i).getPlaca();
 				}
-				FacesContext.getCurrentInstance().addMessage("message", new FacesMessage(FacesMessage.SEVERITY_ERROR, "","Local da Chave j� ocupado por veiculos de placas "+ placas));
+				FacesContext.getCurrentInstance().addMessage("message", new FacesMessage(FacesMessage.SEVERITY_ERROR, "","Local da Chave ja ocupado por veiculos de placas "+ placas));
 			}else{
 				veiculo.setPessoa(pessoa);
 				veiculoService.editar(veiculo);
@@ -291,6 +291,13 @@ public class CadastroVeiculoBean implements Serializable{
 		 return "/site/Ocorrencia/Consulta/Ocorrencia.xhtml?codigoVeiculo="+veiculo.getCodigo()+"faces-redirect=true";
 	} 
 	 
+	
+	 public String novo(){
+			
+			String pagina = "/site/Veiculo/Novo/Veiculo.xhtml?faces-redirect=true";
+			
+			return pagina;
+		} 
 	 
 	 public Veiculo getVeiculo() {
 			return veiculo;

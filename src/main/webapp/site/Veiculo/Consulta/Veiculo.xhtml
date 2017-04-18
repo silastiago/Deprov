@@ -8,9 +8,26 @@
 	<ui:define name="tituloJanela">Sistema com JSF 2.0 e Facelets</ui:define>
 	<ui:define name="conteudo">
 
-		<h1>Lista de Veiculos Cadastrados</h1>
+		
 
-		<h:form enctype="multipart/form-data" acceptcharset="ISO-8859-1">
+		<h:form id="frm">
+				<p:messages for ="message" showDetail="true" autoUpdate="true" closable="true" />
+				<h1>Veiculos Cadastrados</h1>
+			
+				<p:toolbar id="toolbar">
+					<p:toolbarGroup>
+
+					<p:commandButton value="Novo" icon="ui-icon-plus"
+						action="#{cadastroVeiculoBean.novo()}" process="@this"
+						disabled="#{not seguranca.acessoCadastroPermitido}"/>
+
+					<span class="ui-separator"> <span
+						class="ui-icon ui-icon-grip-dotted-vertical" />
+					</span>
+					
+
+				</p:toolbarGroup>
+			</p:toolbar>
 			
 			
 			

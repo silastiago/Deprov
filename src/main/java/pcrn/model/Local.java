@@ -17,8 +17,12 @@ import javax.persistence.Table;
 
 @Entity
 @Table
-public class Local implements Serializable, Cloneable{
+public class Local implements Serializable{
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private Integer codigo;
 	private String local;
 
