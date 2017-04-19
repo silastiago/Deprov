@@ -17,6 +17,23 @@
 		<h1>Lista de Veiculos Cadastrados</h1>
 
 		<h:form enctype="multipart/form-data">
+		
+		<p:toolbar id="toolbar">
+					<p:toolbarGroup>
+
+					<p:commandButton value="Voltar" icon="ui-icon-arrowreturnthick-1-w"
+						title="Voltar" process="@this" action="#{cadastroFotoBean.voltar(codigo)}" />
+					
+					<span class="ui-separator"> <span
+						class="ui-icon ui-icon-grip-dotted-vertical" />
+					</span>
+
+						
+
+				</p:toolbarGroup>
+			</p:toolbar>
+			
+		
 
 			<p:galleria var="image" value="#{cadastroFotoBean.listarFotos(codigo)}" panelWidth="600" panelHeight="600" autoPlay="false" >
 					<p:graphicImage value="#{image.path}" width="500" height="500"/>

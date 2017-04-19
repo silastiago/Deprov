@@ -86,17 +86,25 @@ public class CadastroOcorrenciaBean implements Serializable{
 		return pagina;
 	}
 	
+	public String edicao(){
+		
+		String pagina = "/site/Ocorrencia/Edicao/Ocorrencia.xhtml?codigoOcorrencia="+ocorrenciaSelecionada.getCodigo()+"&codigoVeiculo="+ocorrenciaSelecionada.getVeiculo().getCodigo()+"faces-redirect=true";
+		
+		return pagina;
+	}
+	
+	
 	
 	/** Este metodo remove uma ocorrencia de um determinado veiculo.
 	 * 	@param codigo, este codigo � o identificador da ocorrencia.
 	*/
-	public String excluir(Ocorrencia ocorrencia, String codigoVeiculo) throws IOException {
+	public String excluir(String codigoVeiculo) throws IOException {
 		
 		
 		System.out.println("Entrou no metodo de remoção");
 		
-		ocorrenciaService.remover(ocorrencia);
-		FacesUtil.addInfoMessage("Ocorrencia: " +ocorrencia.getOcorrencia()+ " removida com sucesso");
+		ocorrenciaService.remover(ocorrenciaSelecionada);
+		FacesUtil.addInfoMessage("Ocorrencia: " +ocorrenciaSelecionada.getOcorrencia()+ " removida com sucesso");
 		FacesUtil.contextFlash();
 		
 		return "/site/Ocorrencia/Consulta/Ocorrencia.xhtml?codigoVeiculo="+codigoVeiculo+"faces-redirect=true";

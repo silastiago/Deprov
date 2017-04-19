@@ -5,7 +5,7 @@
 	xmlns:ui="http://java.sun.com/jsf/facelets"
 	xmlns:p="http://primefaces.org/ui">
 <f:metadata>
-	<f:viewParam name="codigo" value="#{cadastroVeiculoBean.veiculo}" />
+	<f:viewParam name="codigo" />
 </f:metadata>
 
 
@@ -14,6 +14,22 @@
 	<ui:define name="tituloJanela">Sistema com JSF 2.0 e Facelets</ui:define>
 	<ui:define name="conteudo">
 		<h:form enctype="multipart/form-data" acceptcharset="ISO-8859-1">
+			
+			<p:toolbar id="toolbar">
+					<p:toolbarGroup>
+
+					<p:commandButton value="Voltar" icon="ui-icon-arrowreturnthick-1-w"
+						title="Voltar" process="@this" action="#{cadastroFotoBean.voltar(codigo)}" />
+					
+					<span class="ui-separator"> <span
+						class="ui-icon ui-icon-grip-dotted-vertical" />
+					</span>
+
+						
+
+				</p:toolbarGroup>
+			</p:toolbar>
+			
 			<div class="ui-fluid">
 				<p:panelGrid columns="2" style="width: 100%; margin-top: 20px"
 					columnClasses="rotulo, campo">

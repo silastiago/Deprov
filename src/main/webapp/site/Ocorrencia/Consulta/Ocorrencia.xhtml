@@ -29,6 +29,25 @@
 
 					<p:commandButton value="Voltar" icon="ui-icon-arrowreturnthick-1-w"
 						title="Voltar" process="@this" action="#{cadastroOcorrenciaBean.voltar(codigoVeiculo)}" />	
+					
+					<span class="ui-separator"> <span
+						class="ui-icon ui-icon-grip-dotted-vertical" />
+					</span>
+
+					<p:commandButton value="Editar" icon="ui-icon-pencil"
+						title="Editar" process="@this" action="#{cadastroOcorrenciaBean.edicao()}"  
+						disabled="#{cadastroOcorrenciaBean.ocorrenciaSelecionada == null or not seguranca.acessoEdicaoPermitido}" />
+
+					
+					<span class="ui-separator"> <span
+						class="ui-icon ui-icon-grip-dotted-vertical" />
+					</span>
+
+					<p:commandButton value="Excluir" icon="ui-icon-trash"
+						title="Excluir" process="@this" update="tabela_ocorrencias toolbar"
+						action="#{cadastroOcorrenciaBean.excluir(codigoVeiculo)}"
+						disabled="#{cadastroOcorrenciaBean.ocorrenciaSelecionada == null or not seguranca.acessoRemocaoPermitido}"
+						onclick="if (!confirm('Deseja deletar  #{cadastroOcorrenciaBean.ocorrenciaSelecionada.ocorrencia} ? ')) return false" />
 
 				</p:toolbarGroup>
 			</p:toolbar>			
@@ -37,7 +56,12 @@
 			<p:dataTable id="tabela_ocorrencias" value="#{cadastroOcorrenciaBean.ocorrencias}" var="ocorrencia" 
 						frame="box" rules="all" cellpadding="3" width="100%" headerClass="cabecalho" 
 						rowClasses="cor-sim, cor-nao" columnClasses="nome"
-						rows="10" rowsPerPageTemplate="5,10,15,20" paginator="true" >
+						rows="10" rowsPerPageTemplate="5,10,15,20" paginator="true" 
+						selection="#{cadastroOcorrenciaBean.ocorrenciaSelecionada}" 
+						selectionMode="single" rowKey="#{ocorrencia.codigo}">				
+				
+			<p:ajax event="rowSelect" update=":frm:toolbar" />
+			<p:ajax event="rowUnselect" update=":frm:toolbar" />
 				
 			<p:column filterBy="#{ocorrencia.ocorrencia}"  style="text-align: center; width:5%" 
 					filterMatchMode="startsWith">
@@ -55,25 +79,7 @@
 					<h:outputText value="#{ocorrencia.data}" >
 					<f:convertDateTime pattern="dd/MM/yyyy"/>
 					</h:outputText>
-			</p:column>
-			
-			<p:column style="text-align: center; width:3%">
-					<h:link outcome="/site/Ocorrencia/Edicao/Ocorrencia" value="Editar" 
-					disabled="#{not seguranca.acessoEdicaoPermitido}" >
-					<i class="icon-edit"></i>
-					<f:param name="codigoOcorrencia"  value="#{ocorrencia.codigo}"/>
-					<f:param name="codigoVeiculo"  value="#{ocorrencia.veiculo.codigo}"/>
-					</h:link>
-			</p:column>
-			
-			<p:column style="text-align: center; width:3%">
-				<h:commandLink value="Excluir Ocorrencia"
-				 action="#{cadastroOcorrenciaBean.excluir(ocorrencia, codigoVeiculo)}" 
-				 disabled="#{not seguranca.acessoRemocaoPermitido}"
-				 onclick="if (!confirm('Confirmar a exclusão desta ocorrencia #{ocorrencia.ocorrencia} ? ')) return false"/>
-				 <i class="icon-remove-sign"></i>
-			</p:column>
-			
+			</p:column>			
 			
 			</p:dataTable>
 		</h:form>

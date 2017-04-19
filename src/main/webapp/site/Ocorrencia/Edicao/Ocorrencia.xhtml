@@ -59,24 +59,7 @@
 					<h:outputText value="#{ocorrencia.data}" >
 					<f:convertDateTime pattern="dd/MM/yyyy"/>
 					</h:outputText>
-			</p:column>
-			
-			<p:column style="text-align: center; width:3%">
-					<h:link outcome="Ocorrencia" value="Editar">
-					<i class="icon-edit"></i>
-					<f:param name="codigoOcorrencia"  value="#{ocorrencia.codigo}"/>
-					<f:param name="codigoVeiculo"  value="#{ocorrencia.veiculo.codigo}"/>
-					</h:link>
-			</p:column>
-			
-			<p:column style="text-align: center; width:3%">
-				<h:commandLink value="Excluir Ocorrencia"
-				 action="#{cadastroOcorrenciaBean.excluir(ocorrencia.codigo)}" 
-				 onclick="if (!confirm('Confirmar a exclusão desta ocorrencia #{ocorrencia.ocorrencia} ? ')) return false"/>
-				 <i class="icon-remove-sign"></i>
-			</p:column>
-			
-			
+			</p:column>			
 			
 			</p:dataTable>
 		</h:form>

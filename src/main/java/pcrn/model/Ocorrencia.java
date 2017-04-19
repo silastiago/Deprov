@@ -51,6 +51,7 @@ public class Ocorrencia implements Serializable, Cloneable{
 	public void setData(Date data) {
 		this.data = data;
 	}
+	
 	@ManyToOne
 	@JoinColumn(name="codigo_veiculo")
 	public Veiculo getVeiculo() {
