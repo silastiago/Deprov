@@ -30,7 +30,6 @@ public class CadastroModeloBean implements Serializable{
 	private Modelo modeloSelecionado;
 	private List<Modelo> listaModelos = new ArrayList<Modelo>();
 	
-	
 	public String cadastrar(){
 		
 		modeloService.salvar(modelo);		
@@ -71,6 +70,9 @@ public class CadastroModeloBean implements Serializable{
 		listaModelos = modeloService.pegaModelos(fabricante.getCodigo());
 	}
 
+	
+	
+	
 	public String novo(){
 		
 		String pagina = "/site/Modelo/Novo/Modelo.xhtml?faces-redirect=true";
@@ -84,8 +86,7 @@ public class CadastroModeloBean implements Serializable{
 		
 		return pagina;
 	}
-	
-	
+
 	public Modelo getModeloSelecionado() {
 		return modeloSelecionado;
 	}

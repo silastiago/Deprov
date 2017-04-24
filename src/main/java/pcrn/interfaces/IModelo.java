@@ -2,6 +2,7 @@ package pcrn.interfaces;
 
 import java.util.List;
 
+import pcrn.model.Fabricante;
 import pcrn.model.Modelo;
 
 /** Esta � uma Interface que possui as assinaturas dos metodos da classe Modelo,
@@ -56,4 +57,6 @@ public interface IModelo {
 	*   	
 	*/
 	public List<Modelo> pegaModelos(int codigo_fabricante);
+
+	public List<Modelo> buscarModelos(Fabricante fabricante);
 }

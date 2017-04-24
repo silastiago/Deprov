@@ -48,9 +48,13 @@ public class Cores implements ICor, Serializable{
 
 	@Override
 	public Cor pegaCodigo(String corBusca) {
+		System.out.println("Cor: " + corBusca);
 		Query query = manager.createQuery("from Cor where cor = :cor");
 		query.setParameter("cor", corBusca);
 		Cor cor = (Cor) query.getSingleResult();
+		
+		System.out.println("Cor: " + cor.getCor());
+		System.out.println("Cor Codigo: " + cor.getCodigo());
 		return cor;
 	}
 }

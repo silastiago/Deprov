@@ -1,11 +1,7 @@
 package pcrn.controller;
 
 import java.io.IOException;
-import java.io.InputStream;
-import java.io.OutputStream;
 import java.io.Serializable;
-import java.net.URL;
-import java.sql.Connection;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -26,22 +22,31 @@ import org.primefaces.event.data.FilterEvent;
 import org.primefaces.model.StreamedContent;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 
-import net.sf.jasperreports.engine.JRException;
-import net.sf.jasperreports.engine.JasperCompileManager;
-import net.sf.jasperreports.engine.JasperFillManager;
-import net.sf.jasperreports.engine.JasperPrint;
-import net.sf.jasperreports.engine.JasperReport;
-import net.sf.jasperreports.engine.export.JRPdfExporter;
-import net.sf.jasperreports.export.ExporterInput;
-import net.sf.jasperreports.export.OutputStreamExporterOutput;
-import net.sf.jasperreports.export.SimpleExporterInput;
-import net.sf.jasperreports.export.SimpleOutputStreamExporterOutput;
-import net.sf.jasperreports.export.SimplePdfExporterConfiguration;
+import pcrn.interfaces.ICor;
+import pcrn.interfaces.IFabricante;
+import pcrn.interfaces.ILocal;
+import pcrn.interfaces.IModelo;
+import pcrn.interfaces.IPericia;
+import pcrn.interfaces.ISeguro;
+import pcrn.interfaces.ISituacao;
+import pcrn.model.Cor;
 import pcrn.model.Fabricante;
+import pcrn.model.Local;
 import pcrn.model.Modelo;
+import pcrn.model.Pericia;
 import pcrn.model.Pessoa;
+import pcrn.model.Seguro;
+import pcrn.model.Situacao;
 import pcrn.model.Veiculo;
+import pcrn.repository.Cores;
+import pcrn.repository.Fabricantes;
+import pcrn.repository.Locais;
+import pcrn.repository.Modelos;
+import pcrn.repository.Pericias;
+import pcrn.repository.Seguros;
+import pcrn.repository.Situacoes;
 import pcrn.security.UsuarioSistema;
+import pcrn.services.ModeloService;
 import pcrn.services.VeiculoService;
 import pcrn.util.FacesUtil;
 import pcrn.util.report.ExecutorRelatorio;
@@ -59,6 +64,9 @@ public class CadastroVeiculoBean implements Serializable{
 	private VeiculoService veiculoService;
 
 	@Inject
+	private ModeloService modeloService;
+	
+	@Inject
 	private HttpServletResponse response;
 	
 	@Inject
@@ -68,6 +76,8 @@ public class CadastroVeiculoBean implements Serializable{
 	private FacesContext facesContext;
 	
 	private Veiculo veiculo = new Veiculo();
+	private Fabricante fabricante;
+	
 	private List<Veiculo> listaVeiculos;
 	private List<Veiculo> listaVeiculosFiltrados;
 	private Map<String, Object> mapaFiltros;
@@ -75,6 +85,7 @@ public class CadastroVeiculoBean implements Serializable{
 	private String relatorio;
 	private Map<String, Object> mapaParametro;
 	private List<Modelo> listaModelos;
+	
 	
 	public void lerFabricante(ValueChangeEvent evento){
 		Fabricante fabricante = (Fabricante) evento.getNewValue();
@@ -217,7 +228,7 @@ public class CadastroVeiculoBean implements Serializable{
 	        	}
 	        relatorio = util.escolherRelatorio(listaObjetos);
 	        System.out.println("Relatorio: " + relatorio);
-	        mapa = util.retornarParametros(listaObjetos, listaValores);
+	        mapa = this.retornarParametros(listaObjetos, listaValores);
 	        
 	        
 	            /*for (String key : mapaRelatorioParametro.keySet()) {
@@ -227,7 +238,7 @@ public class CadastroVeiculoBean implements Serializable{
 	            	relatorio = mapaRelatorioParametro.get(key).toString();
 	            }*/
 	        
-	        
+	        System.out.println("Relatorio: " + relatorio);
 	        this.setMapaParametro(mapa);
 	        this.setRelatorio(relatorio);
 	    }
@@ -236,7 +247,7 @@ public class CadastroVeiculoBean implements Serializable{
 	 public void gerarRelatorio() {
 			Map<String, Object> parametros = new HashMap<>();
 			parametros = this.getMapaParametro();
-			String caminhoRelatorio = this.getRelatorio();
+			String caminhoRelatorio = relatorio;
 			
 			System.out.println("Caminho relatorio: " + caminhoRelatorio);
 			
@@ -300,72 +311,960 @@ public class CadastroVeiculoBean implements Serializable{
 			return pagina;
 		} 
 	 
-	 public Veiculo getVeiculo() {
+	 
+	 public void carregaModelos(){
+		 System.out.println("Entrou no metodo");
+		 listaModelos = modeloService.buscarModelos(veiculo.getFabricante());
+		}
+	 
+	 
+	 private Map<String, Object> retornarParametros(ArrayList<String> listaObjetos, ArrayList<String> listavalores){
+			String parametro = "";
+			Map<String, Object> mapaParametro = new HashMap<String, Object>();
+			int valor = 0;
+			
+			//for (int i = 0; i < listaObjetos.size(); i++) {
+				//System.out.println("Lista: "+ listaObjetos.get(i));
+			
+				if (listaObjetos.size() == 1) {
+					//System.out.println("Parametro 1");
+		            if (listaObjetos.get(0).equals("fabricante.fabricante")) {
+		            	Fabricante fabricante = new Fabricante();
+		        		IFabricante fabricantes = new Fabricantes();
+		        		
+		        		fabricante = fabricantes.pegaCodigo(listavalores.get(0));
+		            	
+		        		valor = fabricante.getCodigo();
+		            	parametro = "codigo_fabricante";
+		            	
+		            	mapaParametro.put(parametro, valor);
+					}else if (listaObjetos.get(0).equals("modelo.modelo")) {
+						
+						Modelo modelo = new Modelo();
+						IModelo modelos = new Modelos();
+						
+						modelo = modelos.pegaCodigo(listavalores.get(0));
+						
+						valor = modelo.getCodigo();
+		            	parametro = "codigo_modelo";
+		            	
+		            	mapaParametro.put(parametro, valor);
+						
+					}else if (listaObjetos.get(0).equals("cor.cor")) {
+						Cor cor = new Cor();
+						ICor cores = new Cores();
+						System.out.println("Codigo Cor: " + listavalores.get(0));
+						
+						cor = cores.pegaCodigo(listavalores.get(0));
+						
+						valor = cor.getCodigo();
+		            	parametro = "codigo_cor";
+		            	
+		            	mapaParametro.put(parametro, valor);		
+						
+					}else if (listaObjetos.get(0).equals("seguro.seguro")) {
+						Seguro seguro = new Seguro();
+						ISeguro seguros = new Seguros();
+						seguro = seguros.pegaCodigo(listavalores.get(0));
+						
+						valor = seguro.getCodigo();
+		            	parametro = "codigo_seguro";
+		            	
+		            	mapaParametro.put(parametro, valor);
+		            	
+					}else if (listaObjetos.get(0).equals("pericia.pericia")) {
+						Pericia pericia = new Pericia();
+						IPericia pericias = new Pericias();
+						pericia = pericias.pegaCodigo(listavalores.get(0));
+						
+						valor = pericia.getCodigo();
+		            	parametro = "codigo_pericia";
+		            	
+		            	mapaParametro.put(parametro, valor);
+						
+					}else if (listaObjetos.get(0).equals("situacao.situacao")) {
+						Situacao situacao = new Situacao();
+						ISituacao ISituacao = new Situacoes();
+						situacao = ISituacao.pegaCodigo(listavalores.get(0));
+						
+						valor = situacao.getCodigo();
+		            	parametro = "codigo_situacao";
+		            	
+		            	mapaParametro.put(parametro, valor);	            	
+					
+					}else if (listaObjetos.get(0).equals("local.local")) {
+						Local local = new Local();
+						ILocal Ilocal = new Locais();
+						
+						
+						local = Ilocal.pegaCodigo(listavalores.get(0));
+						
+						valor = local.getCodigo();
+		            	parametro = "codigo_local";
+		            	
+		            	mapaParametro.put(parametro, valor);	            	
+					}
+		            
+				}else if (listaObjetos.size() == 2) {
+					//System.out.println("Parametro 2");
+					if (listaObjetos.get(0).equals("fabricante.fabricante")  && listaObjetos.get(1).equals("cor.cor")) {
+						Fabricante fabricante = new Fabricante();
+		        		IFabricante fabricantes = new Fabricantes();
+		        		fabricante = fabricantes.pegaCodigo(listavalores.get(0));
+		            	
+		        		valor = fabricante.getCodigo();
+		            	parametro = "codigo_fabricante";
+		            	
+		            	mapaParametro.put(parametro, valor);
+		            	
+		            	Cor cor = new Cor();
+						ICor cores = new Cores();
+						cor = cores.pegaCodigo(listavalores.get(1));
+						
+						valor = cor.getCodigo();
+		            	parametro = "codigo_cor";
+		            	
+		            	mapaParametro.put(parametro, valor);
+						
+						
+					}else if (listaObjetos.get(0).equals("cor.cor") && listaObjetos.get(1).equals("fabricante.fabricante")) {
+						Cor cor = new Cor();
+						ICor cores = new Cores();
+						cor = cores.pegaCodigo(listavalores.get(0));
+						
+						valor = cor.getCodigo();
+		            	parametro = "codigo_cor";
+		            	
+		            	mapaParametro.put(parametro, valor);
+		            	
+		            	Fabricante fabricante = new Fabricante();
+		        		IFabricante fabricantes = new Fabricantes();
+		        		fabricante = fabricantes.pegaCodigo(listavalores.get(1));
+		            	
+		        		valor = fabricante.getCodigo();
+		            	parametro = "codigo_fabricante";
+		            	
+		            	mapaParametro.put(parametro, valor);
+						
+					}else if (listaObjetos.get(0).equals("modelo.modelo")  && listaObjetos.get(1).equals("cor.cor")) {
+						Modelo modelo = new Modelo();
+						IModelo modelos = new Modelos();
+						modelo = modelos.pegaCodigo(listavalores.get(0));
+						
+						valor = modelo.getCodigo();
+		            	parametro = "codigo_modelo";
+		            	
+		            	mapaParametro.put(parametro, valor);
+			            		        	           	
+			            Cor cor = new Cor();
+						ICor cores = new Cores();
+						cor = cores.pegaCodigo(listavalores.get(1));
+							
+						valor = cor.getCodigo();
+			            parametro = "codigo_cor";
+			            	
+			            mapaParametro.put(parametro, valor);
+							
+					}else if (listaObjetos.get(0).equals("cor.cor") && listaObjetos.get(1).equals("modelo.modelo")) {
+						Cor cor = new Cor();
+						ICor cores = new Cores();
+						cor = cores.pegaCodigo(listavalores.get(0));
+							
+						valor = cor.getCodigo();
+			            parametro = "codigo_cor";
+			            	
+			            mapaParametro.put(parametro, valor);
+						
+						Modelo modelo = new Modelo();
+						IModelo modelos = new Modelos();
+						modelo = modelos.pegaCodigo(listavalores.get(1));
+						
+						valor = modelo.getCodigo();
+		            	parametro = "codigo_modelo";
+		            	
+		            	mapaParametro.put(parametro, valor);
+			            
+					}else if (listaObjetos.get(0).equals("seguro.seguro")  && listaObjetos.get(1).equals("cor.cor"))  {
+						Seguro seguro = new Seguro();
+						ISeguro seguros = new Seguros();
+						seguro = seguros.pegaCodigo(listavalores.get(0));
+						
+						valor = seguro.getCodigo();
+		            	parametro = "codigo_seguro";
+		            	
+		            	mapaParametro.put(parametro, valor);
+						
+		            	Cor cor = new Cor();
+						ICor cores = new Cores();
+						cor = cores.pegaCodigo(listavalores.get(1));
+							
+						valor = cor.getCodigo();
+			            parametro = "codigo_cor";
+			            	
+			            mapaParametro.put(parametro, valor);
+						
+					}else if (listaObjetos.get(0).equals("cor.cor") && listaObjetos.get(1).equals("seguro.seguro")) {
+						Cor cor = new Cor();
+						ICor cores = new Cores();
+						cor = cores.pegaCodigo(listavalores.get(0));
+							
+						valor = cor.getCodigo();
+			            parametro = "codigo_cor";
+			            	
+			            mapaParametro.put(parametro, valor);
+						
+			            Seguro seguro = new Seguro();
+						ISeguro seguros = new Seguros();
+						seguro = seguros.pegaCodigo(listavalores.get(1));
+						
+						valor = seguro.getCodigo();
+		            	parametro = "codigo_seguro";
+		            	
+		            	mapaParametro.put(parametro, valor);
+						
+					}else if (listaObjetos.get(0).equals("cor.cor") && listaObjetos.get(1).equals("pericia.pericia")) {
+						Cor cor = new Cor();
+						ICor cores = new Cores();
+						cor = cores.pegaCodigo(listavalores.get(0));
+							
+						valor = cor.getCodigo();
+			            parametro = "codigo_cor";
+			            	
+			            mapaParametro.put(parametro, valor);
+						
+			            Pericia pericia = new Pericia();
+						IPericia pericias = new Pericias();
+						pericia = pericias.pegaCodigo(listavalores.get(1));
+						
+						valor = pericia.getCodigo();
+		            	parametro = "codigo_pericia";
+		            	
+		            	mapaParametro.put(parametro, valor);
+			            
+					}else if (listaObjetos.get(0).equals("pericia.pericia") && listaObjetos.get(1).equals("cor.cor")) {	
+						Pericia pericia = new Pericia();
+						IPericia pericias = new Pericias();
+						pericia = pericias.pegaCodigo(listavalores.get(0));
+						
+						valor = pericia.getCodigo();
+		            	parametro = "codigo_pericia";
+		            	
+		            	mapaParametro.put(parametro, valor);
+						
+		            	Cor cor = new Cor();
+						ICor cores = new Cores();
+						cor = cores.pegaCodigo(listavalores.get(1));
+							
+						valor = cor.getCodigo();
+			            parametro = "codigo_cor";
+			            	
+			            mapaParametro.put(parametro, valor);
+						
+					}else if (listaObjetos.get(0).equals("cor.cor") && listaObjetos.get(1).equals("situacao.situacao")) {
+						Cor cor = new Cor();
+						ICor cores = new Cores();
+						cor = cores.pegaCodigo(listavalores.get(0));
+							
+						valor = cor.getCodigo();
+			            parametro = "codigo_cor";
+			            	
+			            mapaParametro.put(parametro, valor);
+			            
+			            Situacao situacao = new Situacao();
+						ISituacao ISituacao = new Situacoes();
+						situacao = ISituacao.pegaCodigo(listavalores.get(1));
+						
+						valor = situacao.getCodigo();
+		            	parametro = "codigo_situacao";
+		            	
+		            	mapaParametro.put(parametro, valor);		            
+			            
+					}else if (listaObjetos.get(0).equals("situacao.situacao") && listaObjetos.get(1).equals("cor.cor")) {
+						Situacao situacao = new Situacao();
+						ISituacao ISituacao = new Situacoes();
+						situacao = ISituacao.pegaCodigo(listavalores.get(0));
+						
+						valor = situacao.getCodigo();
+		            	parametro = "codigo_situacao";
+		            	
+		            	mapaParametro.put(parametro, valor);
+		            	
+		            	Cor cor = new Cor();
+						ICor cores = new Cores();
+						cor = cores.pegaCodigo(listavalores.get(1));
+							
+						valor = cor.getCodigo();
+			            parametro = "codigo_cor";
+			            	
+			            mapaParametro.put(parametro, valor);
+		            	
+					}else if (listaObjetos.get(0).equals("local.local")  && listaObjetos.get(1).equals("cor.cor")) {
+						Local local = new Local();
+						ILocal Ilocal = new Locais();
+						
+						
+						local = Ilocal.pegaCodigo(listavalores.get(0));
+						
+						valor = local.getCodigo();
+		            	parametro = "codigo_local";
+		            	
+		            	mapaParametro.put(parametro, valor);
+			            		        	           	
+			            Cor cor = new Cor();
+						ICor cores = new Cores();
+						cor = cores.pegaCodigo(listavalores.get(1));
+							
+						valor = cor.getCodigo();
+			            parametro = "codigo_cor";
+			            	
+			            mapaParametro.put(parametro, valor);
+							
+					}else if (listaObjetos.get(0).equals("cor.cor") && listaObjetos.get(1).equals("local.local")) {
+						Cor cor = new Cor();
+						ICor cores = new Cores();
+						cor = cores.pegaCodigo(listavalores.get(0));
+							
+						valor = cor.getCodigo();
+			            parametro = "codigo_cor";
+			            	
+			            mapaParametro.put(parametro, valor);
+						
+			            Local local = new Local();
+						ILocal Ilocal = new Locais();
+						
+						
+						local = Ilocal.pegaCodigo(listavalores.get(1));
+						
+						valor = local.getCodigo();
+		            	parametro = "codigo_local";
+		            	
+		            	mapaParametro.put(parametro, valor);
+			            
+					}else if (listaObjetos.get(0).equals("fabricante.fabricante")  && listaObjetos.get(1).equals("seguro.seguro")) {
+						Fabricante fabricante = new Fabricante();
+		        		IFabricante fabricantes = new Fabricantes();
+		        		fabricante = fabricantes.pegaCodigo(listavalores.get(0));
+		            	
+		        		valor = fabricante.getCodigo();
+		            	parametro = "codigo_fabricante";
+		            	
+		            	mapaParametro.put(parametro, valor); 
+						
+						Seguro seguro = new Seguro();
+						ISeguro seguros = new Seguros();
+						seguro = seguros.pegaCodigo(listavalores.get(1));
+						
+						valor = seguro.getCodigo();
+		            	parametro = "codigo_seguro";
+		            	
+		            	mapaParametro.put(parametro, valor);
+						
+					}else if (listaObjetos.get(0).equals("seguro.seguro") && listaObjetos.get(1).equals("fabricante.fabricante")) {
+						Seguro seguro = new Seguro();
+						ISeguro seguros = new Seguros();
+						seguro = seguros.pegaCodigo(listavalores.get(0));
+						
+						valor = seguro.getCodigo();
+		            	parametro = "codigo_seguro";
+		            	
+		            	mapaParametro.put(parametro, valor);
+		            	
+		            	Fabricante fabricante = new Fabricante();
+		        		IFabricante fabricantes = new Fabricantes();
+		        		fabricante = fabricantes.pegaCodigo(listavalores.get(1));
+		            	
+		        		valor = fabricante.getCodigo();
+		            	parametro = "codigo_fabricante";
+		            	
+		            	mapaParametro.put(parametro, valor);
+					}else if (listaObjetos.get(0).equals("fabricante.fabricante")  && listaObjetos.get(1).equals("pericia.pericia")) {
+						Fabricante fabricante = new Fabricante();
+		        		IFabricante fabricantes = new Fabricantes();
+		        		fabricante = fabricantes.pegaCodigo(listavalores.get(0));
+		            	
+		        		valor = fabricante.getCodigo();
+		            	parametro = "codigo_fabricante";
+		            	
+		            	mapaParametro.put(parametro, valor); 
+						
+		            	Pericia pericia = new Pericia();
+						IPericia pericias = new Pericias();
+						pericia = pericias.pegaCodigo(listavalores.get(1));
+						
+						valor = pericia.getCodigo();
+		            	parametro = "codigo_pericia";
+		            	
+		            	mapaParametro.put(parametro, valor);
+						
+					}else if (listaObjetos.get(0).equals("pericia.pericia") && listaObjetos.get(1).equals("fabricante.fabricante")) {
+						Pericia pericia = new Pericia();
+						IPericia pericias = new Pericias();
+						pericia = pericias.pegaCodigo(listavalores.get(0));
+						
+						valor = pericia.getCodigo();
+		            	parametro = "codigo_pericia";
+		            	
+		            	mapaParametro.put(parametro, valor);
+		            	
+		            	Fabricante fabricante = new Fabricante();
+		        		IFabricante fabricantes = new Fabricantes();
+		        		fabricante = fabricantes.pegaCodigo(listavalores.get(1));
+		            	
+		        		valor = fabricante.getCodigo();
+		            	parametro = "codigo_fabricante";
+		            	
+		            	mapaParametro.put(parametro, valor);
+					}else if (listaObjetos.get(0).equals("fabricante.fabricante")  && listaObjetos.get(1).equals("situacao.situacao")) {
+						Fabricante fabricante = new Fabricante();
+		        		IFabricante fabricantes = new Fabricantes();
+		        		fabricante = fabricantes.pegaCodigo(listavalores.get(0));
+		            	
+		        		valor = fabricante.getCodigo();
+		            	parametro = "codigo_fabricante";
+		            	
+		            	mapaParametro.put(parametro, valor); 
+						
+		            	Situacao situacao = new Situacao();
+						ISituacao ISituacao = new Situacoes();
+						situacao = ISituacao.pegaCodigo(listavalores.get(1));
+						
+						valor = situacao.getCodigo();
+		            	parametro = "codigo_situacao";
+		            	
+		            	mapaParametro.put(parametro, valor);					
+						
+					}else if (listaObjetos.get(0).equals("situacao.situacao") && listaObjetos.get(1).equals("fabricante.fabricante")) {
+						Situacao situacao = new Situacao();
+						ISituacao ISituacao = new Situacoes();
+						situacao = ISituacao.pegaCodigo(listavalores.get(0));
+						
+						valor = situacao.getCodigo();
+		            	parametro = "codigo_situacao";
+		            	
+		            	mapaParametro.put(parametro, valor);					
+						
+						Fabricante fabricante = new Fabricante();
+		        		IFabricante fabricantes = new Fabricantes();
+		        		fabricante = fabricantes.pegaCodigo(listavalores.get(1));
+		            	
+		        		valor = fabricante.getCodigo();
+		            	parametro = "codigo_fabricante";
+		            	
+		            	mapaParametro.put(parametro, valor);
+						
+					}else if (listaObjetos.get(0).equals("fabricante.fabricante")  && listaObjetos.get(1).equals("local.local")) {
+						Fabricante fabricante = new Fabricante();
+		        		IFabricante fabricantes = new Fabricantes();
+		        		fabricante = fabricantes.pegaCodigo(listavalores.get(0));
+		            	
+		        		valor = fabricante.getCodigo();
+		            	parametro = "codigo_fabricante";
+		            	
+		            	mapaParametro.put(parametro, valor);
+		            	
+		            	Local local = new Local();
+						ILocal Ilocal = new Locais();
+						
+						
+						local = Ilocal.pegaCodigo(listavalores.get(1));
+						
+						valor = local.getCodigo();
+		            	parametro = "codigo_local";
+		            	
+		            	mapaParametro.put(parametro, valor);	
+						
+					}else if (listaObjetos.get(0).equals("local.local") && listaObjetos.get(1).equals("fabricante.fabricante")) {
+						Local local = new Local();
+						ILocal Ilocal = new Locais();
+						
+						local = Ilocal.pegaCodigo(listavalores.get(0));
+						
+						valor = local.getCodigo();
+		            	parametro = "codigo_local";
+		            	
+		            	mapaParametro.put(parametro, valor);
+		            	
+		            	Fabricante fabricante = new Fabricante();
+		        		IFabricante fabricantes = new Fabricantes();
+		        		fabricante = fabricantes.pegaCodigo(listavalores.get(1));
+		            	
+		        		valor = fabricante.getCodigo();
+		            	parametro = "codigo_fabricante";
+		            	
+		            	mapaParametro.put(parametro, valor);
+						
+					}else if (listaObjetos.get(0).equals("modelo.modelo")  && listaObjetos.get(1).equals("seguro.seguro")) {
+						Modelo modelo = new Modelo();
+						IModelo modelos = new Modelos();
+						modelo = modelos.pegaCodigo(listavalores.get(0));
+						
+						valor = modelo.getCodigo();
+		            	parametro = "codigo_modelo";
+		            	
+		            	mapaParametro.put(parametro, valor); 
+						
+						Seguro seguro = new Seguro();
+						ISeguro seguros = new Seguros();
+						seguro = seguros.pegaCodigo(listavalores.get(1));
+						
+						valor = seguro.getCodigo();
+		            	parametro = "codigo_seguro";
+		            	
+		            	mapaParametro.put(parametro, valor);
+						
+					}else if (listaObjetos.get(0).equals("seguro.seguro") && listaObjetos.get(1).equals("modelo.modelo")) {
+						Seguro seguro = new Seguro();
+						ISeguro seguros = new Seguros();
+						seguro = seguros.pegaCodigo(listavalores.get(0));
+						
+						valor = seguro.getCodigo();
+		            	parametro = "codigo_seguro";
+		            	
+		            	mapaParametro.put(parametro, valor);
+		            	
+		            	Modelo modelo = new Modelo();
+						IModelo modelos = new Modelos();
+						modelo = modelos.pegaCodigo(listavalores.get(1));
+						
+						valor = modelo.getCodigo();
+		            	parametro = "codigo_modelo";
+		            	
+		            	mapaParametro.put(parametro, valor);
+		            	
+					}else if (listaObjetos.get(0).equals("modelo.modelo")  && listaObjetos.get(1).equals("pericia.pericia")) {
+						Modelo modelo = new Modelo();
+						IModelo modelos = new Modelos();
+						modelo = modelos.pegaCodigo(listavalores.get(0));
+						
+						valor = modelo.getCodigo();
+		            	parametro = "codigo_modelo";
+		            	
+		            	mapaParametro.put(parametro, valor); 
+						
+		            	Pericia pericia = new Pericia();
+						IPericia pericias = new Pericias();
+						pericia = pericias.pegaCodigo(listavalores.get(1));
+						
+						valor = pericia.getCodigo();
+		            	parametro = "codigo_pericia";
+		            	
+		            	mapaParametro.put(parametro, valor);
+						
+					}else if (listaObjetos.get(0).equals("pericia.pericia") && listaObjetos.get(1).equals("modelo.modelo")) {
+						Pericia pericia = new Pericia();
+						IPericia pericias = new Pericias();
+						pericia = pericias.pegaCodigo(listavalores.get(0));
+						
+						valor = pericia.getCodigo();
+		            	parametro = "codigo_pericia";
+		            	
+		            	mapaParametro.put(parametro, valor);
+		            	
+		            	Modelo modelo = new Modelo();
+						IModelo modelos = new Modelos();
+						modelo = modelos.pegaCodigo(listavalores.get(1));
+						
+						valor = modelo.getCodigo();
+		            	parametro = "codigo_modelo";
+		            	
+		            	mapaParametro.put(parametro, valor);
+		            	
+					}else if (listaObjetos.get(0).equals("modelo.modelo")  && listaObjetos.get(1).equals("situacao.situacao")) {
+						Modelo modelo = new Modelo();
+						IModelo modelos = new Modelos();
+						modelo = modelos.pegaCodigo(listavalores.get(0));
+						
+						valor = modelo.getCodigo();
+		            	parametro = "codigo_modelo";
+		            	
+		            	mapaParametro.put(parametro, valor); 
+						
+		            	Situacao situacao = new Situacao();
+						ISituacao ISituacao = new Situacoes();
+						situacao = ISituacao.pegaCodigo(listavalores.get(1));
+						
+						valor = situacao.getCodigo();
+		            	parametro = "codigo_situacao";
+		            	
+		            	mapaParametro.put(parametro, valor);					
+						
+					}else if (listaObjetos.get(0).equals("situacao.situacao") && listaObjetos.get(1).equals("modelo.modelo")) {
+						Situacao situacao = new Situacao();
+						ISituacao ISituacao = new Situacoes();
+						situacao = ISituacao.pegaCodigo(listavalores.get(0));
+						
+						valor = situacao.getCodigo();
+		            	parametro = "codigo_situacao";
+		            	
+		            	mapaParametro.put(parametro, valor);					
+						
+		            	Modelo modelo = new Modelo();
+						IModelo modelos = new Modelos();
+						modelo = modelos.pegaCodigo(listavalores.get(1));
+						
+						valor = modelo.getCodigo();
+		            	parametro = "codigo_modelo";
+		            	
+		            	mapaParametro.put(parametro, valor);
+						
+					}else if (listaObjetos.get(0).equals("modelo.modelo")  && listaObjetos.get(1).equals("local.local")) {
+						Modelo modelo = new Modelo();
+						IModelo modelos = new Modelos();
+						modelo = modelos.pegaCodigo(listavalores.get(0));
+						
+						valor = modelo.getCodigo();
+		            	parametro = "codigo_modelo";
+		            	
+		            	mapaParametro.put(parametro, valor); 
+						
+		            	Local local = new Local();
+						ILocal Ilocal = new Locais();
+						
+						local = Ilocal.pegaCodigo(listavalores.get(1));
+						
+						valor = local.getCodigo();
+		            	parametro = "codigo_local";
+		            	
+		            	mapaParametro.put(parametro, valor);
+						
+					}else if (listaObjetos.get(0).equals("local.local") && listaObjetos.get(1).equals("modelo.modelo")) {
+						Local local = new Local();
+						ILocal Ilocal = new Locais();
+						
+						local = Ilocal.pegaCodigo(listavalores.get(0));
+						
+						valor = local.getCodigo();
+		            	parametro = "codigo_local";
+		            	
+		            	mapaParametro.put(parametro, valor);
+		            	
+		            	Modelo modelo = new Modelo();
+						IModelo modelos = new Modelos();
+						modelo = modelos.pegaCodigo(listavalores.get(1));
+						
+						valor = modelo.getCodigo();
+		            	parametro = "codigo_modelo";
+		            	
+		            	mapaParametro.put(parametro, valor);
+		            	
+					}else if (listaObjetos.get(0).equals("seguro.seguro")  && listaObjetos.get(1).equals("pericia.pericia")) {
+						Seguro seguro = new Seguro();
+						ISeguro seguros = new Seguros();
+						seguro = seguros.pegaCodigo(listavalores.get(0));
+						
+						valor = seguro.getCodigo();
+		            	parametro = "codigo_seguro";
+		            	
+		            	mapaParametro.put(parametro, valor);
+						
+						Pericia pericia = new Pericia();
+						IPericia pericias = new Pericias();
+						pericia = pericias.pegaCodigo(listavalores.get(1));
+						
+						valor = pericia.getCodigo();
+		            	parametro = "codigo_pericia";
+		            	
+		            	mapaParametro.put(parametro, valor);
+						
+					}else if (listaObjetos.get(0).equals("pericia.pericia") && listaObjetos.get(1).equals("seguro.seguro")) {
+						Pericia pericia = new Pericia();
+						IPericia pericias = new Pericias();
+						pericia = pericias.pegaCodigo(listavalores.get(0));
+						
+						valor = pericia.getCodigo();
+		            	parametro = "codigo_pericia";
+		            	
+		            	mapaParametro.put(parametro, valor);
+						
+		            	Seguro seguro = new Seguro();
+						ISeguro seguros = new Seguros();
+						seguro = seguros.pegaCodigo(listavalores.get(1));
+						
+						valor = seguro.getCodigo();
+		            	parametro = "codigo_seguro";
+		            	
+		            	mapaParametro.put(parametro, valor);
+		            	
+					}else if (listaObjetos.get(0).equals("seguro.seguro")  && listaObjetos.get(1).equals("situacao.situacao")) {
+						Seguro seguro = new Seguro();
+						ISeguro seguros = new Seguros();
+						seguro = seguros.pegaCodigo(listavalores.get(0));
+						
+						valor = seguro.getCodigo();
+		            	parametro = "codigo_seguro";
+		            	
+		            	mapaParametro.put(parametro, valor);
+						
+						Situacao situacao = new Situacao();
+						ISituacao ISituacao = new Situacoes();
+						situacao = ISituacao.pegaCodigo(listavalores.get(1));
+						
+						valor = situacao.getCodigo();
+		            	parametro = "codigo_situacao";
+		            	
+		            	mapaParametro.put(parametro, valor);
+						
+					}else if (listaObjetos.get(0).equals("situacao.situacao") && listaObjetos.get(1).equals("seguro.seguro")) {
+						Situacao situacao = new Situacao();
+						ISituacao ISituacao = new Situacoes();
+						situacao = ISituacao.pegaCodigo(listavalores.get(0));
+						
+						valor = situacao.getCodigo();
+		            	parametro = "codigo_situacao";
+		            	
+		            	mapaParametro.put(parametro, valor);
+						
+		            	Seguro seguro = new Seguro();
+						ISeguro seguros = new Seguros();
+						seguro = seguros.pegaCodigo(listavalores.get(1));
+						
+						valor = seguro.getCodigo();
+		            	parametro = "codigo_seguro";
+		            	
+		            	mapaParametro.put(parametro, valor);
+		            	
+					}else if (listaObjetos.get(0).equals("seguro.seguro")  && listaObjetos.get(1).equals("local.local")) {
+						Seguro seguro = new Seguro();
+						ISeguro seguros = new Seguros();
+						seguro = seguros.pegaCodigo(listavalores.get(0));
+						
+						valor = seguro.getCodigo();
+		            	parametro = "codigo_seguro";
+		            	
+		            	mapaParametro.put(parametro, valor);
+						
+		            	Local local = new Local();
+						ILocal Ilocal = new Locais();
+						
+						local = Ilocal.pegaCodigo(listavalores.get(1));
+						
+						valor = local.getCodigo();
+		            	parametro = "codigo_local";
+		            	
+		            	mapaParametro.put(parametro, valor);
+						
+					}else if (listaObjetos.get(0).equals("local.local") && listaObjetos.get(1).equals("seguro.seguro")) {
+						Local local = new Local();
+						ILocal Ilocal = new Locais();
+						
+						local = Ilocal.pegaCodigo(listavalores.get(0));
+						
+						valor = local.getCodigo();
+		            	parametro = "codigo_local";
+		            	
+		            	mapaParametro.put(parametro, valor);
+						
+		            	Seguro seguro = new Seguro();
+						ISeguro seguros = new Seguros();
+						seguro = seguros.pegaCodigo(listavalores.get(1));
+						
+						valor = seguro.getCodigo();
+		            	parametro = "codigo_seguro";
+		            	
+		            	mapaParametro.put(parametro, valor);
+					}else if (listaObjetos.get(0).equals("pericia.pericia")  && listaObjetos.get(1).equals("situacao.situacao")) {
+						Pericia pericia = new Pericia();
+						IPericia pericias = new Pericias();
+						pericia = pericias.pegaCodigo(listavalores.get(0));
+						
+						valor = pericia.getCodigo();
+		            	parametro = "codigo_pericia";
+		            	
+		            	mapaParametro.put(parametro, valor);
+						
+						Situacao situacao = new Situacao();
+						ISituacao ISituacao = new Situacoes();
+						situacao = ISituacao.pegaCodigo(listavalores.get(1));
+						
+						valor = situacao.getCodigo();
+		            	parametro = "codigo_situacao";
+		            	
+		            	mapaParametro.put(parametro, valor);
+						
+					}else if (listaObjetos.get(0).equals("situacao.situacao") && listaObjetos.get(1).equals("pericia.pericia")) {
+						Situacao situacao = new Situacao();
+						ISituacao ISituacao = new Situacoes();
+						situacao = ISituacao.pegaCodigo(listavalores.get(0));
+						
+						valor = situacao.getCodigo();
+		            	parametro = "codigo_situacao";
+		            	
+		            	mapaParametro.put(parametro, valor);
+						
+		            	Pericia pericia = new Pericia();
+						IPericia pericias = new Pericias();
+						pericia = pericias.pegaCodigo(listavalores.get(1));
+						
+						valor = pericia.getCodigo();
+		            	parametro = "codigo_pericia";
+		            	
+		            	mapaParametro.put(parametro, valor);
+		            	
+					}else if (listaObjetos.get(0).equals("pericia.pericia")  && listaObjetos.get(1).equals("local.local")) {
+						Pericia pericia = new Pericia();
+						IPericia pericias = new Pericias();
+						pericia = pericias.pegaCodigo(listavalores.get(0));
+						
+						valor = pericia.getCodigo();
+		            	parametro = "codigo_pericia";
+		            	
+		            	mapaParametro.put(parametro, valor);
+						
+						
+		            	Local local = new Local();
+						ILocal Ilocal = new Locais();
+						
+						local = Ilocal.pegaCodigo(listavalores.get(1));
+						
+						valor = local.getCodigo();
+		            	parametro = "codigo_local";
+		            	
+		            	mapaParametro.put(parametro, valor);
+						
+					}else if (listaObjetos.get(0).equals("local.local") && listaObjetos.get(1).equals("pericia.pericia")) {
+						Local local = new Local();
+						ILocal Ilocal = new Locais();
+						
+						local = Ilocal.pegaCodigo(listavalores.get(0));
+						
+						valor = local.getCodigo();
+		            	parametro = "codigo_local";
+		            	
+		            	mapaParametro.put(parametro, valor);
+						
+		            	Pericia pericia = new Pericia();
+						IPericia pericias = new Pericias();
+						pericia = pericias.pegaCodigo(listavalores.get(1));
+						
+						valor = pericia.getCodigo();
+		            	parametro = "codigo_pericia";
+		            	
+		            	mapaParametro.put(parametro, valor);
+		            	
+					}else if (listaObjetos.get(0).equals("situacao.situacao")  && listaObjetos.get(1).equals("local.local")) {
+						Situacao situacao = new Situacao();
+						ISituacao ISituacao = new Situacoes();
+						situacao = ISituacao.pegaCodigo(listavalores.get(0));
+						
+						valor = situacao.getCodigo();
+		            	parametro = "codigo_situacao";
+		            	
+		            	mapaParametro.put(parametro, valor);
+						
+						
+		            	Local local = new Local();
+						ILocal Ilocal = new Locais();
+						
+						local = Ilocal.pegaCodigo(listavalores.get(1));
+						
+						valor = local.getCodigo();
+		            	parametro = "codigo_local";
+		            	
+		            	mapaParametro.put(parametro, valor);
+						
+					}else if (listaObjetos.get(0).equals("local.local") && listaObjetos.get(1).equals("situacao.situacao")) {
+						Local local = new Local();
+						ILocal Ilocal = new Locais();
+						
+						local = Ilocal.pegaCodigo(listavalores.get(0));
+						
+						valor = local.getCodigo();
+		            	parametro = "codigo_local";
+		            	
+		            	mapaParametro.put(parametro, valor);
+						
+		            	Situacao situacao = new Situacao();
+						ISituacao ISituacao = new Situacoes();
+						situacao = ISituacao.pegaCodigo(listavalores.get(1));
+						
+						valor = situacao.getCodigo();
+		            	parametro = "codigo_situacao";
+		            	
+		            	mapaParametro.put(parametro, valor);
+						}
+					}
+			//}
+			return mapaParametro;
+		}	
+	 
+	 
+	 
+	 
+	 
+	public Fabricante getFabricante() {
+		return fabricante;
+	}
+
+	public void setFabricante(Fabricante fabricante) {
+		this.fabricante = fabricante;
+	}
+
+	public Veiculo getVeiculo() {
 			return veiculo;
 		}
 
 
-		public void setVeiculo(Veiculo veiculo) {
+	public void setVeiculo(Veiculo veiculo) {
 			this.veiculo = veiculo;
 		}
 
 
-		public List<Veiculo> getListaVeiculos() {
+	public List<Veiculo> getListaVeiculos() {
 			return listaVeiculos;
 		}
 
-		public void setListaVeiculos(List<Veiculo> listaVeiculos) {
+	public void setListaVeiculos(List<Veiculo> listaVeiculos) {
 			this.listaVeiculos = listaVeiculos;
 		}
 
-		public List<Veiculo> getListaVeiculosFiltrados() {
+	public List<Veiculo> getListaVeiculosFiltrados() {
 			return listaVeiculosFiltrados;
 		}
 
-		public void setListaVeiculosFiltrados(List<Veiculo> listaVeiculosFiltrados) {
+	public void setListaVeiculosFiltrados(List<Veiculo> listaVeiculosFiltrados) {
 			this.listaVeiculosFiltrados = listaVeiculosFiltrados;
 		}
 
-		public Map<String, Object> getMapaFiltros() {
+	public Map<String, Object> getMapaFiltros() {
 			return mapaFiltros;
 		}
 
-		public void setMapaFiltros(Map<String, Object> mapaFiltros) {
+	public void setMapaFiltros(Map<String, Object> mapaFiltros) {
 			this.mapaFiltros = mapaFiltros;
 		}
 
-		public StreamedContent getFile() {
+	public StreamedContent getFile() {
 			return file;
 		}
 
-		public void setFile(StreamedContent file) {
+	public void setFile(StreamedContent file) {
 			this.file = file;
 		}
 
-		public String getRelatorio() {
+	public String getRelatorio() {
 			return relatorio;
 		}
 
-		public void setRelatorio(String relatorio) {
+	public void setRelatorio(String relatorio) {
 			this.relatorio = relatorio;
 		}
 
 
 
-		public Map<String, Object> getMapaParametro() {
+	public Map<String, Object> getMapaParametro() {
 			return mapaParametro;
 		}
 
 
-		public void setMapaParametro(Map<String, Object> mapaParametro) {
+	public void setMapaParametro(Map<String, Object> mapaParametro) {
 			this.mapaParametro = mapaParametro;
 		}
 
-		public List<Modelo> getListaModelos() {
-			return listaModelos;
+	public List<Modelo> getListaModelos() {
+		return listaModelos;
 		}
 
-		public void setListaModelos(List<Modelo> listaModelos) {
+	public void setListaModelos(List<Modelo> listaModelos) {
 			this.listaModelos = listaModelos;
 		}	
 	

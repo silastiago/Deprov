@@ -8,7 +8,12 @@ import javax.inject.Inject;
 import javax.persistence.EntityManager;
 import javax.persistence.Query;
 
+import org.hibernate.Criteria;
+import org.hibernate.Session;
+import org.hibernate.criterion.Restrictions;
+
 import pcrn.interfaces.IModelo;
+import pcrn.model.Fabricante;
 import pcrn.model.Modelo;
 
 /** Esta � uma Classe concreta que implementa a Interface Modelos,
@@ -100,10 +105,26 @@ public class Modelos implements IModelo, Serializable {
 	public List<Modelo> pegaModelos(int codigo_fabricante) {
 		
 		List<Modelo> listaModelos = new ArrayList<Modelo>();
-		Query query = manager.createQuery("from Local where codigo_fabricante = :codigo_fabricante");
+		Query query = manager.createQuery("from Modelo where codigo_fabricante = :codigo_fabricante");
 		query.setParameter("codigo_fabricante", codigo_fabricante);
 		listaModelos = query.getResultList();
 		
 		return listaModelos;
 	}
+	
+	
+	@Override
+	public List<Modelo> buscarModelos(Fabricante fabricante) {
+		
+		Session sessao = this.manager.unwrap(Session.class);
+		Criteria criteria = sessao.createCriteria(Modelo.class);
+		
+		if (fabricante != null) {
+			criteria.add(Restrictions.eq("fabricante", fabricante));
+		}
+		
+		return criteria.list();
+	}
+	
+	
 }

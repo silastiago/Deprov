@@ -5,6 +5,7 @@ import java.util.List;
 
 import javax.inject.Inject;
 
+import pcrn.model.Fabricante;
 import pcrn.model.Modelo;
 import pcrn.repository.Modelos;
 import pcrn.util.jpa.Transactional;
@@ -49,4 +50,10 @@ public class ModeloService implements Serializable{
 	public List<Modelo> pegaModelos(int codigo_fabricante){
 		return modelos.pegaModelos(codigo_fabricante);
 	}	
+	
+	@Transactional
+	public List<Modelo> buscarModelos(Fabricante fabricante){
+		return modelos.buscarModelos(fabricante);
+	}
+	
 }

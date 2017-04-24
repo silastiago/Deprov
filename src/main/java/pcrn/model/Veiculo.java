@@ -5,6 +5,7 @@ import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -51,6 +52,7 @@ public class Veiculo implements Serializable, Cloneable{
 	private Pericia pericia;
 	private Date dataEntrada;
 	private Pessoa pessoa;
+	private List<Ocorrencia> ocorrencias;
 	private List<Foto> fotos;
 
 
@@ -289,7 +291,16 @@ public class Veiculo implements Serializable, Cloneable{
 		this.pessoa = pessoa;
 	}
 	
-	@OneToMany(mappedBy="veiculo")
+	@OneToMany(mappedBy="veiculo", cascade = CascadeType.REMOVE)
+	public List<Ocorrencia> getOcorrencias() {
+		return ocorrencias;
+	}
+
+	public void setOcorrencias(List<Ocorrencia> ocorrencias) {
+		this.ocorrencias = ocorrencias;
+	}
+
+	@OneToMany(mappedBy="veiculo", cascade = CascadeType.REMOVE)
 	public List<Foto> getFotos() {
 		return fotos;
 	}
