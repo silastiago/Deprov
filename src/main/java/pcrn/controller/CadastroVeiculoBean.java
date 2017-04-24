@@ -282,7 +282,7 @@ public class CadastroVeiculoBean implements Serializable{
 	 
 	 public String redirecionaParaFoto(Veiculo veiculo){
 			
-		 return "/site/Foto/Edicao/Foto.xhtml?codigo="+veiculo.getCodigo()+"faces-redirect=true";
+		 return "/site/Foto/Edicao/Foto.xhtml?codigoVeiculo="+veiculo.getCodigo()+"faces-redirect=true";
 		 
 	}
 	 

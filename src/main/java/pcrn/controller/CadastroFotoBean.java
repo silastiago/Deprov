@@ -8,6 +8,8 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.annotation.PostConstruct;
+import javax.faces.context.FacesContext;
 import javax.faces.view.ViewScoped;
 import javax.inject.Inject;
 import javax.inject.Named;
@@ -16,6 +18,7 @@ import org.primefaces.model.UploadedFile;
 import pcrn.model.Foto;
 import pcrn.model.Veiculo;
 import pcrn.services.FotoService;
+import pcrn.util.FacesUtil;
 
 @Named
 @ViewScoped
@@ -34,6 +37,12 @@ public class CadastroFotoBean implements Serializable{
 	private List<Foto> listaFotos = new ArrayList<Foto>();
 	private Veiculo veiculo = new Veiculo();
     private UploadedFile file;
+    
+    
+    @PostConstruct
+	public void init(){
+		listaFotos = this.listarFotos();
+	}
     
     public String voltar(String codigoVeiculo){
 		
@@ -139,12 +148,16 @@ public class CadastroFotoBean implements Serializable{
 		
 		
 		//Esta linha faz um redirecionamento de pagina para a pagina do veiculo que voc� cadastrou a foto.
-	    String pagina = "/site/Veiculo/Edicao/Veiculo.xhtml?codigoVeiculo="+codigo+"faces-redirect=true";
+	    //String pagina = "/site/Veiculo/Edicao/Veiculo.xhtml?codigoVeiculo="+codigo+"faces-redirect=true";
+		String pagina = "/site/Foto/Edicao/Foto.xhtml?codigoVeiculo="+foto.getVeiculo().getCodigo()+"faces-redirect=true";
+	    FacesUtil.addInfoMessage("Foto cadastrada com sucesso");		
+		FacesUtil.contextFlash();
 	    return pagina;
 	}
     
-    public List<Foto> listarFotos(String codigo){
-		
+    public List<Foto> listarFotos(){
+    	
+    	String codigo = FacesContext.getCurrentInstance().getExternalContext().getRequestParameterMap().get("codigoVeiculo");
 		int idVeiculo = Integer.parseInt(codigo); 
 		listaFotos = fotoService.porCodigoVeiculo(idVeiculo);
 		
@@ -157,16 +170,19 @@ public class CadastroFotoBean implements Serializable{
 		fotoService.remover(fotoSelecionada);
 		
 		//A variavel path recebe o caminho de onde a foto est� inserida.
-		//String path = "/opt/tomcat/webapps/Deprov/resources/"+ foto.getPath();
-		//String path = "/var/lib/tomcat/webapps/Deprov/resources/"+ foto.getPath();
-		String path = fotoSelecionada.getPath();
+		String path = "/opt/tomcat/webapps/Deprov/resources/images/"+ fotoSelecionada.getVeiculo().getCodigo()+"/"+fotoSelecionada.getPath();
+		//String path = "/var/lib/tomcat/webapps/Deprov/resources/images/"+ fotoSelecionada.getVeiculo().getCodigo()+"/"+fotoSelecionada.getPath();
 		//Criando arquivo para ser deletado com o caminho especificado logo acima.
 		File f = new File(path);
 		//Deletando o arquivo do diretorio.
 		f.delete();
 	    
-	    String pagina = "/site/Veiculo/Edicao/Veiculo.xhtml?codigoVeiculo="+fotoSelecionada.getVeiculo().getCodigo()+"faces-redirect=true";
-	    
+		
+		FacesUtil.addInfoMessage("Foto: " +fotoSelecionada.getPath()+ " removida com sucesso");
+		FacesUtil.contextFlash();
+	    //String pagina = "/site/Veiculo/Edicao/Veiculo.xhtml?codigoVeiculo="+fotoSelecionada.getVeiculo().getCodigo()+"faces-redirect=true";
+		String pagina = "/site/Foto/Edicao/Foto.xhtml?codigoVeiculo="+fotoSelecionada.getVeiculo().getCodigo()+"faces-redirect=true";
+		
 	    return pagina;
 	    
 	}

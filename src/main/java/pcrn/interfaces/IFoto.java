@@ -34,4 +34,5 @@ public interface IFoto {
 	*   	
 	*/
 	public void remover(Foto foto);
+	public Foto porCodigo(Integer codigo);
 }

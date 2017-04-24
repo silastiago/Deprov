@@ -31,6 +31,12 @@ public class Fotos implements IFoto, Serializable{
 		return listaFotos;
 	}
 
+	
+	@Override
+	public Foto porCodigo(Integer codigo) {
+		return manager.find(Foto.class, codigo);
+	}
+	
 	@Override
 	public void salvar(Foto foto) {
 		manager.merge(foto);
