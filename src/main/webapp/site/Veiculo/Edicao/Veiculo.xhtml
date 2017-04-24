@@ -17,6 +17,14 @@
 			<p:toolbar id="toolbar">
 				<p:toolbarGroup>
 				
+					<p:commandButton value="Novo" icon="ui-icon-plus"
+						action="#{cadastroVeiculoBean.novo()}" process="@this"
+						disabled="#{not seguranca.acessoCadastroPermitido}"/>
+
+					<span class="ui-separator"> <span
+						class="ui-icon ui-icon-grip-dotted-vertical" />
+					</span>				
+				
 					<p:commandButton value="Editar" icon="ui-icon-pencil"
 						disabled="#{not seguranca.acessoEdicaoPermitido}" 
 						action="#{cadastroVeiculoBean.editar()}" process="@this" />

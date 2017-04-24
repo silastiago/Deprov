@@ -88,8 +88,8 @@ public class CadastroVeiculoBean implements Serializable{
 		
 		pessoa = getUsuarioLogado().getPessoa();
 		
-		System.out.println("Chave: " + veiculo.getChave());
-		System.out.println("Lista de veiculos: " + veiculoService.chaveExistenteEditar(veiculo).size());
+		//System.out.println("Chave: " + veiculo.getChave());
+		//System.out.println("Lista de veiculos: " + veiculoService.chaveExistenteEditar(veiculo).size());
 		
 		if (veiculo.getChave().toUpperCase().equals("NAO") || 
 				veiculo.getChave().toUpperCase().equals("NÃO") ||  
@@ -144,8 +144,9 @@ public class CadastroVeiculoBean implements Serializable{
 		pessoa = getUsuarioLogado().getPessoa();		
 		
 		
-		System.out.println("Chave: " + veiculo.getChave());
-		System.out.println("Lista de veiculos: " + veiculoService.chaveExistenteEditar(veiculo).size());
+		//System.out.println("Chave: " + veiculo.getChave());
+		//System.out.println("Lista de veiculos: " + veiculoService.chaveExistenteEditar(veiculo).size());
+		
 		if (veiculo.getChave().toUpperCase().equals("NAO") || 
 				veiculo.getChave().toUpperCase().equals("NÃO") || 
 				veiculo.getChave().toUpperCase().equals("")) {
