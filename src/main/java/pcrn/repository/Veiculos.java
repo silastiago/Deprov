@@ -35,7 +35,12 @@ public class Veiculos implements IVeiculo, Serializable{
 	public List<Veiculo> listar(){
 		
 		List<Veiculo> listaVeiculos = new ArrayList<Veiculo>();
-		Query query = manager.createQuery("from Veiculo v order by dossie asc");
+		Query query = manager.createQuery("from Veiculo v "
+						+ "inner join fetch v.cor inner join fetch v.pericia "
+						+ "inner join fetch v.fabricante inner join fetch v.modelo "
+						+ "inner join fetch v.seguro inner join fetch v.situacao "
+						+ "inner join fetch v.tipo inner join fetch v.local "
+						+ "order by dossie asc", Veiculo.class);
 		listaVeiculos = query.getResultList();
 		
 		return listaVeiculos;

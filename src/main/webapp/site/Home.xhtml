@@ -34,8 +34,9 @@
 			<p:ajax event="filter" listener="#{cadastroVeiculoBean.listenFilter}" update="@this"/>
 				
 			<f:facet name="{Exporters}">
-				<p:commandButton value="Emitir Relatorio" icon="ui-icon-document" ajax="false"  onclick="this.form.target='_blank'"
-	    							action="#{cadastroVeiculoBean.gerarRelatorio()}" />
+				<h:commandButton  value="Gerar Relatorio" action="#{cadastroVeiculoBean.gerarRelatorio()}"
+				 onclick="this.form.target='_blank'">
+				</h:commandButton>
        		 </f:facet>
 
 				
