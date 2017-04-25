@@ -8,10 +8,6 @@ import javax.inject.Inject;
 import javax.persistence.EntityManager;
 import javax.persistence.Query;
 
-import org.hibernate.Criteria;
-import org.hibernate.Session;
-import org.hibernate.criterion.Restrictions;
-
 import pcrn.interfaces.ICor;
 import pcrn.model.Cor;
 
@@ -58,18 +54,4 @@ public class Cores implements ICor, Serializable{
 		
 		return cor;
 	}
-	
-	
-	@Override
-	public Cor buscarCodigoCor(String corBusca) {
-		
-		Session session = manager.unwrap(Session.class);
-		Criteria criteria = session.createCriteria(Cor.class);
-		criteria.add(Restrictions.eq("cor", corBusca));
-		
-		return (Cor) criteria.uniqueResult();
-	}
-	
-	
-	
 }

@@ -47,6 +47,4 @@ public interface ICor {
 	*   	
 	*/
 	public Cor pegaCodigo(String cor);
-
-	public Cor buscarCodigoCor(String corBusca);
 }
