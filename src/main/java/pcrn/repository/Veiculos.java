@@ -40,7 +40,7 @@ public class Veiculos implements IVeiculo, Serializable{
 						+ "inner join fetch v.fabricante inner join fetch v.modelo "
 						+ "inner join fetch v.seguro inner join fetch v.situacao "
 						+ "inner join fetch v.tipo inner join fetch v.local "
-						+ "order by dossie asc", Veiculo.class);
+						+ "order by dossie desc", Veiculo.class);
 		listaVeiculos = query.getResultList();
 		
 		return listaVeiculos;
@@ -52,7 +52,12 @@ public class Veiculos implements IVeiculo, Serializable{
 		
 		List<Veiculo> listaVeiculos = new ArrayList<Veiculo>();
 		List<Veiculo> listaVeiculosSemFoto = new ArrayList<Veiculo>();
-		Query query = manager.createQuery("Select v from Veiculo v order by dossie asc");		
+		Query query = manager.createQuery("from Veiculo v "
+						+ "inner join fetch v.cor inner join fetch v.pericia "
+						+ "inner join fetch v.fabricante inner join fetch v.modelo "
+						+ "inner join fetch v.seguro inner join fetch v.situacao "
+						+ "inner join fetch v.tipo inner join fetch v.local "
+						+ "order by dossie desc", Veiculo.class);
 		listaVeiculos = query.getResultList();
 		
 		for (int i = 0; i < listaVeiculos.size(); i++) {

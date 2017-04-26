@@ -22,23 +22,20 @@
 						class="ui-icon ui-icon-grip-dotted-vertical" />
 					</span>
 					
+					<p:commandButton value="Gerar Relatorio" icon="ui-icon-document" ajax="false"  
+										onclick="this.form.target='_blank'"
+	    								action="#{cadastroVeiculoBean.gerarRelatorio()}" />
+					
 
 				</p:toolbarGroup>
 			</p:toolbar>
 			
 			
 			<p:dataTable value="#{cadastroVeiculoBean.listarVeiculos()}" var="veiculo"  id="mostraEquipamento"
-			paginatorTemplate="{CurrentPageReport} {PageLinks} {Exporters}"
-			paginator="true" rows="10">
+							paginatorTemplate="{CurrentPageReport} {PageLinks} "
+							paginator="true" rows="10">
 			
 			<p:ajax event="filter" listener="#{cadastroVeiculoBean.listenFilter}" update="@this"/>
-				
-			<f:facet name="{Exporters}">
-				<h:commandButton  value="Gerar Relatorio" action="#{cadastroVeiculoBean.gerarRelatorio()}"
-				 onclick="this.form.target='_blank'">
-				</h:commandButton>
-       		 </f:facet>
-
 				
 				<p:column filterBy="#{veiculo.dossie}" style="text-align: center; width:4%" 
 					filterMatchMode="startsWith">

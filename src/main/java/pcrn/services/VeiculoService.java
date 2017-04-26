@@ -25,6 +25,12 @@ public class VeiculoService implements Serializable{
 	}
 	
 	@Transactional
+	public List<Veiculo> listarVeiculosSemFoto(){
+		return veiculos.listarSemFoto();
+	}
+	
+	
+	@Transactional
 	public Veiculo porCodigo(int codigo){
 		return veiculos.porCodigo(codigo);
 	}

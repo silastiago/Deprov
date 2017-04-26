@@ -51,57 +51,14 @@ public class CadastroFotoBean implements Serializable{
 		return pagina;
 	}
     
-    /*public String upload(FileUploadEvent event, String codigoVeiculo){
-    	String diretorioArquivo = "../../../resources/images/"+codigoVeiculo; 
-    	
-    	File outDir = new File(diretorioArquivo);
-    	
-    	if (outDir.exists()) {
-			System.out.println("Diretorio ja criado ");
-		}else {
-		//Caso o diretorio nao exista ele e criado.
-			outDir. mkdirs();
-		}    	
-    	
-    	FileOutputStream fos;
-        //variavel nomeArquivo recebe o nome da foto.
-        String nomeArquivo = file.getFileName();
-        //variavel fotos recebe o array de bytes da foto.
-        byte[] fotos = file.getContents();
-        
-        //Diretorio das fotos.
-        
-		try {
-		//Variavel fos recebe o caminho da foto.
-		fos = new FileOutputStream(diretorioArquivo+"/"+event.getFile().getFileName());
-		//variavel fos escreve a foto no diretorio que a variavel path+nomeArquivo sao referenciados..
-		fos.write(fotos);
-		//Variavel fos fecha a conexao de arquivo.
-		fos.close();
-		} catch (FileNotFoundException ex) {
-		} catch (IOException ex) {
-		}
-		
-		//Estamos setando no atributo path o caminho do arquivo, para que esse path seja salvo no banco.
-		this.foto.setPath(diretorioArquivo+"/"+event.getFile().getFileName());
-		//Estamos setando no atributo codigo, o identificador do veiculo.
-		veiculo.setCodigo(Integer.parseInt(codigoVeiculo));
-		//Estamos setando no atributo veiculo o veiculo que aquela foto faz parte.
-		this.foto.setVeiculo(veiculo);
-		//Esta linha salva a entidade foto.
-		fotoService.salvar(foto);
-		//Esta linha faz um redirecionamento de pagina para a pagina do veiculo que voc� cadastrou a foto.
-	    String pagina = "/site/Veiculo/Edicao/Veiculo.xhtml?codigoVeiculo="+veiculo.getCodigo()+"faces-redirect=true";
-	    System.out.println(pagina);
-	    return pagina;
-    	
-    }*/
     
     public String upload(String codigoVeiculo) throws IOException{
 		int codigo = Integer.parseInt(codigoVeiculo);
 		//Diretorio de imagens onde as fotos ser�o salvas.
-		String diretorioArquivo = "../../../resources/images/"+ codigo+"/";
-		File outDir = new File(diretorioArquivo);
+		String diretorioArquivo = "../../../resources/images/"+ codigo;
+		String path = "/var/lib/tomcat/webapps/Deprov/resources/images/"+ codigo+"/";
+		
+		File outDir = new File(path);
         //Verifica se o diretorio j� existe.
 		if (outDir.exists()) {
 			System.out.println("Diretorio ja criado ");
@@ -110,6 +67,8 @@ public class CadastroFotoBean implements Serializable{
 			outDir. mkdirs();
 		}
         
+		System.out.println("Diretorio: " + diretorioArquivo);
+		
 		//Variavel que operar� a operacao de leitura e escrita.
         FileOutputStream fos;
         //variavel nomeArquivo recebe o nome da foto.
@@ -120,7 +79,7 @@ public class CadastroFotoBean implements Serializable{
         
         //Diretorio das fotos.
         //String path = "/var/lib/tomcat/webapps/Deprov/resources/images/"+ codigo+"/";
-        String path = "/opt/tomcat/webapps/Deprov/resources/images/"+ codigo+"/";
+        //String path = "/opt/tomcat/webapps/Deprov/resources/images/"+ codigo+"/";
         
         //Referencia do caminho das fotos para ser salvos no banco, 
         //pois as consultas s�o mais r�pidas salvando as fotos em 1 diretorio e n�o dentro do banco, no banco salvamos apenas o caminho da foto.
@@ -170,8 +129,8 @@ public class CadastroFotoBean implements Serializable{
 		fotoService.remover(fotoSelecionada);
 		
 		//A variavel path recebe o caminho de onde a foto est� inserida.
-		String path = "/opt/tomcat/webapps/Deprov/resources/images/"+ fotoSelecionada.getVeiculo().getCodigo()+"/"+fotoSelecionada.getPath();
-		//String path = "/var/lib/tomcat/webapps/Deprov/resources/images/"+ fotoSelecionada.getVeiculo().getCodigo()+"/"+fotoSelecionada.getPath();
+		//String path = "/opt/tomcat/webapps/Deprov/resources/images/"+ fotoSelecionada.getVeiculo().getCodigo()+"/"+fotoSelecionada.getPath();
+		String path = "/var/lib/tomcat/webapps/Deprov/resources/images/"+ fotoSelecionada.getVeiculo().getCodigo()+"/"+fotoSelecionada.getPath();
 		//Criando arquivo para ser deletado com o caminho especificado logo acima.
 		File f = new File(path);
 		//Deletando o arquivo do diretorio.

@@ -263,6 +263,14 @@ public class CadastroVeiculoBean implements Serializable{
 	 }
 	 
 	 
+	 public List<Veiculo> listarVeiculosSemFoto(){
+		 
+		 listaVeiculos = veiculoService.listarVeiculosSemFoto();
+		 
+		 return listaVeiculos;
+	 }
+	 
+	 
 	 
 	 public String redirecionaParaFoto(Veiculo veiculo){
 			
