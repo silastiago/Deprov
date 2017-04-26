@@ -25,7 +25,7 @@ public class Fabricantes implements IFabricante, Serializable{
 	@Override
 	public List<Fabricante> listar() {
 		List<Fabricante> listaFabricantes = new ArrayList<Fabricante>();
-		Query query = manager.createQuery("Select c from Fabricante c");
+		Query query = manager.createQuery("Select c from Fabricante c order by fabricante asc");
 		listaFabricantes = query.getResultList();
 		return listaFabricantes;
 	}

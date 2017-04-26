@@ -10,6 +10,7 @@ import javax.persistence.Query;
 
 import org.hibernate.Criteria;
 import org.hibernate.Session;
+import org.hibernate.criterion.Order;
 import org.hibernate.criterion.Restrictions;
 
 import pcrn.interfaces.IModelo;
@@ -121,6 +122,7 @@ public class Modelos implements IModelo, Serializable {
 		
 		if (fabricante != null) {
 			criteria.add(Restrictions.eq("fabricante", fabricante));
+			criteria.addOrder(Order.asc("modelo"));
 		}
 		
 		return criteria.list();
