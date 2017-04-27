@@ -45,18 +45,40 @@ public class Seguranca {
 		return externalContext.isUserInRole("ADMINISTRADOR");				
 	}
 	
+	public boolean isAcessoCadastroVeiculoPermitido() {
+		return externalContext.isUserInRole("ADMINISTRADOR")
+				|| externalContext.isUserInRole("USUARIO");
+	}
+	
+	public boolean isAcessoGerarRelatorioPermitido() {
+		return externalContext.isUserInRole("ADMINISTRADOR")
+				|| externalContext.isUserInRole("USUARIO");
+	}
+	
+	
 	public boolean isAcessoConsultaPermitido() {
 		return externalContext.isUserInRole("ADMINISTRADOR")
-				|| externalContext.isUserInRole("CONSULTA");
+				|| externalContext.isUserInRole("CONSULTA")
+				|| externalContext.isUserInRole("USUARIO");
 	}
 	
 	public boolean isAcessoEdicaoPermitido() {
 		return externalContext.isUserInRole("ADMINISTRADOR");
-				//|| externalContext.isUserInRole("CONSULTA");
 	}
+	
+	public boolean isAcessoEdicaoVeiculoPermitido() {
+		return externalContext.isUserInRole("ADMINISTRADOR")
+				|| externalContext.isUserInRole("USUARIO");
+	}
+	
 	
 	public boolean isAcessoRemocaoPermitido() {
 		return externalContext.isUserInRole("ADMINISTRADOR");
+	}
+	
+	public boolean isAcessoRemocaoVeiculoPermitido() {
+		return externalContext.isUserInRole("ADMINISTRADOR")
+				|| externalContext.isUserInRole("USUARIO");
 	}
 	
 	public boolean isAcessoDesabilitado() {

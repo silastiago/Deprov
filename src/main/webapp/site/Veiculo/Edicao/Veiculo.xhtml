@@ -19,14 +19,14 @@
 				
 					<p:commandButton value="Novo" icon="ui-icon-plus"
 						action="#{cadastroVeiculoBean.novo()}" process="@this"
-						disabled="#{not seguranca.acessoCadastroPermitido}"/>
+						disabled="#{not seguranca.acessoCadastroVeiculoPermitido}"/>
 
 					<span class="ui-separator"> <span
 						class="ui-icon ui-icon-grip-dotted-vertical" />
 					</span>
 				
 					<p:commandButton value="Editar" icon="ui-icon-pencil"
-						disabled="#{not seguranca.acessoEdicaoPermitido}" 
+						disabled="#{not seguranca.acessoEdicaoVeiculoPermitido}" 
 						action="#{cadastroVeiculoBean.editar()}" />					
 					
 					<span class="ui-separator"> <span
@@ -41,7 +41,9 @@
 						class="ui-icon ui-icon-grip-dotted-vertical" />
 					</span>
 			
-					<p:commandButton value="Emitir Relatorio" icon="ui-icon-document" ajax="false"  onclick="this.form.target='_blank'"
+					<p:commandButton value="Emitir Relatorio" icon="ui-icon-document" ajax="false"  
+									onclick="this.form.target='_blank'"
+									disabled="#{not seguranca.acessoGerarRelatorioPermitido}"
 	    							action="#{cadastroVeiculoBean.gerarRelatorioVeiculo(cadastroVeiculoBean.veiculo.codigo)}" />			
 			
 					<span class="ui-separator"> <span

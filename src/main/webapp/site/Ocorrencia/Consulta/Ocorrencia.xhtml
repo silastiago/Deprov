@@ -21,7 +21,7 @@
 
 					<p:commandButton value="Novo" icon="ui-icon-plus"
 						action="#{cadastroOcorrenciaBean.novo(codigoVeiculo)}" process="@this"
-						disabled="#{not seguranca.acessoCadastroPermitido}"/>
+						disabled="#{not seguranca.acessoCadastroVeiculoPermitido}"/>
 
 					<span class="ui-separator"> <span
 						class="ui-icon ui-icon-grip-dotted-vertical" />
@@ -36,7 +36,7 @@
 
 					<p:commandButton value="Editar" icon="ui-icon-pencil"
 						title="Editar" process="@this" action="#{cadastroOcorrenciaBean.edicao()}"  
-						disabled="#{cadastroOcorrenciaBean.ocorrenciaSelecionada == null or not seguranca.acessoEdicaoPermitido}" />
+						disabled="#{cadastroOcorrenciaBean.ocorrenciaSelecionada == null or not seguranca.acessoEdicaoVeiculoPermitido}" />
 
 					
 					<span class="ui-separator"> <span
@@ -46,7 +46,7 @@
 					<p:commandButton value="Excluir" icon="ui-icon-trash"
 						title="Excluir" process="@this" update="tabela_ocorrencias toolbar"
 						action="#{cadastroOcorrenciaBean.excluir(codigoVeiculo)}"
-						disabled="#{cadastroOcorrenciaBean.ocorrenciaSelecionada == null or not seguranca.acessoRemocaoPermitido}"
+						disabled="#{cadastroOcorrenciaBean.ocorrenciaSelecionada == null or not seguranca.acessoRemocaoVeiculoPermitido}"
 						onclick="if (!confirm('Deseja deletar  #{cadastroOcorrenciaBean.ocorrenciaSelecionada.ocorrencia} ? ')) return false" />
 
 				</p:toolbarGroup>

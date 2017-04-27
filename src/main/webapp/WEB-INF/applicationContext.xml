@@ -45,7 +45,7 @@
 		<intercept-url pattern="/site/Grupo/Edicao/**" access="hasAnyRole('ADMINISTRADOR')"  />
 		<intercept-url pattern="/site/Grupo/Novo/**" access="hasAnyRole('ADMINISTRADOR')"  />
 		
-		<intercept-url pattern="/site/Pessoa/Consulta/**" access="hasAnyRole('ADMINISTRADOR', 'CONSULTA')" />
+		<intercept-url pattern="/site/Pessoa/Consulta/**" access="hasAnyRole('ADMINISTRADOR')" />
 		<intercept-url pattern="/site/Pessoa/Edicao/**" access="hasAnyRole('ADMINISTRADOR')" />
 		<intercept-url pattern="/site/Pessoa/Novo/**" access="hasAnyRole('ADMINISTRADOR')" />
 		<intercept-url pattern="/site/Pessoa/MudarSenha/**" access="isAuthenticated()" />
@@ -58,9 +58,7 @@
 		<intercept-url pattern="/site/Fabricante/Edicao/**" access="hasAnyRole('ADMINISTRADOR')" />
 		<intercept-url pattern="/site/Fabricante/Novo/**" access="hasAnyRole('ADMINISTRADOR')" />
 		
-		<intercept-url pattern="/site/Foto/Consulta/**" access="hasAnyRole('ADMINISTRADOR')"  />
-		<intercept-url pattern="/site/Foto/Edicao/**" access="hasAnyRole('ADMINISTRADOR')" />
-		<intercept-url pattern="/site/Foto/Novo/**" access="hasAnyRole('ADMINISTRADOR')" />
+		<intercept-url pattern="/site/Foto/Edicao/**" access="hasAnyRole('ADMINISTRADOR', 'USUARIO', 'CONSULTA')" />
 		
 		<intercept-url pattern="/site/Local/Consulta/**" access="hasAnyRole('ADMINISTRADOR')"  />
 		<intercept-url pattern="/site/Local/Edicao/**" access="hasAnyRole('ADMINISTRADOR')" />
@@ -70,9 +68,9 @@
 		<intercept-url pattern="/site/Modelo/Edicao/**" access="hasAnyRole('ADMINISTRADOR')" />
 		<intercept-url pattern="/site/Modelo/Novo/**" access="hasAnyRole('ADMINISTRADOR')" />
 		
-		<intercept-url pattern="/site/Ocorrencia/Consulta/**" access="hasAnyRole('ADMINISTRADOR', 'CONSULTA')"  />
-		<intercept-url pattern="/site/Ocorrencia/Edicao/**" access="hasAnyRole('ADMINISTRADOR')"  />
-		<intercept-url pattern="/site/Ocorrencia/Novo/**" access="hasAnyRole('ADMINISTRADOR')"  />
+		<intercept-url pattern="/site/Ocorrencia/Consulta/**" access="hasAnyRole('ADMINISTRADOR', 'CONSULTA', 'USUARIO')"  />
+		<intercept-url pattern="/site/Ocorrencia/Edicao/**" access="hasAnyRole('ADMINISTRADOR', 'USUARIO')"  />
+		<intercept-url pattern="/site/Ocorrencia/Novo/**" access="hasAnyRole('ADMINISTRADOR', 'USUARIO')"  />
 		
 		<intercept-url pattern="/site/Seguro/Consulta/**" access="hasAnyRole('ADMINISTRADOR')"  />
 		<intercept-url pattern="/site/Seguro/Edicao/**" access="hasAnyRole('ADMINISTRADOR')" />
@@ -86,9 +84,9 @@
 		<intercept-url pattern="/site/Tipo/Edicao/**" access="hasAnyRole('ADMINISTRADOR')" />
 		<intercept-url pattern="/site/Tipo/Novo/**" access="hasAnyRole('ADMINISTRADOR')" />
 		
-		<intercept-url pattern="/site/Veiculo/Consulta/**" access="hasAnyRole('ADMINISTRADOR', 'CONSULTA')"  />
-		<intercept-url pattern="/site/Veiculo/Edicao/**" access="hasAnyRole('ADMINISTRADOR', 'CONSULTA')"  />
-		<intercept-url pattern="/site/Veiculo/Novo/**" access="hasAnyRole('ADMINISTRADOR')" />
+		<intercept-url pattern="/site/Veiculo/Consulta/**" access="hasAnyRole('ADMINISTRADOR', 'CONSULTA', 'USUARIO')"  />
+		<intercept-url pattern="/site/Veiculo/Edicao/**" access="hasAnyRole('ADMINISTRADOR', 'CONSULTA', 'USUARIO')"  />
+		<intercept-url pattern="/site/Veiculo/Novo/**" access="hasAnyRole('ADMINISTRADOR', 'USUARIO')" />
 		
 		<intercept-url pattern="/**" access="denyAll" />
 

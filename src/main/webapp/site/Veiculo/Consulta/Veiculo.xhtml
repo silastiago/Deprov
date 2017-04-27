@@ -17,7 +17,7 @@
 
 					<p:commandButton value="Novo" icon="ui-icon-plus"
 						action="#{cadastroVeiculoBean.novo()}" process="@this"
-						disabled="#{not seguranca.acessoCadastroPermitido}"/>
+						disabled="#{not seguranca.acessoCadastroVeiculoPermitido}"/>
 
 					<span class="ui-separator"> <span
 						class="ui-icon ui-icon-grip-dotted-vertical" />
@@ -25,7 +25,7 @@
 					
 					<p:commandButton value="Visualizar" icon="ui-icon-search"
 						title="Editar" process="@this" action="#{cadastroVeiculoBean.edicao()}"  
-						disabled="#{cadastroVeiculoBean.veiculoSelecionado == null or not seguranca.acessoEdicaoPermitido}" />
+						disabled="#{cadastroVeiculoBean.veiculoSelecionado == null or not seguranca.acessoEdicaoVeiculoPermitido}" />
 
 					<span class="ui-separator"> <span
 						class="ui-icon ui-icon-grip-dotted-vertical" />

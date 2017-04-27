@@ -20,7 +20,9 @@
 					columnClasses="rotulo, campo">
 				
 				<p:fileUpload value="#{cadastroFotoBean.file}" mode="simple" skinSimple="true"/>				
-				<p:commandButton value="Submit" ajax="false" action="#{cadastroFotoBean.upload(codigoVeiculo)}" />
+				<p:commandButton value="Submit" ajax="false"
+					disabled="#{not seguranca.acessoEdicaoVeiculoPermitido}"
+					action="#{cadastroFotoBean.upload(codigoVeiculo)}" />
 				
 			</p:panelGrid>
 			</div>
@@ -44,7 +46,7 @@
 					<p:commandButton value="Excluir" icon="ui-icon-trash"
 						title="Excluir" process="@this" update="tabela_fotos toolbar"
 						action="#{cadastroFotoBean.excluir}"
-						disabled="#{cadastroFotoBean.fotoSelecionada == null or not seguranca.acessoRemocaoPermitido}"
+						disabled="#{cadastroFotoBean.fotoSelecionada == null or not seguranca.acessoRemocaoVeiculoPermitido}"
 						onclick="if (!confirm('Deseja deletar a foto: #{cadastroFotoBean.fotoSelecionada.path} ? ')) return false" />
 
 				</p:toolbarGroup>
