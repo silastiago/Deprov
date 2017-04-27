@@ -55,7 +55,7 @@ public class CadastroFotoBean implements Serializable{
     public String upload(String codigoVeiculo) throws IOException{
 		int codigo = Integer.parseInt(codigoVeiculo);
 		//Diretorio de imagens onde as fotos ser�o salvas.
-		String diretorioArquivo = "../../../resources/images/"+ codigo;
+		String diretorioArquivo = "../../../resources/images/"+ codigo+"/";
 		String path = "/var/lib/tomcat/webapps/Deprov/resources/images/"+ codigo+"/";
 		
 		File outDir = new File(path);
