@@ -13,7 +13,7 @@
 
 	<ui:define name="tituloJanela">Sistema com JSF 2.0 e Facelets</ui:define>
 	<ui:define name="conteudo">
-		<h:form enctype="multipart/form-data" acceptcharset="ISO-8859-1">
+		<h:form id="frm">
 			<p:toolbar id="toolbar">
 				<p:toolbarGroup>
 				
@@ -25,10 +25,9 @@
 						class="ui-icon ui-icon-grip-dotted-vertical" />
 					</span>
 				
-				
 					<p:commandButton value="Editar" icon="ui-icon-pencil"
 						disabled="#{not seguranca.acessoEdicaoPermitido}" 
-						action="#{cadastroVeiculoBean.editar()}" process="@this" />
+						action="#{cadastroVeiculoBean.editar()}" />					
 					
 					<span class="ui-separator"> <span
 						class="ui-icon ui-icon-grip-dotted-vertical" />
@@ -198,11 +197,6 @@
 				</p:panelGrid>
 			
 			</div>
-		
-		
-		
-		
-		
 		
 		</h:form>
 

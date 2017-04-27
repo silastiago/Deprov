@@ -22,9 +22,21 @@
 						class="ui-icon ui-icon-grip-dotted-vertical" />
 					</span>
 					
+					<p:commandButton value="Visualizar" icon="ui-icon-search"
+						title="Editar" process="@this" action="#{cadastroVeiculoBean.edicao()}"  
+						disabled="#{cadastroVeiculoBean.veiculoSelecionado == null or not seguranca.acessoEdicaoPermitido}" />
+
+					<span class="ui-separator"> <span
+						class="ui-icon ui-icon-grip-dotted-vertical" />
+					</span>					
+					
 					<p:commandButton value="Gerar Relatorio" icon="ui-icon-document" ajax="false"  
 										onclick="this.form.target='_blank'"
 	    								action="#{cadastroVeiculoBean.gerarRelatorio()}" />
+					
+					<span class="ui-separator"> <span
+						class="ui-icon ui-icon-grip-dotted-vertical" />
+					</span>
 					
 
 				</p:toolbarGroup>
@@ -33,8 +45,12 @@
 			
 			<p:dataTable value="#{cadastroVeiculoBean.listarVeiculos()}" var="veiculo"  id="mostraEquipamento"
 							paginatorTemplate="{CurrentPageReport} {PageLinks} "
-							paginator="true" rows="10">
-			
+							paginator="true" rows="10"
+							selection="#{cadastroVeiculoBean.veiculoSelecionado}" 
+							selectionMode="single" rowKey="#{veiculo.codigo}">				
+				
+			<p:ajax event="rowSelect" update=":frm:toolbar" />
+			<p:ajax event="rowUnselect" update=":frm:toolbar" />
 			<p:ajax event="filter" listener="#{cadastroVeiculoBean.listenFilter}" update="@this"/>
 				
 				<p:column filterBy="#{veiculo.dossie}" style="text-align: center; width:4%" 

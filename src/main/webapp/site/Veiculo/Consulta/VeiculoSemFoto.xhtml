@@ -23,6 +23,15 @@
 						class="ui-icon ui-icon-grip-dotted-vertical" />
 					</span>
 					
+					<p:commandButton value="Visualizar" icon="ui-icon-search"
+						title="Editar" process="@this" action="#{cadastroVeiculoBean.edicao()}"  
+						disabled="#{cadastroVeiculoBean.veiculoSelecionado == null or not seguranca.acessoEdicaoPermitido}" />
+
+					<span class="ui-separator"> <span
+						class="ui-icon ui-icon-grip-dotted-vertical" />
+					</span>
+					
+					
 
 				</p:toolbarGroup>
 			</p:toolbar>
@@ -30,10 +39,14 @@
 			
 			
 			<p:dataTable value="#{cadastroVeiculoBean.listarVeiculosSemFoto()}" var="veiculo"  id="mostraEquipamento"
-			widgetVar="veiculoFiltro" filteredValue="#{cadastroVeiculoBean.listaVeiculosFiltrados}" 
-			paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
-			paginator="true" rows="10" 
-			rowsPerPageTemplate="5,10,15,20,25,30,35,40,45,50"> 
+							widgetVar="veiculoFiltro" filteredValue="#{cadastroVeiculoBean.listaVeiculosFiltrados}" 
+							paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+							paginator="true" rows="10" rowsPerPageTemplate="5,10,15,20,25,30,35,40,45,50"
+							selection="#{cadastroVeiculoBean.veiculoSelecionado}" 
+							selectionMode="single" rowKey="#{veiculo.codigo}">				
+				
+			<p:ajax event="rowSelect" update=":frm:toolbar" />
+			<p:ajax event="rowUnselect" update=":frm:toolbar" />  
 			
 				<f:facet name="header">
             		<p:outputPanel>
@@ -118,13 +131,6 @@
 						<h:outputText value="Situação" />
 					</f:facet>
 					<h:outputText value="#{veiculo.situacao.situacao}" />
-				</p:column>
-			
-				<p:column style="text-align: center; width:7%">
-					<h:link outcome="/site/Veiculo/Edicao/Veiculo" value="Visualizar">
-					<i class="icon-edit"></i>
-					<f:param name="codigoVeiculo"  value="#{veiculo.codigo}"/>
-					</h:link>
 				</p:column>
 
 

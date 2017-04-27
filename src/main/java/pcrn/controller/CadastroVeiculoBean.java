@@ -61,6 +61,7 @@ public class CadastroVeiculoBean implements Serializable{
 	private FacesContext facesContext;
 	
 	private Veiculo veiculo = new Veiculo();
+	private Veiculo veiculoSelecionado;
 	private Fabricante fabricante;
 	
 	private List<Veiculo> listaVeiculos;
@@ -203,7 +204,7 @@ public class CadastroVeiculoBean implements Serializable{
 	        System.out.println("size filter: "+ tempString.size());
 	        
 	        for (String key : tempString.keySet()) {
-	            System.out.println("key: " + key + " \t values: " + tempString.get(key).toString().toUpperCase());
+	            //System.out.println("key: " + key + " \t values: " + tempString.get(key).toString().toUpperCase());
 		        listaObjetos.add(key);
 		        listaValores.add(tempString.get(key).toString().toUpperCase());
 	        }
@@ -221,7 +222,7 @@ public class CadastroVeiculoBean implements Serializable{
 			parametros = this.getMapaParametro();
 			String caminhoRelatorio = this.getRelatorio();
 			
-			System.out.println("Caminho relatorio: " + caminhoRelatorio);
+			//System.out.println("Caminho relatorio: " + caminhoRelatorio);
 			
 			ExecutorRelatorio executor = new ExecutorRelatorio(caminhoRelatorio,
 					this.response, parametros, "Relatorio.pdf");
@@ -289,21 +290,28 @@ public class CadastroVeiculoBean implements Serializable{
 			String pagina = "/site/Veiculo/Novo/Veiculo.xhtml?faces-redirect=true";
 			
 			return pagina;
+	} 
+	
+	 public String edicao(){
+			
+			String pagina = "/site/Veiculo/Edicao/Veiculo.xhtml?codigoVeiculo="+veiculoSelecionado.getCodigo()+"faces-redirect=true";
+			
+			return pagina;
 		} 
 	 
 	 
 	 public void carregaModelos(){
-		 System.out.println("Entrou no metodo");
 		 listaModelos = modeloService.buscarModelos(veiculo.getFabricante());
-		}
+	}
 	 
-	 
-		
-	 
-	 
-	 
-	 
-	 
+	public Veiculo getVeiculoSelecionado() {
+		return veiculoSelecionado;
+	}
+
+	public void setVeiculoSelecionado(Veiculo veiculoSelecionado) {
+		this.veiculoSelecionado = veiculoSelecionado;
+	}
+
 	public Fabricante getFabricante() {
 		return fabricante;
 	}
