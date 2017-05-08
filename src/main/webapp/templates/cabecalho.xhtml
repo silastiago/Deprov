@@ -8,23 +8,24 @@
      <div style="float: right;">
 	 <h:form style="display: inline-block" enctype="multipart/form-data" acceptcharset="UTF-8">
 					<p:menubar styleClass="menu-sistema" >
-						<p:submenu label="Consultas" rendered="#{seguranca.acessoConsultaPermitido}">
-							<p:menuitem value="Cores" outcome="/site/Cor/Consulta/Cor"/>
-							<p:menuitem value="Exame Veiculares" outcome="/site/ExameVeicular/Consulta/ExameVeicular"/>
-							<p:menuitem value="Fabricantes" outcome="/site/Fabricante/Consulta/Fabricante"/>
-							<p:menuitem value="Grupos" outcome="/site/Grupo/Consulta/Grupo"/>
-							<p:menuitem value="Locais" outcome="/site/Local/Consulta/Local"/>
-							<p:menuitem value="Modelos" outcome="/site/Modelo/Consulta/Modelo"/>
-							<p:menuitem value="Pessoas" outcome="/site/Pessoa/Consulta/Pessoa"/>
-							<p:menuitem value="Seguros" outcome="/site/Seguro/Consulta/Seguro"/>
-							<p:menuitem value="Situacoes" outcome="/site/Situacao/Consulta/Situacao"/>
-							<p:menuitem value="Tipos" outcome="/site/Tipo/Consulta/Tipo"/>							
-							<p:menuitem value="Veiculos" outcome="/site/Veiculo/Consulta/Veiculo"/>						
+						<p:submenu label="Consultas" rendered="#{seguranca.acessoConsultaVeiculoPermitido}">
+							<p:menuitem value="Cores" outcome="/site/Cor/Consulta/Cor" rendered="#{seguranca.acessoConsultaPermitido}"/>
+							<p:menuitem value="Exame Veiculares" outcome="/site/ExameVeicular/Consulta/ExameVeicular" rendered="#{seguranca.acessoConsultaPermitido}"/>
+							<p:menuitem value="Fabricantes" outcome="/site/Fabricante/Consulta/Fabricante" rendered="#{seguranca.acessoConsultaPermitido}"/>
+							<p:menuitem value="Grupos" outcome="/site/Grupo/Consulta/Grupo" rendered="#{seguranca.acessoConsultaPermitido}"/>
+							<p:menuitem value="Locais" outcome="/site/Local/Consulta/Local" rendered="#{seguranca.acessoConsultaPermitido}"/>
+							<p:menuitem value="Modelos" outcome="/site/Modelo/Consulta/Modelo" rendered="#{seguranca.acessoConsultaPermitido}"/>
+							<p:menuitem value="Pessoas" outcome="/site/Pessoa/Consulta/Pessoa" rendered="#{seguranca.acessoConsultaPermitido}"/>
+							<p:menuitem value="Seguros" outcome="/site/Seguro/Consulta/Seguro" rendered="#{seguranca.acessoConsultaPermitido}"/>
+							<p:menuitem value="Situacoes" outcome="/site/Situacao/Consulta/Situacao" rendered="#{seguranca.acessoConsultaPermitido}"/>
+							<p:menuitem value="Tipos" outcome="/site/Tipo/Consulta/Tipo" rendered="#{seguranca.acessoConsultaPermitido}"/>							
+							<p:menuitem value="Veiculos" outcome="/site/Veiculo/Consulta/Veiculo"/>
 							<p:menuitem value="Veiculos Sem Foto" outcome="/site/Veiculo/Consulta/VeiculoSemFoto"/>
 							</p:submenu>
 						<p:submenu label="Opções">
 						<p:menuitem value="Pagina Inicial" outcome="/site/Home"/>
 						<p:menuitem value="Alterar Senha" outcome="/site/Pessoa/MudarSenha/PessoaSenha"/>
+						<p:menuitem value="Grafico" outcome="/site/Grafico/Grafico"/>
 						<p:menuitem value="Sair" action="#{loginBean.sair()}"  />
 						</p:submenu>
 					</p:menubar>

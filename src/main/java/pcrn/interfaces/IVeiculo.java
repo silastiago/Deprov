@@ -87,6 +87,8 @@ public interface IVeiculo {
 	public Veiculo pegaSituacaoVeiculo(String situacao);
 	
 	public List<Veiculo> placaxistenteCadastrar(Veiculo veiculo);
+	
+	public List<Veiculo> listarVeiculosComSituacao(int codigoSituacao);
 
 	
 }

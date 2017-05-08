@@ -195,5 +195,20 @@ public class Veiculos implements IVeiculo, Serializable{
 		
 		return listaVeiculos;
 	}
+
+	@Override
+	public List<Veiculo> listarVeiculosComSituacao(int codigoSituacao) {
+		List<Veiculo> listaVeiculos = new ArrayList<Veiculo>();
+		Query query = manager.createQuery("from Veiculo where codigo_situacao = :codigo_situacao");
+		query.setParameter("codigo_situacao", codigoSituacao);
+		listaVeiculos = query.getResultList();
+		
+		return listaVeiculos;
+	}
+	
+	
+	
+	
+	
 	
 }

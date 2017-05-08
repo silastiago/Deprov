@@ -57,10 +57,15 @@ public class Seguranca {
 	
 	
 	public boolean isAcessoConsultaPermitido() {
+		return externalContext.isUserInRole("ADMINISTRADOR");
+	}
+	
+	public boolean isAcessoConsultaVeiculoPermitido() {
 		return externalContext.isUserInRole("ADMINISTRADOR")
 				|| externalContext.isUserInRole("CONSULTA")
 				|| externalContext.isUserInRole("USUARIO");
 	}
+	
 	
 	public boolean isAcessoEdicaoPermitido() {
 		return externalContext.isUserInRole("ADMINISTRADOR");

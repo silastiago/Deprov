@@ -7,6 +7,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import javax.annotation.PostConstruct;
 import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
 import javax.faces.event.ActionEvent;
@@ -20,15 +21,18 @@ import javax.servlet.http.HttpServletResponse;
 import org.hibernate.Session;
 import org.primefaces.event.data.FilterEvent;
 import org.primefaces.model.StreamedContent;
+import org.primefaces.model.chart.PieChartModel;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 
 import pcrn.model.Fabricante;
 import pcrn.model.Modelo;
 import pcrn.model.Pessoa;
+import pcrn.model.Situacao;
 import pcrn.model.Veiculo;
 import pcrn.security.UsuarioSistema;
 import pcrn.services.ModeloService;
 import pcrn.services.RelatorioService;
+import pcrn.services.SituacaoService;
 import pcrn.services.VeiculoService;
 import pcrn.util.FacesUtil;
 import pcrn.util.report.ExecutorRelatorio;
@@ -45,6 +49,10 @@ public class CadastroVeiculoBean implements Serializable{
 	@Inject
 	private VeiculoService veiculoService;
 
+	@Inject
+	private SituacaoService situacaoService;
+	
+	
 	@Inject
 	private ModeloService modeloService;
 	
@@ -71,6 +79,12 @@ public class CadastroVeiculoBean implements Serializable{
 	private String relatorio;
 	private Map<String, Object> mapaParametro;
 	private List<Modelo> listaModelos;
+	private PieChartModel pieModel;
+	
+	@PostConstruct
+	public void init(){
+		createPieModels();
+	}
 	
 	
 	public void lerFabricante(ValueChangeEvent evento){
@@ -79,7 +93,7 @@ public class CadastroVeiculoBean implements Serializable{
 		//return codigoSistemaOperacional;
 	}
 	
-	public void cadastrar(){		
+	public void cadastrar(){
 		String placas = "";
 		Pessoa pessoa = new Pessoa();
 		
@@ -300,7 +314,47 @@ public class CadastroVeiculoBean implements Serializable{
 		} 
 	 
 	 
-	 public void carregaModelos(){
+	 private void createPieModels() {
+	        createPieModel();
+	    }
+	 
+	 
+	 private void createPieModel() {
+		 	List<Situacao> listaSituacao = new ArrayList<Situacao>();
+		 	pieModel = new PieChartModel();
+		 	int numeroVeiculos = 0;
+		 	String label = "";
+		 	
+		 	listaSituacao = situacaoService.listar();
+		 	Map<String, Number> dataFormat = new HashMap<String, Number>();  
+		 	
+		 	
+		 	for (int i = 0; i < listaSituacao.size(); i++) {
+		 		numeroVeiculos = veiculoService.listarVeiculosComSituacao(listaSituacao.get(i).getCodigo()).size();
+		 		label = listaSituacao.get(i).getSituacao() + " - " + numeroVeiculos ;
+		 		dataFormat.put(label, numeroVeiculos);
+				pieModel.set(label , numeroVeiculos);
+		 		
+		 		
+		 	}
+	         
+		 	
+	        pieModel.setTitle("Grafico de Veiculos");
+	        pieModel.setLegendPosition("w");
+	        pieModel.setFill(true);
+	        pieModel.setShowDataLabels(true);
+	        
+	        
+	    }
+	 
+	 
+	 
+	 
+	 public PieChartModel getPieModel() {
+		return pieModel;
+	}
+
+	public void carregaModelos(){
 		 listaModelos = modeloService.buscarModelos(veiculo.getFabricante());
 	}
 	 

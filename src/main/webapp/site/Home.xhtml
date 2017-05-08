@@ -24,7 +24,7 @@
 					
 					<p:commandButton value="Visualizar" icon="ui-icon-search"
 						title="Editar" process="@this" action="#{cadastroVeiculoBean.edicao()}"  
-						disabled="#{cadastroVeiculoBean.veiculoSelecionado == null or not seguranca.acessoConsultaPermitido}" />
+						disabled="#{cadastroVeiculoBean.veiculoSelecionado == null or not seguranca.acessoConsultaVeiculoPermitido}" />
 
 					<span class="ui-separator"> <span
 						class="ui-icon ui-icon-grip-dotted-vertical" />

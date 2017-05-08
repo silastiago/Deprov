@@ -75,4 +75,10 @@ public class VeiculoService implements Serializable{
 		return veiculos.placaxistenteCadastrar(veiculo);
 	}
 	
+	@Transactional
+	public List<Veiculo> listarVeiculosComSituacao(int codigoSituacao){
+		return veiculos.listarVeiculosComSituacao(codigoSituacao);
+	}
+	
+	
 }
