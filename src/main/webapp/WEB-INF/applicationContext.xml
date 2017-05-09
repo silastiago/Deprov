@@ -82,6 +82,10 @@
 		<intercept-url pattern="/site/Situacao/Edicao/**" access="hasAnyRole('ADMINISTRADOR')" />
 		<intercept-url pattern="/site/Situacao/Novo/**" access="hasAnyRole('ADMINISTRADOR')" />
 		
+		<intercept-url pattern="/site/Tarefa/Consulta/**" access="hasAnyRole('ADMINISTRADOR')"  />
+		<intercept-url pattern="/site/Tarefa/Edicao/**" access="hasAnyRole('ADMINISTRADOR')" />
+		<intercept-url pattern="/site/Tarefa/Novo/**" access="hasAnyRole('ADMINISTRADOR')" />
+		
 		<intercept-url pattern="/site/Tipo/Consulta/**" access="hasAnyRole('ADMINISTRADOR')"  />
 		<intercept-url pattern="/site/Tipo/Edicao/**" access="hasAnyRole('ADMINISTRADOR')" />
 		<intercept-url pattern="/site/Tipo/Novo/**" access="hasAnyRole('ADMINISTRADOR')" />

@@ -17,11 +17,12 @@
 		<class> pcrn.model.Pericia </class>
 		<class> pcrn.model.Seguro </class>
 		<class> pcrn.model.Situacao </class>
+		<class> pcrn.model.Tarefa</class>
 		<class> pcrn.model.Tipo </class>
 		<class> pcrn.model.Veiculo </class>
 		
 		<properties>
-			<property name="javax.persistence.jdbc.url" value="jdbc:postgresql://localhost:5432/deprov" />
+			<property name="javax.persistence.jdbc.url" value="jdbc:postgresql://10.9.0.70:5432/deprov" />
 			<property name="javax.persistence.jdbc.user" value="postgres" />
 			<property name="javax.persistence.jdbc.password" value="postgres" />
 			<property name="javax.persistence.jdbc.driver" value="org.postgresql.Driver" />

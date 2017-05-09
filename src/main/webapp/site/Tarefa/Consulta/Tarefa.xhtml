@@ -1,0 +1,97 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui">
+<f:metadata>
+	<f:viewParam name="codigoVeiculo"/>
+</f:metadata>
+
+<ui:composition template="/templates/template.xhtml">
+
+	<ui:define name="tituloJanela">Sistema com JSF 2.0 e Facelets</ui:define>
+	<ui:define name="conteudo">
+		<h:form id="frm">
+			<p:messages for ="message" showDetail="true" autoUpdate="true" closable="true" />
+				<h1>Cadastro de Tarefas</h1>
+				
+				<p:toolbar id="toolbar">
+					<p:toolbarGroup>
+
+					<p:commandButton value="Novo" icon="ui-icon-plus"
+						action="#{cadastroTarefaBean.novo(codigoVeiculo)}" process="@this"
+						disabled="#{not seguranca.acessoCadastroVeiculoPermitido}"/>
+
+					<span class="ui-separator"> <span
+						class="ui-icon ui-icon-grip-dotted-vertical" />
+					</span>
+
+					<p:commandButton value="Voltar" icon="ui-icon-arrowreturnthick-1-w"
+						title="Voltar" process="@this" action="#{cadastroOcorrenciaBean.voltar(codigoVeiculo)}" />	
+					
+					<span class="ui-separator"> <span
+						class="ui-icon ui-icon-grip-dotted-vertical" />
+					</span>
+
+					<p:commandButton value="Editar" icon="ui-icon-pencil"
+						title="Editar" process="@this" action="#{cadastroTarefaBean.edicao()}"  
+						disabled="#{cadastroTarefaBean.tarefaSelecionada == null or not seguranca.acessoEdicaoVeiculoPermitido}" />
+
+					
+					<span class="ui-separator"> <span
+						class="ui-icon ui-icon-grip-dotted-vertical" />
+					</span>
+
+					<p:commandButton value="Excluir" icon="ui-icon-trash"
+						title="Excluir" process="@this" update="tabela_tarefas toolbar"
+						action="#{cadastroTarefaBean.excluir(codigoVeiculo)}"
+						disabled="#{cadastroTarefaBean.tarefaSelecionada == null or not seguranca.acessoRemocaoVeiculoPermitido}"
+						onclick="if (!confirm('Deseja deletar  #{cadastroTarefaBean.tarefaSelecionada.descricaoTarefa} ? ')) return false" />
+
+				</p:toolbarGroup>
+			</p:toolbar>			
+				
+				
+			<p:dataTable id="tabela_tarefas" value="#{cadastroTarefaBean.tarefas}" var="tarefa" 
+						frame="box" rules="all" cellpadding="3" width="100%" headerClass="cabecalho" 
+						rowClasses="cor-sim, cor-nao" columnClasses="nome"
+						rows="10" rowsPerPageTemplate="5,10,15,20" paginator="true" 
+						selection="#{cadastroTarefaBean.tarefaSelecionada}" 
+						selectionMode="single" rowKey="#{tarefa.codigo}">				
+				
+			<p:ajax event="rowSelect" update=":frm:toolbar" />
+			<p:ajax event="rowUnselect" update=":frm:toolbar" />
+				
+			<p:column filterBy="#{tarefa.descricaoTarefa}"  style="text-align: center; width:5%" 
+					filterMatchMode="startsWith">
+					<f:facet name="header">
+						<h:outputText value="Descrição da Tarefa" />
+					</f:facet>
+					<h:outputText value="#{tarefa.descricaoTarefa}" />
+			</p:column>
+				
+			<p:column filterBy="#{tarefa.dataTarefa}"  style="text-align: center; width:5%" 
+					filterMatchMode="startsWith">
+					<f:facet name="header">
+						<h:outputText value="Data da Tarefa" />
+					</f:facet>
+					<h:outputText value="#{tarefa.dataTarefa}" >
+					<f:convertDateTime pattern="dd/MM/yyyy"/>
+					</h:outputText>
+			</p:column>
+			
+			<p:column filterBy="#{tarefa.ativada}"  style="text-align: center; width:5%" 
+					filterMatchMode="startsWith">
+					<f:facet name="header">
+						<h:outputText value="Status da Tarefa" />
+					</f:facet>
+					<h:outputText value="#{tarefa.ativada}" />
+			</p:column>
+			
+			
+			</p:dataTable>
+		</h:form>
+	</ui:define>	
+	</ui:composition>
+</html>

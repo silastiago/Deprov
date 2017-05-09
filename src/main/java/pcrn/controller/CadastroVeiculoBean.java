@@ -293,10 +293,16 @@ public class CadastroVeiculoBean implements Serializable{
 		 
 	}
 	 
-	 public String redirecionaParaOcorrencia(Veiculo veiculo){
+	public String redirecionaParaOcorrencia(Veiculo veiculo){
 			
 		 return "/site/Ocorrencia/Consulta/Ocorrencia.xhtml?codigoVeiculo="+veiculo.getCodigo()+"faces-redirect=true";
 	} 
+	 
+	public String redirecionaTarefa(){
+		
+		 return "/site/Tarefa/Consulta/Tarefa.xhtml?codigoVeiculo="+veiculoSelecionado.getCodigo()+"faces-redirect=true";
+	} 
+	 
 	 
 	
 	 public String novo(){
@@ -333,17 +339,14 @@ public class CadastroVeiculoBean implements Serializable{
 		 		numeroVeiculos = veiculoService.listarVeiculosComSituacao(listaSituacao.get(i).getCodigo()).size();
 		 		label = listaSituacao.get(i).getSituacao() + " - " + numeroVeiculos ;
 		 		dataFormat.put(label, numeroVeiculos);
-				pieModel.set(label , numeroVeiculos);
+				pieModel.set(label , numeroVeiculos);	
 		 		
-		 		
-		 	}
-	         
+		 	} 
 		 	
 	        pieModel.setTitle("Grafico de Veiculos");
 	        pieModel.setLegendPosition("w");
 	        pieModel.setFill(true);
-	        pieModel.setShowDataLabels(true);
-	        
+	        pieModel.setShowDataLabels(true);	        
 	        
 	    }
 	 

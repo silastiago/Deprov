@@ -3,7 +3,6 @@ package pcrn.model;
 import java.io.Serializable;
 import java.util.Date;
 
-
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -12,44 +11,57 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
-/** Esta Classe que possui os metodos de acesso getter e setters que representa as ocorrencias de umn determinado veiculo, 
- * e tamb�m possui o mapeamento relacional das tabelas via hibernate, da entidade Ocorrencia.
-*   
-* @author silas
-*
-*/
-
 @Entity
 @Table
-public class Ocorrencia implements Serializable{
+public class Tarefa implements Serializable{
+
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 
 	private Integer codigo;
-	private String ocorrencia;
-	private Date data;
+	private String descricaoTarefa;
+	private Boolean ativada;
+	private Date dataTarefa;
 	private Veiculo veiculo;
+	
 	
 	@Id
 	@GeneratedValue
 	public Integer getCodigo() {
 		return codigo;
 	}
+
 	public void setCodigo(Integer codigo) {
 		this.codigo = codigo;
 	}
-	
+
 	@Column
-	public String getOcorrencia() {
-		return ocorrencia;
+	public String getDescricaoTarefa() {
+		return descricaoTarefa;
 	}
-	public void setOcorrencia(String ocorrencia) {
-		this.ocorrencia = ocorrencia.toUpperCase();
+
+	public void setDescricaoTarefa(String descricaoTarefa) {
+		this.descricaoTarefa = descricaoTarefa;
 	}
+
 	@Column
-	public Date getData() {
-		return data;
+	public Boolean getAtivada() {
+		return ativada;
 	}
-	public void setData(Date data) {
-		this.data = data;
+
+	public void setAtivada(Boolean ativada) {
+		this.ativada = ativada;
+	}
+
+	@Column
+	public Date getDataTarefa() {
+		return dataTarefa;
+	}
+
+	public void setDataTarefa(Date dataTarefa) {
+		this.dataTarefa = dataTarefa;
 	}
 	
 	@ManyToOne
@@ -60,4 +72,6 @@ public class Ocorrencia implements Serializable{
 	public void setVeiculo(Veiculo veiculo) {
 		this.veiculo = veiculo;
 	}
+	
+	
 }
