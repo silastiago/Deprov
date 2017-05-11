@@ -3,6 +3,10 @@ package pcrn.util;
 import java.math.BigInteger;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 import javax.faces.application.FacesMessage;
 import javax.faces.context.ExternalContext;
@@ -65,4 +69,31 @@ public class FacesUtil {
 		FacesContext.getCurrentInstance().addMessage("message", 
 				new FacesMessage(FacesMessage.SEVERITY_INFO, "", message));
 	}
+	
+	public static String retornaDataAtualString(){
+		DateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
+		Date date = new Date();
+		return dateFormat.format(date);
+	}
+	
+	public static Date retornaDataAtualDate(String dataAtual){
+		DateFormat formatter = new SimpleDateFormat("dd/MM/yyyy");
+		Date date = null;
+		try {
+			date = (Date)formatter.parse(dataAtual);
+		} catch (ParseException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		return date;
+		
+		
+	}
+	
+	
+
+	
+	
+	
 }

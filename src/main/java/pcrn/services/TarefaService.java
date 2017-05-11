@@ -1,6 +1,7 @@
 package pcrn.services;
 
 import java.io.Serializable;
+import java.util.Date;
 import java.util.List;
 
 import javax.inject.Inject;
@@ -38,4 +39,10 @@ public class TarefaService implements Serializable{
 	public List<Tarefa> porCodigoVeiculo(int codigoVeiculo){
 		return tarefas.porCodigoVeiculo(codigoVeiculo);
 	}
+	
+	@Transactional
+	public List<Tarefa> porCodigoVeiculoEData(Date dataAtual){
+		return tarefas.porCodigoVeiculoEData(dataAtual);
+	}
+	
 }

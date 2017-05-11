@@ -3,6 +3,7 @@ package pcrn.controller;
 import java.io.IOException;
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -28,11 +29,13 @@ import pcrn.model.Fabricante;
 import pcrn.model.Modelo;
 import pcrn.model.Pessoa;
 import pcrn.model.Situacao;
+import pcrn.model.Tarefa;
 import pcrn.model.Veiculo;
 import pcrn.security.UsuarioSistema;
 import pcrn.services.ModeloService;
 import pcrn.services.RelatorioService;
 import pcrn.services.SituacaoService;
+import pcrn.services.TarefaService;
 import pcrn.services.VeiculoService;
 import pcrn.util.FacesUtil;
 import pcrn.util.report.ExecutorRelatorio;
@@ -48,6 +51,9 @@ public class CadastroVeiculoBean implements Serializable{
 
 	@Inject
 	private VeiculoService veiculoService;
+	
+	@Inject
+	private TarefaService tarefaService;
 
 	@Inject
 	private SituacaoService situacaoService;
@@ -339,21 +345,45 @@ public class CadastroVeiculoBean implements Serializable{
 		 		numeroVeiculos = veiculoService.listarVeiculosComSituacao(listaSituacao.get(i).getCodigo()).size();
 		 		label = listaSituacao.get(i).getSituacao() + " - " + numeroVeiculos ;
 		 		dataFormat.put(label, numeroVeiculos);
-				pieModel.set(label , numeroVeiculos);	
-		 		
+				pieModel.set(label , numeroVeiculos);		 		
 		 	} 
 		 	
 	        pieModel.setTitle("Grafico de Veiculos");
 	        pieModel.setLegendPosition("w");
 	        pieModel.setFill(true);
-	        pieModel.setShowDataLabels(true);	        
+	        pieModel.setShowDataLabels(true);       
 	        
 	    }
 	 
+	public List<Veiculo> listarVeiculosDataAtual(){
+
+		List<Veiculo> listaVeiculos = new ArrayList<Veiculo>();
+		List<Tarefa> listaTarefas = new ArrayList<Tarefa>();
+		String dataAtualString = FacesUtil.retornaDataAtualString();
+		
+		
+		Date dataAtual = FacesUtil.retornaDataAtualDate(dataAtualString);
+		
+		listaTarefas = tarefaService.porCodigoVeiculoEData(dataAtual);
+
+		System.out.println("Data String: " + dataAtualString);
+		System.out.println("Data Atual: " + dataAtual);
+		System.out.println("Numero de Tarefas: " + listaTarefas.size());
+		
+		for (int i = 0; i < listaTarefas.size(); i++) {
+			listaVeiculos.add(listaTarefas.get(i).getVeiculo());
+		}
+		
+		
+		
+		return listaVeiculos;
+		
+	}
 	 
 	 
 	 
-	 public PieChartModel getPieModel() {
+	 
+	public PieChartModel getPieModel() {
 		return pieModel;
 	}
 

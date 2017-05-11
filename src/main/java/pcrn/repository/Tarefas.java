@@ -2,6 +2,7 @@ package pcrn.repository;
 
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import javax.inject.Inject;
@@ -28,6 +29,7 @@ public class Tarefas implements ITarefa, Serializable{
 		return manager.find(Tarefa.class, codigo);
 	}
 
+	@SuppressWarnings("unchecked")
 	@Override
 	public List<Tarefa> porCodigoVeiculo(int codigoVeiculo) {
 		
@@ -39,6 +41,20 @@ public class Tarefas implements ITarefa, Serializable{
 		return listaTarefas;
 	}
 
+	@SuppressWarnings("unchecked")
+	@Override
+	public List<Tarefa> porCodigoVeiculoEData(Date dataAtual) {
+		
+		List<Tarefa> listaTarefas = new ArrayList<Tarefa>();
+		Query query = manager.createQuery("from Tarefa where dataTarefa = :dataTarefa and ativada = false");
+		query.setParameter("dataTarefa", dataAtual);
+		listaTarefas = query.getResultList();
+		
+		return listaTarefas;
+	}
+	
+	
+	
 	@Override
 	public void salvar(Tarefa tarefa) {
 		manager.merge(tarefa);

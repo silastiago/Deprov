@@ -54,6 +54,7 @@ public class Veiculo implements Serializable, Cloneable{
 	private Pessoa pessoa;
 	private List<Ocorrencia> ocorrencias;
 	private List<Foto> fotos;
+	private List<Tarefa> tarefas;
 
 
 	@Id
@@ -307,6 +308,15 @@ public class Veiculo implements Serializable, Cloneable{
 
 	public void setFotos(List<Foto> fotos) {
 		this.fotos = fotos;
+	}	
+	
+	@OneToMany(mappedBy="veiculo", cascade = CascadeType.REMOVE)
+	public List<Tarefa> getTarefas() {
+		return tarefas;
+	}
+
+	public void setTarefas(List<Tarefa> tarefas) {
+		this.tarefas = tarefas;
 	}
 
 	@Override
