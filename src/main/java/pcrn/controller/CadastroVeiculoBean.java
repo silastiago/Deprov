@@ -7,11 +7,9 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import javax.annotation.PostConstruct;
 import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
 import javax.faces.event.ActionEvent;
-import javax.faces.event.ValueChangeEvent;
 import javax.faces.view.ViewScoped;
 import javax.inject.Inject;
 import javax.inject.Named;
@@ -78,19 +76,10 @@ public class CadastroVeiculoBean implements Serializable{
 	private String relatorio;
 	private Map<String, Object> mapaParametro;
 	private List<Modelo> listaModelos;
-	private PieChartModel pieModel;
-	
-	
-	@PostConstruct
-	public void init(){
+	private PieChartModel pieModel;	
+
+	public void inicializar(){
 		createPieModels();
-	}
-	
-	
-	public void lerFabricante(ValueChangeEvent evento){
-		Fabricante fabricante = (Fabricante) evento.getNewValue();
-		this.veiculo.setFabricante(fabricante);
-		//return codigoSistemaOperacional;
 	}
 	
 	public void cadastrar(){
@@ -98,9 +87,6 @@ public class CadastroVeiculoBean implements Serializable{
 		Pessoa pessoa = new Pessoa();
 		
 		pessoa = getUsuarioLogado().getPessoa();
-		
-		//System.out.println("Chave: " + veiculo.getChave());
-		//System.out.println("Lista de veiculos: " + veiculoService.chaveExistenteEditar(veiculo).size());
 		
 		if (veiculo.getChave().toUpperCase().equals("NAO") || 
 				veiculo.getChave().toUpperCase().equals("NÃO") ||  

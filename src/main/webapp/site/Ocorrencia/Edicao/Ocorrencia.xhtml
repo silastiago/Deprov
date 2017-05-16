@@ -7,6 +7,7 @@
 <f:metadata>
 	<f:viewParam name="codigoVeiculo"/>
 	<f:viewParam name="codigoOcorrencia" value="#{cadastroOcorrenciaBean.ocorrencia}" />
+	<f:viewAction action="#{cadastroOcorrenciaBean.inicializar}"/>
 </f:metadata>
 
 <ui:composition template="/templates/template.xhtml">

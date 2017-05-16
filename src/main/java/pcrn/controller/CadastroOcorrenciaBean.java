@@ -37,11 +37,10 @@ public class CadastroOcorrenciaBean implements Serializable{
 	private Veiculo veiculo = new Veiculo();
 	
 	
-	@PostConstruct
-	public void init(){
+	//@PostConstruct
+	public void inicializar(){
 		ocorrencias = this.listarOcorrencias();
 	}
-	
 	
 	public String cadastrar(String codigoVeiculo) throws IOException {
 		

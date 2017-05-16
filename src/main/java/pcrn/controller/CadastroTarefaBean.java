@@ -5,7 +5,6 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.annotation.PostConstruct;
 import javax.faces.context.FacesContext;
 import javax.faces.view.ViewScoped;
 import javax.inject.Inject;
@@ -35,8 +34,6 @@ public class CadastroTarefaBean implements Serializable{
 	private List<Tarefa> listaTodasTarefas = new ArrayList<Tarefa>();
 	private Veiculo veiculo = new Veiculo();
 	
-	
-	//@PostConstruct
 	public void inicializar(){
 		tarefas = this.listarTarefas();
 	}
@@ -99,8 +96,6 @@ public class CadastroTarefaBean implements Serializable{
 		
 		return pagina;
 	}
-	
-	
 	
 	/** Este metodo remove uma ocorrencia de um determinado veiculo.
 	 * 	@param codigo, este codigo � o identificador da ocorrencia.

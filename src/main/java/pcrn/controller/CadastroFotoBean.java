@@ -8,7 +8,6 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.annotation.PostConstruct;
 import javax.faces.context.FacesContext;
 import javax.faces.view.ViewScoped;
 import javax.inject.Inject;
@@ -38,9 +37,7 @@ public class CadastroFotoBean implements Serializable{
 	private Veiculo veiculo = new Veiculo();
     private UploadedFile file;
     
-    
-    @PostConstruct
-	public void init(){
+	public void inicializar(){
 		listaFotos = this.listarFotos();
 	}
     
@@ -57,6 +54,7 @@ public class CadastroFotoBean implements Serializable{
 		//Diretorio de imagens onde as fotos ser�o salvas.
 		String diretorioArquivo = "../../../resources/images/"+ codigo+"/";
 		String path = "/var/lib/tomcat/webapps/Deprov/resources/images/"+ codigo+"/";
+		//String path = "/opt/tomcat/webapps/Deprov/resources/images/"+ codigo+"/";
 		
 		File outDir = new File(path);
         //Verifica se o diretorio j� existe.
@@ -77,13 +75,9 @@ public class CadastroFotoBean implements Serializable{
         //variavel fotos recebe o array de bytes da foto.
         byte[] fotos = file.getContents();
         
-        //Diretorio das fotos.
-        //String path = "/var/lib/tomcat/webapps/Deprov/resources/images/"+ codigo+"/";
-        //String path = "/opt/tomcat/webapps/Deprov/resources/images/"+ codigo+"/";
-        
         //Referencia do caminho das fotos para ser salvos no banco, 
         //pois as consultas s�o mais r�pidas salvando as fotos em 1 diretorio e n�o dentro do banco, no banco salvamos apenas o caminho da foto.
-        //String pathBanco = "/resources/images/"+codigo+"/";
+        
 		try {
 		//Variavel fos recebe o caminho da foto.
 		fos = new FileOutputStream(path+nomeArquivo);
