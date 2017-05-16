@@ -36,8 +36,8 @@ public class CadastroTarefaBean implements Serializable{
 	private Veiculo veiculo = new Veiculo();
 	
 	
-	@PostConstruct
-	public void init(){
+	//@PostConstruct
+	public void inicializar(){
 		tarefas = this.listarTarefas();
 	}
 	
