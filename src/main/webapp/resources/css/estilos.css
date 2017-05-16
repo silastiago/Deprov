@@ -101,6 +101,12 @@
 	top: 90px;
 }
 
+.falha {
+	background: #ff0000;
+}
 
+.sucesso {
+	background: #00ff00;
+}
 
 

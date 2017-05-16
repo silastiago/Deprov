@@ -43,11 +43,10 @@ public class Tarefas implements ITarefa, Serializable{
 
 	@SuppressWarnings("unchecked")
 	@Override
-	public List<Tarefa> porCodigoVeiculoEData(Date dataAtual) {
+	public List<Tarefa> porCodigoVeiculoData() {
 		
 		List<Tarefa> listaTarefas = new ArrayList<Tarefa>();
-		Query query = manager.createQuery("from Tarefa where dataTarefa = :dataTarefa and ativada = false");
-		query.setParameter("dataTarefa", dataAtual);
+		Query query = manager.createQuery("from Tarefa where ativada = false order by dataTarefa asc");
 		listaTarefas = query.getResultList();
 		
 		return listaTarefas;

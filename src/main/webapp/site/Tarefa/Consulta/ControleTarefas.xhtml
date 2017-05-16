@@ -4,45 +4,48 @@
 	xmlns:f="http://java.sun.com/jsf/core"
 	xmlns:ui="http://java.sun.com/jsf/facelets"
 	xmlns:p="http://primefaces.org/ui">
-<f:metadata>
-	<f:viewParam name="codigoVeiculo"/>
-</f:metadata>
 
 <ui:composition template="/templates/template.xhtml">
 
 	<ui:define name="tituloJanela">Sistema com JSF 2.0 e Facelets</ui:define>
 	<ui:define name="conteudo">
-		<h:form enctype="multipart/form-data" acceptcharset="ISO-8859-1" id="form">
-			<div class="ui-fluid">
+		<h:form id="frm">
 			<p:messages for ="message" showDetail="true" autoUpdate="true" closable="true" />
 				<h1>Cadastro de Tarefas</h1>
-				<p:panelGrid columns="2" style="width: 100%; margin-top: 20px"
-					columnClasses="rotulo, campo">
-
-				<h:outputText value="Descrição da Tarefa: " />
-				<h:inputText value="#{cadastroTarefaBean.tarefa.descricaoTarefa}"  />
 				
-				<p:outputLabel for="mask" value="Data:" />
-					<p:calendar id="mask" value="#{cadastroTarefaBean.tarefa.dataTarefa}"
-						pattern="dd/MM/yyyy" mask="true" navigator="true" showOn="button">
-						<f:convertDateTime pattern="dd/MM/yyyy" type="both" dateStyle="short" timeZone="GMT-3"/>						
-					</p:calendar>
+				<p:toolbar id="toolbar">
+					<p:toolbarGroup>
+
+					<p:commandButton value="Editar" icon="ui-icon-pencil"
+						title="Editar" process="@this" action="#{cadastroTarefaBean.edicao()}"  
+						disabled="#{cadastroTarefaBean.tarefaSelecionada == null or not seguranca.acessoEdicaoVeiculoPermitido}" />
 					
-				<h:outputText value="Status da Tarefa: " />
-				<h:selectBooleanCheckbox value="#{cadastroTarefaBean.tarefa.ativada}" />	
-				
-				<p:commandButton action="#{cadastroTarefaBean.voltar(codigoVeiculo)}"  value="Voltar" />	
-				<p:commandButton action="#{cadastroTarefaBean.cadastrar(codigoVeiculo)}"  update="lista" value="Salvar" />
-				
+					<span class="ui-separator"> <span
+						class="ui-icon ui-icon-grip-dotted-vertical" />
+					</span>
+					
+					<p:commandButton value="Consulta Veiculo" icon="ui-icon-search"
+						title="Editar" process="@this" action="#{cadastroTarefaBean.redirecionarParaPaginaVeiculo()}"  
+						disabled="#{cadastroTarefaBean.tarefaSelecionada == null or not seguranca.acessoEdicaoVeiculoPermitido}" />
+					
+					<span class="ui-separator"> <span
+						class="ui-icon ui-icon-grip-dotted-vertical" />
+					</span>
+					
+					
 
-			</p:panelGrid>
-				</div>
-			</h:form>
-			
-			<h:form id="lista">	
+				</p:toolbarGroup>
+			</p:toolbar>			
 				
-			<p:dataTable value="#{cadastroTarefaBean.listarTarefas(codigoVeiculo)}" var="tarefa" 
-						rows="10" rowsPerPageTemplate="5,10,15,20" id="mostraEquipamento"  paginator="true" >
+				
+			<p:dataTable id="tabela_tarefas" value="#{cadastroTarefaBean.listarTodasTarefas()}" var="tarefa"
+						rows="10" rowsPerPageTemplate="5,10,15,20" paginator="true" 
+						selection="#{cadastroTarefaBean.tarefaSelecionada}" 
+						selectionMode="single" rowKey="#{tarefa.codigo}"
+						rowStyleClass="#{cadastroTarefaBean.comparaData(tarefa) ? 'sucesso' : 'falha'}">
+				
+			<p:ajax event="rowSelect" update=":frm:toolbar" />
+			<p:ajax event="rowUnselect" update=":frm:toolbar" />
 				
 			<p:column filterBy="#{tarefa.descricaoTarefa}"  style="text-align: center; width:5%" 
 					filterMatchMode="startsWith">
@@ -68,7 +71,7 @@
 						<h:outputText value="Status da Tarefa" />
 					</f:facet>
 					<h:outputText value="#{tarefa.ativada}" />
-			</p:column>
+			</p:column>			
 			
 			</p:dataTable>
 		</h:form>

@@ -3,7 +3,6 @@ package pcrn.controller;
 import java.io.IOException;
 import java.io.Serializable;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -29,13 +28,11 @@ import pcrn.model.Fabricante;
 import pcrn.model.Modelo;
 import pcrn.model.Pessoa;
 import pcrn.model.Situacao;
-import pcrn.model.Tarefa;
 import pcrn.model.Veiculo;
 import pcrn.security.UsuarioSistema;
 import pcrn.services.ModeloService;
 import pcrn.services.RelatorioService;
 import pcrn.services.SituacaoService;
-import pcrn.services.TarefaService;
 import pcrn.services.VeiculoService;
 import pcrn.util.FacesUtil;
 import pcrn.util.report.ExecutorRelatorio;
@@ -51,13 +48,9 @@ public class CadastroVeiculoBean implements Serializable{
 
 	@Inject
 	private VeiculoService veiculoService;
-	
-	@Inject
-	private TarefaService tarefaService;
 
 	@Inject
 	private SituacaoService situacaoService;
-	
 	
 	@Inject
 	private ModeloService modeloService;
@@ -86,6 +79,7 @@ public class CadastroVeiculoBean implements Serializable{
 	private Map<String, Object> mapaParametro;
 	private List<Modelo> listaModelos;
 	private PieChartModel pieModel;
+	
 	
 	@PostConstruct
 	public void init(){
@@ -302,14 +296,7 @@ public class CadastroVeiculoBean implements Serializable{
 	public String redirecionaParaOcorrencia(Veiculo veiculo){
 			
 		 return "/site/Ocorrencia/Consulta/Ocorrencia.xhtml?codigoVeiculo="+veiculo.getCodigo()+"faces-redirect=true";
-	} 
-	 
-	public String redirecionaTarefa(){
-		
-		 return "/site/Tarefa/Consulta/Tarefa.xhtml?codigoVeiculo="+veiculoSelecionado.getCodigo()+"faces-redirect=true";
-	} 
-	 
-	 
+	}	 
 	
 	 public String novo(){
 			
@@ -323,7 +310,14 @@ public class CadastroVeiculoBean implements Serializable{
 			String pagina = "/site/Veiculo/Edicao/Veiculo.xhtml?codigoVeiculo="+veiculoSelecionado.getCodigo()+"faces-redirect=true";
 			
 			return pagina;
-		} 
+	} 
+	 
+	 public String redirecionaParaPaginaTarefa(Veiculo veiculo){
+			
+			String pagina = "/site/Tarefa/Consulta/Tarefa.xhtml?codigoVeiculo="+veiculo.getCodigo()+"faces-redirect=true";
+			
+			return pagina;
+	}
 	 
 	 
 	 private void createPieModels() {
@@ -345,52 +339,35 @@ public class CadastroVeiculoBean implements Serializable{
 		 		numeroVeiculos = veiculoService.listarVeiculosComSituacao(listaSituacao.get(i).getCodigo()).size();
 		 		label = listaSituacao.get(i).getSituacao() + " - " + numeroVeiculos ;
 		 		dataFormat.put(label, numeroVeiculos);
-				pieModel.set(label , numeroVeiculos);		 		
+				pieModel.set(label , numeroVeiculos);	 		
 		 	} 
 		 	
 	        pieModel.setTitle("Grafico de Veiculos");
 	        pieModel.setLegendPosition("w");
 	        pieModel.setFill(true);
-	        pieModel.setShowDataLabels(true);       
+	        pieModel.setShowDataLabels(true);
 	        
 	    }
-	 
-	public List<Veiculo> listarVeiculosDataAtual(){
-
-		List<Veiculo> listaVeiculos = new ArrayList<Veiculo>();
-		List<Tarefa> listaTarefas = new ArrayList<Tarefa>();
-		String dataAtualString = FacesUtil.retornaDataAtualString();
-		
-		
-		Date dataAtual = FacesUtil.retornaDataAtualDate(dataAtualString);
-		
-		listaTarefas = tarefaService.porCodigoVeiculoEData(dataAtual);
-
-		System.out.println("Data String: " + dataAtualString);
-		System.out.println("Data Atual: " + dataAtual);
-		System.out.println("Numero de Tarefas: " + listaTarefas.size());
-		
-		for (int i = 0; i < listaTarefas.size(); i++) {
-			listaVeiculos.add(listaTarefas.get(i).getVeiculo());
-		}
-		
-		
-		
-		return listaVeiculos;
-		
-	}
-	 
-	 
-	 
+	
+	
 	 
 	public PieChartModel getPieModel() {
 		return pieModel;
 	}
 
 	public void carregaModelos(){
-		 listaModelos = modeloService.buscarModelos(veiculo.getFabricante());
+		
+		if (veiculo.getFabricante() != null) {
+			System.out.println("Não NULO");
+			
+			listaModelos = modeloService.buscarModelos(veiculo.getFabricante());
+		}else{
+			
+			System.out.println("NULO");
+			listaModelos = new ArrayList<Modelo>();
+		} 
 	}
-	 
+	
 	public Veiculo getVeiculoSelecionado() {
 		return veiculoSelecionado;
 	}
@@ -409,71 +386,65 @@ public class CadastroVeiculoBean implements Serializable{
 
 	public Veiculo getVeiculo() {
 			return veiculo;
-		}
-
+	}
 
 	public void setVeiculo(Veiculo veiculo) {
 			this.veiculo = veiculo;
-		}
-
+	}
 
 	public List<Veiculo> getListaVeiculos() {
 			return listaVeiculos;
-		}
+	}
 
 	public void setListaVeiculos(List<Veiculo> listaVeiculos) {
 			this.listaVeiculos = listaVeiculos;
-		}
+	}
 
 	public List<Veiculo> getListaVeiculosFiltrados() {
 			return listaVeiculosFiltrados;
-		}
+	}
 
 	public void setListaVeiculosFiltrados(List<Veiculo> listaVeiculosFiltrados) {
 			this.listaVeiculosFiltrados = listaVeiculosFiltrados;
-		}
+	}
 
 	public Map<String, Object> getMapaFiltros() {
 			return mapaFiltros;
-		}
+	}
 
 	public void setMapaFiltros(Map<String, Object> mapaFiltros) {
 			this.mapaFiltros = mapaFiltros;
-		}
+	}
 
 	public StreamedContent getFile() {
 			return file;
-		}
+	}
 
 	public void setFile(StreamedContent file) {
 			this.file = file;
-		}
+	}
 
 	public String getRelatorio() {
 			return relatorio;
-		}
+	}
 
 	public void setRelatorio(String relatorio) {
 			this.relatorio = relatorio;
-		}
-
-
+	}
 
 	public Map<String, Object> getMapaParametro() {
 			return mapaParametro;
-		}
-
+	}
 
 	public void setMapaParametro(Map<String, Object> mapaParametro) {
 			this.mapaParametro = mapaParametro;
-		}
+	}
 
 	public List<Modelo> getListaModelos() {
 		return listaModelos;
-		}
+	}
 
 	public void setListaModelos(List<Modelo> listaModelos) {
 			this.listaModelos = listaModelos;
-		}	
-	
+	}	
 }

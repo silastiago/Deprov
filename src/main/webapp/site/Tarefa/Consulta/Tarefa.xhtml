@@ -53,7 +53,7 @@
 			</p:toolbar>			
 				
 				
-			<p:dataTable id="tabela_tarefas" value="#{cadastroTarefaBean.tarefas}" var="tarefa" 
+			<p:dataTable id="tabela_tarefas" value="#{cadastroTarefaBean.listarTarefas(codigoVeiculo)}" var="tarefa" 
 						frame="box" rules="all" cellpadding="3" width="100%" headerClass="cabecalho" 
 						rowClasses="cor-sim, cor-nao" columnClasses="nome"
 						rows="10" rowsPerPageTemplate="5,10,15,20" paginator="true" 

@@ -1,6 +1,5 @@
 package pcrn.interfaces;
 
-import java.util.Date;
 import java.util.List;
 
 import pcrn.model.Tarefa;
@@ -16,5 +15,5 @@ public interface ITarefa {
 	
 	public void remover(Tarefa tarefa);
 
-	public List<Tarefa> porCodigoVeiculoEData(Date dataTarefa);	
+	public List<Tarefa> porCodigoVeiculoData();
 }

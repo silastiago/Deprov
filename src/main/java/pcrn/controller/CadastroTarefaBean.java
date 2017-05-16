@@ -10,8 +10,6 @@ import javax.faces.context.FacesContext;
 import javax.faces.view.ViewScoped;
 import javax.inject.Inject;
 import javax.inject.Named;
-
-import pcrn.model.Ocorrencia;
 import pcrn.model.Tarefa;
 import pcrn.model.Veiculo;
 import pcrn.services.TarefaService;
@@ -34,12 +32,13 @@ public class CadastroTarefaBean implements Serializable{
 	private Tarefa tarefa = new Tarefa();
 	private Tarefa tarefaSelecionada;
 	private List<Tarefa> tarefas = new ArrayList<Tarefa>();
+	private List<Tarefa> listaTodasTarefas = new ArrayList<Tarefa>();
 	private Veiculo veiculo = new Veiculo();
 	
 	
 	@PostConstruct
 	public void init(){
-		tarefas = this.listarTarefas();
+		//tarefas = this.listarTarefas();
 	}
 	
 	
@@ -94,6 +93,13 @@ public class CadastroTarefaBean implements Serializable{
 		return pagina;
 	}
 	
+	public String redirecionarParaPaginaVeiculo(){
+		
+		String pagina = "/site/Veiculo/Edicao/Veiculo.xhtml?codigoVeiculo="+tarefaSelecionada.getVeiculo().getCodigo()+"faces-redirect=true";
+		
+		return pagina;
+	}
+	
 	
 	
 	/** Este metodo remove uma ocorrencia de um determinado veiculo.
@@ -115,15 +121,49 @@ public class CadastroTarefaBean implements Serializable{
 	/** Este metodo lista todoas as ocorrencias de um determinado veiculo.
 	 * 	@return List<Ocorrencia>, retorna a lista de ocorrencias daquele veiculo.
 	*/
-	public List<Tarefa> listarTarefas(){
+	public List<Tarefa> listarTarefas(int codigoVeiculo){
 		
-		String codigo = FacesContext.getCurrentInstance().getExternalContext().getRequestParameterMap().get("codigoVeiculo");
+		//String codigo = FacesContext.getCurrentInstance().getExternalContext().getRequestParameterMap().get("codigoVeiculo");
 		//Convertendo a string codigo que o id do veiculo para um inteiro.
-		int idVeiculo = Integer.parseInt(codigo);
+		//int idVeiculo = Integer.parseInt(codigo);
 		//A lista de ocorrencias recebe as ocorrencias daquele veiculo que se passou a identificador.
-		tarefas = tarefaService.porCodigoVeiculo(idVeiculo);
+		tarefas = tarefaService.porCodigoVeiculo(codigoVeiculo);
 		//retorna a lista das ocorrencias daquele veiculo.
 		return tarefas;
+	}
+
+	
+	/** Este metodo lista todoas as ocorrencias de um determinado veiculo.
+	 * 	@return List<Ocorrencia>, retorna a lista de ocorrencias daquele veiculo.
+	*/
+	public List<Tarefa> listarTodasTarefas(){
+		
+		listaTodasTarefas = tarefaService.porCodigoVeiculoData();
+		
+		return listaTodasTarefas;
+	}
+
+	
+	public Boolean comparaData(Tarefa tarefa){
+		Boolean condicao = false;
+		String dataHoje = FacesUtil.retornaDataAtualString();
+		
+		if (FacesUtil.retornaDataAtualDate(dataHoje).before(tarefa.getDataTarefa())) {
+			condicao = true;
+		}
+		
+		System.out.println("Tarefa: " + tarefa.getDescricaoTarefa());
+		System.out.println("Condicao: " + condicao);
+		return condicao;
+	}
+	
+	public List<Tarefa> getListaTodasTarefas() {
+		return listaTodasTarefas;
+	}
+
+
+	public void setListaTodasTarefas(List<Tarefa> listaTodasTarefas) {
+		this.listaTodasTarefas = listaTodasTarefas;
 	}
 
 

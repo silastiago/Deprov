@@ -87,8 +87,6 @@ public class FacesUtil {
 		}
 		
 		return date;
-		
-		
 	}
 	
 	

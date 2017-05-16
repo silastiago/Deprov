@@ -53,6 +53,20 @@
 					<p:commandButton value="Gerar Ocorrencia" icon="ui-icon-note"
 						action="#{cadastroVeiculoBean.redirecionaParaOcorrencia(cadastroVeiculoBean.veiculo)}" process="@this" />				
 
+					<span class="ui-separator"> <span
+						class="ui-icon ui-icon-grip-dotted-vertical" />
+					</span>
+
+					<p:commandButton value="Visualizar Tarefas" icon="ui-icon-search"
+						title="Editar" process="@this" action="#{cadastroVeiculoBean.redirecionaParaPaginaTarefa(cadastroVeiculoBean.veiculo)}" />
+					
+					
+					<span class="ui-separator"> <span
+						class="ui-icon ui-icon-grip-dotted-vertical" />
+					</span>
+
+
+
 				</p:toolbarGroup>
 			</p:toolbar>
 			
@@ -90,13 +104,13 @@
 					</h:selectOneMenu>
 
 					<h:outputLabel value="Fabricante" />
-					<h:selectOneMenu value="#{cadastroVeiculoBean.veiculo.fabricante}" label="Fabricante" valueChangeListener="#{cadastroVeiculoBean.lerFabricante}">
+					<h:selectOneMenu value="#{cadastroVeiculoBean.veiculo.fabricante}" label="Fabricante" >
 						<f:selectItem itemLabel="Selecione o Fabricante do Veiculo"
 							noSelectionOption="true" />
 						<f:selectItems value="#{cadastroFabricanteBean.listaFabricantes()}"
 							var="fabricante" itemValue="#{fabricante}"
 							itemLabel="#{fabricante.fabricante}" />
-							<f:ajax event="change" render="modelos"/>
+						<p:ajax update="modelos" listener="#{cadastroVeiculoBean.carregaModelos}"/>	
 					</h:selectOneMenu>
 
 					<h:outputLabel value="Modelo" />
@@ -104,7 +118,7 @@
 						required="true" label="Modelo" id="modelos">
 						<f:selectItem itemLabel="Selecione o Modelo do Veiculo"
 							noSelectionOption="true" />
-						<f:selectItems value="#{cadastroModeloBean.listaModelo()}" var="modelo"
+						<f:selectItems value="#{cadastroVeiculoBean.listaModelos}" var="modelo"
 							itemValue="#{modelo}" itemLabel="#{modelo.modelo}" />
 					</h:selectOneMenu>
 
