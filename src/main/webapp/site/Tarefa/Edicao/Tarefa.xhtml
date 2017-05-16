@@ -43,7 +43,7 @@
 			<h:form enctype="multipart/form-data" id="lista">
 				
 				
-			<p:dataTable value="#{cadastroTarefaBean.listarTarefas(codigoVeiculo)}" var="tarefa" 
+			<p:dataTable value="#{cadastroTarefaBean.tarefas}" var="tarefa" 
 						rows="10" rowsPerPageTemplate="5,10,15,20" id="mostraEquipamento"  paginator="true" >
 				
 			<p:column filterBy="#{tarefa.descricaoTarefa}"  style="text-align: center; width:5%" 

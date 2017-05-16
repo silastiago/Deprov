@@ -38,7 +38,7 @@ public class CadastroTarefaBean implements Serializable{
 	
 	@PostConstruct
 	public void init(){
-		//tarefas = this.listarTarefas();
+		tarefas = this.listarTarefas();
 	}
 	
 	
@@ -121,13 +121,13 @@ public class CadastroTarefaBean implements Serializable{
 	/** Este metodo lista todoas as ocorrencias de um determinado veiculo.
 	 * 	@return List<Ocorrencia>, retorna a lista de ocorrencias daquele veiculo.
 	*/
-	public List<Tarefa> listarTarefas(int codigoVeiculo){
+	public List<Tarefa> listarTarefas(){
 		
-		//String codigo = FacesContext.getCurrentInstance().getExternalContext().getRequestParameterMap().get("codigoVeiculo");
+		String codigo = FacesContext.getCurrentInstance().getExternalContext().getRequestParameterMap().get("codigoVeiculo");
 		//Convertendo a string codigo que o id do veiculo para um inteiro.
-		//int idVeiculo = Integer.parseInt(codigo);
+		int idVeiculo = Integer.parseInt(codigo);
 		//A lista de ocorrencias recebe as ocorrencias daquele veiculo que se passou a identificador.
-		tarefas = tarefaService.porCodigoVeiculo(codigoVeiculo);
+		tarefas = tarefaService.porCodigoVeiculo(idVeiculo);
 		//retorna a lista das ocorrencias daquele veiculo.
 		return tarefas;
 	}
@@ -152,8 +152,6 @@ public class CadastroTarefaBean implements Serializable{
 			condicao = true;
 		}
 		
-		System.out.println("Tarefa: " + tarefa.getDescricaoTarefa());
-		System.out.println("Condicao: " + condicao);
 		return condicao;
 	}
 	
