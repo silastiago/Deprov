@@ -109,8 +109,7 @@
 							noSelectionOption="true" />
 						<f:selectItems value="#{cadastroFabricanteBean.listaFabricantes()}"
 							var="fabricante" itemValue="#{fabricante}"
-							itemLabel="#{fabricante.fabricante}" />
-						<p:ajax update="modelos" listener="#{cadastroVeiculoBean.carregaModelos}"/>	
+							itemLabel="#{fabricante.fabricante}" />	
 					</h:selectOneMenu>
 
 					<h:outputLabel value="Modelo" />
@@ -118,7 +117,7 @@
 						required="true" label="Modelo" id="modelos">
 						<f:selectItem itemLabel="Selecione o Modelo do Veiculo"
 							noSelectionOption="true" />
-						<f:selectItems value="#{cadastroVeiculoBean.listaModelos}" var="modelo"
+						<f:selectItems value="#{cadastroModeloBean.listaModelo()}" var="modelo"
 							itemValue="#{modelo}" itemLabel="#{modelo.modelo}" />
 					</h:selectOneMenu>
 
