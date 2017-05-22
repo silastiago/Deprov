@@ -140,11 +140,12 @@ public class CadastroTarefaBean implements Serializable{
 
 	
 	public Boolean comparaData(Tarefa tarefa){
-		Boolean condicao = false;
+		
+		Boolean condicao = true;
 		String dataHoje = FacesUtil.retornaDataAtualString();
 		
-		if (FacesUtil.retornaDataAtualDate(dataHoje).before(tarefa.getDataTarefa())) {
-			condicao = true;
+		if (tarefa.getDataTarefa().compareTo(FacesUtil.retornaDataAtualDate(dataHoje)) < 0) {
+			condicao = false;
 		}
 		
 		return condicao;
