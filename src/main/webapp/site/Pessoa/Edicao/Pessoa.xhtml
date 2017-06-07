@@ -22,6 +22,9 @@
 				<h:outputText value="Login" />
 				<h:inputText value="#{cadastroPessoaBean.pessoa.login}" />
 			
+				<h:outputText value="Senha" />
+				<h:inputSecret value="#{cadastroPessoaBean.pessoa.senha}" redisplay="true" autocomplete="off"/>
+			
 				<h:outputLabel value="Grupo"/>
 				<h:selectManyCheckbox value="#{cadastroPessoaBean.pessoa.grupos}" converter="grupoConverter" layout="pageDirection">
 				<f:attribute name="collectionType" value="java.util.ArrayList"/>

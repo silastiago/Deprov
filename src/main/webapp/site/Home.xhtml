@@ -47,7 +47,10 @@
 			</p:toolbar>
 			
 			
-			<p:dataTable value="#{cadastroVeiculoBean.listarVeiculos()}" var="veiculo"  id="mostraEquipamento"
+			<p:messages for ="message" showDetail="true" autoUpdate="true" closable="true" />
+			
+			
+			<p:dataTable value="#{cadastroVeiculoBean.listarTelaInicial()}" var="veiculo"  id="mostraEquipamento"
 							paginatorTemplate="{CurrentPageReport} {PageLinks} "
 							paginator="true" rows="10"
 							selection="#{cadastroVeiculoBean.veiculoSelecionado}" 

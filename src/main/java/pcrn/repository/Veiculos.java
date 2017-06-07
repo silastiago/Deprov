@@ -32,7 +32,7 @@ public class Veiculos implements IVeiculo, Serializable{
 	*/
 	@SuppressWarnings("unchecked")
 	@Override
-	public List<Veiculo> listar(){
+	public List<Veiculo> listarTelaInicial(){
 		
 		List<Veiculo> listaVeiculos = new ArrayList<Veiculo>();
 		Query query = manager.createQuery("from Veiculo v "
@@ -45,6 +45,23 @@ public class Veiculos implements IVeiculo, Serializable{
 		
 		return listaVeiculos;
 	}
+	
+	@SuppressWarnings("unchecked")
+	@Override
+	public List<Veiculo> listarVeiculos(){
+		
+		List<Veiculo> listaVeiculos = new ArrayList<Veiculo>();
+		Query query = manager.createQuery("from Veiculo v "
+						+ "inner join fetch v.cor inner join fetch v.pericia "
+						+ "inner join fetch v.fabricante inner join fetch v.modelo "
+						+ "inner join fetch v.seguro inner join fetch v.situacao "
+						+ "inner join fetch v.tipo inner join fetch v.local "
+						+ "order by situacao asc", Veiculo.class);
+		listaVeiculos = query.getResultList();
+		
+		return listaVeiculos;
+	}
+	
 
 	@SuppressWarnings("unchecked")
 	@Override
@@ -57,7 +74,7 @@ public class Veiculos implements IVeiculo, Serializable{
 						+ "inner join fetch v.fabricante inner join fetch v.modelo "
 						+ "inner join fetch v.seguro inner join fetch v.situacao "
 						+ "inner join fetch v.tipo inner join fetch v.local "
-						+ "order by dossie desc", Veiculo.class);
+						+ "order by situacao asc", Veiculo.class);
 		listaVeiculos = query.getResultList();
 		
 		for (int i = 0; i < listaVeiculos.size(); i++) {

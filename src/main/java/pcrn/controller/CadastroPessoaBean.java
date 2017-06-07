@@ -63,7 +63,11 @@ public class CadastroPessoaBean implements Serializable{
 	
 	public String editar(){
 		
+		String senha = this.pessoa.getSenha();
+		pessoa.setSenha(FacesUtil.md5(senha));
 		pessoaService.salvar(pessoa);
+		
+		
 		FacesUtil.addInfoMessage("Pessoa alterada com sucesso");
 		FacesUtil.contextFlash();
 		

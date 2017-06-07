@@ -17,7 +17,10 @@ public interface IVeiculo {
 	* @return retorna a lista de todos os veiculos cadastrados.
 	*   	
 	*/
-	public List<Veiculo> listar();
+	public List<Veiculo> listarTelaInicial();
+	
+	public List<Veiculo> listarVeiculos();
+	
 	
 	/** Este metodo lista todos os veiculos cadastrados sem foto.
 	*   

@@ -20,9 +20,15 @@ public class VeiculoService implements Serializable{
 	private Veiculos veiculos;
 	
 	@Transactional
-	public List<Veiculo> listar(){
-		return veiculos.listar();
+	public List<Veiculo> listarTelaInicial(){
+		return veiculos.listarTelaInicial();
 	}
+	
+	@Transactional
+	public List<Veiculo> listarVeiculos(){
+		return veiculos.listarVeiculos();
+	}
+	
 	
 	@Transactional
 	public List<Veiculo> listarVeiculosSemFoto(){

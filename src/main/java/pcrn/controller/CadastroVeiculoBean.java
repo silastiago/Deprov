@@ -95,7 +95,7 @@ public class CadastroVeiculoBean implements Serializable{
 			veiculo.setPessoa(pessoa);
 			
 			if (veiculoService.placaxistenteCadastrar(veiculo).size() > 0) {
-				FacesContext.getCurrentInstance().addMessage("message", new FacesMessage(FacesMessage.SEVERITY_WARN, "","Esta placa j� foi cadastrada em outro carro"));
+				FacesContext.getCurrentInstance().addMessage("message", new FacesMessage(FacesMessage.SEVERITY_WARN, "","Esta placa ja foi cadastrada em outro carro"));
 			}			
 			veiculoService.salvar(veiculo);
 			
@@ -124,7 +124,7 @@ public class CadastroVeiculoBean implements Serializable{
 			      .getFlash().setKeepMessages(true);
 				
 				try {
-					FacesContext.getCurrentInstance().getExternalContext().redirect("Veiculo2.xhtml");
+					FacesContext.getCurrentInstance().getExternalContext().redirect("/Deprov/site/Home.xhtml");
 				} catch (IOException e) {
 					
 					e.printStackTrace();
@@ -256,12 +256,20 @@ public class CadastroVeiculoBean implements Serializable{
 		}
 	 
 	 
-	 public List<Veiculo> listarVeiculos(){
+	 public List<Veiculo> listarTelaInicial(){
 		 
-		 listaVeiculos = veiculoService.listar();
+		 listaVeiculos = veiculoService.listarTelaInicial();
 		 
 		 return listaVeiculos;
 	 }
+	 
+	 public List<Veiculo> listarVeiculos(){
+		 
+		 listaVeiculos = veiculoService.listarVeiculos();
+		 
+		 return listaVeiculos;
+	 }
+	 
 	 
 	 
 	 public List<Veiculo> listarVeiculosSemFoto(){
