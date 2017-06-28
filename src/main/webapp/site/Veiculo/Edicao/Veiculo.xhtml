@@ -51,14 +51,17 @@
 					</span>
 			
 					<p:commandButton value="Gerar Ocorrencia" icon="ui-icon-note"
-						action="#{cadastroVeiculoBean.redirecionaParaOcorrencia(cadastroVeiculoBean.veiculo)}" process="@this" />				
+									action="#{cadastroVeiculoBean.redirecionaParaOcorrencia(cadastroVeiculoBean.veiculo)}" 
+									process="@this" />				
 
 					<span class="ui-separator"> <span
 						class="ui-icon ui-icon-grip-dotted-vertical" />
 					</span>
 
 					<p:commandButton value="Visualizar Tarefas" icon="ui-icon-search"
-						title="Editar" process="@this" action="#{cadastroVeiculoBean.redirecionaParaPaginaTarefa(cadastroVeiculoBean.veiculo)}" />
+								 	process="@this"
+								 	disabled="#{not seguranca.acessoEdicaoVeiculoPermitido}" 
+								 	action="#{cadastroVeiculoBean.redirecionaParaPaginaTarefa(cadastroVeiculoBean.veiculo)}" />
 					
 					
 					<span class="ui-separator"> <span

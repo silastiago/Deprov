@@ -18,12 +18,15 @@
 			
 			<div class="ui-fluid">
 				<p:panelGrid columns="2" style="width: 100%; margin-top: 20px"
-					columnClasses="rotulo, campo">
+							columnClasses="rotulo, campo">
 				
-				<p:fileUpload value="#{cadastroFotoBean.file}" mode="simple" skinSimple="true"/>				
+				<p:fileUpload value="#{cadastroFotoBean.file}" 
+							mode="simple" skinSimple="true"
+							disabled="#{not seguranca.acessoEdicaoVeiculoPermitido}"/>				
+				
 				<p:commandButton value="Submit" ajax="false"
-					disabled="#{not seguranca.acessoEdicaoVeiculoPermitido}"
-					action="#{cadastroFotoBean.upload(codigoVeiculo)}" />
+							disabled="#{not seguranca.acessoEdicaoVeiculoPermitido}"
+							action="#{cadastroFotoBean.upload(codigoVeiculo)}" />
 				
 			</p:panelGrid>
 			</div>
