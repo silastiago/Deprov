@@ -133,8 +133,145 @@
 					</f:facet>
 					<h:outputText value="#{veiculo.situacao.situacao}" />
 				</p:column>
+				
+				<p:column filterBy="#{veiculo.processo}"  style="text-align: center; display: none;" 
+					filterMatchMode="startsWith">
+					<f:facet name="header">
+						<h:outputText value="Processo" />
+					</f:facet>
+					<h:outputText value="#{veiculo.processo}" />
+				</p:column>
+				
+				<p:column filterBy="#{veiculo.tipo.tipo}"  style="text-align: center; display: none;" 
+					filterMatchMode="startsWith">
+					<f:facet name="header">
+						<h:outputText value="Tipo" />
+					</f:facet>
+					<h:outputText value="#{veiculo.tipo.tipo}" />
+				</p:column>
+				
+<!-- 				<p:column filterBy="#{veiculo.Anofabricacao}"  style="text-align: center; display: none;"  -->
+<!-- 					filterMatchMode="startsWith"> -->
+<!-- 					<f:facet name="header"> -->
+<!-- 						<h:outputText value="Ano Fabricação" /> -->
+<!-- 					</f:facet> -->
+<!-- 					<h:outputText value="#{veiculo.Anofabricacao}" /> -->
+<!-- 				</p:column> -->
 
-
+				<p:column filterBy="#{veiculo.dossie}"  style="text-align: center; display: none;" 
+					filterMatchMode="startsWith">
+					<f:facet name="header">
+						<h:outputText value="Dossie" />
+					</f:facet>
+					<h:outputText value="#{veiculo.dossie}" />
+				</p:column>
+				
+				<p:column filterBy="#{veiculo.ip}"  style="text-align: center; display: none;" 
+					filterMatchMode="startsWith">
+					<f:facet name="header">
+						<h:outputText value="IP" />
+					</f:facet>
+					<h:outputText value="#{veiculo.ip}" />
+				</p:column>
+				
+				<p:column filterBy="#{veiculo.local.local}"  style="text-align: center; display: none;" 
+					filterMatchMode="startsWith">
+					<f:facet name="header">
+						<h:outputText value="Local" />
+					</f:facet>
+					<h:outputText value="#{veiculo.local.local}" />
+				</p:column>
+				
+				<p:column filterBy="#{veiculo.numero_ocorrencia}"  style="text-align: center; display: none;" 
+					filterMatchMode="startsWith">
+					<f:facet name="header">
+						<h:outputText value="NOcorrencia" />
+					</f:facet>
+					<h:outputText value="#{veiculo.numero_ocorrencia}" />
+				</p:column>
+				
+				<p:column filterBy="#{veiculo.chave}"  style="text-align: center; display: none;" 
+					filterMatchMode="startsWith">
+					<f:facet name="header">
+						<h:outputText value="chave" />
+					</f:facet>
+					<h:outputText value="#{veiculo.chave}" />
+				</p:column>
+				
+				<p:column filterBy="#{veiculo.motivoApreensao}"  style="text-align: center; display: none;" 
+					filterMatchMode="startsWith">
+					<f:facet name="header">
+						<h:outputText value="motivoAprss" />
+					</f:facet>
+					<h:outputText value="#{veiculo.motivoApreensao}" />
+				</p:column>
+				
+				<p:column filterBy="#{veiculo.dataEntrada}" style="text-align: center; display: none;" 
+					filterMatchMode="startsWith">
+					<f:facet name="header">
+						<h:outputText value="Data" />
+					</f:facet>
+					<h:outputText value="#{veiculo.dataEntrada}" >
+					<f:convertDateTime pattern="dd/MM/yyyy"/>
+					</h:outputText>
+				</p:column>
+				
+				<p:column filterBy="#{veiculo.motivoApreensao}"  style="text-align: center; display: none;" 
+					filterMatchMode="startsWith">
+					<f:facet name="header">
+						<h:outputText value="motivoAprss" />
+					</f:facet>
+					<h:outputText value="#{veiculo.motivoApreensao}" />
+				</p:column>
+				
+				<p:column filterBy="#{veiculo.pessoa.login}"  style="text-align: center; display: none;" 
+					filterMatchMode="startsWith">
+					<f:facet name="header">
+						<h:outputText value="pessoa" />
+					</f:facet>
+					<h:outputText value="#{veiculo.pessoa.login}" />
+				</p:column>
+				
+				<p:column filterBy="#{veiculo.proprietario}"  style="text-align: center; display: none;" 
+					filterMatchMode="startsWith">
+					<f:facet name="header">
+						<h:outputText value="proprietario" />
+					</f:facet>
+					<h:outputText value="#{veiculo.proprietario}" />
+				</p:column>
+				
+				<p:column filterBy="#{veiculo.condicao}"  style="text-align: center; display: none;" 
+					filterMatchMode="startsWith">
+					<f:facet name="header">
+						<h:outputText value="condicao" />
+					</f:facet>
+					<h:outputText value="#{veiculo.condicao}" />
+				</p:column>
+				
+				<p:column filterBy="#{veiculo.anofabricacao}"  style="text-align: center; display: none;" 
+					filterMatchMode="startsWith">
+					<f:facet name="header">
+						<h:outputText value="anofab" />
+					</f:facet>
+					<h:outputText value="#{veiculo.anofabricacao}" />
+				</p:column>
+				
+				<p:column filterBy="#{veiculo.comentarios}"  style="text-align: center; display: none;" 
+					filterMatchMode="startsWith">
+					<f:facet name="header">
+						<h:outputText value="comentarios" />
+					</f:facet>
+					<h:outputText value="#{veiculo.comentarios}" />
+				</p:column>
+				
+				<p:column filterBy="#{veiculo.obs}"  style="text-align: center; display: none;" 
+					filterMatchMode="startsWith">
+					<f:facet name="header">
+						<h:outputText value="OBS" />
+					</f:facet>
+					<h:outputText value="#{veiculo.obs}" />
+				</p:column>
+				
 				<f:facet name="footer">
 
 				</f:facet>

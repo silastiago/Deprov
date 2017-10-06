@@ -262,6 +262,13 @@ public String escolherRelatorio(ArrayList<String> listaObjetos){
 				//relatorio = "/var/lib/tomcat/webapps/Deprov/resources/relatorios/parametros/2/PericiaLocal.jasper";
 				relatorio = "/relatorios/parametros/2/PericiaLocal.jasper";
 			}
+		} else if (listaObjetos.size() == 3) {
+			if (listaObjetos.get(0).equals("pericia.pericia") && listaObjetos.get(1).equals("situacao.situacao") 
+					&& listaObjetos.get(2).equals("local.local")) {
+				//relatorio = "/opt/tomcat/webapps/Deprov/resources/relatorios/parametros/2/PericiaLocal.jasper";
+				//relatorio = "/var/lib/tomcat/webapps/Deprov/resources/relatorios/parametros/2/PericiaLocal.jasper";
+				relatorio = "/relatorios/parametros/3/SituacaoPericiaLocal.jasper";
+			}
 		}
 	//}
 	return relatorio;
@@ -1070,7 +1077,37 @@ public String escolherRelatorio(ArrayList<String> listaObjetos){
 		            	
 		            	mapaParametro.put(parametro, valor);
 						}
+					} else if (listaObjetos.size() == 3) {
+						if(listaObjetos.get(0).equals("pericia.pericia") && listaObjetos.get(1).equals("situacao.situacao")
+								&& listaObjetos.get(2).equals("local.local")){
+							
+			            	Pericia pericia = new Pericia();
+			            	pericia = pericias.pegaCodigo(listavalores.get(0));
+			            	
+			            	valor = pericia.getCodigo();
+			            	parametro = "codigo_pericia";
+			            	
+			            	mapaParametro.put(parametro, valor);
+			            	
+			            	//SITUACAO
+			            	Situacao situacao = new Situacao();
+							situacao = situacoes.pegaCodigo(listavalores.get(1));
+							
+							valor = situacao.getCodigo();
+			            	parametro = "codigo_situacao";
+			            	
+			            	mapaParametro.put(parametro, valor);
+			            	
+			            	Local local = new Local();
+							local = locais.pegaCodigo(listavalores.get(2));
+							
+							valor = local.getCodigo();
+			            	parametro = "codigo_local";
+			            	
+			            	mapaParametro.put(parametro, valor);
+						}
 					}
+				
 			//}
 			return mapaParametro;
 		}

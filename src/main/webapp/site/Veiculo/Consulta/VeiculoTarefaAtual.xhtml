@@ -10,7 +10,7 @@
 
 		<h:form id="frm">
 				<p:messages for ="message" showDetail="true" autoUpdate="true" closable="true" />
-				<h1>Veiculos Sem Foto Cadastrados</h1>
+				<h1>Veiculos Com Tarefa Cadastrada</h1>
 			
 				<p:toolbar id="toolbar">
 					<p:toolbarGroup>
@@ -43,13 +43,13 @@
 			</p:toolbar>
 			
 			
-			
 			<p:dataTable value="#{cadastroVeiculoBean.listarVeiculosDataAtual()}" var="veiculo"  id="mostraEquipamento"
 							widgetVar="veiculoFiltro" filteredValue="#{cadastroVeiculoBean.listaVeiculosFiltrados}" 
 							paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
 							paginator="true" rows="10" rowsPerPageTemplate="5,10,15,20,25,30,35,40,45,50"
 							selection="#{cadastroVeiculoBean.veiculoSelecionado}" 
-							selectionMode="single" rowKey="#{veiculo.codigo}">				
+							selectionMode="single" rowKey="#{veiculo.codigo}"
+							rowStyleClass="#{cadastroVeiculoBean.compara() ? 'green' : 'old'}">
 				
 			<p:ajax event="rowSelect" update=":frm:toolbar" />
 			<p:ajax event="rowUnselect" update=":frm:toolbar" />  

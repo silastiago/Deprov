@@ -41,8 +41,8 @@ public class TarefaService implements Serializable{
 	}
 	
 	@Transactional
-	public List<Tarefa> porCodigoVeiculoEData(Date dataAtual){
-		return tarefas.porCodigoVeiculoEData(dataAtual);
+	public List<Tarefa> porCodigoVeiculoEData(){
+		return tarefas.porCodigoVeiculoEData();
 	}
 	
 }

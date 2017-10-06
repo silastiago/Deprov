@@ -12,7 +12,7 @@
 		
 		<h:outputStylesheet library="css" name="sistema.css"/>
 	</h:head>
-	<h:body>
+	<h:body class="background-login" >
 	<f:metadata>
 		<f:viewParam name="dummy"/>
 		<f:event listener="#{loginBean.preRender}" type="preRenderView"></f:event>
@@ -20,15 +20,19 @@
 	
 	
 		<div id="content">
-			<div style="width: 240px; margin-left: auto; margin-right: auto; margin-top: 150px">
-		
+			<div style="width: 240px; margin-left: auto; margin-right: auto; margin-top: 150px;">
 				<h:form id="frm" prependId="false">
 		
 					<p:messages id="messages" showDetail="true" autoUpdate="true" closable="true" />
-		
+					
 					<p:panelGrid columns="2" styleClass="form-grid" style="padding: 10px"
 							columnClasses="label, campo" id="panel">
-					
+						<f:facet name="header">
+							<div class="ui-grid-col-4">
+       						<h:graphicImage style="height=100px;" name="images/brasao-login2.png" />
+       						</div>
+    					</f:facet>
+    					
 						<p:outputLabel value="Login"/>
 						<p:inputText id="j_username" size="20" />
 						

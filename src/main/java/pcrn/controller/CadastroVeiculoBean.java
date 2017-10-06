@@ -86,6 +86,8 @@ public class CadastroVeiculoBean implements Serializable{
 	private Map<String, Object> mapaParametro;
 	private List<Modelo> listaModelos;
 	private PieChartModel pieModel;
+	private List<Boolean> condicional;
+	private List<Tarefa> listaTarefa = new ArrayList<Tarefa>();
 	
 	@PostConstruct
 	public void init(){
@@ -307,9 +309,12 @@ public class CadastroVeiculoBean implements Serializable{
 	public String redirecionaTarefa(){
 		
 		 return "/site/Tarefa/Consulta/Tarefa.xhtml?codigoVeiculo="+veiculoSelecionado.getCodigo()+"faces-redirect=true";
-	} 
-	 
-	 
+	}
+	
+	public String redirecionaCadastroTarefa(){
+		
+		 return "/site/Veiculo/Consulta/VeiculoTarefa.xhtml"+"faces-redirect=true";
+	}
 	
 	 public String novo(){
 			
@@ -345,52 +350,79 @@ public class CadastroVeiculoBean implements Serializable{
 		 		numeroVeiculos = veiculoService.listarVeiculosComSituacao(listaSituacao.get(i).getCodigo()).size();
 		 		label = listaSituacao.get(i).getSituacao() + " - " + numeroVeiculos ;
 		 		dataFormat.put(label, numeroVeiculos);
-				pieModel.set(label , numeroVeiculos);		 		
+				pieModel.set(label , numeroVeiculos);	 		
 		 	} 
 		 	
 	        pieModel.setTitle("Grafico de Veiculos");
 	        pieModel.setLegendPosition("w");
 	        pieModel.setFill(true);
-	        pieModel.setShowDataLabels(true);       
+	        pieModel.setShowDataLabels(true);
 	        
 	    }
 	 
 	public List<Veiculo> listarVeiculosDataAtual(){
-
-		List<Veiculo> listaVeiculos = new ArrayList<Veiculo>();
-		List<Tarefa> listaTarefas = new ArrayList<Tarefa>();
-		String dataAtualString = FacesUtil.retornaDataAtualString();
+		listaVeiculos = new ArrayList<Veiculo>();
 		
+		listaTarefa = tarefaService.porCodigoVeiculoEData();
 		
-		Date dataAtual = FacesUtil.retornaDataAtualDate(dataAtualString);
-		
-		listaTarefas = tarefaService.porCodigoVeiculoEData(dataAtual);
-
-		System.out.println("Data String: " + dataAtualString);
-		System.out.println("Data Atual: " + dataAtual);
-		System.out.println("Numero de Tarefas: " + listaTarefas.size());
-		
-		for (int i = 0; i < listaTarefas.size(); i++) {
-			listaVeiculos.add(listaTarefas.get(i).getVeiculo());
+		for (int i = 0; i < listaTarefa.size(); i++) {			
+			listaVeiculos.add(listaTarefa.get(i).getVeiculo());
 		}
-		
-		
 		
 		return listaVeiculos;
 		
 	}
-	 
-	 
-	 
+	
+	
 	 
 	public PieChartModel getPieModel() {
 		return pieModel;
 	}
 
 	public void carregaModelos(){
-		 listaModelos = modeloService.buscarModelos(veiculo.getFabricante());
+		
+		if (veiculo.getFabricante() != null) {
+			System.out.println("Não NULO");
+			
+			listaModelos = modeloService.buscarModelos(veiculo.getFabricante());
+		}else{
+			
+			System.out.println("NULO");
+			listaModelos = new ArrayList<Modelo>();
+		} 
 	}
-	 
+	
+	public Boolean compara(){	
+		System.out.println("Lista de tarefas: " + listaTarefa.size());
+		
+		
+		return false;
+		
+	}
+	
+	
+	
+	
+	public List<Tarefa> getListaTarefa() {
+		return listaTarefa;
+	}
+
+
+	public void setListaTarefa(List<Tarefa> listaTarefa) {
+		this.listaTarefa = listaTarefa;
+	}
+
+
+	public List<Boolean> getCondicional() {
+		return condicional;
+	}
+
+
+	public void setCondicional(List<Boolean> condicional) {
+		this.condicional = condicional;
+	}
+
+
 	public Veiculo getVeiculoSelecionado() {
 		return veiculoSelecionado;
 	}
@@ -469,6 +501,11 @@ public class CadastroVeiculoBean implements Serializable{
 		}
 
 	public List<Modelo> getListaModelos() {
+		
+		if(this.veiculo!= null){
+			carregaModelos();
+		}
+		
 		return listaModelos;
 		}
 
