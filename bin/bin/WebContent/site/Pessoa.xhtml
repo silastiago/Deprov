@@ -1,0 +1,40 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui">
+<f:metadata>
+	<f:viewParam name="codigo" value="#{cadastroPessoaBean.pessoa}" />
+</f:metadata>
+
+<ui:composition template="/templates/template.xhtml">
+
+	<ui:define name="tituloJanela">Sistema com JSF 2.0 e Facelets</ui:define>
+	<ui:define name="conteudo">
+		<h:form enctype="multipart/form-data">
+			<div class="ui-fluid">
+				<h1>Cadastro de Pessoa</h1>				
+				<p:panelGrid columns="2" style="width: 100%; margin-top: 20px"
+					columnClasses="rotulo, campo">
+				<h:outputText value="Login" />
+				<h:inputText value="#{cadastroPessoaBean.pessoa.login}" />
+				<h:outputText value="Senha" />
+				<h:inputSecret value="#{cadastroPessoaBean.pessoa.senha}" />
+			
+			<h:outputLabel value="Grupo"/>
+				<h:selectOneMenu value="#{cadastroPessoaBean.pessoa.grupo}" required="true" label="Grupo">
+				<f:selectItem itemLabel="Selecione o grupo da pessoa" noSelectionOption="true"/>
+				<f:selectItems value="#{cadastroPessoaBean.grupos}" var="grupo" itemValue="#{grupo}" itemLabel="#{grupo.nome}"/>
+				</h:selectOneMenu>
+			
+			</p:panelGrid>
+
+			<h:commandButton action="#{cadastroPessoaBean.cadastrar()}"
+				value="Salvar" />
+				</div>
+		</h:form>
+
+	</ui:define>>	
+	</ui:composition>
+</html>

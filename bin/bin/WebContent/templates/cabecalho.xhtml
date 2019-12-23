@@ -1,0 +1,40 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"> 
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui">
+      
+     <div style="float: right;">
+	 <h:form style="display: inline-block" enctype="multipart/form-data" acceptcharset="UTF-8">
+					<p:menubar styleClass="menu-sistema">
+						<p:submenu label="Cadastros">
+							<p:menuitem value="Pessoa" outcome="Pessoa"/>
+							<p:menuitem value="Fabricante" outcome="Fabricante"/>
+							<p:menuitem value="Modelo" outcome="Modelo"/>
+							<p:menuitem value="Cor" outcome="Cor"/>
+							<p:menuitem value="Tipo" outcome="Tipo"/>
+							<p:menuitem value="Exame Veicular" outcome="Pericia"/>
+							<p:menuitem value="Seguro" outcome="Seguro"/>
+							<p:menuitem value="Veiculo" outcome="Veiculo"/>
+							<p:menuitem value="Ocorrencia" outcome="Ocorrencia"/>
+							<p:menuitem value="Grupo" outcome="Grupo"/>
+						</p:submenu>
+						<p:submenu label="Consultas">
+							<p:menuitem value="ListarPessoas" outcome="ListarPessoas"/>
+							<p:menuitem value="ListarFabricantes" outcome="ListarFabricantes"/>
+							<p:menuitem value="ListarModelos" outcome="ListarModelos"/>
+							<p:menuitem value="ListarCores" outcome="ListarCores"/>
+							<p:menuitem value="ListarTipos" outcome="ListarTipos"/>
+							<p:menuitem value="Listar Exame Veicular" outcome="ListarPericias"/>
+							<p:menuitem value="ListarSeguros" outcome="ListarSeguros"/>
+							<p:menuitem value="ListarVeiculos" outcome="ListarVeiculos"/>
+							<p:menuitem value="ListarGrupos" outcome="ListarGrupos"/>
+							<p:menuitem value="ListarOcorrencia" outcome="ListarOcorrencia"/>
+						</p:submenu>
+						<p:menuitem value="Sair" action="#{loginBean.sair()}"/>
+					</p:menubar>
+				</h:form>				
+		</div>
+</html>
+
